@@ -1,10 +1,15 @@
-import ProfileSection from "./components/ProfileSection/ProfileSection";
+import { GlobalStyle } from "./GlobalStyle";
+import Post from "./components/Posts/Post";
+import PostOnlyText from "./components/Posts/PostOnlyText";
 
 function App() {
   return (
-    <div>
-      <ProfileSection />
-    </div>
+    <>
+      <GlobalStyle />
+      <div>hello world</div>
+      <Post />
+      <PostOnlyText />
+    </>
   );
 }
 export default App;

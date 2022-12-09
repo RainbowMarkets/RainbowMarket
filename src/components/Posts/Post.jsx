@@ -1,6 +1,10 @@
-// 게시물 추가 : 업로드 페이지
+import postImg from "../../assets/images/post_img.jpg";
 import profileImgSmall from "../../assets/images/profile_small.png";
 import sIconMoreVertical from "../../assets/images/s-icon-more-vertical.png";
+import iconHeart from "../../assets/images/icon-heart.png";
+import iconMessageCircle from "../../assets/images/icon-message-circle.png";
+// import { Wrapper } from "./styled.jsx";
+
 const Post = () => {
   return (
     <>
@@ -16,6 +20,14 @@ const Post = () => {
           이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게
           뛰노는 인생의 힘있다.
         </p>
+        <img src={postImg} alt="게시글 이미지" />
+        <div>
+          <img src={iconHeart} alt="하트 아이콘" />
+          <span>58</span>
+          <img src={iconMessageCircle} alt="댓글" />
+          <span>12</span>
+        </div>
+        <p>2020년 10월 21일</p>
       </div>
     </>
   );
