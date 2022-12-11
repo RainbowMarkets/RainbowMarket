@@ -1,16 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
-const Number = styled.span`
+const Anchor = styled.a`
+  text-align: center;
+  margin: auto;
+`;
+
+const Number = styled.strong`
+  display: block;
   font-size: 18px;
   font-weight: 700;
 `;
 
 export default function Followers() {
   return (
-    <div>
+    <Anchor>
       <Number>9999</Number>
-      <div>followers</div>
-    </div>
+      <small>followers</small>
+    </Anchor>
   );
 }

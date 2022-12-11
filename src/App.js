@@ -1,14 +1,14 @@
 import { GlobalStyle } from "./GlobalStyle";
 import Post from "./components/Posts/Post";
 import PostOnlyText from "./components/Posts/PostOnlyText";
-import ProfileSection from "./components/ProfileSection/ProfileSection";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div>hello world</div>
-      <ProfileSection />
+      {/* <div>hello world</div> */}
+      <Profile />
       {/* <Post />
       <PostOnlyText /> */}
     </>
