@@ -1,29 +1,34 @@
 import React from "react";
-import Followers from "../Follows/Followers";
-import Followings from "../Follows/Followings";
 import styled from "styled-components";
+import ProfileFooter from "../ProfileFooter/ProfileFooter";
+import ProfileHeader from "../ProfileHeader/ProfileHeader";
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 30px 55px 26px 55px;
+  text-align: center;
+`;
 
 const Nickname = styled.strong`
-  font-size: 70px;
+  font-size: 16px;
   font-weight: 700;
+`;
+
+const Identifier = styled.small`
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
 `;
 
 export default function ProfileSection() {
   return (
-    <>
-      <Followers />
-      <img src="" alt="프로필 사진" />
-      <Followings />
+    <Main>
+      <ProfileHeader />
       <Nickname>닉네임</Nickname>
-      <small>@대충아이디</small>
+      <Identifier>@대충아이디</Identifier>
       <p>프로필 설명</p>
-      <button>
-        <img src="" alt="채팅" />
-      </button>
-      <button>팔로우</button>
-      <button>
-        <img src="" alt="공유하기" />
-      </button>
-    </>
+      <ProfileFooter />
+    </Main>
   );
 }
