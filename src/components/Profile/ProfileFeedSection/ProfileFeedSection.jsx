@@ -11,7 +11,7 @@ export default function ProfileFeedSection() {
   return (
     <Section>
       <ProfileFeedHeader />
-      <div>Feed 다정님 부탁해요!!</div>
+      <div>피드 부탁해요!!</div>
     </Section>
   );
 }

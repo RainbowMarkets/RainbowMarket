@@ -3,23 +3,22 @@ import styled from "styled-components";
 import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+const Section = styled.section`
+  width: 100%;
   padding: 30px 24px;
   background: white;
-  width: 100%;
+  text-align: center;
 
   strong {
+    display: block;
     font-size: 16px;
     font-weight: 700;
     margin: 10px 0;
   }
 
   small {
+    display: block;
+    color: #767676;
     font-size: 12px;
     font-weight: 400;
     line-height: 14px;
@@ -27,6 +26,7 @@ const Wrapper = styled.div`
   }
 
   p {
+    display: block;
     line-height: 17.53px;
     font-weight: 400;
     margin: 10px 0;
@@ -35,12 +35,12 @@ const Wrapper = styled.div`
 
 export default function ProfileSection() {
   return (
-    <Wrapper>
+    <Section>
       <ProfileHeader />
       <strong>닉네임</strong>
       <small>@대충아이디</small>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
       <ProfileFooter />
-    </Wrapper>
+    </Section>
   );
 }

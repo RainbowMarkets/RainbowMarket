@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Followers from "../Follows/Followers";
-import Followings from "../Follows/Followings";
+import Follow from "../Follow/Follow";
+import ProfileBasic from "../../../../assets/images/profile_big.png";
 
 const Header = styled.header`
   display: flex;
@@ -9,13 +9,13 @@ const Header = styled.header`
   align-items: center;
   max-width: 390px;
   width: 100%;
+  margin: 0 auto;
 `;
 
-// 로컬 작업 시 이미지가 안 보이는 관계로, 온라인 이미지 임시로 사용
 const ProfileImg = styled.div`
   width: 110px;
   height: 110px;
-  background-image: url("https://cdn.pixabay.com/photo/2022/12/05/05/20/cat-7635983_960_720.png");
+  background-image: url(${ProfileBasic});
   background-repeat: none;
   background-size: cover;
   margin: 16px;
@@ -24,9 +24,9 @@ const ProfileImg = styled.div`
 export default function ProfileHeader() {
   return (
     <Header>
-      <Followers>9999</Followers>
+      <Follow follow="9999" tofrom="followers" />
       <ProfileImg />
-      <Followings>1111</Followings>
+      <Follow follow="1111" tofrom="followings" />
     </Header>
   );
 }
