@@ -10,12 +10,13 @@ function App() {
     <>
       <GlobalStyle />
       <BrowserRouter>
-        {/* <Profile />
+        {/* <Profile /> */}
+        {/* 
         <PostOnlyText />
          */}
         {/* <PostWithImg /> */}
         <PostDetail />
-        {/* <Navbar /> */}
+        <Navbar />
       </BrowserRouter>
     </>
   );
