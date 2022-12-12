@@ -7,13 +7,14 @@ import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
 import MainTopBar from "./components/TopBar/MainTopBar/MainTopBar";
 import SearchTopBar from "./components/TopBar/SearchTopBar/SearchTopBar";
+import FollowTopBar from "./components/TopBar/FollowTopBar/FollowTopBar";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <SearchTopBar/> 
+        <FollowTopBar/> 
         {/* <Profile /> */}
         {/* 
         <PostOnlyText />

@@ -12,6 +12,11 @@ export const StyledHeader = styled.header`
   /* background-color: bisque; */
 `;
 
+export const StyledH1 = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+`;
+
 export const StyledBtn = styled.button`
   width: 22px;
 `;
