@@ -6,6 +6,7 @@ import iconMessageCircle from "../../assets/images/icon-message-circle.png";
 import styled from "styled-components";
 import PostHeartBtn from "./PostHeartBtn";
 import PostCommentBtn from "./PostCommentBtn";
+import PostDate from "./PostDate";
 const PostWrapper = styled.section`
   margin: 0px auto 20px;
   display: flex;
@@ -96,7 +97,7 @@ const Post = () => {
           <PostHeartBtn />
           <PostCommentBtn />
         </PostBtn>
-        <p className="post-date">2020년 10월 21일</p>
+        <PostDate />
       </ContextWrapper>
     </PostWrapper>
   );

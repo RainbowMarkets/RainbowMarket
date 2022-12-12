@@ -4,6 +4,7 @@ import sIconMoreVertical from "../../assets/images/s-icon-more-vertical.png";
 import PostCommentBtn from "./PostCommentBtn";
 import PostHeartBtn from "./PostHeartBtn";
 import styled from "styled-components";
+import PostDate from "./PostDate";
 
 const PostWrapper = styled.article`
   display: flex;
@@ -43,7 +44,6 @@ const ProfileName = styled.div`
 `;
 const ContextWrapper = styled.div`
   margin-left: 54px;
-
   .post-context {
     font-weight: 400;
     line-height: 17.53px;
@@ -88,7 +88,7 @@ const PostOnlyText = () => {
           <PostHeartBtn />
           <PostCommentBtn />
         </PostBtn>
-        <p className="post-date">2020년 10월 21일</p>
+        <PostDate />
       </ContextWrapper>
     </PostWrapper>
   );
