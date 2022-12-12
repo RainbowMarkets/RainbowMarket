@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import backBtn from "../../assets/images/icon-arrow-left.png";
 
 export const StyledHeader = styled.header`
   display: flex;
@@ -19,6 +20,8 @@ export const StyledH1 = styled.h1`
 
 export const StyledBtn = styled.button`
   width: 22px;
+  height: 22px;
+  background: url(${ backBtn }) no-repeat center / 100%;
 `;
 
 export const StyledImg = styled.img`

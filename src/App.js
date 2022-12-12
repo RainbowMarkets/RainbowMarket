@@ -14,7 +14,7 @@ function App() {
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <FollowTopBar/> 
+        <MainTopBar/> 
         {/* <Profile /> */}
         {/* 
         <PostOnlyText />
