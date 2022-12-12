@@ -7,6 +7,7 @@ const CommentPlusWrapper = styled.section`
   margin: 0 auto;
   padding: 13px 0px 12px 0px;
   border-top: 0.5px solid #dbdbdb;
+  bottom: 0;
   img {
     width: 36px;
     height: 36px;
