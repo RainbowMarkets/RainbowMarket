@@ -4,12 +4,14 @@ import sIconMoreVertical from "../../assets/images/s-icon-more-vertical.png";
 import PostCommentBtn from "./PostCommentBtn";
 import PostHeartBtn from "./PostHeartBtn";
 import styled from "styled-components";
-const PostWrapper = styled.section`
-  margin: 20px auto 16px;
+
+const PostWrapper = styled.article`
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  justify-content: center;
+  margin: auto;
   width: 358px;
+  margin-bottom: 20px;
 `;
 const ProfileContain = styled.div`
   display: flex;

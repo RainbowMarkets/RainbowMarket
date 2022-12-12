@@ -7,7 +7,7 @@ import styled from "styled-components";
 import PostHeartBtn from "./PostHeartBtn";
 import PostCommentBtn from "./PostCommentBtn";
 const PostWrapper = styled.section`
-  margin: 20px auto 16px;
+  margin: 0px auto 20px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
