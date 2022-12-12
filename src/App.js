@@ -5,17 +5,18 @@ import PostOnlyText from "./components/Posts/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
+import Modal from "./components/Posts/Modal";
+import Post from "./pages/Post/Post";
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        {/* <Profile /> */}
-        {/* 
+        <Profile />
         <PostOnlyText />
-         */}
-        {/* <PostWithImg /> */}
+        <PostWithImg />
         <PostDetail />
+        <Post />
         <Navbar />
       </BrowserRouter>
     </>
