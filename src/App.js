@@ -5,11 +5,14 @@ import PostOnlyText from "./components/Posts/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
+import MainTopBar from "./components/TopBar/MainTopBar/MainTopBar";
+
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
+        <MainTopBar/> 
         {/* <Profile /> */}
         {/* 
         <PostOnlyText />
