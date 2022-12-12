@@ -9,7 +9,3 @@ export const StyledH1 = styled.h1`
 export const StyledLink = styled(Link)`
   width: 24px;
 `;
-
-export const StyledImg = styled.img`
-  width: 100%;
-`;

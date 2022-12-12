@@ -12,3 +12,10 @@ export const StyledHeader = styled.header`
   /* background-color: bisque; */
 `;
 
+export const StyledBtn = styled.button`
+  width: 22px;
+`;
+
+export const StyledImg = styled.img`
+  width: 100%;
+`;

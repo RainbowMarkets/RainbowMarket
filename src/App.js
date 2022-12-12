@@ -6,13 +6,14 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
 import MainTopBar from "./components/TopBar/MainTopBar/MainTopBar";
+import SearchTopBar from "./components/TopBar/SearchTopBar/SearchTopBar";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <MainTopBar/> 
+        <SearchTopBar/> 
         {/* <Profile /> */}
         {/* 
         <PostOnlyText />

@@ -1,5 +1,5 @@
-import { StyledHeader } from "../commonStyledTopBar"
-import { StyledLink, StyledImg, StyledH1 } from "./styledMainTopBar"
+import { StyledHeader, StyledImg} from "../commonStyledTopBar"
+import { StyledLink, StyledH1 } from "./styledMainTopBar"
 import searchBtn from "../../../assets/images/icon-search.png"
 
 export default function MainTopBar() {
