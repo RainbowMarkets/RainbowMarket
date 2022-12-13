@@ -2,13 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import uploadimg from "../../../../assets/images/icon-image.png";
 
+const Wrapper = styled.div`
+  width: min-content;
+  position: relative;
+  margin: auto;
+`;
+
 const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border: 1px solid #dbdbdb;
   border-radius: 50%;
   object-fit: cover;
-  position: relative;
 `;
 
 const UploadButton = styled.button`
@@ -16,22 +21,25 @@ const UploadButton = styled.button`
   height: 36px;
   background: #8d72e1;
   border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: 2px;
 
   img {
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     margin: auto;
   }
 `;
 
 export default function SetProfileImage() {
   return (
-    <>
+    <Wrapper>
       <ProfileImage src="https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_960_720.png" />
       <UploadButton>
         <img src={uploadimg} />
       </UploadButton>
-    </>
+    </Wrapper>
   );
 }
