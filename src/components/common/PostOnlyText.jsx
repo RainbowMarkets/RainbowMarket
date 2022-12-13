@@ -40,6 +40,7 @@ const ProfileName = styled.div`
     font-weight: 400;
     line-height: 14px;
     font-size: 12px;
+    color: #767676;
   }
 `;
 const ContextWrapper = styled.div`
