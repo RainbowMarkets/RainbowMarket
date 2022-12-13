@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import CommentDetail from "./CommentDetail";
 import CommentPlus from "./CommentPlus";
-import DeleteAlert from "./DeleteAlert";
-import Modal from "./Modal";
+import DeleteAlert from "../common/DeleteAlert";
+import Modal from "../common/Modal";
 import PostOnlyText from "./PostOnlyText";
 import PostWithImg from "./PostWithImg";
 
