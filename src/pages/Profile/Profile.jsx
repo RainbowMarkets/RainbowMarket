@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ProfileItemSection from "../../components/Profile/ProfileItemSection/ProfileItemSection";
 import ProfileFeedSection from "../../components/Profile/ProfileFeedSection/ProfileFeedSection";
 import ProfileSection from "../../components/Profile/ProfileSection/ProfileSection";
+import SetProfile from "../../components/common/SetProfile/SetProfile";
 
 const Main = styled.main`
   width: 100%;
@@ -18,6 +19,7 @@ const Main = styled.main`
 export default function Profile() {
   return (
     <Main>
+      <SetProfile />
       <ProfileSection />
       <ProfileItemSection />
       <ProfileFeedSection />
