@@ -3,8 +3,12 @@ import { reset } from "styled-reset";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
+
+  @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
   :root{
     font-size: 14px;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
   * {
     box-sizing: border-box;
