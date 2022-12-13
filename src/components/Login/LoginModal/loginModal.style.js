@@ -7,7 +7,7 @@ import GoogleIcon from "../../../assets/images/google.png";
 // 관련 글들은 찾았지만 제가 연습해 본 다음에 여기에 시도해보는 걸로 하겠습니다..!
 export const LogInModalBox = styled.div`
   position: relative;
-  width: 390px;
+  width: 100%;
   height: 844px;
   display: flex;
   align-items: center;

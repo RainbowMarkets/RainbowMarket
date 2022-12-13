@@ -23,8 +23,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 12px;
-
-  overflow: hidden;
 `;
 
 const Aside = styled.aside`
@@ -96,12 +94,15 @@ function App() {
         <BrowserRouter>
           <CommonTopBar />
           <Main>
-            <SplashPage />
-            <Profile />
+            <Routes>
+              <Route path="/splash" element={<SplashPage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/post" element={<Post />} />
+            </Routes>
+            {/* 
             <PostOnlyText />
             <PostWithImg />
-            <PostDetail />
-            <Post />
+            <PostDetail /> */}
           </Main>
           <Navbar />
         </BrowserRouter>
