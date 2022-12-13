@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Button } from "../../../GlobalStyle";
 import SetprofileHeader from "./SetProfileHeader/SetprofileHeader";
 import SetProfileImage from "./SetProfileImage/SetProfileImage";
 import SetProfileInput from "./SetProfileInput/SetProfileInput";
@@ -8,6 +9,11 @@ const Wrapper = styled.div`
   background: white;
   min-width: 390px;
   width: 100%;
+`;
+
+const StartButton = styled(Button)`
+  font-size: 16px;
+  color: white;
 `;
 
 export default function SetProfile() {
@@ -30,6 +36,7 @@ export default function SetProfile() {
         label="소개"
         placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
       />
+      <StartButton>ㅁㅁㅁ</StartButton>
     </Wrapper>
   );
 }

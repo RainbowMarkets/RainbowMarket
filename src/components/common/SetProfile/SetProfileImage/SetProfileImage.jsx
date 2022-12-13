@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import uploadimg from "../../../../assets/images/icon-image.png";
+import { colors } from "../../../../GlobalStyle";
 
 const Wrapper = styled.div`
   width: min-content;
@@ -19,9 +20,9 @@ const ProfileImage = styled.img`
 const UploadButton = styled.button`
   width: 36px;
   height: 36px;
-  background: #8d72e1;
   border-radius: 50%;
   position: absolute;
+  background: ${colors.colorMain}};
   right: 0;
   bottom: 2px;
 

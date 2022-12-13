@@ -12,8 +12,47 @@ import FollowTopBar from "./components/TopBar/FollowTopBar/FollowTopBar";
 import CommonTopBar from "./components/TopBar/CommonTopBar/CommonTopBar";
 import SaveTopBar from "./components/TopBar/SaveTopBar/SaveTopBar";
 import UpLoadTopBar from "./components/TopBar/UpLoadTopBar/UpLoadTopBar";
-
 import Post from "./pages/Post/Post";
+import styled from "styled-components";
+import SplashPage from "./pages/Splash/SplashPage";
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  overflow: hidden;
+`;
+
+const Aside = styled.aside`
+  width: 390px;
+  background: white;
+
+  img {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 680px) {
+    display: none;
+  }
+`;
+
+const Wrapper = styled.div`
+  width: 440px;
+  min-width: 390px;
+  height: 100vh;
+  background: white;
+  box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
+`;
+
+const Main = styled.main`
+  height: 85%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+`;
 
 function App() {
   const [data, setData] = useState({ post: [] });
@@ -37,27 +76,37 @@ function App() {
   }, []);
 
   console.log(data.post[0] || data);
+
   return (
-    <>
+    <Container>
       <GlobalStyle />
-      {data.post.map((list) => {
+      <Aside>
+        <img src="https://cdn.pixabay.com/photo/2012/04/10/16/54/rainbow-26389_960_720.png" />
+      </Aside>
+      {/* {data.post.map((list) => {
         return (
           <>
             <p>{list.author.username}</p>
             <p>{list.content}</p>
           </>
         );
-      })}
-      <BrowserRouter>
-        <CommonTopBar />
-        <Profile />
-        <PostOnlyText />
-        <PostWithImg />
-        <PostDetail />
-        <Post />
-        <Navbar />
-      </BrowserRouter>
-    </>
+      })} */}
+
+      <Wrapper>
+        <BrowserRouter>
+          <CommonTopBar />
+          <Main>
+            <SplashPage />
+            <Profile />
+            <PostOnlyText />
+            <PostWithImg />
+            <PostDetail />
+            <Post />
+          </Main>
+          <Navbar />
+        </BrowserRouter>
+      </Wrapper>
+    </Container>
   );
 }
 export default App;
