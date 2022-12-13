@@ -4,8 +4,8 @@ import CommentDetail from "./CommentDetail";
 import CommentPlus from "./CommentPlus";
 import DeleteAlert from "../common/DeleteAlert";
 import Modal from "../common/Modal";
-import PostOnlyText from "./PostOnlyText";
-import PostWithImg from "./PostWithImg";
+import PostOnlyText from "../common/PostOnlyText";
+import PostWithImg from "../common/PostWithImg";
 
 const PostDetailWrapper = styled.section`
   padding: 20px 16px 20px 16px;
