@@ -31,6 +31,15 @@ export const StyledMoreBtn = styled.button`
   background: url(${ moreBtn }) no-repeat center / 100%;
 `;
 
+export const StyledUpdateBtn = styled.button`
+  width: 90px;
+  padding: 7px 0;
+  border-radius: 32px;
+  font-weight: 500;
+  background-color: #B8C0F9;
+  color: #fff;
+`;
+
 export const StyledImg = styled.img`
   width: 100%;
 `;
