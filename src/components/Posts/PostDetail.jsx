@@ -1,7 +1,10 @@
+import { useState } from "react";
 import styled from "styled-components";
 import CommentDetail from "./CommentDetail";
 import CommentPlus from "./CommentPlus";
-import PostModal from "./PostModal";
+import DeleteAlert from "./DeleteAlert";
+import Modal from "./Modal";
+import PostOnlyText from "./PostOnlyText";
 import PostWithImg from "./PostWithImg";
 
 const PostDetailWrapper = styled.section`
@@ -16,11 +19,14 @@ const CommentWrapper = styled.div`
 `;
 
 const PostDetail = () => {
+  const [commentModal, setCommentModal] = useState(true);
+
   return (
     <>
       <PostDetailWrapper>
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
-        <PostWithImg />
+        {/* <PostWithImg /> */}
+        <PostOnlyText />
         <CommentWrapper>
           <CommentDetail />
           <CommentDetail />
@@ -29,7 +35,9 @@ const PostDetail = () => {
         </CommentWrapper>
         <CommentPlus />
       </PostDetailWrapper>
-      <PostModal />
+      {/* {commentModal === true ? <Modal /> : null} */}
+      {/* <DeleteAlert /> */}
+      {/* <Modal /> */}
     </>
   );
 };
