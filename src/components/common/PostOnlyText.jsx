@@ -1,18 +1,18 @@
 import postImg from "../../assets/images/post_img.jpg";
 import profileImgSmall from "../../assets/images/profile_small.png";
 import sIconMoreVertical from "../../assets/images/s-icon-more-vertical.png";
-
-import iconMessageCircle from "../../assets/images/icon-message-circle.png";
+import PostCommentBtn from "../Posts/PostCommentBtn";
+import PostHeartBtn from "../Posts/PostHeartBtn";
 import styled from "styled-components";
-import PostHeartBtn from "./PostHeartBtn";
-import PostCommentBtn from "./PostCommentBtn";
-import PostDate from "./PostDate";
-const PostWrapper = styled.section`
-  margin: 0px auto 20px;
+import PostDate from "../Posts/PostDate";
+
+const PostWrapper = styled.article`
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  justify-content: center;
+  margin: auto;
   width: 358px;
+  margin-bottom: 20px;
 `;
 const ProfileContain = styled.div`
   display: flex;
@@ -40,11 +40,11 @@ const ProfileName = styled.div`
     font-weight: 400;
     line-height: 14px;
     font-size: 12px;
+    color: #767676;
   }
 `;
 const ContextWrapper = styled.div`
   margin-left: 54px;
-
   .post-context {
     font-weight: 400;
     line-height: 17.53px;
@@ -56,19 +56,12 @@ const ContextWrapper = styled.div`
     line-height: 12px;
     font-size: 10px;
   }
-  .post-img {
-    width: 304px;
-    height: 228px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-  }
 `;
 const PostBtn = styled.div`
   display: flex;
   margin-bottom: 16px;
 `;
-
-const Post = () => {
+const PostOnlyText = () => {
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -92,7 +85,6 @@ const Post = () => {
           이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게
           뛰노는 인생의 힘있다.
         </p>
-        <img className="post-img" src={postImg} alt="게시글 이미지" />
         <PostBtn>
           <PostHeartBtn />
           <PostCommentBtn />
@@ -102,4 +94,4 @@ const Post = () => {
     </PostWrapper>
   );
 };
-export default Post;
+export default PostOnlyText;
