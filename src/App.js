@@ -15,6 +15,8 @@ import UpLoadTopBar from "./components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import Post from "./pages/Post/Post";
 import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
+import Search from "./pages/Search/Search";
+
 
 const Container = styled.div`
   width: 100vw;
@@ -92,12 +94,13 @@ function App() {
 
       <Wrapper>
         <BrowserRouter>
-          <CommonTopBar />
+          <SearchTopBar />
           <Main>
             <Routes>
               <Route path="/splash" element={<SplashPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/post" element={<Post />} />
+              <Route path="/search" element={<Search />} />
             </Routes>
             {/* 
             <PostOnlyText />
