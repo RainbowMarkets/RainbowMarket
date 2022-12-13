@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalStyle } from "./GlobalStyle";
-import PostWithImg from "./components/Posts/PostWithImg";
-import PostOnlyText from "./components/Posts/PostOnlyText";
+import PostWithImg from "./components/common/PostWithImg";
+import PostOnlyText from "./components/common/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
