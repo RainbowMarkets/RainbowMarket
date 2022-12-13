@@ -12,17 +12,14 @@ import CommonTopBar from "./components/TopBar/CommonTopBar/CommonTopBar";
 import SaveTopBar from "./components/TopBar/SaveTopBar/SaveTopBar";
 import UpLoadTopBar from "./components/TopBar/UpLoadTopBar/UpLoadTopBar";
 
-
-import Modal from "./components/Posts/Modal";
 import Post from "./pages/Post/Post";
-
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <CommonTopBar/>
+        <CommonTopBar />
         <Profile />
         <PostOnlyText />
         <PostWithImg />

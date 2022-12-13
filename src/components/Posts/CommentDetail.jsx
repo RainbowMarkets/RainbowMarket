@@ -2,7 +2,7 @@ import styled from "styled-components";
 import profileImgSmall from "../../assets/images/profile_small.png";
 import iconMoreVertical from "../../assets/images/icon- more-vertical.png";
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../common/Modal";
 
 const CommentWrapper = styled.section`
   margin-bottom: 16px;
