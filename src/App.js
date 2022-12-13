@@ -9,13 +9,18 @@ import MainTopBar from "./components/TopBar/MainTopBar/MainTopBar";
 import SearchTopBar from "./components/TopBar/SearchTopBar/SearchTopBar";
 import FollowTopBar from "./components/TopBar/FollowTopBar/FollowTopBar";
 
+
 import Modal from "./components/Posts/Modal";
 import Post from "./pages/Post/Post";
+import CommonTopBar from "./components/TopBar/CommonTopBar/CommonTopBar";
+
+
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
+        <CommonTopBar/>
         <Profile />
         <PostOnlyText />
         <PostWithImg />

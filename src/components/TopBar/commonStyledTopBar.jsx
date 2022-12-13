@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import backBtn from "../../assets/images/icon-arrow-left.png";
+import moreBtn from "../../assets/images/icon- more-vertical.png";
 
 export const StyledHeader = styled.header`
   display: flex;
@@ -22,6 +23,12 @@ export const StyledBtn = styled.button`
   width: 22px;
   height: 22px;
   background: url(${ backBtn }) no-repeat center / 100%;
+`;
+
+export const StyledMoreBtn = styled.button`
+  width: 24px;
+  height: 24px;
+  background: url(${ moreBtn }) no-repeat center / 100%;
 `;
 
 export const StyledImg = styled.img`
