@@ -120,9 +120,10 @@ function App() {
 
             {/* <PostOnlyText />
             <PostWithImg />
-            <PostDetail /> */}
+            <PostDetail /> 
+            */}
           </Main>
-          <Navbar />
+          {/* <Navbar /> */}
         </BrowserRouter>
       </Wrapper>
     </Container>
