@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import CommentDetail from "./CommentDetail";
-import CommentPlus from "./CommentPlus";
-import DeleteAlert from "../common/DeleteAlert";
-import Modal from "../common/Modal";
-import PostOnlyText from "../common/PostOnlyText";
-import PostWithImg from "../common/PostWithImg";
+import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
+import Modal from "../common/Modal/Modal/Modal";
+import PostOnlyText from "../common/PostFormat/PostOnlyText/PostOnlyText";
+import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
+import CommentDetail from "./Comment/CommentDetail/CommentDetail";
+import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 
 const PostDetailWrapper = styled.section`
   padding: 20px 16px 20px 16px;
@@ -33,7 +33,7 @@ const PostDetail = () => {
           <CommentDetail />
           <CommentDetail />
         </CommentWrapper>
-        <CommentPlus />
+        <CommentAdd />
       </PostDetailWrapper>
       {/* {commentModal === true ? <Modal /> : null} */}
       {/* <DeleteAlert /> */}
