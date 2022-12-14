@@ -4,7 +4,7 @@ import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 
 const Section = styled.section`
-  width: 390px;
+  width: 100%;
   padding: 30px 24px;
   background: white;
   text-align: center;
