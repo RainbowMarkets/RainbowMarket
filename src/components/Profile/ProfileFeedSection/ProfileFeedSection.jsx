@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ProfileFeedHeader from "./ProfileFeedHeader/ProfileFeedHeader";
-import PostOnlyText from "../../common/PostOnlyText";
+import PostOnlyText from "../../common/PostFormat/PostOnlyText/PostOnlyText";
 
 const Section = styled.section`
   background: white;

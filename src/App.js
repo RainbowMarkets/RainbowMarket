@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { colors, GlobalStyle } from "./GlobalStyle";
-import PostWithImg from "./components/common/PostWithImg";
-import PostOnlyText from "./components/common/PostOnlyText";
+import PostWithImg from "./components/common/PostFormat/PostWithImg/PostWithImg";
+import PostOnlyText from "./components/common/PostFormat/PostOnlyText/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
@@ -110,8 +110,8 @@ function App() {
               <Route path="/post" element={<Post />} />
               <Route path="/search" element={<Search />} />
             </Routes>
-            {/* 
-            <PostOnlyText />
+
+            {/* <PostOnlyText />
             <PostWithImg />
             <PostDetail /> */}
           </Main>
