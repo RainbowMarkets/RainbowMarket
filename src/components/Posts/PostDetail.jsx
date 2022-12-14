@@ -6,17 +6,7 @@ import PostOnlyText from "../common/PostFormat/PostOnlyText/PostOnlyText";
 import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
-
-const PostDetailWrapper = styled.section`
-  padding: 20px 16px 20px 16px;
-  width: 390px;
-  margin: 0 auto;
-`;
-
-const CommentWrapper = styled.div`
-  padding: 20px 0px 0px 0px;
-  border-top: 1px solid #dbdbdb;
-`;
+import { CommentWrapper, PostDetailWrapper } from "./styledPostDetail";
 
 const PostDetail = () => {
   const [commentModal, setCommentModal] = useState(true);
