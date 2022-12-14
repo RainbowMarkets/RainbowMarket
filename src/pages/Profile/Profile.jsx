@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 export default function Profile() {
   return (
     <Wrapper>
-      {/* <SetProfile /> */}
+      <SetProfile />
       <ProfileSection />
       <ProfileItemSection />
       <ProfileFeedSection />

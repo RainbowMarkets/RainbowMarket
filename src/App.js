@@ -16,6 +16,7 @@ import Post from "./pages/Post/Post";
 import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
+import Home from "./pages/Home/Home";
 
 const Container = styled.div`
   width: 100vw;
@@ -53,7 +54,6 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  height: 85%;
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(100% - 108px);
@@ -112,7 +112,8 @@ function App() {
           <SearchTopBar />
           <Main>
             <Routes>
-              <Route path="splash" element={<SplashPage />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/splash" element={<SplashPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/search" element={<Search />} />
               {/* </Route> */}

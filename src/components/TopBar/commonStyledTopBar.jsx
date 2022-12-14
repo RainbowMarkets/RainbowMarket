@@ -5,7 +5,7 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledHeader = styled.header`
   display: flex;
-  position: fixed;
+  position: sticky;
   z-index: 10px;
   justify-content: space-between;
   align-items: center;

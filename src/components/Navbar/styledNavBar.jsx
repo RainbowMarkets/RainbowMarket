@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledNav = styled.nav`
-  position: fixed;
+  position: sticky;
+  left: 0;
+  bottom: 0;
   width: 100%;
   height: 60px;
   margin: 0 auto;
