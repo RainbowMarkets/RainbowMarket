@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { colors } from "../../GlobalStyle";
 
 export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 390px;
-  height: 760px;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
 `;
 
@@ -16,18 +17,19 @@ export const StyledImg = styled.img`
 
 export const StyledStrong = styled.strong`
   font-size: 36px;
-  line-height: 36px;
-  font-weight: 700;
+
+  font-weight: bold;
   margin-top: 10px;
 `
 export const StyledP = styled.p`
   margin: 20px 0;
-  font-weight: 500;
+  line-height: 14px;
 `
 
 export const StyledButton = styled.button`
-  background-color: #8D72E1;
+  background-color: ${colors.colorMain};
   color: #fff;
   padding: 13px 26px;
   border-radius: 44px;
+  font-weight: 500;
 `
