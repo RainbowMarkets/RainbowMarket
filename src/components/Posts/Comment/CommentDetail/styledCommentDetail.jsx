@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import iconMoreVertical from "../../../../assets/images/icon- more-vertical.png";
+import { colors, fonts } from "../../../../GlobalStyle";
 
 export const CommentWrapper = styled.section`
   margin-bottom: 16px;
@@ -30,18 +31,21 @@ export const CommentWrapper = styled.section`
   }
   strong {
     line-height: 17.53px;
-    font-weight: 500;
+    font-weight: bold;
   }
   span {
     margin-left: 6px;
     line-height: 12.52px;
     font-weight: 400;
-    font-size: 10px;
-    color: #767676;
+    font-size: ${fonts.small};
+    color: ${colors.color76};
   }
   p {
     margin-top: 4px;
     margin-left: 48px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #333333;
   }
   button {
     content: "";

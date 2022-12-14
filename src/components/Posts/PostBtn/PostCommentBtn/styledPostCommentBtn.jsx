@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { colors, fonts } from "../../../../GlobalStyle";
 
 export const CommentWrapper = styled.button`
-  color: #757575;
-  font-size: 12px;
+  color: ${colors.color76};
+  font-size: ${fonts.mid};
   font-weight: 400;
   line-height: 12px;
   display: flex;

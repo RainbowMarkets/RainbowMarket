@@ -25,7 +25,6 @@ export const TextWrapper = styled.section`
   flex-grow: 1;
   margin-top: 12px;
   position: relative;
-  background-color: pink;
 
   .form-textarea {
     width: 100%;
@@ -37,13 +36,15 @@ export const TextWrapper = styled.section`
     margin-bottom: 16px;
     outline: none;
   }
+  .form-textarea::placeholder {
+    color: ${colors.colorC4};
+  }
   .img-up-btn {
     background-image: url(${uploadFile});
     background-size: cover;
     position: absolute;
     bottom: 0;
-    /* right: -22px; */
-    transform: translateX(-50%);
+    right: 0;
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -59,13 +60,14 @@ export const PostImgWrapper = styled.section`
   }
   img {
     width: 100%;
-    height: 228px;
+    height: 100%;
     border-radius: 10px;
+    background-size: cover;
   }
   .postImg-del {
     position: absolute;
     background-image: url(${xImg});
-    background-size: cover;
+    background-size: contain;
     width: 22px;
     height: 22px;
     right: 6px;
