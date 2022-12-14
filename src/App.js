@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GlobalStyle } from "./GlobalStyle";
-import PostWithImg from "./components/common/PostFormat/PostWithImg/PostWithImg";
-import PostOnlyText from "./components/common/PostFormat/PostOnlyText/PostOnlyText";
+import { colors, GlobalStyle } from "./GlobalStyle";
+import PostWithImg from "./components/common/PostWithImg";
+import PostOnlyText from "./components/common/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import PostDetail from "./components/Posts/PostDetail";
@@ -15,6 +15,7 @@ import UpLoadTopBar from "./components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import Post from "./pages/Post/Post";
 import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
+import Search from "./pages/Search/Search";
 
 const Container = styled.div`
   width: 100vw;
@@ -50,6 +51,15 @@ const Main = styled.main`
   height: 85%;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.colorMain};
+  }
 `;
 
 function App() {
@@ -92,12 +102,13 @@ function App() {
 
       <Wrapper>
         <BrowserRouter>
-          <CommonTopBar />
+          <SearchTopBar />
           <Main>
             <Routes>
               <Route path="/splash" element={<SplashPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/post" element={<Post />} />
+              <Route path="/search" element={<Search />} />
             </Routes>
 
             <PostOnlyText />

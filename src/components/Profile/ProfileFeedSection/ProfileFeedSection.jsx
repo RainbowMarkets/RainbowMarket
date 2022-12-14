@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ProfileFeedHeader from "./ProfileFeedHeader/ProfileFeedHeader";
+import PostOnlyText from "../../common/PostOnlyText";
 
 const Section = styled.section`
   background: white;
@@ -11,7 +12,7 @@ export default function ProfileFeedSection() {
   return (
     <Section>
       <ProfileFeedHeader />
-      <div>피드 부탁해요!!</div>
+      <PostOnlyText />
     </Section>
   );
 }
