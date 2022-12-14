@@ -42,6 +42,9 @@ const Aside = styled.aside`
 const Wrapper = styled.div`
   width: 440px;
   min-width: 390px;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
   background: white;
   box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
   display: flex;
@@ -50,10 +53,11 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  height: calc(100% - 108px);
-  margin-top: 48px;
+  height: 85%;
   overflow-y: scroll;
   overflow-x: hidden;
+  height: calc(100% - 108px);
+  margin-top: 48px;
 
   &::-webkit-scrollbar {
     width: 1px;
@@ -108,10 +112,11 @@ function App() {
           <SearchTopBar />
           <Main>
             <Routes>
-              <Route path="/splash" element={<SplashPage />} />
+              <Route path="splash" element={<SplashPage />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/post" element={<Post />} />
               <Route path="/search" element={<Search />} />
+              {/* </Route> */}
+              <Route path="/post" element={<Post />} />
             </Routes>
 
             {/* <PostOnlyText />
