@@ -9,7 +9,7 @@ export const StyledHeader = styled.header`
   z-index: 10px;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 440px;
   height: 48px;
   margin: 0 auto;
   padding: 0 16px;
