@@ -17,6 +17,7 @@ import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
 
 const Container = styled.div`
   width: 100vw;
@@ -116,6 +117,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               {/* </Route> */}
               <Route path="/post" element={<Post />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
 
             {/* <PostOnlyText />
