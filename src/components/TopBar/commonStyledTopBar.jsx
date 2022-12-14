@@ -5,6 +5,8 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledHeader = styled.header`
   display: flex;
+  position: fixed;
+  z-index: 10px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -23,13 +25,13 @@ export const StyledH1 = styled.h1`
 export const StyledBtn = styled.button`
   width: 22px;
   height: 22px;
-  background: url(${ backBtn }) no-repeat center / 100%;
+  background: url(${backBtn}) no-repeat center / 100%;
 `;
 
 export const StyledMoreBtn = styled.button`
   width: 24px;
   height: 24px;
-  background: url(${ moreBtn }) no-repeat center / 100%;
+  background: url(${moreBtn}) no-repeat center / 100%;
 `;
 
 export const StyledUpdateBtn = styled.button`
