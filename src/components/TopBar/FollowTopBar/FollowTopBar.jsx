@@ -1,16 +1,21 @@
-import React from 'react'
-import { StyledHeader, StyledH1, StyledBtn } from '../commonStyledTopBar'
+import styled from "styled-components";
+import { StyledHeader, StyledH1, StyledBtn } from "../commonStyledTopBar";
 
+const StyledHead = styled(StyledHeader)`
+  justify-content: flex-start;
+` 
 
-
+const StyledTit = styled(StyledH1)`
+  margin-left: 10px;
+` 
 
 export default function FollowTopBar() {
   return (
-    <StyledHeader style={{justifyContent: 'flex-start'}}>
-      <StyledBtn>
+    <StyledHead>
+      <StyledBtn type="button">
         <span className="hidden">이전 페이지</span>
       </StyledBtn>
-      <StyledH1 style={{marginLeft: "8px"}}>Flowers</StyledH1>
-    </StyledHeader>
+      <StyledTit>Flowers</StyledTit>
+    </StyledHead>
   )
 }

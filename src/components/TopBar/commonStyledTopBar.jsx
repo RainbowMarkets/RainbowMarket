@@ -1,22 +1,23 @@
 import styled from "styled-components";
 import backBtn from "../../assets/images/icon-arrow-left.png";
 import moreBtn from "../../assets/images/icon- more-vertical.png";
+import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 390px;
+  width: 100%;
   height: 48px;
   margin: 0 auto;
-  padding: 0 12px;
-  border-bottom: solid 0.5px #DBDBDB;;
+  padding: 0 16px;
+  border-bottom: solid 0.5px ${colors.colorDB};
   /* background-color: bisque; */
 `;
 
 export const StyledH1 = styled.h1`
-  font-size: 18px;
-  font-weight: 700;
+  font-size: ${fonts.xlarge};
+  font-weight: bold;
 `;
 
 export const StyledBtn = styled.button`
@@ -36,7 +37,7 @@ export const StyledUpdateBtn = styled.button`
   padding: 7px 0;
   border-radius: 32px;
   font-weight: 500;
-  background-color: #B8C0F9;
+  background-color: ${colors.colorSub};
   color: #fff;
 `;
 
