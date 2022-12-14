@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
@@ -34,12 +34,41 @@ const Section = styled.section`
 `;
 
 export default function ProfileSection() {
+  const [userInfo, setUserInfo] = useState({
+    _id: "",
+    username: "",
+    accountname: "",
+    intro: "",
+    image: "",
+    isfollow: false,
+    following: [],
+    follower: [],
+    followerCount: 0,
+    followingCount: 0,
+  });
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTZjYjUyMTdhZTY2NjU4MWMzMzQ0MyIsImV4cCI6MTY3NjE2MTYwNCwiaWF0IjoxNjcwOTc3NjA0fQ.zm-yhyy5g9foTWFFkVOO3-kTJHR45GWJCKBBf7sl3Dc";
+
+  useEffect(() => {
+    fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setUserInfo(json.user));
+  }, []);
+
+  console.log("userinfo", userInfo);
   return (
     <Section>
-      <ProfileHeader />
-      <strong>닉네임</strong>
-      <small>@대충아이디</small>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+      <ProfileHeader userInfo={userInfo} />
+      <strong>{userInfo.username}</strong>
+      <small>@{userInfo.accountname}</small>
+      <p>{userInfo.intro}</p>
       <ProfileFooter />
     </Section>
   );

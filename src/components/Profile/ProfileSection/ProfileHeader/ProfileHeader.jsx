@@ -21,12 +21,12 @@ const ProfileImg = styled.div`
   margin: 16px;
 `;
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ userInfo }) {
   return (
     <Header>
-      <Follow follow="9999" tofrom="followers" />
+      <Follow follow={userInfo.followerCount} tofrom="followers" />
       <ProfileImg />
-      <Follow follow="1111" tofrom="followings" />
+      <Follow follow={userInfo.followingCount} tofrom="followings" />
     </Header>
   );
 }

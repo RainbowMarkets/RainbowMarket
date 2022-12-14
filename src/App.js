@@ -42,13 +42,16 @@ const Aside = styled.aside`
 const Wrapper = styled.div`
   width: 440px;
   min-width: 390px;
-  height: 100vh;
   background: white;
   box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Main = styled.main`
-  height: 85%;
+  height: calc(100% - 108px);
+  margin-top: 48px;
   overflow-y: scroll;
   overflow-x: hidden;
 
