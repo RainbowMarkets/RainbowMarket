@@ -3,25 +3,49 @@ import styled from "styled-components";
 export const ModalWrapper = styled.section`
   /* 모달창 외부 */
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 100;
+  z-index: 900;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  /* right: 0;
+  bottom: 0; */
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* bottom: 0; */
+  /* position: absolute;
+  bottom: 0px;
+  left: 0px;*/
+  div {
+    width: 440px;
+    min-width: 390px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
   /* 모달창 내부 */
   ul {
-    display: flex;
+    width: 440px;
+    min-width: 390px;
+    /* margin: 0 auto; */
+    /* display: flex; */
     flex-direction: column;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    /* right: 95px; */
+    /* bottom: 0; */
     padding: 36px 0 10px;
     height: auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #fff;
+    z-index: 902;
   }
   ul::before {
     content: "";
@@ -48,7 +72,7 @@ export const ModalWrapper = styled.section`
     display: flex;
     color: red;
     font-weight: 400;
-    line-height: 17.53px;
+    line-height: 18px;
     align-items: center;
     flex-grow: 1;
     width: 100%;

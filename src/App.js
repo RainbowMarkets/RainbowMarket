@@ -116,15 +116,17 @@ function App() {
               <Route path="/join" element={<JoinWithEmail />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/search" element={<Search />} />
-              {/* </Route> */}
+
               <Route path="/post" element={<Post />} />
+              <Route path="/post/postdetail" element={<PostDetail />} />
             </Routes>
 
             {/* <PostOnlyText />
             <PostWithImg />
-            <PostDetail /> */}
+            <PostDetail /> 
+            */}
           </Main>
-          <Navbar />
+          {/* <Navbar /> */}
         </BrowserRouter>
       </Wrapper>
     </Container>

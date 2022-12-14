@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import xImg from "../../assets/images/x.png";
 import uploadFile from "../../assets/images/upload-file.png";
+import { colors, fonts } from "../../GlobalStyle";
 
 export const UploadContain = styled.div`
   padding: 20px 16px 16px 16px;
@@ -10,9 +11,8 @@ export const UploadContain = styled.div`
 export const UploadWrapper = styled.section`
   display: flex;
   height: 100%;
-  justify-content: center;
-  /* background-color: white; */
-  background-color: black;
+  justify-content: space-between;
+  background-color: white;
 `;
 export const ProfileContain = styled.section`
   img {
@@ -22,16 +22,22 @@ export const ProfileContain = styled.section`
   }
 `;
 export const TextWrapper = styled.section`
+  flex-grow: 1;
   margin-top: 12px;
   position: relative;
+
   .form-textarea {
-    width: 304px;
+    width: 100%;
+    height: auto;
     font-weight: 400;
     line-height: 17.53px;
     border: none;
     resize: none;
-    height: 50px;
     margin-bottom: 16px;
+    outline: none;
+  }
+  .form-textarea::placeholder {
+    color: ${colors.colorC4};
   }
   .img-up-btn {
     background-image: url(${uploadFile});
@@ -53,9 +59,10 @@ export const PostImgWrapper = styled.section`
     position: relative;
   }
   img {
-    width: 304px;
-    height: 228px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
+    background-size: cover;
   }
   .postImg-del {
     position: absolute;

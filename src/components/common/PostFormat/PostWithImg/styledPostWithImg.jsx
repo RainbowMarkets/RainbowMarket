@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { colors, fonts } from "../../../../GlobalStyle";
 
 export const PostWrapper = styled.section`
-  margin: 0px auto 20px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 358px;
+  width: 100%;
 `;
 export const ProfileContain = styled.div`
   display: flex;
@@ -24,15 +24,17 @@ export const ProfileContain = styled.div`
 `;
 export const ProfileName = styled.div`
   flex-grow: 2;
+  margin-top: 4px;
   p {
-    font-weight: 500;
+    font-weight: bold;
     line-height: 17.53px;
     margin-bottom: 2px;
   }
   small {
     font-weight: 400;
     line-height: 14px;
-    font-size: 12px;
+    font-size: ${fonts.mid};
+    color: ${colors.color76};
   }
 `;
 export const ContextWrapper = styled.div`
@@ -44,14 +46,15 @@ export const ContextWrapper = styled.div`
     margin-bottom: 16px;
   }
   .post-date {
-    color: rgba(118, 118, 118, 1);
+    color: ${colors.color76};
     font-weight: 400;
     line-height: 12px;
-    font-size: 10px;
+    font-size: ${fonts.small};
   }
   .post-img {
-    width: 304px;
-    height: 228px;
+    width: 100%;
+    height: auto;
+    background-size: contain;
     border-radius: 10px;
     margin-bottom: 12px;
   }
