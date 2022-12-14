@@ -5,7 +5,7 @@ import ProfileFeedSection from "../../components/Profile/ProfileFeedSection/Prof
 import ProfileSection from "../../components/Profile/ProfileSection/ProfileSection";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
 
-const Main = styled.main`
+const Wrapper = styled.div`
   width: 100%;
   min-width: 390px;
   background: #f2f2f2;
@@ -18,11 +18,11 @@ const Main = styled.main`
 
 export default function Profile() {
   return (
-    <Main>
+    <Wrapper>
       <SetProfile />
       <ProfileSection />
       <ProfileItemSection />
       <ProfileFeedSection />
-    </Main>
+    </Wrapper>
   );
 }

@@ -6,14 +6,18 @@ import SetProfileImage from "./SetProfileImage/SetProfileImage";
 import SetProfileInput from "./SetProfileInput/SetProfileInput";
 
 const Wrapper = styled.div`
-  background: white;
-  min-width: 390px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StartButton = styled(Button)`
+  width: 80%;
   font-size: 16px;
   color: white;
+  padding: 13px 0;
+  margin: 20px 0;
 `;
 
 export default function SetProfile() {
@@ -36,7 +40,7 @@ export default function SetProfile() {
         label="소개"
         placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
       />
-      <StartButton>ㅁㅁㅁ</StartButton>
+      <StartButton>감귤마켓 시작하기</StartButton>
     </Wrapper>
   );
 }

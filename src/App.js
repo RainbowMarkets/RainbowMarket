@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GlobalStyle } from "./GlobalStyle";
+import { colors, GlobalStyle } from "./GlobalStyle";
 import PostWithImg from "./components/common/PostWithImg";
 import PostOnlyText from "./components/common/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
@@ -16,7 +16,6 @@ import Post from "./pages/Post/Post";
 import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
-
 
 const Container = styled.div`
   width: 100vw;
@@ -52,6 +51,15 @@ const Main = styled.main`
   height: 85%;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.colorMain};
+  }
 `;
 
 function App() {

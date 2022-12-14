@@ -6,7 +6,7 @@ import { colors } from "../../../../GlobalStyle";
 const Wrapper = styled.div`
   width: min-content;
   position: relative;
-  margin: auto;
+  margin: 30px auto;
 `;
 
 const ProfileImage = styled.img`
