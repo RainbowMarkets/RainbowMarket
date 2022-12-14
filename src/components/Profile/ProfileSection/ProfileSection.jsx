@@ -47,10 +47,10 @@ export default function ProfileSection() {
     followingCount: 0,
   });
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTZjYjUyMTdhZTY2NjU4MWMzMzQ0MyIsImV4cCI6MTY3NjE2MTYwNCwiaWF0IjoxNjcwOTc3NjA0fQ.zm-yhyy5g9foTWFFkVOO3-kTJHR45GWJCKBBf7sl3Dc";
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
+    if (!token) return;
     fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
       method: "GET",
       headers: {

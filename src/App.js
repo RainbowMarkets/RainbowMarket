@@ -17,6 +17,7 @@ import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
+import { Auth } from "./context/Context";
 
 const Container = styled.div`
   width: 100vw;
@@ -71,6 +72,7 @@ const Main = styled.main`
 
 function App() {
   const [data, setData] = useState({ post: [] });
+  const [auth, setAuth] = useState("");
 
   useEffect(() => {
     console.log("useEffect called");
@@ -93,12 +95,13 @@ function App() {
   console.log(data.post[0] || data);
 
   return (
-    <Container>
-      <GlobalStyle />
-      <Aside>
-        <img src="https://cdn.pixabay.com/photo/2012/04/10/16/54/rainbow-26389_960_720.png" />
-      </Aside>
-      {/* {data.post.map((list) => {
+    <Auth.Provider value={{ auth, setAuth }}>
+      <Container>
+        <GlobalStyle />
+        <Aside>
+          <img src="https://cdn.pixabay.com/photo/2012/04/10/16/54/rainbow-26389_960_720.png" />
+        </Aside>
+        {/* {data.post.map((list) => {
         return (
           <>
             <p>{list.author.username}</p>
@@ -107,27 +110,28 @@ function App() {
         );
       })} */}
 
-      <Wrapper>
-        <BrowserRouter>
-          <SearchTopBar />
-          <Main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/splash" element={<SplashPage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/search" element={<Search />} />
-              {/* </Route> */}
-              <Route path="/post" element={<Post />} />
-            </Routes>
+        <Wrapper>
+          <BrowserRouter>
+            <SearchTopBar />
+            <Main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/splash" element={<SplashPage />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/search" element={<Search />} />
+                {/* </Route> */}
+                <Route path="/post" element={<Post />} />
+              </Routes>
 
-            {/* <PostOnlyText />
+              {/* <PostOnlyText />
             <PostWithImg />
             <PostDetail /> */}
-          </Main>
-          <Navbar />
-        </BrowserRouter>
-      </Wrapper>
-    </Container>
+            </Main>
+            <Navbar />
+          </BrowserRouter>
+        </Wrapper>
+      </Container>
+    </Auth.Provider>
   );
 }
 export default App;

@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const Auth = createContext("hello");
+export const Auth = createContext(null);
