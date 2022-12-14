@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledNav = styled.nav`
+  position: fixed;
   width: 100%;
   height: 60px;
   margin: 0 auto;
@@ -11,7 +12,7 @@ export const StyledNav = styled.nav`
 `;
 
 export const StyledUl = styled.ul`
-	display: flex;
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
   margin: 0 auto;
@@ -19,7 +20,7 @@ export const StyledUl = styled.ul`
 `;
 
 export const StyledLi = styled.li`
-	width: 100%;
+  width: 100%;
 `;
 
 export const StyledLink = styled(Link)`
@@ -36,5 +37,5 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledImg = styled.img`
-	width: 22px;
+  width: 22px;
 `;
