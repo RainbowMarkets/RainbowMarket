@@ -28,11 +28,11 @@ const ListByImg = styled(ListByText)`
   background-image: url(${postAlbumOff});
 `;
 
-export default function ProfileFeedHeader() {
+export default function ProfileFeedHeader({ setWithImg }) {
   return (
     <Header>
-      <ListByText />
-      <ListByImg />
+      <ListByText onClick={() => setWithImg(false)} />
+      <ListByImg onClick={() => setWithImg(true)} />
     </Header>
   );
 }

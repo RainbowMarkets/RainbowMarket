@@ -62,7 +62,6 @@ export default function ProfileSection() {
       .then((json) => setUserInfo(json.user));
   }, []);
 
-  console.log("userinfo", userInfo);
   return (
     <Section>
       <ProfileHeader userInfo={userInfo} />

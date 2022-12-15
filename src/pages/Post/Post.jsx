@@ -11,7 +11,6 @@ import {
 import { useCallback, useRef, useState } from "react";
 import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
 
-
 const Post = (props) => {
   const [isValid, setIsValid] = useState(false);
   const textRef = useRef();
