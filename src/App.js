@@ -20,7 +20,6 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -71,27 +70,27 @@ const Main = styled.main`
 `;
 
 function App() {
-  const [data, setData] = useState({ post: [] });
+  // const [data, setData] = useState({ post: [] });
 
-  useEffect(() => {
-    console.log("useEffect called");
-    const url = "https://mandarin.api.weniv.co.kr";
-    const reqPath = "/post/testrainbow/userpost";
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTdlMGIyMTdhZTY2NjU4MWM1MTBmYSIsImV4cCI6MTY3NjA4MjA0MSwiaWF0IjoxNjcwODk4MDQxfQ.uEOFhf4XIGFUJUVvZcPnsYbVG0fK9z2TLqLy3jU3Xoo";
+  // useEffect(() => {
+  //   console.log("useEffect called");
+  //   const url = "https://mandarin.api.weniv.co.kr";
+  //   const reqPath = "/post/testrainbow/userpost";
+  //   const token =
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTdlMGIyMTdhZTY2NjU4MWM1MTBmYSIsImV4cCI6MTY3NjA4MjA0MSwiaWF0IjoxNjcwODk4MDQxfQ.uEOFhf4XIGFUJUVvZcPnsYbVG0fK9z2TLqLy3jU3Xoo";
 
-    fetch(url + reqPath, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => setData(json));
-  }, []);
+  //   fetch(url + reqPath, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       "Content-type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => setData(json));
+  // }, []);
 
-  console.log(data.post[0] || data);
+  // console.log(data.post[0] || data);
 
   return (
     <Container>
@@ -110,7 +109,6 @@ function App() {
 
       <Wrapper>
         <BrowserRouter>
-        
           <Main>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -119,6 +117,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               {/* </Route> */}
               <Route path="/post" element={<Post />} />
+              <Route path="/post/postdetail" element={<PostDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
 
