@@ -111,29 +111,30 @@ function App() {
         );
       })} */}
 
-      <Wrapper>
-        <BrowserRouter>
-          <SearchTopBar />
-          <Main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/splash" element={<SplashPage />} />
-              <Route path="/join" element={<JoinWithEmail />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/search" element={<Search />} />
+        <Wrapper>
+          <BrowserRouter>
+            <SearchTopBar />
+            <Main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/splash" element={<SplashPage />} />
+                <Route path="/join" element={<JoinWithEmail />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/search" element={<Search />} />
 
-              <Route path="/post" element={<Post />} />
-              <Route path="/post/postdetail" element={<PostDetail />} />
-            </Routes>
+                <Route path="/post" element={<Post />} />
+                <Route path="/post/postdetail" element={<PostDetail />} />
+              </Routes>
 
               {/* <PostOnlyText />
             <PostWithImg />
             <PostDetail /> */}
-          </Main>
-          <Navbar />
-        </BrowserRouter>
-      </Wrapper>
-    </Container>
+            </Main>
+            <Navbar />
+          </BrowserRouter>
+        </Wrapper>
+      </Container>
+    </Auth.Provider>
   );
 }
 export default App;

@@ -39,7 +39,10 @@ export default function SetProfileImage() {
     <Wrapper>
       <ProfileImage src="https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_960_720.png" />
       <UploadButton>
-        <img src={uploadimg} />
+        <label for="upload">
+          <img src={uploadimg} />
+        </label>
+        <input className="hidden" id="upload" type="file" />
       </UploadButton>
     </Wrapper>
   );
