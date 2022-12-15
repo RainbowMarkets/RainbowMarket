@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { fonts } from "../../../../GlobalStyle";
 
 export const DeleteAlertWrapper = styled.section`
   position: fixed;
@@ -9,7 +10,7 @@ export const DeleteAlertWrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 904;
 
   div {
     background-color: #ffffff;
@@ -20,8 +21,8 @@ export const DeleteAlertWrapper = styled.section`
   }
   strong {
     display: inline-block;
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: ${fonts.large};
     line-height: 20.03px;
     padding: 22px 0 22px;
   }

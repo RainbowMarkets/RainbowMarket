@@ -22,9 +22,9 @@ export default function JoinWithEmail() {
       <form className = "join-form" onSubmit={onSubmitHandler}>
         <span>이메일</span>
         <input value = {email} onKeyUp = {goToNextSignUp} onChange = {(event) => setEmail(event.target.value)} placeholder = "이메일 주소를 입력해주세요"/>
+        <strong className= "warning-message">*이미 가입된 이메일 주소입니다.</strong>
         <span>비밀번호</span>
         <input value = {password} onKeyUp = {goToNextSignUp} onChange = {(event) => setPassword(event.target.value)} placeholder = "비밀번호를 입력해 주세요"/>
-        <strong className= "warning-message">*이미 가입된 이메일 주소입니다.</strong>
         <strong className= "warning-message">*비밀번호는 6자 이상이어야 합니다.</strong>
         <div className = "next-button-wrapper">
           <button className = "next-button">다음</button> 
