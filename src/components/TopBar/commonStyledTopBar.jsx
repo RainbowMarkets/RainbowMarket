@@ -5,7 +5,12 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledHeader = styled.header`
   display: flex;
+<<<<<<< HEAD
   position: sticky;
+=======
+  position: fixed;
+  top: 0;
+>>>>>>> 5b01cd238d21247213f9a00b32ccb7061f0a283c
   z-index: 10px;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +19,6 @@ export const StyledHeader = styled.header`
   margin: 0 auto;
   padding: 0 16px;
   border-bottom: solid 0.5px ${colors.colorDB};
-  /* background-color: bisque; */
 `;
 
 export const StyledH1 = styled.h1`
@@ -22,7 +26,7 @@ export const StyledH1 = styled.h1`
   font-weight: bold;
 `;
 
-export const StyledBtn = styled.button`
+export const StyledBackBtn = styled.button`
   width: 22px;
   height: 22px;
   background: url(${backBtn}) no-repeat center / 100%;

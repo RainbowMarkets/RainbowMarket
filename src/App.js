@@ -17,6 +17,7 @@ import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
 import { Auth } from "./context/Context";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 
@@ -113,17 +114,15 @@ function App() {
 
         <Wrapper>
           <BrowserRouter>
-            <SearchTopBar />
             <Main>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/splash" element={<SplashPage />} />
-                <Route path="/join" element={<JoinWithEmail />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
-
+                {/* </Route> */}
                 <Route path="/post" element={<Post />} />
-                <Route path="/post/postdetail" element={<PostDetail />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
 
               {/* <PostOnlyText />
