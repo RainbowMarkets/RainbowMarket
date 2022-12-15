@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { colors, GlobalStyle } from "./GlobalStyle";
 import PostWithImg from "./components/common/PostFormat/PostWithImg/PostWithImg";
@@ -18,8 +18,8 @@ import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
+import { Auth } from "./context/Context";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
-
 
 const Container = styled.div`
   width: 100vw;
@@ -51,13 +51,14 @@ const Wrapper = styled.div`
   overflow: hidden;
   background: white;
   box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Main = styled.main`
-  /* height: 85%; */
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100% - 108px);
   margin-top: 48px;
 
   &::-webkit-scrollbar {
@@ -72,34 +73,33 @@ const Main = styled.main`
 
 function App() {
   const [data, setData] = useState({ post: [] });
+  const [auth, setAuth] = useState("");
 
-  useEffect(() => {
-    console.log("useEffect called");
-    const url = "https://mandarin.api.weniv.co.kr";
-    const reqPath = "/post/testrainbow/userpost";
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTdlMGIyMTdhZTY2NjU4MWM1MTBmYSIsImV4cCI6MTY3NjA4MjA0MSwiaWF0IjoxNjcwODk4MDQxfQ.uEOFhf4XIGFUJUVvZcPnsYbVG0fK9z2TLqLy3jU3Xoo";
+  // useEffect(() => {
+  //   const url = "https://mandarin.api.weniv.co.kr";
+  //   const reqPath = "/post/testrainbow/userpost";
+  //   const token =
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTdlMGIyMTdhZTY2NjU4MWM1MTBmYSIsImV4cCI6MTY3NjA4MjA0MSwiaWF0IjoxNjcwODk4MDQxfQ.uEOFhf4XIGFUJUVvZcPnsYbVG0fK9z2TLqLy3jU3Xoo";
 
-    fetch(url + reqPath, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => setData(json));
-  }, []);
-
-  console.log(data.post[0] || data);
+  //   fetch(url + reqPath, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       "Content-type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => setData(json));
+  // }, []);
 
   return (
-    <Container>
-      <GlobalStyle />
-      <Aside>
-        <img src="https://cdn.pixabay.com/photo/2012/04/10/16/54/rainbow-26389_960_720.png" />
-      </Aside>
-      {/* {data.post.map((list) => {
+    <Auth.Provider value={{ auth, setAuth }}>
+      <Container>
+        <GlobalStyle />
+        <Aside>
+          <img src="https://cdn.pixabay.com/photo/2012/04/10/16/54/rainbow-26389_960_720.png" />
+        </Aside>
+        {/* {data.post.map((list) => {
         return (
           <>
             <p>{list.author.username}</p>
@@ -108,28 +108,28 @@ function App() {
         );
       })} */}
 
-      <Wrapper>
-        <BrowserRouter>
-        
-          <Main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/splash" element={<SplashPage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/search" element={<Search />} />
-              {/* </Route> */}
-              <Route path="/post" element={<Post />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+        <Wrapper>
+          <BrowserRouter>
+            <Main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/splash" element={<SplashPage />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/search" element={<Search />} />
+                {/* </Route> */}
+                <Route path="/post" element={<Post />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
 
-            {/* <PostOnlyText />
+              {/* <PostOnlyText />
             <PostWithImg />
             <PostDetail /> */}
-          </Main>
-          <Navbar />
-        </BrowserRouter>
-      </Wrapper>
-    </Container>
+            </Main>
+            <Navbar />
+          </BrowserRouter>
+        </Wrapper>
+      </Container>
+    </Auth.Provider>
   );
 }
 export default App;
