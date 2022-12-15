@@ -118,6 +118,7 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 {/* </Route> */}
                 <Route path="/post" element={<Post />} />
+                <Route path="/post/postdetail" element={<PostDetail />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
 
