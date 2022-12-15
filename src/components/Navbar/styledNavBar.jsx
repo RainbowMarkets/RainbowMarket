@@ -4,6 +4,7 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledNav = styled.nav`
   position: fixed;
+  bottom: 0;
   width: 440px;
   height: 60px;
   margin: 0 auto;

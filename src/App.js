@@ -108,7 +108,7 @@ function App() {
 
       <Wrapper>
         <BrowserRouter>
-          <SearchTopBar />
+          
           <Main>
             <Routes>
               <Route path="/" element={<Home />} />

@@ -6,6 +6,7 @@ import { colors, fonts } from "../../GlobalStyle";
 export const StyledHeader = styled.header`
   display: flex;
   position: fixed;
+  top: 0;
   z-index: 10px;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +15,6 @@ export const StyledHeader = styled.header`
   margin: 0 auto;
   padding: 0 16px;
   border-bottom: solid 0.5px ${colors.colorDB};
-  /* background-color: bisque; */
 `;
 
 export const StyledH1 = styled.h1`
@@ -22,7 +22,7 @@ export const StyledH1 = styled.h1`
   font-weight: bold;
 `;
 
-export const StyledBtn = styled.button`
+export const StyledBackBtn = styled.button`
   width: 22px;
   height: 22px;
   background: url(${backBtn}) no-repeat center / 100%;
