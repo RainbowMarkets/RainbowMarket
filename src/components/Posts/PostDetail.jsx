@@ -19,28 +19,21 @@ import {
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
   const [postDetailData, setPostDetailData] = useState({
-    post: {
-      id: "",
-      content: "",
+    comments: [],
+    commentCount: 0,
+    createdAt: "",
+    updatedAt: "",
+    author: {
+      _id: "",
+      username: "",
+      accountname: "",
+      intro: "",
       image: "",
-      createdAt: "",
-      updatedAt: "",
-      hearted: false,
-      heartCount: 0,
-      comments: [],
-      commentCount: 0,
-      author: {
-        _id: "",
-        username: "",
-        accountname: "",
-        intro: "",
-        image: "",
-        isfollow: false,
-        following: [],
-        follower: [],
-        followerCount: 0,
-        followingCount: 0,
-      },
+      isfollow: false,
+      following: [],
+      follower: [],
+      followerCount: 0,
+      followingCount: 0,
     },
   });
   // const myToken = localStorage.getItem("token");
@@ -79,11 +72,11 @@ const PostDetail = () => {
       <PostDetailWrapper>
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
         <PostDiv>
-          <PostWithImg postDetail={postDetailData} />
-          {/* <PostOnlyText /> */}
+          {/* <PostWithImg postDetail={postDetailData} /> */}
+          <PostOnlyText postDetail={postDetailData} />
         </PostDiv>
         <CommentWrapper>
-          <CommentDetail />
+          <CommentDetail commentDetail={postDetailData.comments} />
           <CommentDetail />
           <CommentDetail />
           <CommentDetail />

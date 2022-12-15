@@ -22,7 +22,6 @@ import { Auth } from "./context/Context";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import Chat from "./pages/Chat/Chat";
 
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;

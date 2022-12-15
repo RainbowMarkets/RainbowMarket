@@ -13,7 +13,7 @@ import {
 } from "./styledPostWithImg";
 
 const Post = ({ postDetail }) => {
-  // console.log("post", postDetail);
+  console.log("post", postDetail);
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -45,13 +45,17 @@ const Post = ({ postDetail }) => {
           뛰노는 인생의 힘있다. */}
           {postDetail.content}
         </p>
-        {/* {postDetail.image:} */}
-        <img className="post-img" src={postImg} alt="게시글 이미지" />
+        {/* 이미지 여부에 따라 달라지게 구현 예정 */}
+        <img className="post-img" src={postDetail.image} alt="게시글 이미지" />
         <PostBtn>
-          <PostHeartBtn />
-          <PostCommentBtn />
+          <PostHeartBtn
+            heartCount={postDetail.heartCount}
+            hearted={postDetail.hearted}
+          />
+          <PostCommentBtn heartCount={postDetail.comments.length} />
+          {/* {console.log(postDetail.comments.length)} */}
         </PostBtn>
-        <PostDate />
+        <PostDate upDate={postDetail.updatedAt} />
       </ContextWrapper>
     </PostWrapper>
   );

@@ -1,5 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import { colors, fonts } from "../../../../GlobalStyle";
+import { StyledImg, StyledLink } from "../../UserList/styledUserList";
 export const PostWrapper = styled.article`
   display: flex;
   flex-direction: column;
@@ -14,28 +17,28 @@ export const ProfileContain = styled.div`
   .profile-img {
     width: 42px;
     height: 42px;
-    margin-right: 12px;
+    /* margin-right: 12px; */
   }
   .post-modal {
     width: 18px;
     height: 18px;
   }
 `;
-export const ProfileName = styled.div`
-  flex-grow: 2;
-  margin-top: 4px;
-  p {
-    font-weight: bold;
-    line-height: 17.53px;
-    margin-bottom: 2px;
-  }
-  small {
-    font-weight: 400;
-    line-height: 14px;
-    font-size: ${fonts.mid};
-    color: ${colors.color76};
-  }
-`;
+// export const ProfileName = styled.div`
+//   flex-grow: 2;
+//   margin-top: 4px;
+//   p {
+//     font-weight: bold;
+//     line-height: 17.53px;
+//     margin-bottom: 2px;
+//   }
+//   small {
+//     font-weight: 400;
+//     line-height: 14px;
+//     font-size: ${fonts.mid};
+//     color: ${colors.color76};
+//   }
+// `;
 export const ContextWrapper = styled.div`
   margin-left: 54px;
   .post-context {
