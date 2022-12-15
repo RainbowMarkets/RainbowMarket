@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { url } from "../../../../context/Context";
 
 const ItemList = styled.ol`
   display: flex;
@@ -34,48 +35,37 @@ const Item = styled.li`
 `;
 
 export default function ProfileItemList() {
+  const [items, setItems] = useState([]);
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!token) return;
+    fetch(url + "/product/abc0528", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setItems(json.product));
+  }, []);
+
+  console.log(items);
   return (
     <ItemList>
-      <Item>
-        <figure>
-          <img
-            src="https://cdn.pixabay.com/photo/2022/12/02/18/37/middle-spotted-woodpecker-7631440_1280.jpg"
-            alt=""
-          />
-          <figcaption>딱따구리 새 감귤</figcaption>
-          <span>3,500원</span>
-        </figure>
-      </Item>
-      <Item>
-        <figure>
-          <img
-            src="https://cdn.pixabay.com/photo/2022/12/02/18/37/middle-spotted-woodpecker-7631440_1280.jpg"
-            alt=""
-          />
-          <figcaption>딱따구리 새 감귤</figcaption>
-          <span>3,500원</span>
-        </figure>
-      </Item>
-      <Item>
-        <figure>
-          <img
-            src="https://cdn.pixabay.com/photo/2022/12/02/18/37/middle-spotted-woodpecker-7631440_1280.jpg"
-            alt=""
-          />
-          <figcaption>딱따구리 새 감귤</figcaption>
-          <span>3,500원</span>
-        </figure>
-      </Item>
-      <Item>
-        <figure>
-          <img
-            src="https://cdn.pixabay.com/photo/2022/12/02/18/37/middle-spotted-woodpecker-7631440_1280.jpg"
-            alt=""
-          />
-          <figcaption>딱따구리 새 감귤</figcaption>
-          <span>3,500원</span>
-        </figure>
-      </Item>
+      {items.map((product, i) => {
+        return (
+          <Item key={i}>
+            <figure>
+              <img src={product.itemImage} />
+              <figcaption>{product.itemName}</figcaption>
+              <span>{product.price.toLocaleString()} 원</span>
+            </figure>
+          </Item>
+        );
+      })}
     </ItemList>
   );
 }

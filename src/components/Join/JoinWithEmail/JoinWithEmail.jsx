@@ -11,6 +11,7 @@ export default function JoinWithEmail() {
   // 다음 버튼을 활성화시켜서 프로필 설정으로 갈 수 있게 하는 검사
   const goToNextSignUp = () => {};
 
+  const onSubmitHandler = () => {};
   //
 
   //warning-message는 삼항연산자를 이용해서 메세지가 떠야할 때와 뜨면 안 될 때를 구분해서 쓰기

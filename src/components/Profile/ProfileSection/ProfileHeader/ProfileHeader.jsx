@@ -10,23 +10,28 @@ const Header = styled.header`
   max-width: 390px;
   width: 100%;
   margin: 0 auto;
+
+  img {
+    width: 110px;
+    height: 110px;
+    margin: 16px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 `;
 
 const ProfileImg = styled.div`
-  width: 110px;
-  height: 110px;
   background-image: url(${ProfileBasic});
   background-repeat: none;
   background-size: cover;
-  margin: 16px;
 `;
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ userInfo }) {
   return (
     <Header>
-      <Follow follow="9999" tofrom="followers" />
-      <ProfileImg />
-      <Follow follow="1111" tofrom="followings" />
+      <Follow follow={userInfo.followerCount} tofrom="followers" />
+      <img src={userInfo.image} alt="" />
+      <Follow follow={userInfo.followingCount} tofrom="followings" />
     </Header>
   );
 }
