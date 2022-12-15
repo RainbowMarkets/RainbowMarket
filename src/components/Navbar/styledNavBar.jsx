@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledNav = styled.nav`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 440px;
   height: 60px;
@@ -24,7 +24,7 @@ export const StyledLi = styled.li`
   width: 100%;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,6 +35,10 @@ export const StyledLink = styled(Link)`
   color: ${colors.color76};
   font-size: ${fonts.small};
   width: 100%;
+
+  &.active {
+    color: ${colors.colorMain};
+  }
 `;
 
 export const StyledImg = styled.img`
