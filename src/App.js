@@ -1,17 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { colors, GlobalStyle } from "./GlobalStyle";
-import PostWithImg from "./components/common/PostFormat/PostWithImg/PostWithImg";
-import PostOnlyText from "./components/common/PostFormat/PostOnlyText/PostOnlyText";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
-import PostDetail from "./components/Posts/PostDetail";
-import MainTopBar from "./components/TopBar/MainTopBar/MainTopBar";
-import SearchTopBar from "./components/TopBar/SearchTopBar/SearchTopBar";
-import FollowTopBar from "./components/TopBar/FollowTopBar/FollowTopBar";
-import CommonTopBar from "./components/TopBar/CommonTopBar/CommonTopBar";
-import SaveTopBar from "./components/TopBar/SaveTopBar/SaveTopBar";
-import UpLoadTopBar from "./components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import Post from "./pages/Post/Post";
 import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
@@ -19,9 +10,7 @@ import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import { Auth } from "./context/Context";
-import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import Chat from "./pages/Chat/Chat";
-
 
 const Container = styled.div`
   width: 100vw;
@@ -74,42 +63,15 @@ const Main = styled.main`
 `;
 
 function App() {
-  const [data, setData] = useState({ post: [] });
   const [auth, setAuth] = useState("");
-
-  // useEffect(() => {
-  //   const url = "https://mandarin.api.weniv.co.kr";
-  //   const reqPath = "/post/testrainbow/userpost";
-  //   const token =
-  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTdlMGIyMTdhZTY2NjU4MWM1MTBmYSIsImV4cCI6MTY3NjA4MjA0MSwiaWF0IjoxNjcwODk4MDQxfQ.uEOFhf4XIGFUJUVvZcPnsYbVG0fK9z2TLqLy3jU3Xoo";
-
-  //   fetch(url + reqPath, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       "Content-type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((json) => setData(json));
-  // }, []);
 
   return (
     <Auth.Provider value={{ auth, setAuth }}>
       <Container>
         <GlobalStyle />
         <Aside>
-          <img src="https://cdn.pixabay.com/photo/2012/04/10/16/54/rainbow-26389_960_720.png" />
+          <img src="https://cdn.pixabay.com/photo/2017/10/05/09/37/equalizer-2818803_960_720.jpg" />
         </Aside>
-        {/* {data.post.map((list) => {
-        return (
-          <>
-            <p>{list.author.username}</p>
-            <p>{list.content}</p>
-          </>
-        );
-      })} */}
-
         <Wrapper>
           <BrowserRouter>
             <Main>
@@ -119,14 +81,9 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
-                {/* </Route> */}
                 <Route path="/post" element={<Post />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-
-              {/* <PostOnlyText />
-            <PostWithImg />
-            <PostDetail /> */}
             </Main>
             <Navbar />
           </BrowserRouter>

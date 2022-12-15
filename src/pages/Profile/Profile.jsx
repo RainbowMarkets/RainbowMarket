@@ -22,7 +22,6 @@ export default function Profile() {
     <>
       <CommonTopBar />
       <Wrapper>
-        <SetProfile />
         <ProfileSection />
         <ProfileItemSection />
         <ProfileFeedSection />
