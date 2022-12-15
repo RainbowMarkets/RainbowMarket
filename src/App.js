@@ -17,11 +17,9 @@ import styled from "styled-components";
 import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
-<<<<<<< HEAD
 import NotFound from "./pages/NotFound/NotFound";
-=======
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
->>>>>>> 992964863db842bba1d6d4a4b7598cad4efb7ede
+
 
 const Container = styled.div`
   width: 100vw;
@@ -112,29 +110,23 @@ function App() {
 
       <Wrapper>
         <BrowserRouter>
-          
+        
           <Main>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/splash" element={<SplashPage />} />
-              <Route path="/join" element={<JoinWithEmail />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/search" element={<Search />} />
-
+              {/* </Route> */}
               <Route path="/post" element={<Post />} />
-<<<<<<< HEAD
               <Route path="*" element={<NotFound />} />
-=======
-              <Route path="/post/postdetail" element={<PostDetail />} />
->>>>>>> 992964863db842bba1d6d4a4b7598cad4efb7ede
             </Routes>
 
             {/* <PostOnlyText />
             <PostWithImg />
-            <PostDetail /> 
-            */}
+            <PostDetail /> */}
           </Main>
-          {/* <Navbar /> */}
+          <Navbar />
         </BrowserRouter>
       </Wrapper>
     </Container>

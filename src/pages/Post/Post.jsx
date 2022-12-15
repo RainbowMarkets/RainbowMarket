@@ -9,6 +9,8 @@ import {
   UploadWrapper,
 } from "./styledPost";
 import { useCallback, useRef, useState } from "react";
+import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
+
 
 const Post = (props) => {
   const [isValid, setIsValid] = useState(false);
@@ -20,6 +22,7 @@ const Post = (props) => {
 
   return (
     <>
+      <CommonTopBar />
       <UploadContain>
         <UploadWrapper>
           <h2 className="hidden">게시글 작성 페이지</h2>
