@@ -59,6 +59,10 @@ export const GlobalStyle = createGlobalStyle`
     position: absolute;
     white-space: nowrap;
   }
+
+  .postHeight{
+    height: 100%;
+  }
 `;
 
 export const Button = styled.button`
@@ -66,3 +70,4 @@ export const Button = styled.button`
   background: #b8c0f9;
   border-radius: 44px;
 `;
+

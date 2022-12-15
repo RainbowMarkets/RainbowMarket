@@ -20,6 +20,8 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import { Auth } from "./context/Context";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
+import Chat from "./pages/Chat/Chat";
+
 
 const Container = styled.div`
   width: 100vw;
@@ -116,6 +118,7 @@ function App() {
                 <Route path="/splash" element={<SplashPage />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/chat" element={<Chat />} />
                 {/* </Route> */}
                 <Route path="/post" element={<Post />} />
                 <Route path="/post/postdetail" element={<PostDetail />} />
