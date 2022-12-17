@@ -4,14 +4,14 @@ export const Auth = createContext(null);
 
 export const url = "https://mandarin.api.weniv.co.kr";
 
-// const initialState = {};
+const initialState = {};
 
-// export const reducer = (state = initialState, { type, payload }) => {
-//   switch (type) {
-//     case first:
-//       return { ...state, ...payload };
+export const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "login":
+      return { ...state, login: "login" };
 
-//     default:
-//       return state;
-//   }
-// };
+    default:
+      return state;
+  }
+};
