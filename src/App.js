@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useReducer } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { colors, GlobalStyle } from "./GlobalStyle";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
@@ -9,9 +9,10 @@ import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
-import { Auth, getData } from "./context/Context";
 import Chat from "./pages/Chat/Chat";
-
+import Follow from "./pages/Follow/Follow";
+import { UserContextProvider } from "./context/UserContext";
+import useFetch from "./hooks/useFetch";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -63,10 +64,23 @@ const Main = styled.main`
 `;
 
 function App() {
-  const [auth, setAuth] = useState("");
+  const { getData } = useFetch();
+
+  fetch("https://mandarin.api.weniv.co.kr/user/login", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      user: {
+        email: "05280528@test.com",
+        password: "",
+      },
+    }),
+  }).then((res) => console.log(res.ok));
 
   return (
-    <Auth.Provider value={{ auth, setAuth }}>
+    <UserContextProvider>
       <Container>
         <GlobalStyle />
         <Aside>
@@ -78,10 +92,15 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/splash" element={<SplashPage />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/" element={<Profile />} />
+                <Route path="/profile/:accountname" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/post" element={<Post />} />
+                <Route
+                  path="/follow/:accountname/follower"
+                  element={<Follow />}
+                ></Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Main>
@@ -89,7 +108,7 @@ function App() {
           </BrowserRouter>
         </Wrapper>
       </Container>
-    </Auth.Provider>
+    </UserContextProvider>
   );
 }
 export default App;

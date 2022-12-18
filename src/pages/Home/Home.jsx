@@ -11,10 +11,10 @@
 //   return <>{isHaveFeed ? <IsHaveFeed /> : <NoFeed />}</>;
 // }
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Auth } from "../../context/Context";
 import { Button, colors } from "../../GlobalStyle";
+import useUserContext from "../../hooks/useUserContext";
 
 const Submit = styled(Button)`
   background: ${colors.colorMain};
@@ -23,7 +23,7 @@ const Submit = styled(Button)`
 export default function Home() {
   const [emailInp, setEmailInp] = useState("");
   const [passInp, setPassInp] = useState("");
-  const test = useContext(Auth);
+  const { user, dispatch } = useUserContext();
 
   const handleInp = (event) => {
     switch (event.target.id) {
@@ -44,6 +44,13 @@ export default function Home() {
   const handleAuth = (event) => {
     event.preventDefault();
 
+    let body = {
+      user: {
+        email: emailInp,
+        password: passInp,
+      },
+    };
+
     fetch("https://mandarin.api.weniv.co.kr/user/login", {
       method: "POST",
       headers: {
@@ -58,15 +65,12 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((json) => {
-        const token = json.user.token;
-        test.setAuth(token);
-        localStorage.setItem("token", token);
+        test.dispatch({ type: "LOGIN", payload: json });
+        localStorage.setItem("token", json.user.token);
       });
   };
 
-  // console.log(test);
-  // console.log(localStorage.getItem("token"));
-
+  console.log(dispatch);
   return (
     <form>
       <label htmlFor="email">이메일</label>

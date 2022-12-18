@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
@@ -49,9 +50,12 @@ export default function ProfileSection() {
 
   const token = localStorage.getItem("token");
 
+  const params = useParams();
+  console.log(params);
+
   useEffect(() => {
     if (!token) return;
-    fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
+    fetch("https://mandarin.api.weniv.co.kr/profile/abc0528", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -59,8 +63,10 @@ export default function ProfileSection() {
       },
     })
       .then((res) => res.json())
-      .then((json) => setUserInfo(json.user));
+      .then((json) => setUserInfo(json.profile));
   }, []);
+
+  console.log(userInfo);
 
   return (
     <Section>
