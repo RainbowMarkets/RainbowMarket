@@ -8,6 +8,7 @@ export default function JoinWithEmail() {
   const [passwordValid, setPasswordValid] =useState(true);
   const [isActive, setIsActive] =useState(true);
 
+
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
