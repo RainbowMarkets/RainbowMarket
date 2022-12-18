@@ -4,6 +4,7 @@ import ProfileItemSection from "../../components/Profile/ProfileItemSection/Prof
 import ProfileFeedSection from "../../components/Profile/ProfileFeedSection/ProfileFeedSection";
 import ProfileSection from "../../components/Profile/ProfileSection/ProfileSection";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
+import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,18 +12,21 @@ const Wrapper = styled.div`
   background: #f2f2f2;
   display: flex;
   flex-direction: column;
-  justify-conetent: center;
+  justify-content: center;
   align-items: center;
   gap: 6px;
 `;
 
 export default function Profile() {
   return (
-    <Wrapper>
-      <SetProfile />
-      <ProfileSection />
-      <ProfileItemSection />
-      <ProfileFeedSection />
-    </Wrapper>
+    <>
+      <CommonTopBar />
+      <Wrapper>
+        <SetProfile />
+        <ProfileSection />
+        <ProfileItemSection />
+        <ProfileFeedSection />
+      </Wrapper>
+    </>
   );
 }

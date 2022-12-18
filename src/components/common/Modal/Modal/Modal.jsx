@@ -9,6 +9,7 @@ const Modal = () => {
     <>
       <ModalWrapper>
         <h2 className="hidden">댓글 모달창</h2>
+        <div></div>
         <ul>
           <li>
             <button>삭제</button>

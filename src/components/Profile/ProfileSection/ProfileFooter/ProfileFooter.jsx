@@ -51,15 +51,15 @@ const CircleButton = styled.button`
 export default function ProfileFooter() {
   return (
     <Wrapper>
-      <CircleButton>
+      {/* <CircleButton>
         <img src={messageIcon} />
       </CircleButton>
       <FollowButton>팔로우</FollowButton>
       <CircleButton>
         <img src={shareIcon} />
-      </CircleButton>
-      {/* <ProfileModifyButton>프로필 수정</ProfileModifyButton>
-      <RegisterItem>상품 등록</RegisterItem> */}
+      </CircleButton> */}
+      <ProfileModifyButton>프로필 수정</ProfileModifyButton>
+      <RegisterItem>상품 등록</RegisterItem>
     </Wrapper>
   );
 }
