@@ -1,3 +1,4 @@
+
 import { useState, useRef } from "react";
 
 export default function JoinWithEmail() {
@@ -6,6 +7,7 @@ export default function JoinWithEmail() {
   const [emailValid, setEmailValid] = useState(true);
   const [passwordValid, setPasswordValid] =useState(true);
   const [isActive, setIsActive] =useState(true);
+
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
