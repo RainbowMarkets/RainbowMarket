@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { colors, GlobalStyle } from "./GlobalStyle";
 import Navbar from "./components/Navbar/Navbar";
@@ -9,7 +9,7 @@ import SplashPage from "./pages/Splash/SplashPage";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
-import { Auth } from "./context/Context";
+import { Auth, getData } from "./context/Context";
 import Chat from "./pages/Chat/Chat";
 
 const Container = styled.div`

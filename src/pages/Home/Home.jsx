@@ -65,7 +65,7 @@ export default function Home() {
   };
 
   // console.log(test);
-  console.log(localStorage.getItem("token"));
+  // console.log(localStorage.getItem("token"));
 
   return (
     <form>
