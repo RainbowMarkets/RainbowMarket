@@ -10,7 +10,7 @@ import useFetch from "../../../../hooks/useFetch";
  */
 
 const CommentDetail = (props) => {
-  console.log(props.commentDetail);
+  // console.log(props.commentDetail);
 
   const [commentData, setCommentData] = useState({
     comments: [
@@ -41,7 +41,7 @@ const CommentDetail = (props) => {
     if (!myToken) return;
     getData("/post/639ab92f17ae666581c625a1/comments", setCommentData, myToken);
   }, []);
-  console.log(commentData.comments);
+  // console.log(commentData.comments);
   const getTimeGap = (time) => {
     const timeValue = new Date(time);
     const end = new Date();

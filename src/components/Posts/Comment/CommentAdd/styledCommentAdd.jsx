@@ -27,7 +27,12 @@ export const CommentAddWrapper = styled.section`
     line-height: 17.53px;
     color: ${colors.colorC4};
   }
-  button {
+  button.activeBtn {
+    color: ${colors.colorMain};
+    font-weight: bold;
+    line-height: 18px;
+  }
+  button.disabled {
     color: ${colors.colorC4};
     font-weight: bold;
     line-height: 18px;

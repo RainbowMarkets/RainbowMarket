@@ -12,7 +12,7 @@ export const PostDiv = styled.div`
 `;
 
 export const CommentWrapper = styled.div`
-  padding: 20px 16px 0 16px;
+  padding: 20px 16px 61px 16px;
 `;
 export const ModalStyle = styled.div`
   /* position: relative; */
