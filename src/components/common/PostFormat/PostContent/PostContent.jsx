@@ -23,6 +23,7 @@ const PostContent = (props) => {
       <ProfileContain>
         <UserList
           width="42px"
+          image={props.postDetail.author.image}
           username={props.postDetail.author.username}
           accountname={props.postDetail.author.accountname}
         />
