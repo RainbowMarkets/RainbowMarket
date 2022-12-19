@@ -93,7 +93,6 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/splash" element={<SplashPage />} />
-                <Route path="/feed" element={<IsHaveFeed />} />
                 <Route path="/profile/" element={<Profile />} />
                 <Route path="/profile/:accountname" element={<Profile />} />
                 <Route path="/search" element={<Search />} />

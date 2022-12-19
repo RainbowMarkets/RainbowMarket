@@ -4,7 +4,7 @@ import { colors } from "../../../GlobalStyle";
 import rainbowLogo from "../../../assets/images/rainbow.png"
 
 export const StyledSection = styled.section`
-  height: 100%;
+  height: calc(100vh - 108px);
   display: flex;
   flex-direction: column;
   justify-content: center;

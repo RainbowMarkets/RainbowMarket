@@ -22,7 +22,7 @@ export default function Navbar() {
   const location = useLocation();
   const nowLocation = location.pathname;
   
-  if (nowLocation === "/post") return null;
+  if (nowLocation === "/post" || nowLocation === "/post/postdetail") return null;
 
   return (
     <>

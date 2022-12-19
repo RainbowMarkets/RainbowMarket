@@ -5,6 +5,7 @@ import { ProfileCont, Styledbtn, StyledSection, Styledimg } from "./styledisHave
 import sIconMoreVertical from "../../../assets/images/s-icon-more-vertical.png";
 import PostOnlyText from "../../../components/common/PostFormat/PostOnlyText/PostOnlyText";
 import PostWithImg from "../../../components/common/PostFormat/PostWithImg/PostWithImg";
+import PostContent from "../../../components/common/PostFormat/PostContent/PostContent";
 
 export default function IsHaveFeed() {
   const url = "https://mandarin.api.weniv.co.kr";
@@ -31,13 +32,18 @@ export default function IsHaveFeed() {
     getFeedData();
   }, []);
 
-  // console.log(feedData[0]);
-
   return (
     <>
-      <MainTopBar />
-      {/* i.author.username */}
-
+      {
+        feedData.map((feeditem) => {
+          return (
+            <StyledSection key={Math.random()}>
+              <PostContent postDetail={feeditem} />
+            </StyledSection>
+          )
+        })
+      }
+      
       {/* {
         feedData.map((feeditem) => {
           return (
@@ -53,31 +59,6 @@ export default function IsHaveFeed() {
           )
         })
       } */}
-
-      {
-        feedData.map((feeditem) => {
-          return (
-            <StyledSection key={Math.random()}>
-              <PostWithImg postDetail={feeditem} />
-            </StyledSection>
-          )
-        })
-      }
-      
-      {/* <StyledSection>
-        <PostWithImg postDetail={feedData} />
-      </StyledSection> */}
-
-      {/* <StyledSection>
-        <ProfileCont>
-          <UserList width="42px" username={feedData[0].author.username} accountname={feedData[0].author.accountname}/>
-          <Styledbtn>
-            <Styledimg src={sIconMoreVertical} alt="" />
-          </Styledbtn>
-        </ProfileCont>
-        <p>{feedData[0].author.accountname}</p>
-      </StyledSection>  */}
-      {/* <Post />*/}
     </>
   )
 }
