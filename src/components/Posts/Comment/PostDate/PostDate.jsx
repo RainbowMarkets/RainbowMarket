@@ -1,7 +1,15 @@
-const PostDate = () => {
+const PostDate = ({ upDate }) => {
+  const dateFormat = (upDate) => {
+    const dateTotal = upDate.split("T")[0];
+    const year = dateTotal.split("-")[0];
+    const month = dateTotal.split("-")[1];
+    const day = dateTotal.split("-")[2];
+    return `${year}년 ${month}월 ${day}일`;
+  };
+
   return (
     <>
-      <p className="post-date">2020년 10월 21일</p>
+      <p className="post-date">{dateFormat(upDate)}</p>
     </>
   );
 };
