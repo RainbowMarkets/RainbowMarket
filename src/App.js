@@ -13,6 +13,8 @@ import Chat from "./pages/Chat/Chat";
 import Follow from "./pages/Follow/Follow";
 import { UserContextProvider } from "./context/UserContext";
 import useFetch from "./hooks/useFetch";
+import PostDetail from "./components/Posts/PostDetail";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -25,11 +27,9 @@ const Container = styled.div`
 const Aside = styled.aside`
   width: 390px;
   background: white;
-
   img {
     width: 100%;
   }
-
   @media screen and (max-width: 680px) {
     display: none;
   }
@@ -52,12 +52,10 @@ const Main = styled.main`
   overflow-y: scroll;
   overflow-x: hidden;
   margin-top: 48px;
-
   &::-webkit-scrollbar {
     width: 1px;
     background: transparent;
   }
-
   &::-webkit-scrollbar-thumb {
     background: ${colors.colorMain};
   }
@@ -97,6 +95,7 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/post" element={<Post />} />
+                <Route path="/post/postdetail" element={<PostDetail />} />
                 <Route
                   path="/follow/:accountname/follower"
                   element={<Follow />}

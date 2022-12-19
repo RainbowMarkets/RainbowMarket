@@ -22,7 +22,7 @@ export default function Navbar() {
   const location = useLocation();
   const nowLocation = location.pathname;
   
-  if (nowLocation === '/post') return null;
+  if (nowLocation === "/post") return null;
 
   return (
     <>
@@ -30,13 +30,13 @@ export default function Navbar() {
         <StyledUl>
           <StyledLi>
             <StyledLink to="/" /* className={({ isActive }) => (isActive ? "active" : undefined)} */>
-              <StyledImg src={ nowLocation === '/' || nowLocation === 'search' ? imgHomeFill : imgHome} alt="홈" />
+              <StyledImg src={ nowLocation === "/" || nowLocation === "/search" ? imgHomeFill : imgHome} alt="홈" />
               홈
             </StyledLink>
           </StyledLi>
           <StyledLi>
             <StyledLink to="/chat">
-              <StyledImg src={ nowLocation === '/chat' ? imgMessageFill : imgMessage } alt="채팅" />
+              <StyledImg src={ nowLocation ==="/chat" ? imgMessageFill : imgMessage } alt="채팅" />
               채팅
             </StyledLink>
           </StyledLi>
@@ -48,7 +48,7 @@ export default function Navbar() {
           </StyledLi>
           <StyledLi>
             <StyledLink to="/profile">
-              <StyledImg src={ nowLocation === '/profile' ? imgProfileFill : imgProfile } alt="프로필" />
+              <StyledImg src={ nowLocation === "/profile" ? imgProfileFill : imgProfile } alt="프로필" />
               프로필
             </StyledLink>
           </StyledLi>
