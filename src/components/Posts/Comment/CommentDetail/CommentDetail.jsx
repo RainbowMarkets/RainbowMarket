@@ -39,7 +39,11 @@ const CommentDetail = (props) => {
 
   useEffect(() => {
     if (!myToken) return;
-    getData("/post/639ab92f17ae666581c625a1/comments", setCommentData, myToken);
+    getData(
+      "/post/639ab92f17ae666581c625a1/comments/?limit=100&skip=1",
+      setCommentData,
+      myToken
+    );
   }, []);
   // console.log(commentData.comments);
   const getTimeGap = (time) => {

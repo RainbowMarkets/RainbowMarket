@@ -11,9 +11,7 @@ const CommentAdd = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
   // console.log(props.postId);
-  // const postId = props.postId;
-  console.log(props.postId);
-  console.log(props.commentImg);
+  // console.log(props.commentImg);
   const { user } = useUserContext();
   const [writeComment, setWriteComment] = useState({
     comment: {
@@ -36,29 +34,37 @@ const CommentAdd = (props) => {
   });
   const { postData } = useFetch();
 
+  const myToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
+
   useEffect(() => {
-    if (!user) return;
+    if (!myToken) return;
     postData(
-      `/post/${props.postId}/comments`,
+      "/post/639ab92f17ae666581c625a1/comments",
       {
         comment: {
-          content: "",
+          content: `${text}`,
         },
       },
       setWriteComment,
-      `${user.token}`
+      myToken
     );
   }, []);
-  console.log(writeComment);
+  console.log(text);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   const handleText = (e) => {
     setText(e.target.value);
+    // setText("");
   };
   const handleChangeBtn = () => {
     setIsActive(text.length > 0 ? true : false);
   };
   return (
-    <CommentAddWrapper>
+    <CommentAddWrapper onSubmit={setWriteComment}>
       <h2 className="hidden">댓글 입력하기</h2>
       <img
         src={
@@ -76,7 +82,11 @@ const CommentAdd = (props) => {
         onKeyUp={handleChangeBtn}
         onChange={handleText}
       />
-      <button className={`activeBtn ${!isActive ? "disabled" : ""}`}>
+      <button
+        onClick={handleSubmit}
+        className={`activeBtn ${!isActive ? "disabled" : ""}`}
+        type="submit"
+      >
         게시
       </button>
     </CommentAddWrapper>

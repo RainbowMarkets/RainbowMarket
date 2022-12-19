@@ -5,7 +5,7 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const UploadContain = styled.div`
   padding: 20px 16px 16px 16px;
-  height: 100vh;
+  height: calc(100vh - 48px);
   box-sizing: border-box;
 `;
 export const UploadWrapper = styled.section`
@@ -48,6 +48,7 @@ export const TextWrapper = styled.section`
     width: 50px;
     height: 50px;
     cursor: pointer;
+    z-index: 100;
   }
 `;
 export const PostImgWrapper = styled.section`

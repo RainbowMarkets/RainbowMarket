@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../../../GlobalStyle";
 
-export const CommentAddWrapper = styled.section`
+export const CommentAddWrapper = styled.form`
   display: flex;
   position: fixed;
   margin: 0 auto;

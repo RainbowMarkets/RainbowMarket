@@ -84,7 +84,7 @@ const PostDetail = () => {
           <CommentDetail commentDetail={postDetailData.comments} />
         </CommentWrapper>
         <CommentAdd
-          postId={postDetailData.author._id}
+          postUserId={postDetailData.author._id}
           commentImg={postDetailData.author.image}
         />
       </PostDetailWrapper>
