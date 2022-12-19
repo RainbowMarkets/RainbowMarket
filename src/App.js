@@ -16,6 +16,7 @@ import useFetch from "./hooks/useFetch";
 import PostDetail from "./components/Posts/PostDetail";
 import IsHaveFeed from "./pages/Home/IsHaveFeed/IsHaveFeed";
 import NoFeed from "./pages/Home/NoFeed/NoFeed";
+import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 
 
 const Container = styled.div`
@@ -99,6 +100,7 @@ function App() {
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/post" element={<Post />} />
                 <Route path="/post/postdetail" element={<PostDetail />} />
+                <Route path="/join" element={<JoinWithEmail />} />
                 <Route
                   path="/follow/:accountname/follower"
                   element={<Follow />}
