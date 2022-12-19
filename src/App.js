@@ -75,7 +75,7 @@ function App() {
   //   body: JSON.stringify({
   //     user: {
   //       email: "05280528@test.com",
-  //       password: "",
+  //       password: "123123",
   //     },
   //   }),
   // }).then((res) => console.log(res.ok));
