@@ -14,6 +14,7 @@ import {
   ModalStyle,
 } from "./styledPostDetail";
 import PostContent from "../common/PostFormat/PostContent/PostContent";
+import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
@@ -73,6 +74,7 @@ const PostDetail = () => {
 
   return (
     <>
+      <CommonTopBar />
       <PostDetailWrapper>
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
         <PostDiv>
