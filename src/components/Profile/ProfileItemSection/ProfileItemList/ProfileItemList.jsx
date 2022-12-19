@@ -1,61 +1,24 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { url } from "../../../../context/UserContext";
-
-const ItemList = styled.ol`
-  display: flex;
-  max-width: 390px;
-  gap: 10px;
-  margin: 0 auto;
-  overflow-x: scroll;
-  overflow-y: hidden;
-`;
-
-const Item = styled.li`
-  margin-top: 16px;
-
-  figure > img {
-    width: 140px;
-    height: 90px;
-    object-fit: cover;
-    border: 0.5px solid #dbdbdb;
-    border-radius: 8px;
-  }
-
-  figure > figcaption {
-    line-height: 18px;
-  }
-
-  figure > span {
-    color: #8d72e1;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 15px;
-  }
-`;
+import { useEffect, useState } from "react";
+import useFetch from "../../../../hooks/useFetch";
+import useUserContext from "../../../../hooks/useUserContext";
+import { ItemList, Item } from "./styledProfileItemList";
 
 export default function ProfileItemList() {
-  // const [items, setItems] = useState([]);
-
-  // const token = localStorage.getItem("token");
+  const { user } = useUserContext();
+  const [items, setItems] = useState({
+    data: 0,
+    product: [],
+  });
+  const { getData } = useFetch();
 
   // useEffect(() => {
-  //   if (!token) return;
-  //   fetch(url + "/product/abc0528", {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       "Content-type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((json) => setItems(json.product));
+  //   getData(`/product/${user.accountname}`, setItems, user.token);
   // }, []);
 
   return (
     <ItemList>
-      {/* {items ? (
-        items.map((product, i) => {
+      {items.data ? (
+        items.product.map((product, i) => {
           return (
             <Item key={i}>
               <figure>
@@ -67,8 +30,8 @@ export default function ProfileItemList() {
           );
         })
       ) : (
-        <strong>판매중인 상품이 없습니다.</strong>
-      )} */}
+        <strong>판매 중인 상품이 없습니다.</strong>
+      )}
     </ItemList>
   );
 }
