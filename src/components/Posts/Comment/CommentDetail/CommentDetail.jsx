@@ -4,7 +4,14 @@ import profileImgSmall from "../../../../assets/images/profile_small.png";
 import { useState } from "react";
 import Modal from "../../../common/Modal/Modal/Modal";
 import { CommentWrapper } from "./styledCommentDetail";
-const CommentDetail = (props) => {
+
+/* test220Name 계정인 경우 해당 계정의 게시글 상세페이지의 댓글들 불러오기
+ */
+
+const CommentDetail = ({ commentDetail }) => {
+  console.log(commentDetail);
+  const [commentData, setCommentData] = useState([]);
+
   return (
     <>
       <CommentWrapper>

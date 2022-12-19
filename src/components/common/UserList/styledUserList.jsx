@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { colors, fonts, Button } from "../../../GlobalStyle";
-
+// postdetail-style
 export const StyledLi = styled.li`
   display: flex;
   align-items: center;
@@ -24,16 +24,16 @@ export const StyledDiv = styled.div`
 
 export const StyledImg = styled.img`
   width: 50px;
-`
+`;
 
 export const StyledStrong = styled.strong`
   font-weight: bold;
-`
+`;
 
 export const StyledSmall = styled.small`
   color: ${colors.color76};
   font-size: ${fonts.mid};
-`
+`;
 
 export const StyledButton = styled.button`
   border-radius: 26px;
@@ -44,4 +44,4 @@ export const StyledButton = styled.button`
   background-color: ${colors.colorMain};
   font-size: ${fonts.mid};
   color: #fff;
-`
+`;
