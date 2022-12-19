@@ -11,7 +11,7 @@ import useFetch from "../../../../hooks/useFetch";
 
 const CommentDetail = (props) => {
   console.log(props.commentDetail);
-  console.log(props.commentDetail.map((item) => console.log(item)));
+
   const [commentData, setCommentData] = useState({
     comments: [
       {
@@ -68,7 +68,7 @@ const CommentDetail = (props) => {
         <h2 className="hidden">댓글 섹션</h2>
         <ul>
           {commentData.comments.map((item) => (
-            <li>
+            <li key={item.id}>
               <div>
                 <a href="">
                   <img
