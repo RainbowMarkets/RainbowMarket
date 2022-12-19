@@ -12,13 +12,11 @@ import {
   ProfileName,
   StyledLiPos,
   PostStyledLink,
-} from "./styledPostOnlyText";
+} from "./styledPostContent";
 import UserList from "../../UserList/UserList";
 import styled from "styled-components";
 
-const PostOnlyText = (props) => {
-  // console.log(props.postDetail);
-  // 이미지 여부에 따라 상세 내용 변경 구현하기
+const PostContent = (props) => {
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -57,4 +55,5 @@ const PostOnlyText = (props) => {
     </PostWrapper>
   );
 };
-export default PostOnlyText;
+
+export default PostContent;
