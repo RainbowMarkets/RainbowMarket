@@ -23,20 +23,20 @@ import {
   StyledSmall,
   StyledButton,
 } from "../../UserList/styledUserList";
-
 const PostOnlyText = ({ postDetail, props }) => {
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
 
       <ProfileContain>
-        <StyledLink>
+        {/* <StyledLink>
           <StyledImg className="profile-img" src={profileImgSmall} alt="" />
           <StyledDiv>
             <StyledStrong>무지개 마켓 대장sdfsdfsd</StyledStrong>
             <StyledSmall>@ Dae-do mujigae</StyledSmall>
           </StyledDiv>
-        </StyledLink>
+        </StyledLink> */}
+        <UserList />
         <button>
           <img className="post-modal" src={sIconMoreVertical} alt="" />
         </button>

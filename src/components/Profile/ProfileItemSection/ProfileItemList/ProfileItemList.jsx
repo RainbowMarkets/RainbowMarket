@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { url } from "../../../../context/Context";
+import { url } from "../../../../context/UserContext";
 
 const ItemList = styled.ol`
   display: flex;
@@ -35,37 +35,40 @@ const Item = styled.li`
 `;
 
 export default function ProfileItemList() {
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!token) return;
-    fetch(url + "/product/abc0528", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => setItems(json.product));
-  }, []);
+  // useEffect(() => {
+  //   if (!token) return;
+  //   fetch(url + "/product/abc0528", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       "Content-type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => setItems(json.product));
+  // }, []);
 
-  console.log(items);
   return (
     <ItemList>
-      {items.map((product, i) => {
-        return (
-          <Item key={i}>
-            <figure>
-              <img src={product.itemImage} />
-              <figcaption>{product.itemName}</figcaption>
-              <span>{product.price.toLocaleString()} 원</span>
-            </figure>
-          </Item>
-        );
-      })}
+      {/* {items ? (
+        items.map((product, i) => {
+          return (
+            <Item key={i}>
+              <figure>
+                <img src={product.itemImage} />
+                <figcaption>{product.itemName}</figcaption>
+                <span>{product.price.toLocaleString()} 원</span>
+              </figure>
+            </Item>
+          );
+        })
+      ) : (
+        <strong>판매중인 상품이 없습니다.</strong>
+      )} */}
     </ItemList>
   );
 }

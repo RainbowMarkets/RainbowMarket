@@ -10,7 +10,6 @@ const Section = styled.section`
 
 export default function ProfileFeedSection() {
   const [withImg, setWithImg] = useState(false);
-  console.log(withImg);
 
   return (
     <Section>

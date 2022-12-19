@@ -40,8 +40,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button{
-    padding: 0;
-    margin: 0;
     background: none;
     border: none;
     cursor: pointer;
@@ -70,4 +68,3 @@ export const Button = styled.button`
   background: #b8c0f9;
   border-radius: 44px;
 `;
-

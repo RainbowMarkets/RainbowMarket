@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Follow from "../Follow/Follow";
 import ProfileBasic from "../../../../assets/images/profile_big.png";
+import { useNavigate } from "react-router-dom";
 
 const Header = styled.header`
   display: flex;
@@ -27,9 +28,16 @@ const ProfileImg = styled.div`
 `;
 
 export default function ProfileHeader({ userInfo }) {
+  const 이동 = useNavigate();
   return (
     <Header>
-      <Follow follow={userInfo.followerCount} tofrom="followers" />
+      <Follow
+        onClick={() => {
+          console.log("진짜?");
+        }}
+        follow={userInfo.followerCount}
+        tofrom="followers"
+      />
       <img src={userInfo.image} alt="" />
       <Follow follow={userInfo.followingCount} tofrom="followings" />
     </Header>
