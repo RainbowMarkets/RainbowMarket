@@ -7,7 +7,9 @@ export const CommentWrapper = styled.section`
 
   li {
     position: relative;
+    margin-bottom: 16px;
   }
+
   div {
     display: flex;
     align-items: center;

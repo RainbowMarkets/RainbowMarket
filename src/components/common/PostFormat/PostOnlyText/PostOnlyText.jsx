@@ -17,7 +17,7 @@ import UserList from "../../UserList/UserList";
 import styled from "styled-components";
 
 const PostOnlyText = (props) => {
-  console.log(props.postDetail);
+  // console.log(props.postDetail);
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>

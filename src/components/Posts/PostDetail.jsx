@@ -21,6 +21,7 @@ const PostDetail = () => {
     commentCount: 0,
     createdAt: "",
     updatedAt: "",
+    content: "",
     author: {
       _id: "",
       username: "",
@@ -65,6 +66,7 @@ const PostDetail = () => {
   }, []);
   // console.log(postData[0].content);
   // console.log(postDetailData);
+  // console.log(postDetailData.comments);
 
   return (
     <>
@@ -75,13 +77,10 @@ const PostDetail = () => {
           <PostOnlyText postDetail={postDetailData} />
         </PostDiv>
         <CommentWrapper>
+          {/* {postDetailData.comments.map((item) => (
+            <CommentDetail key={item} commentDetail={postDetailData.comments} />
+          ))} */}
           <CommentDetail commentDetail={postDetailData.comments} />
-          <CommentDetail />
-          <CommentDetail />
-          <CommentDetail />
-          <CommentDetail />
-
-          <CommentDetail />
         </CommentWrapper>
         <CommentAdd />
       </PostDetailWrapper>
