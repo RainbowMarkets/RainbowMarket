@@ -1,5 +1,7 @@
 
 import { useState, useRef } from "react";
+import { NextButtonWrapper, WarningMessageWrapper } from "./JoinWithEmail.style";
+import { Container, Input, InputTitle, NextButton } from "./JoinWithEmail.style";
 
 export default function JoinWithEmail() {
   const [emailWarningMessage, setEmailWarningMessage] = useState("");
@@ -100,20 +102,34 @@ export default function JoinWithEmail() {
 
   
   return (
-    <>
+    <Container>
       <h1 className = "hidden">무지개마켓 회원가입</h1>
       <h2 className = "join-title">이메일로 회원가입</h2>
       <form className = "join-form" onSubmit={onSubmitHandler}>
-        <span>이메일</span>
-        <input type = "email" useRef = {emailRef} onkeyUp = {goToNextSignUp} onChange = {emailValidCheck} placeholder = "이메일 주소를 입력해주세요"/>
-        <div>{emailWarningMessage}</div>
-        <span>비밀번호</span>
-        <input type = "password" useRef = {passwordRef} onkeyUp = {goToNextSignUp} onChange = {passwordValidCheck} placeholder = "비밀번호를 입력해 주세요"/>
-        <div>{passwordWarningMessage}</div>
-        <div className = "next-button-wrapper">
-          <button className = "next-button" disabled={isActive}>다음</button> 
-        </div>
+        <InputTitle>이메일</InputTitle>
+        <Input 
+          emailValid 
+          type = "email" 
+          useRef = {emailRef} 
+          onkeyUp = {goToNextSignUp} 
+          onChange = {emailValidCheck} 
+          placeholder = "이메일 주소를 입력해주세요"
+        />
+        <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
+        <InputTitle>비밀번호</InputTitle>
+        <Input 
+          passwordValid
+          type = "password" 
+          useRef = {passwordRef} 
+          onkeyUp = {goToNextSignUp} 
+          onChange = {passwordValidCheck} 
+          placeholder = "비밀번호를 입력해 주세요"
+        />
+        <WarningMessageWrapper>{passwordWarningMessage}</WarningMessageWrapper>
+        <NextButtonWrapper>
+          <NextButton disabled={isActive}>다음</NextButton> 
+        </NextButtonWrapper>
       </form>
-    </>
+    </Container>
   )
 }
