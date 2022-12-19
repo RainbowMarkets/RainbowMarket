@@ -7,8 +7,6 @@ import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 
-import { url } from "../../context/Context";
-
 import {
   CommentWrapper,
   PostDiv,
@@ -38,6 +36,7 @@ const PostDetail = () => {
   });
   // const myToken = localStorage.getItem("token");
   // /post/:post_id
+  const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1`;
   const myToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";

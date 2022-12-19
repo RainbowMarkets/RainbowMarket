@@ -10,14 +10,18 @@ import {
   StyledButton,
 } from "./styledUserList";
 
-export default function UserList() {
+export default function UserList(props) {
   return (
     <StyledLi>
       <StyledLink>
-        <StyledImg src={defaultProfile} alt="" />
+        <StyledImg
+          src={defaultProfile}
+          alt=""
+          style={{ width: `${props.width}` }}
+        />
         <StyledDiv>
-          <StyledStrong>무지개 마켓 대장</StyledStrong>
-          <StyledSmall>@ Dae-do mujigae</StyledSmall>
+          <StyledStrong>{props.username}</StyledStrong>
+          <StyledSmall>@ {props.accountname}</StyledSmall>
         </StyledDiv>
       </StyledLink>
     </StyledLi>
