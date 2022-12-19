@@ -13,6 +13,8 @@ import Chat from "./pages/Chat/Chat";
 import Follow from "./pages/Follow/Follow";
 import { UserContextProvider } from "./context/UserContext";
 import useFetch from "./hooks/useFetch";
+import PostDetail from "./components/Posts/PostDetail";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -97,6 +99,7 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/post" element={<Post />} />
+                <Route path="/post/postdetail" element={<PostDetail />} />
                 <Route
                   path="/follow/:accountname/follower"
                   element={<Follow />}
