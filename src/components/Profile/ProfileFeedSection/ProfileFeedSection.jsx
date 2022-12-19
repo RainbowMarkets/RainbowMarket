@@ -14,7 +14,7 @@ export default function ProfileFeedSection() {
   return (
     <Section>
       <ProfileFeedHeader setWithImg={setWithImg} />
-      <PostOnlyText />
+      {/* <PostOnlyText /> */}
     </Section>
   );
 }
