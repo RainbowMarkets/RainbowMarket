@@ -13,6 +13,8 @@ import {
   PostDetailWrapper,
   ModalStyle,
 } from "./styledPostDetail";
+import PostContent from "../common/PostFormat/PostContent/PostContent";
+import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
@@ -21,6 +23,7 @@ const PostDetail = () => {
     commentCount: 0,
     createdAt: "",
     updatedAt: "",
+    content: "",
     author: {
       _id: "",
       username: "",
@@ -36,6 +39,8 @@ const PostDetail = () => {
   });
   // const myToken = localStorage.getItem("token");
   // /post/:post_id
+  // 639ab90a17ae666581c6259e -> 사진 없는 id
+  // 639ab92f17ae666581c625a1 -> 사진 있는 id
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1`;
   const myToken =
@@ -64,24 +69,19 @@ const PostDetail = () => {
     fetchPostData();
   }, []);
   // console.log(postData[0].content);
-  // console.log(postDetailData);
+  console.log(postDetailData);
+  // console.log(postDetailData.comments);
 
   return (
     <>
+      <CommonTopBar />
       <PostDetailWrapper>
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
         <PostDiv>
-          {/* <PostWithImg postDetail={postDetailData} /> */}
-          <PostOnlyText postDetail={postDetailData} />
+          <PostContent postDetail={postDetailData} />
         </PostDiv>
         <CommentWrapper>
           <CommentDetail commentDetail={postDetailData.comments} />
-          <CommentDetail />
-          <CommentDetail />
-          <CommentDetail />
-          <CommentDetail />
-
-          <CommentDetail />
         </CommentWrapper>
         <CommentAdd />
       </PostDetailWrapper>
