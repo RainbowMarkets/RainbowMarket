@@ -14,6 +14,9 @@ import Follow from "./pages/Follow/Follow";
 import { UserContextProvider } from "./context/UserContext";
 import useFetch from "./hooks/useFetch";
 import PostDetail from "./components/Posts/PostDetail";
+import IsHaveFeed from "./pages/Home/IsHaveFeed/IsHaveFeed";
+import NoFeed from "./pages/Home/NoFeed/NoFeed";
+
 
 const Container = styled.div`
   width: 100vw;
@@ -64,18 +67,18 @@ const Main = styled.main`
 function App() {
   const { getData } = useFetch();
 
-  fetch("https://mandarin.api.weniv.co.kr/user/login", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        email: "05280528@test.com",
-        password: "",
-      },
-    }),
-  }).then((res) => console.log(res.ok));
+  // fetch("https://mandarin.api.weniv.co.kr/user/login", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     user: {
+  //       email: "05280528@test.com",
+  //       password: "",
+  //     },
+  //   }),
+  // }).then((res) => console.log(res.ok));
 
   return (
     <UserContextProvider>
@@ -90,6 +93,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/splash" element={<SplashPage />} />
+                <Route path="/feed" element={<IsHaveFeed />} />
                 <Route path="/profile/" element={<Profile />} />
                 <Route path="/profile/:accountname" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
