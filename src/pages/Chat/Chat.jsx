@@ -1,11 +1,21 @@
-import React from 'react'
-import CommonTopBar from '../../components/TopBar/CommonTopBar/CommonTopBar'
+import React from "react";
+import Login from "../../components/common/Login/Login";
+import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function Chat() {
+  const { user } = useUserContext();
+
   return (
     <>
-      <CommonTopBar/>
-      <div>Chat</div>
+      {!user ? (
+        <Login />
+      ) : (
+        <>
+          <CommonTopBar />
+          <div>Chat</div>
+        </>
+      )}
     </>
-  )
+  );
 }

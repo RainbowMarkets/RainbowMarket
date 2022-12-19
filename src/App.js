@@ -68,18 +68,18 @@ const Main = styled.main`
 function App() {
   const { getData } = useFetch();
 
-  fetch("https://mandarin.api.weniv.co.kr/user/login", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        email: "05280528@test.com",
-        password: "",
-      },
-    }),
-  }).then((res) => console.log(res.ok));
+  // fetch("https://mandarin.api.weniv.co.kr/user/login", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     user: {
+  //       email: "05280528@test.com",
+  //       password: "123123",
+  //     },
+  //   }),
+  // }).then((res) => console.log(res.ok));
 
   return (
     <UserContextProvider>
