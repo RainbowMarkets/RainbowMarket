@@ -14,19 +14,19 @@ export default function IsHaveFeed() {
 
   const [feedData, setFeedData] = useState([]);
 
-  useEffect(() => { 
-    async function getFeedData(){
+  useEffect(() => {
+    async function getFeedData() {
       await fetch(url + reqPath, {
-        method : "GET",
+        method: "GET",
         headers: {
-          "Authorization" : `Bearer ${myToken}`,
-          "Content-type" : "application/json"
+          "Authorization": `Bearer ${myToken}`,
+          "Content-type": "application/json"
         }
       }).then(res => res.json())
-      .then(res => {
-        console.log("test!!!!", res.posts);
-        setFeedData(res.posts);
-      });              
+        .then(res => {
+          console.log("test!!!!", res.posts);
+          setFeedData(res.posts);
+        });
     }
     getFeedData();
   }, []);
@@ -35,23 +35,33 @@ export default function IsHaveFeed() {
 
   return (
     <>
-      <MainTopBar/>
+      <MainTopBar />
       {/* i.author.username */}
-      
+
+      {/* {
+        feedData.map((feeditem) => {
+          return (
+            <StyledSection key={Math.random()}>
+              <ProfileCont>
+                <UserList width="42px" username={feeditem.author.username} accountname={feeditem.author.accountname} />
+                <Styledbtn>
+                  <Styledimg src={sIconMoreVertical} alt="" />
+                </Styledbtn>
+              </ProfileCont>
+              <p>{feeditem.content}</p>
+            </StyledSection>
+          )
+        })
+      } */}
+
       {
-        feedData.map((i) => {
-          return(
-            <StyledSection>
-            <ProfileCont>
-              <UserList width="42px" username={i.author.username} accountname={i.author.accountname}/>
-              <Styledbtn>
-                <Styledimg src={sIconMoreVertical} alt="" />
-              </Styledbtn>
-            </ProfileCont>
-            <p>{i.content}</p>
-          </StyledSection> 
-        )
-      })  
+        feedData.map((feeditem) => {
+          return (
+            <StyledSection key={Math.random()}>
+              <PostWithImg postDetail={feeditem} />
+            </StyledSection>
+          )
+        })
       }
       
       {/* <StyledSection>
