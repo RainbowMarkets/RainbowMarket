@@ -1,100 +1,69 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import profileImgSmall from "../../../../assets/images/profile_small.png";
 import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { CommentAddWrapper } from "./styledCommentAdd";
-
 // 댓글 기능 구현하기 1. 프로필 이미지 넣기
 const CommentAdd = (props) => {
   // 버튼 활성화
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
-  // console.log(props.postId);
-  // console.log(props.commentImg);
   const { user } = useUserContext();
-  const [] = useState();
-  const [writeComment, setWriteComment] = useState({
-    comment: {
-      id: "",
-      content: "",
-      createdAt: "",
-      author: {
-        _id: "",
-        username: "",
-        accountname: "",
-        intro: "",
-        image: "",
-        isfollow: false,
-        following: [],
-        follower: [],
-        followerCount: 1,
-        followingCount: 0,
-      },
-    },
-  });
-  const { postData } = useFetch();
-  // 1. 유저 정보 받아 오기
-  // 2. 댓글 작성 코드
 
-  // useEffect(() => {
-  //   if (!myToken) return;
-  //   postData(
-  //     "/post/639ab92f17ae666581c625a1/comments",
-  //     {
-  //       comment: {
-  //         content: `${text}`,
-  //       },
-  //     },
-  //     setWriteComment,
-  //     myToken
-  //   );
-  // }, []);
-  // console.log(text);
+  const [writeComment, setWriteComment] = useState({});
 
   // 1. 프로필 정보 불러오기 -> 댓글 작성란 프로필 넣어주기
   // 2. 댓글 작성 API 작성하기
+  // 3. 게시 버튼 클릭시 리스트 새로 로드 해주기 (게시 버튼 클릭 -> comments : Array 출력 -> 84 번째 줄 이 내용물을 담아서 전달해야함)
+  // 4. 댓글 내용 없을 땐 게시버튼 클릭 안되게
   const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/user/myinfo`;
-  const myToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
+  const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
+  // const myToken =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
 
-  // 게시글 가져오기
-  // const fetchProfileData = async () => {
-  //   try {
-  //     const res = await fetch(url + reqPath, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${myToken}`,
-  //         "Content-type": "application/json",
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       // .then((data) => console.log(data))
-  //       .then((data) => setPostDetailData(data.post));
-  //   } catch (err) {
-  //     console.log("err", err);
-  //   }
-  // };
+  // 댓글 작성하기
 
-  // useEffect(() => {
-  //   if (!myToken) return;
-  //   fetchProfileData();
-  // }, []);
-
-  const handleSubmit = (e) => {
+  const handleWrapperSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const res = await fetch(url + reqPath, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          comment: {
+            content: `${text}`,
+          },
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      props.setCommentData((prev) => [{ ...data.comment }, ...prev]);
+      setText("");
+      // 리스트 새로고침 다시 뿌려주기
+      //낙관적 업데이트
+      // handleUpComment();
+    } catch (err) {
+      console.log("err", err);
+    }
   };
 
+  // 댓글 input 값 받아오기
   const handleText = (e) => {
+    console.log(e.target.value);
     setText(e.target.value);
-    // setText("");
   };
+
+  // 입력 유무에 따라 버튼 활성화
   const handleChangeBtn = () => {
     setIsActive(text.length > 0 ? true : false);
   };
   return (
-    <CommentAddWrapper onSubmit={handleSubmit}>
+    <CommentAddWrapper onSubmit={handleWrapperSubmit}>
       <h2 className="hidden">댓글 입력하기</h2>
       <img
         src={
@@ -111,9 +80,9 @@ const CommentAdd = (props) => {
         placeholder="댓글 입력하기..."
         onKeyUp={handleChangeBtn}
         onChange={handleText}
+        value={text}
       />
       <button
-        onClick={handleSubmit}
         className={`activeBtn ${!isActive ? "disabled" : ""}`}
         type="submit"
       >
