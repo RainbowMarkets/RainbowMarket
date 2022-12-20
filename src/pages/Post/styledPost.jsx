@@ -23,12 +23,13 @@ export const ProfileContain = styled.section`
 `;
 export const TextWrapper = styled.section`
   margin-top: 12px;
+  flex-grow: 1;
 
   form {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100%;
-    position: relative;
   }
 
   .form-textarea {
@@ -45,18 +46,20 @@ export const TextWrapper = styled.section`
     color: ${colors.colorC4};
   }
 
+  .label-wrap {
+    position: sticky;
+    bottom: 20px;
+    right: 0;
+  }
+
   .img-up-btn {
-    display: inline-block;
+    display: block;
     background-image: url(${uploadFile});
     background-size: cover;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    margin-left: auto;
     width: 50px;
     height: 50px;
     cursor: pointer;
-    z-index: 100;
+    margin-left: auto;
   }
 `;
 export const PostImgWrapper = styled.section`
