@@ -5,12 +5,13 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledHeader = styled.header`
   display: flex;
-  position: fixed;
+  position: sticky;
+  background: white;
   top: 0;
   z-index: 10px;
   justify-content: space-between;
   align-items: center;
-  width: 440px;
+  width: 100%;
   height: 48px;
   margin: 0 auto;
   padding: 0 16px;

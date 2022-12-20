@@ -5,7 +5,7 @@ import { colors, fonts } from "../../GlobalStyle";
 export const StyledNav = styled.nav`
   position: sticky;
   bottom: 0;
-  width: 440px;
+  width: 100%;
   height: 60px;
   margin: 0 auto;
   border-top: solid 0.5px ${colors.colorDB};

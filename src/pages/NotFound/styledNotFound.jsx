@@ -7,12 +7,13 @@ export const StyledSection = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-width: 390px;
   height: 100%;
   margin: 0 auto;
 `;
 
 export const StyledImg = styled.img`
-	width: 160px;
+  width: 160px;
 `;
 
 export const StyledStrong = styled.strong`
@@ -20,11 +21,11 @@ export const StyledStrong = styled.strong`
 
   font-weight: bold;
   margin-top: 10px;
-`
+`;
 export const StyledP = styled.p`
   margin: 20px 0;
   line-height: 14px;
-`
+`;
 
 export const StyledButton = styled.button`
   background-color: ${colors.colorMain};
@@ -32,4 +33,4 @@ export const StyledButton = styled.button`
   padding: 13px 26px;
   border-radius: 44px;
   font-weight: 500;
-`
+`;
