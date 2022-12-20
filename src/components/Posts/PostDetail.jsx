@@ -83,7 +83,10 @@ const PostDetail = () => {
         <CommentWrapper>
           <CommentDetail commentDetail={postDetailData.comments} />
         </CommentWrapper>
-        <CommentAdd />
+        <CommentAdd
+          postUserId={postDetailData.author._id}
+          commentImg={postDetailData.author.image}
+        />
       </PostDetailWrapper>
       {/* {commentModal === true ? <Modal /> : null} */}
       {/* <DeleteAlert />

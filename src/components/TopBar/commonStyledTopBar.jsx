@@ -39,8 +39,13 @@ export const StyledUpdateBtn = styled.button`
   padding: 7px 0;
   border-radius: 32px;
   font-weight: 500;
-  background-color: ${colors.colorSub};
+  background-color: ${colors.colorMain};
   color: #fff;
+
+  &:disabled {
+    background-color: ${colors.colorSub};
+    cursor: default;
+  }
 `;
 
 export const StyledImg = styled.img`
