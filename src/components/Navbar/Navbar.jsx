@@ -29,7 +29,9 @@ export default function Navbar() {
       <StyledNav>
         <StyledUl>
           <StyledLi>
-            <StyledLink to="/" /* className={({ isActive }) => (isActive ? "active" : undefined)} */>
+            <StyledLink to="/" 
+              style={ nowLocation === "/search" || nowLocation === "/"? { color: colors.colorMain } : {color : colors.color76 } }
+              /* className={({ isActive }) => (isActive ? "active" : undefined)} */>
               <StyledImg src={ nowLocation === "/" || nowLocation === "/search" ? imgHomeFill : imgHome} alt="홈" />
               홈
             </StyledLink>
@@ -42,7 +44,7 @@ export default function Navbar() {
           </StyledLi>
           <StyledLi>
             <StyledLink to="/post">
-              <StyledImg src={imgEdit} alt="게시물 작성" />
+              <StyledImg src={ imgEdit } alt="게시물 작성" />
               게시물 작성
             </StyledLink>
           </StyledLi>

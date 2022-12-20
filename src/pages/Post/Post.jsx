@@ -9,19 +9,26 @@ import {
   UploadWrapper,
 } from "./styledPost";
 import { useCallback, useRef, useState } from "react";
-import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
+import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 
 const Post = (props) => {
   const [isValid, setIsValid] = useState(false);
   const textRef = useRef();
+  const [inpValue, setInpValue] = useState("");
+
   const handleResizeHeight = () => {
     textRef.current.style.height = "auto";
     textRef.current.style.height = textRef.current.scrollHeight + "px";
   };
 
+  const handleInpVal = (e) => {
+    setInpValue(e.target.value);
+    console.log(inpValue);
+  }
+
   return (
     <>
-      <CommonTopBar />
+      <UpLoadTopBar setInpValue={setInpValue} inpValue={inpValue}/>
       <UploadContain>
         <UploadWrapper>
           <h2 className="hidden">게시글 작성 페이지</h2>
@@ -38,7 +45,9 @@ const Post = (props) => {
                 placeholder="게시글 입력하기..."
                 maxLength={1200}
                 ref={textRef}
+                value={inpValue}
                 onInput={handleResizeHeight}
+                onChange={handleInpVal}
               />
               <label htmlFor="imgUpLabel" className="img-up-btn"></label>
               <input

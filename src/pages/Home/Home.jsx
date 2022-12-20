@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import { Button, colors } from "../../GlobalStyle";
 import useUserContext from "../../hooks/useUserContext";
+import Modal from "../../components/common/Modal/Modal/Modal";
 
 const Submit = styled(Button)`
   background: ${colors.colorMain};
@@ -19,6 +20,7 @@ export default function Home() {
     <>
       <MainTopBar />
       {isHaveFeed ? <IsHaveFeed /> : <NoFeed />}
+      {/* <Modal /> */}
     </>
   );
 }
