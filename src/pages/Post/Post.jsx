@@ -60,18 +60,18 @@ const Post = (props) => {
                 accept="image/*"
                 className="hidden"
               />
+              <PostImgWrapper>
+                <h4 className="hidden">이미지추가</h4>
+                <ul>
+                  <li>
+                    <img src={postImg} alt="이미지" />
+                    <button className="postImg-del">
+                      <span className="hidden">이미지 삭제</span>
+                    </button>
+                  </li>
+                </ul>
+              </PostImgWrapper>
             </form>
-            <PostImgWrapper>
-              <h4 className="hidden">이미지추가</h4>
-              <ul>
-                <li>
-                  <img src={postImg} alt="이미지" />
-                  <button className="postImg-del">
-                    <span className="hidden">이미지 삭제</span>
-                  </button>
-                </li>
-              </ul>
-            </PostImgWrapper>
           </TextWrapper>
         </UploadWrapper>
       </UploadContain>
