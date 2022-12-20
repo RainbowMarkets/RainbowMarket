@@ -22,9 +22,14 @@ export const ProfileContain = styled.section`
   }
 `;
 export const TextWrapper = styled.section`
-  flex-grow: 1;
   margin-top: 12px;
-  position: relative;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+  }
 
   .form-textarea {
     width: 100%;
@@ -39,12 +44,15 @@ export const TextWrapper = styled.section`
   .form-textarea::placeholder {
     color: ${colors.colorC4};
   }
+
   .img-up-btn {
+    display: inline-block;
     background-image: url(${uploadFile});
     background-size: cover;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 20px;
+    right: 20px;
+    margin-left: auto;
     width: 50px;
     height: 50px;
     cursor: pointer;

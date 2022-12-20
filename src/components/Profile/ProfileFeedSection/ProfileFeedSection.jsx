@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import ProfileFeedHeader from "./ProfileFeedHeader/ProfileFeedHeader";
 import PostOnlyText from "../../common/PostFormat/PostOnlyText/PostOnlyText";
-
-const Section = styled.section`
-  background: white;
-  width: 100%;
-`;
 
 export default function ProfileFeedSection() {
   const [withImg, setWithImg] = useState(false);
 
   return (
-    <Section>
+    <section style={{ width: "100%", background: "white" }}>
       <ProfileFeedHeader setWithImg={setWithImg} />
       {/* <PostOnlyText /> */}
-    </Section>
+    </section>
   );
 }

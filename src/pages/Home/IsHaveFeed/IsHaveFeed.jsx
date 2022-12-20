@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import UserList from "../../../components/common/UserList/UserList";
 import MainTopBar from "../../../components/TopBar/MainTopBar/MainTopBar";
-import { ProfileCont, Styledbtn, StyledSection, Styledimg } from "./styledisHaveFeed";
+import {
+  ProfileCont,
+  Styledbtn,
+  StyledSection,
+  Styledimg,
+} from "./styledisHaveFeed";
 import sIconMoreVertical from "../../../assets/images/s-icon-more-vertical.png";
 import PostOnlyText from "../../../components/common/PostFormat/PostOnlyText/PostOnlyText";
 import PostWithImg from "../../../components/common/PostFormat/PostWithImg/PostWithImg";
@@ -20,11 +25,12 @@ export default function IsHaveFeed() {
       await fetch(url + reqPath, {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${myToken}`,
-          "Content-type": "application/json"
-        }
-      }).then(res => res.json())
-        .then(res => {
+          Authorization: `Bearer ${myToken}`,
+          "Content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
           console.log("test!!!!", res.posts);
           setFeedData(res.posts);
         });
@@ -34,16 +40,14 @@ export default function IsHaveFeed() {
 
   return (
     <>
-      {
-        feedData.map((feeditem) => {
-          return (
-            <StyledSection key={Math.random()}>
-              <PostContent postDetail={feeditem} />
-            </StyledSection>
-          )
-        })
-      }
-      
+      {feedData.map((feeditem) => {
+        return (
+          <StyledSection key={Math.random()}>
+            <PostContent postDetail={feeditem} />
+          </StyledSection>
+        );
+      })}
+
       {/* {
         feedData.map((feeditem) => {
           return (
@@ -60,5 +64,5 @@ export default function IsHaveFeed() {
         })
       } */}
     </>
-  )
+  );
 }

@@ -63,8 +63,48 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const Button = styled.button`
-  width: 100%;
-  background: #b8c0f9;
-  border-radius: 44px;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 `;
+
+const Aside = styled.aside`
+  width: 390px;
+  background: white;
+  img {
+    width: 100%;
+  }
+  @media screen and (max-width: 680px) {
+    display: none;
+  }
+`;
+
+const Wrapper = styled.div`
+  width: 440px;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Main = styled.main`
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.colorMain};
+  }
+`;
+
+export { Container, Aside, Wrapper, Main };
