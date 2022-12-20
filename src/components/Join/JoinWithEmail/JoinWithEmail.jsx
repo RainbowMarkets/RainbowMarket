@@ -24,7 +24,6 @@ export default function JoinWithEmail() {
   const loginData = {
     user: {
       email: emailRef.current.value,
-      password: passwordRef.current.value,
     },
   };
 
@@ -117,7 +116,7 @@ export default function JoinWithEmail() {
           passwordValid
           type="password"
           useRef={passwordRef}
-          onkeyUp={goToNextSignUp}
+          onKeyUp={goToNextSignUp}
           onChange={passwordValidCheck}
           placeholder="비밀번호를 입력해 주세요"
         />
