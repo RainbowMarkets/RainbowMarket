@@ -24,6 +24,7 @@ export default function JoinWithEmail() {
   const loginData = {
     user: {
       email: emailRef.current.value,
+      password: passwordRef.current.value,
     },
   };
 
@@ -69,6 +70,7 @@ export default function JoinWithEmail() {
   const onSubmitHandler = async (event) => {
     //리프레시되는 것을 막아줌
     event.preventDefault();
+    console.log("통신 시작");
     try {
       const res = await fetch(url + "user/emailvalid", {
         method: "POST",
@@ -80,6 +82,9 @@ export default function JoinWithEmail() {
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
+
+      console.log(result);
+
       const requestMessage = result.message;
 
       if (requestMessage === "이미 가입된 이메일 주소입니다.") {
@@ -106,7 +111,7 @@ export default function JoinWithEmail() {
           emailValid
           type="email"
           useRef={emailRef}
-          onkeyUp={goToNextSignUp}
+          onKeyUp={goToNextSignUp}
           onChange={emailValidCheck}
           placeholder="이메일 주소를 입력해주세요"
         />

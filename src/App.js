@@ -17,8 +17,6 @@ import PostDetail from "./components/Posts/PostDetail";
 import IsHaveFeed from "./pages/Home/IsHaveFeed/IsHaveFeed";
 import NoFeed from "./pages/Home/NoFeed/NoFeed";
 import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
-import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
-import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 
 const Container = styled.div`
