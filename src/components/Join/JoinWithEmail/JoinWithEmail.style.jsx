@@ -32,25 +32,9 @@ export const Input = styled.input`
   fill: #ffffff;
   margin-bottom: 16px;
   border: none;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
   border-bottom: 1px solid
     ${(props) =>
       props.emailValid || props.passwordValid ? "8d72e1" : "b8c0f9"};
->>>>>>> Stashed changes
-=======
-  border-bottom: 1px solid
-    ${(props) =>
-      props.emailValid || props.passwordValid ? "8d72e1" : "b8c0f9"};
->>>>>>> Stashed changes
-=======
-  border-bottom: 1px solid
-    ${(props) =>
-      props.emailValid || props.passwordValid ? "8d72e1" : "b8c0f9"};
->>>>>>> Stashed changes
   &:focus {
     outline: 3px solid ${colors.colorMain};
   }
@@ -69,32 +53,13 @@ export const NextButton = styled.button`
   margin: 30px 0 34px;
   width: 322px;
   height: 44px;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+  ${({ disabled }) => {
+    return disabled === false
+      ? `background-color: ${colors.colorMain};`
+      : `background-color: ${colors.colorSub};`;
+  }}
   border-radius: 44px;
   color: #ffffff;
-  background-color: ${colors.colorMain};
-  &:disabled {
-    background-color: ${colors.colorSub};
-  } //disabled 됐을떄 색상
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-  background-color: ${({ disabled }) => {
-    return disabled === false ? colors.colorMain : colors.colorSub;
-  }};
-  border-radius: 44px;
-  color: #ffffff;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 `;
 
 export const WarningMessageWrapper = styled.strong`
