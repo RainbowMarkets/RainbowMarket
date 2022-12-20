@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ModalWrapper = styled.section`
   /* 모달창 외부 */
-  position: fixed;
+  /* position: fixed; */
   z-index: 900;
   /* background-color: rgba(0, 0, 0, 0.4); */
   /* right: 0;
@@ -16,37 +16,40 @@ export const ModalWrapper = styled.section`
   height: 100%;
   /* bottom: 0; */
   /* position: absolute;
-  bottom: 0px;
   left: 0px;*/
   div {
-    width: 440px;
+    width: 100%;
     min-width: 390px;
     position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-color: rgba(0, 0, 0, 0.4);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s, visibility .5s;
   }
 
   /* 모달창 내부 */
   ul {
-    width: 440px;
+    width: 100%;
     min-width: 390px;
-    /* margin: 0 auto; */
-    /* display: flex; */
     flex-direction: column;
     position: absolute;
     bottom: 0;
-    /* right: 95px; */
-    /* bottom: 0; */
     padding: 36px 0 10px;
     height: auto;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 10px 10px 0 0;
     background-color: #fff;
-    z-index: 902;
+    z-index: 910;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(0, 100%);
+    transition: opacity .5s, visibility .5s, transform .5s;
   }
+
   ul::before {
     content: "";
     display: inline-block;
@@ -59,8 +62,18 @@ export const ModalWrapper = styled.section`
     top: 16px;
     transform: translateX(-50%);
   }
+
+  .reveal{
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
+  }
+  // .container-disable { 
+  //   /* 클릭불가능 효과 */
+  //   pointer-events : none;
+  // }
+
   li {
-    /* margin-top: 16px; */
     height: 46px;
     padding-left: 26px;
     display: flex;
@@ -70,12 +83,12 @@ export const ModalWrapper = styled.section`
 
   button {
     display: flex;
-    color: red;
+    /* color: red; */
     font-weight: 400;
     line-height: 18px;
     align-items: center;
     flex-grow: 1;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
   }
 `;
