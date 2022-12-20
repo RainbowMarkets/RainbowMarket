@@ -39,39 +39,42 @@ const Post = (props) => {
           <TextWrapper>
             <h3 className="hidden">게시글 작성란</h3>
             <form method="post">
-              <textarea
-                className="form-textarea"
-                type="text"
-                placeholder="게시글 입력하기..."
-                maxLength={1200}
-                ref={textRef}
-                value={inpValue}
-                onInput={handleResizeHeight}
-                onChange={handleInpVal}
-              />
-
+              <div className="post-wrap">
+                <textarea
+                  className="form-textarea"
+                  type="text"
+                  placeholder="게시글 입력하기..."
+                  maxLength={1200}
+                  ref={textRef}
+                  value={inpValue}
+                  onInput={handleResizeHeight}
+                  onChange={handleInpVal}
+                />
+                <PostImgWrapper>
+                  <h4 className="hidden">이미지추가</h4>
+                  <ul>
+                    <li>
+                      <img src={postImg} alt="이미지" />
+                      <button className="postImg-del">
+                        <span className="hidden">이미지 삭제</span>
+                      </button>
+                    </li>
+                  </ul>
+                </PostImgWrapper>
+              </div>
               {/* 디자인 변경해주기 */}
-              <label htmlFor="imgUpLabel" className="img-up-btn"></label>
-              <input
-                id="imgUpLabel"
-                multiple
-                alt="사진추가"
-                type="file"
-                accept="image/*"
-                className="hidden"
-              />
+              <div className="label-wrap">
+                <label htmlFor="imgUpLabel" className="img-up-btn"></label>
+                <input
+                  id="imgUpLabel"
+                  multiple
+                  alt="사진추가"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                />
+              </div>
             </form>
-            <PostImgWrapper>
-              <h4 className="hidden">이미지추가</h4>
-              <ul>
-                <li>
-                  <img src={postImg} alt="이미지" />
-                  <button className="postImg-del">
-                    <span className="hidden">이미지 삭제</span>
-                  </button>
-                </li>
-              </ul>
-            </PostImgWrapper>
           </TextWrapper>
         </UploadWrapper>
       </UploadContain>
