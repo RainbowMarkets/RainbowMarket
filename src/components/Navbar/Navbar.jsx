@@ -1,4 +1,3 @@
-import React from "react";
 import imgHome from "../../assets/images/icon-home.png";
 import imgHomeFill from "../../assets/images/icon-home-fill.png";
 import imgMessage from "../../assets/images/icon-message-circle.png";
@@ -6,8 +5,9 @@ import imgMessageFill from "../../assets/images/icon-message-circle-fill.png";
 import imgEdit from "../../assets/images/icon-edit.png";
 import imgProfile from "../../assets/images/icon-user.png";
 import imgProfileFill from "../../assets/images/icon-user-fill.png";
-import styled from "styled-components";
-import { colors, fonts } from "../../GlobalStyle";
+import { colors } from "../../GlobalStyle";
+import { useLocation } from "react-router-dom";
+import useUserContext from "../../hooks/useUserContext";
 
 import {
   StyledLink,
@@ -16,13 +16,17 @@ import {
   StyledUl,
   StyledLi,
 } from "./styledNavBar";
-import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const { user } = useUserContext();
   const location = useLocation();
   const nowLocation = location.pathname;
   
-  if (nowLocation === "/post" || nowLocation === "/post/postdetail") return null;
+  if ((nowLocation !== "/" && 
+      nowLocation !== "/search" &&
+      nowLocation !== "/chat" &&
+      nowLocation !== "/profile") /* || (이거 해제하면 splash에서 내비바 없어짐)
+      !user */) return null;
 
   return (
     <>
