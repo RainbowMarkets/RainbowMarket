@@ -16,8 +16,9 @@ import useFetch from "./hooks/useFetch";
 import PostDetail from "./components/Posts/PostDetail";
 import IsHaveFeed from "./pages/Home/IsHaveFeed/IsHaveFeed";
 import NoFeed from "./pages/Home/NoFeed/NoFeed";
+import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
+import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
-
 
 const Container = styled.div`
   width: 100vw;
@@ -92,17 +93,18 @@ function App() {
           <BrowserRouter>
             <Main>
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route exact path="/" element={<Home />} />
                 <Route path="/splash" element={<SplashPage />} />
-                <Route path="/profile/" element={<Profile />} />
-                <Route path="/profile/:accountname" element={<Profile />} />
+                <Route exact path="/profile" element={<Profile />} />
+                <Route path="/profile/edit" element={<ProfileEdit />} />
+                <Route path="/profile/:accountname" element={<ProfileEdit />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/post" element={<Post />} />
                 <Route path="/post/postdetail" element={<PostDetail />} />
                 <Route path="/join" element={<JoinWithEmail />} />
                 <Route
-                  path="/follow/:accountname/follower"
+                  path="/profile/:accountname/follower"
                   element={<Follow />}
                 ></Route>
                 <Route path="*" element={<NotFound />} />
