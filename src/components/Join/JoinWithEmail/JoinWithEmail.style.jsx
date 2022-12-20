@@ -34,7 +34,13 @@ export const Input = styled.input`
   border: none;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+  border-bottom: 1px solid
+    ${(props) =>
+      props.emailValid || props.passwordValid ? "8d72e1" : "b8c0f9"};
+>>>>>>> Stashed changes
 =======
   border-bottom: 1px solid
     ${(props) =>
@@ -65,6 +71,7 @@ export const NextButton = styled.button`
   height: 44px;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   border-radius: 44px;
   color: #ffffff;
   background-color: ${colors.colorMain};
@@ -74,12 +81,17 @@ export const NextButton = styled.button`
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   background-color: ${({ disabled }) => {
     return disabled === false ? colors.colorMain : colors.colorSub;
   }};
   border-radius: 44px;
   color: #ffffff;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
