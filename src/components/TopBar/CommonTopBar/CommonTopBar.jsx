@@ -1,7 +1,7 @@
 import BackButton from "../BackButton"
 import { StyledHeader, StyledMoreBtn } from "../commonStyledTopBar"
 
-export default function () {
+export default function CommonTopBar() {
   return (
     <StyledHeader>
       <BackButton />

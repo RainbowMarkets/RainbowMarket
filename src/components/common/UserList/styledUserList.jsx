@@ -24,6 +24,7 @@ export const StyledDiv = styled.div`
 
 export const StyledImg = styled.img`
   width: 50px;
+  border-radius: 50%;
 `;
 
 export const StyledStrong = styled.strong`
