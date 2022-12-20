@@ -13,6 +13,7 @@ const CommentAdd = (props) => {
   // console.log(props.postId);
   // console.log(props.commentImg);
   const { user } = useUserContext();
+  const [] = useState();
   const [writeComment, setWriteComment] = useState({
     comment: {
       id: "",
@@ -33,24 +34,53 @@ const CommentAdd = (props) => {
     },
   });
   const { postData } = useFetch();
+  // 1. 유저 정보 받아 오기
+  // 2. 댓글 작성 코드
 
+  // useEffect(() => {
+  //   if (!myToken) return;
+  //   postData(
+  //     "/post/639ab92f17ae666581c625a1/comments",
+  //     {
+  //       comment: {
+  //         content: `${text}`,
+  //       },
+  //     },
+  //     setWriteComment,
+  //     myToken
+  //   );
+  // }, []);
+  // console.log(text);
+
+  // 1. 프로필 정보 불러오기 -> 댓글 작성란 프로필 넣어주기
+  // 2. 댓글 작성 API 작성하기
+  const url = "https://mandarin.api.weniv.co.kr";
+  const reqPath = `/user/myinfo`;
   const myToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
 
-  useEffect(() => {
-    if (!myToken) return;
-    postData(
-      "/post/639ab92f17ae666581c625a1/comments",
-      {
-        comment: {
-          content: `${text}`,
-        },
-      },
-      setWriteComment,
-      myToken
-    );
-  }, []);
-  console.log(text);
+  // 게시글 가져오기
+  // const fetchProfileData = async () => {
+  //   try {
+  //     const res = await fetch(url + reqPath, {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${myToken}`,
+  //         "Content-type": "application/json",
+  //       },
+  //     })
+  //       .then((res) => res.json())
+  //       // .then((data) => console.log(data))
+  //       .then((data) => setPostDetailData(data.post));
+  //   } catch (err) {
+  //     console.log("err", err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (!myToken) return;
+  //   fetchProfileData();
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +94,7 @@ const CommentAdd = (props) => {
     setIsActive(text.length > 0 ? true : false);
   };
   return (
-    <CommentAddWrapper onSubmit={setWriteComment}>
+    <CommentAddWrapper onSubmit={handleSubmit}>
       <h2 className="hidden">댓글 입력하기</h2>
       <img
         src={
