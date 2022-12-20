@@ -24,11 +24,11 @@ const Post = (props) => {
   const handleInpVal = (e) => {
     setInpValue(e.target.value);
     console.log(inpValue);
-  }
+  };
 
   return (
     <>
-      <UpLoadTopBar setInpValue={setInpValue} inpValue={inpValue}/>
+      <UpLoadTopBar setInpValue={setInpValue} inpValue={inpValue} />
       <UploadContain>
         <UploadWrapper>
           <h2 className="hidden">게시글 작성 페이지</h2>
@@ -49,6 +49,8 @@ const Post = (props) => {
                 onInput={handleResizeHeight}
                 onChange={handleInpVal}
               />
+
+              {/* 디자인 변경해주기 */}
               <label htmlFor="imgUpLabel" className="img-up-btn"></label>
               <input
                 id="imgUpLabel"
@@ -58,19 +60,18 @@ const Post = (props) => {
                 accept="image/*"
                 className="hidden"
               />
-              <PostImgWrapper>
-                <h4 className="hidden">이미지추가</h4>
-                <ul>
-                  <li>
-                    <img src={postImg} alt="이미지" />
-                    <button className="postImg-del">
-                      <span className="hidden">이미지 삭제</span>
-                    </button>
-                  </li>
-                </ul>
-              </PostImgWrapper>
-              {/* 디자인 변경해주기 */}
             </form>
+            <PostImgWrapper>
+              <h4 className="hidden">이미지추가</h4>
+              <ul>
+                <li>
+                  <img src={postImg} alt="이미지" />
+                  <button className="postImg-del">
+                    <span className="hidden">이미지 삭제</span>
+                  </button>
+                </li>
+              </ul>
+            </PostImgWrapper>
           </TextWrapper>
         </UploadWrapper>
       </UploadContain>

@@ -4,7 +4,6 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 390px;
   width: 100%;
   margin: 0 auto;
 

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SplashBox = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

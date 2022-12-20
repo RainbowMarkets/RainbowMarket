@@ -16,9 +16,13 @@ export default function UserList(props) {
       <StyledLink>
         <StyledImg
           /* src={defaultProfile} */
-          src={props.image ? props.image : defaultProfile}
+          src={
+            props.image !== "http://146.56.183.55:5050/Ellipse.png"
+              ? props.image
+              : defaultProfile
+          }
           alt=""
-          style={{ width: `${props.width}`, height: `${props.width}`}}
+          style={{ width: `${props.width}`, height: `${props.width}` }}
         />
         <StyledDiv>
           <StyledStrong>{props.username}</StyledStrong>
