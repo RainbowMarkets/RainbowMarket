@@ -17,7 +17,7 @@ export const Container = styled.div`
     }
     
 
-`
+`;
 
 export const InputTitle = styled.span`
     display: block;
@@ -29,7 +29,7 @@ export const InputTitle = styled.span`
     
 
 
-`
+`;
 
 export const Input = styled.input`
     width: 322px;
@@ -37,7 +37,7 @@ export const Input = styled.input`
     fill: #ffffff;
     margin-bottom: 16px;
     border: none;
-    border-bottom: 1px solid ${props => props.emailValid || props.passwordValid ? "8d72e1" : "b8c0f9"}; 
+    
     &:focus {
         outline : 3px solid ${colors.colorMain};
     }
@@ -57,13 +57,12 @@ export const NextButton = styled.button`
     margin : 30px 0 34px;
     width: 322px;
     height: 44px;
-    ${({disabled}) => {
-        return disabled === false
-        ? `background-color: ${colors.colorMain};`
-        : `background-color: ${colors.colorSub};`
-    }}
     border-radius: 44px;
     color: #ffffff;
+    background-color: ${colors.colorMain};
+    &:disabled {
+        background-color: ${colors.colorSub};
+    } //disabled 됐을떄 색상
     
 `;
 
