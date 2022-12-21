@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
-import UserList from "../../../components/common/UserList/UserList";
-
-import {
-  ProfileCont,
-  Styledbtn,
-  StyledSection,
-  Styledimg,
-} from "./styledisHaveFeed";
-import sIconMoreVertical from "../../../assets/images/s-icon-more-vertical.png";
+import { StyledSection } from "./styledisHaveFeed";
 import PostContent from "../../../components/common/PostFormat/PostContent/PostContent";
 import useUserContext from "../../../hooks/useUserContext";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
@@ -33,7 +25,7 @@ export default function IsHaveFeed() {
         .then((res) => res.json())
         .then((res) => {
           console.log("test!!!!", res.posts);
-          setFeedData(res.posts);
+          setFeedData(res.posts || []);
         });
     }
     getFeedData();
@@ -49,13 +41,15 @@ export default function IsHaveFeed() {
             <PostContent
               postDetail={feeditem}
               postModalActive={postModalActive}
-              setPostModalActive={setPostModalActive} />
+              setPostModalActive={setPostModalActive}
+            />
           </StyledSection>
         );
       })}
       <PostModal
         postModalActive={postModalActive}
-        setPostModalActive={setPostModalActive}/>
+        setPostModalActive={setPostModalActive}
+      />
       {/* {
         feedData.map((feeditem) => {
           return (

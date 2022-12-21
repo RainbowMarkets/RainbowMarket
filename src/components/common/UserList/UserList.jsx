@@ -11,6 +11,7 @@ import {
 } from "./styledUserList";
 
 export default function UserList(props) {
+  console.log(props);
   return (
     <StyledLi>
       <StyledLink>
