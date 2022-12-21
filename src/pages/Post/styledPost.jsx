@@ -24,7 +24,6 @@ export const ProfileContain = styled.section`
 export const TextWrapper = styled.section`
   margin-top: 12px;
   flex-grow: 1;
-
   form {
     display: flex;
     flex-direction: column;

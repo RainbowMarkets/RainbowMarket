@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
 import Modal from "../common/Modal/Modal/Modal";
@@ -15,6 +15,7 @@ import {
 } from "./styledPostDetail";
 import PostContent from "../common/PostFormat/PostContent/PostContent";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
+import useUserContext from "../../hooks/useUserContext";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
@@ -37,17 +38,19 @@ const PostDetail = () => {
       followingCount: 0,
     },
   });
+  const [commentData, setCommentData] = useState([]);
+  const { user } = useUserContext();
   // const myToken = localStorage.getItem("token");
   // /post/:post_id
   // 639ab90a17ae666581c6259e -> 사진 없는 id
   // 639ab92f17ae666581c625a1 -> 사진 있는 id
   const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/639ab92f17ae666581c625a1`;
   const myToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
 
   // 게시글 가져오기
   const fetchPostData = async () => {
+    const reqPath = `/post/639ab92f17ae666581c625a1`;
     try {
       const res = await fetch(url + reqPath, {
         method: "GET",
@@ -64,13 +67,33 @@ const PostDetail = () => {
     }
   };
 
+  // 댓글 업데이트
+  const getCommentList = async () => {
+    const reqPath = `/post/639ab92f17ae666581c625a1/comments/?limit=1000&skip=0`;
+    try {
+      const res = await fetch(url + reqPath, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json",
+        },
+      });
+      const data = await res.json();
+      setCommentData(data.comments);
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
+  console.log(commentData);
+
   useEffect(() => {
     if (!myToken) return;
     fetchPostData();
+    getCommentList();
+    // handleUpComment();
   }, []);
   // console.log(postData[0].content);
   console.log(postDetailData);
-  // console.log(postDetailData.comments);
 
   return (
     <>
@@ -81,11 +104,12 @@ const PostDetail = () => {
           <PostContent postDetail={postDetailData} />
         </PostDiv>
         <CommentWrapper>
-          <CommentDetail commentDetail={postDetailData.comments} />
+          <CommentDetail commentData={commentData} />
         </CommentWrapper>
         <CommentAdd
           postUserId={postDetailData.author._id}
           commentImg={postDetailData.author.image}
+          setCommentData={setCommentData}
         />
       </PostDetailWrapper>
       {/* {commentModal === true ? <Modal /> : null} */}
