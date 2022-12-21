@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { DeleteAlertWrapper } from "./styledDeleteAlert";
+import { AlertWrapper } from "./styledDeleteAlert";
 
 const DeleteAlert = () => {
   return (
     <>
-      <DeleteAlertWrapper>
+      <AlertWrapper>
         <h3 className="hidden">경고 알림 창</h3>
         <div>
           <strong>게시글을 삭제할까요?</strong>
@@ -17,7 +17,7 @@ const DeleteAlert = () => {
             </li>
           </ul>
         </div>
-      </DeleteAlertWrapper>
+      </AlertWrapper>
     </>
   );
 };
