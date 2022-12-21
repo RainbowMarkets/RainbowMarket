@@ -118,6 +118,8 @@ const PostDetail = () => {
             setIsHeartOn={setIsHeartOn}
             likeCount={likeCount}
             setLikeCount={setLikeCount}
+            postModalActive={postModalActive}
+            setPostModalActive={setPostModalActive}
           />
         </PostDiv>
         <CommentWrapper>

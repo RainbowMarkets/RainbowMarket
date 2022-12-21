@@ -28,7 +28,7 @@ const PostModal = (props) => {
   return (
     <>
       <ModalWrapper>
-        <h2 className="hidden">댓글 모달창</h2>
+        <h2 className="hidden">게시글 모달창</h2>
         <div 
           className={props.postModalActive ? "reveal" : ""}
           onClick={handleCancelMenu}></div>
