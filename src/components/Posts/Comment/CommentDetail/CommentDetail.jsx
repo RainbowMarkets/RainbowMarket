@@ -12,7 +12,7 @@ import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
 
 const CommentDetail = (props) => {
   // console.log(props.commentDetail);
-  // console.log(props);
+  console.log(props);
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
