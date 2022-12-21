@@ -17,6 +17,7 @@ import UserList from "../../UserList/UserList";
 import styled from "styled-components";
 
 const PostContent = (props) => {
+  // console.log(props.postDetail.heartCount, props.postDetail.hearted);
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
