@@ -26,17 +26,18 @@ export const InputTitle = styled.span`
   margin-bottom: 10px;
 `;
 
+
 export const Input = styled.input`
   width: 322px;
   height: 48px;
   fill: #ffffff;
   margin-bottom: 16px;
   border: none;
-  border-bottom: 1px solid
-    ${(props) =>
-      props.emailValid || props.passwordValid ? "8d72e1" : "b8c0f9"};
+  border-bottom: 1px solid ${({ validTest }) => validTest ? `${colors.colorSub}` : `${colors.colorEB}`};
   &:focus {
-    outline: 3px solid ${colors.colorMain};
+    border-bottom-color: ${colors.colorMain};
+  }
+    outline: none;
   }
   &::placeholder {
     color: ${colors.colorDB};
@@ -70,6 +71,5 @@ export const WarningMessageWrapper = styled.strong`
   line-height: 14px;
   align: left;
   margin-bottom: 6px;
-
-  color: #eb5757;
+  color: ${colors.colorEB};
 `;
