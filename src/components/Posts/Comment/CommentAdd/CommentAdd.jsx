@@ -13,20 +13,12 @@ const CommentAdd = (props) => {
 
   const [writeComment, setWriteComment] = useState({});
 
-  // 1. 프로필 정보 불러오기 -> 댓글 작성란 프로필 넣어주기
-  // 2. 댓글 작성 API 작성하기
-  // 3. 게시 버튼 클릭시 리스트 새로 로드 해주기 (게시 버튼 클릭 -> comments : Array 출력 -> 84 번째 줄 이 내용물을 담아서 전달해야함)
-  // 4. 댓글 내용 없을 땐 게시버튼 클릭 안되게
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
-  // const myToken =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
 
   // 댓글 작성하기
-
   const handleWrapperSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await fetch(url + reqPath, {
         method: "POST",
@@ -44,9 +36,7 @@ const CommentAdd = (props) => {
       console.log(data);
       props.setCommentData((prev) => [{ ...data.comment }, ...prev]);
       setText("");
-      // 리스트 새로고침 다시 뿌려주기
       //낙관적 업데이트
-      // handleUpComment();
     } catch (err) {
       console.log("err", err);
     }
@@ -85,6 +75,7 @@ const CommentAdd = (props) => {
       <button
         className={`activeBtn ${!isActive ? "disabled" : ""}`}
         type="submit"
+        disabled={isActive ? false : true}
       >
         게시
       </button>
