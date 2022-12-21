@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
 import Modal from "../common/Modal/Modal/Modal";
+import PostModal from "../common/Modal/Modal/PostModal";
 import PostOnlyText from "../common/PostFormat/PostOnlyText/PostOnlyText";
 import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
@@ -98,6 +99,7 @@ const PostDetail = () => {
 
   //모달 활성화 상태
   const [modalActive, setModalActive] = useState(false);
+  const [postModalActive, setPostModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
   return (
@@ -106,7 +108,10 @@ const PostDetail = () => {
       <PostDetailWrapper>
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
         <PostDiv>
-          <PostContent postDetail={postDetailData} />
+          <PostContent
+            postDetail={postDetailData}
+            postModalActive={postModalActive}
+            setPostModalActive={setPostModalActive} />
         </PostDiv>
         <CommentWrapper>
           <CommentDetail commentData={commentData} />
@@ -129,6 +134,9 @@ const PostDetail = () => {
             isLogOut={isLogOut}
             setIsLogOut={setIsLogOut} />
         }
+        <PostModal
+          postModalActive={postModalActive}
+          setPostModalActive={setPostModalActive}/>
       </PostDetailWrapper>
 
       {/* {commentModal === true ? <Modal /> : null} */}
