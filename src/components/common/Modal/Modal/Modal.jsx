@@ -1,11 +1,7 @@
-// 내가 작성한 댓글 : 삭제
-// 다른 사용자가 작성한 댓글 : 신고하기
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ModalWrapper } from "./styledModal";
 
-// 내가 작성한 게시글 : 삭제, 수정
-// 다른 사용자가 작성한 게시글 : 신고하기
 const Modal = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +24,7 @@ const Modal = (props) => {
   return (
     <>
       <ModalWrapper>
-        <h2 className="hidden">댓글 모달창</h2>
+        <h2 className="hidden">헤더 모달창</h2>
         <div 
           className={props.modalActive ? "reveal" : ""}
           onClick={handleCancelMenu}></div>

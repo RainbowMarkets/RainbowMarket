@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import UserList from "../../../components/common/UserList/UserList";
-import MainTopBar from "../../../components/TopBar/MainTopBar/MainTopBar";
+
 import {
   ProfileCont,
   Styledbtn,
@@ -10,6 +10,7 @@ import {
 import sIconMoreVertical from "../../../assets/images/s-icon-more-vertical.png";
 import PostContent from "../../../components/common/PostFormat/PostContent/PostContent";
 import useUserContext from "../../../hooks/useUserContext";
+import PostModal from "../../../components/common/Modal/Modal/PostModal";
 
 export default function IsHaveFeed() {
   const { user } = useUserContext();
@@ -38,16 +39,23 @@ export default function IsHaveFeed() {
     getFeedData();
   }, []);
 
+  const [postModalActive, setPostModalActive] = useState(false);
+
   return (
     <>
       {feedData.map((feeditem) => {
         return (
           <StyledSection key={Math.random()}>
-            <PostContent postDetail={feeditem} />
+            <PostContent
+              postDetail={feeditem}
+              postModalActive={postModalActive}
+              setPostModalActive={setPostModalActive} />
           </StyledSection>
         );
       })}
-
+      <PostModal
+          postModalActive={postModalActive}
+          setPostModalActive={setPostModalActive}/>
       {/* {
         feedData.map((feeditem) => {
           return (

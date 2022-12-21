@@ -17,6 +17,11 @@ import UserList from "../../UserList/UserList";
 import styled from "styled-components";
 
 const PostContent = (props) => {
+  function handleSideMenu(){
+    console.log(props.postDetail.author.username);
+    props.setPostModalActive(true);
+  }
+
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -27,7 +32,7 @@ const PostContent = (props) => {
           username={props.postDetail.author.username}
           accountname={props.postDetail.author.accountname}
         />
-        <button>
+        <button onClick={handleSideMenu}>
           <img className="post-modal" src={sIconMoreVertical} alt="" />
         </button>
       </ProfileContain>
