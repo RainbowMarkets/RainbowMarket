@@ -8,7 +8,7 @@ export const StyledSection = styled.section`
   align-items: center;
   width: 100%;
   min-width: 390px;
-  height: 100%;
+  height: 100vh;
   margin: 0 auto;
 `;
 
