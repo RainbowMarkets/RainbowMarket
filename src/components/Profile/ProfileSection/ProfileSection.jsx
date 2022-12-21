@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import useUserContext from "../../../hooks/useUserContext";
 import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";

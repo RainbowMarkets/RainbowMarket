@@ -1,5 +1,3 @@
-import postImg from "../../../../assets/images/post_img.jpg";
-import profileImgSmall from "../../../../assets/images/profile_small.png";
 import sIconMoreVertical from "../../../../assets/images/s-icon-more-vertical.png";
 import PostCommentBtn from "../../../Posts/PostBtn/PostCommentBtn/PostCommentBtn";
 import PostHeartBtn from "../../../Posts/PostBtn/PostHearBtn/PostHeartBtn";
@@ -9,13 +7,9 @@ import {
   PostBtn,
   PostWrapper,
   ProfileContain,
-  ProfileName,
-  StyledLiPos,
-  PostStyledLink,
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
-import styled from "styled-components";
-import { useState } from "react";
+
 const PostContent = (props) => {
   function handleSideMenu() {
     console.log(props.postDetail.id);

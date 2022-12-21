@@ -34,7 +34,7 @@ function App() {
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch({ type: "LOGIN", payload: json.user });
+        dispatch({ type: "LOGIN", payload: { ...json.user, token } });
       });
   }, []);
 
