@@ -9,6 +9,7 @@ export const colors = {
   colorDB: "#dbdbdb",
   colorC4: "#c4c4c4",
   color76: "#767676",
+  colorEB: "#eb5757",
 };
 
 export const fonts = {

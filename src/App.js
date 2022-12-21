@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import useUserContext from "./hooks/useUserContext";
 
+// 잠시 1200 -> 100으로 변경
 function App() {
   const { dispatch } = useUserContext();
 
@@ -41,7 +42,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsFirst(false);
-    }, 1200);
+    }, 100);
   });
 
   return (

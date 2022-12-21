@@ -21,12 +21,7 @@ export default function JoinWithEmail() {
   const passwordRef = useRef("");
 
   const url = "https://mandarin.api.weniv.co.kr";
-  const loginData = {
-    user: {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    },
-  };
+
 
   // 이메일 유효성 검사
   const emailValidCheck = ({ target }) => {
@@ -61,6 +56,12 @@ export default function JoinWithEmail() {
     }
   };
 
+      const loginData = {
+      user: {
+        email: `${emailRef.current.value}`
+      },
+    };
+
   // 다음 버튼을 활성화시켜서 프로필 설정으로 갈 수 있게 하는 검사
   const goToNextSignUp = () => {
     return emailValid && passwordValid ? setIsActive(false) : setIsActive(true);
@@ -70,22 +71,22 @@ export default function JoinWithEmail() {
   const onSubmitHandler = async (event) => {
     //리프레시되는 것을 막아줌
     event.preventDefault();
-    console.log("통신 시작");
+    console.log("통신 시작", emailRef.current.value);
+
+
     try {
-      const res = await fetch(url + "user/emailvalid", {
+      const res = await fetch(url + '/user/emailvalid', {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(loginData),
-      });
+      })
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
-
       console.log(result);
-
-      const requestMessage = result.message;
+      const requestMessage = await result.message;
 
       if (requestMessage === "이미 가입된 이메일 주소입니다.") {
         setEmailWarningMessage("*이미 가입된 이메일 주소입니다.");
@@ -96,10 +97,12 @@ export default function JoinWithEmail() {
         setEmailValid(true);
       }
       return result;
+      
     } catch (error) {
       console.log(error);
     }
   };
+
 
   return (
     <Container>
@@ -108,9 +111,9 @@ export default function JoinWithEmail() {
       <form className="join-form" onSubmit={onSubmitHandler}>
         <InputTitle>이메일</InputTitle>
         <Input
-          emailValid
+          validTest={emailValid}
           type="email"
-          useRef={emailRef}
+          ref={emailRef}
           onKeyUp={goToNextSignUp}
           onChange={emailValidCheck}
           placeholder="이메일 주소를 입력해주세요"
@@ -118,9 +121,9 @@ export default function JoinWithEmail() {
         <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
         <InputTitle>비밀번호</InputTitle>
         <Input
-          passwordValid
+          validTest={passwordValid}
           type="password"
-          useRef={passwordRef}
+          ref={passwordRef}
           onKeyUp={goToNextSignUp}
           onChange={passwordValidCheck}
           placeholder="비밀번호를 입력해 주세요"

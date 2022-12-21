@@ -33,7 +33,7 @@ const CommentAdd = (props) => {
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       props.setCommentData((prev) => [{ ...data.comment }, ...prev]);
       setText("");
       //낙관적 업데이트
@@ -44,7 +44,7 @@ const CommentAdd = (props) => {
 
   // 댓글 input 값 받아오기
   const handleText = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setText(e.target.value);
   };
 
