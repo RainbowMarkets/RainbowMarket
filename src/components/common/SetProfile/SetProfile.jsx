@@ -12,10 +12,6 @@ export default function SetProfile({ join }) {
   const [intro, setIntro] = useState("");
   const uploadInp = useRef(null);
 
-  const changeHandler = (event) => {
-    console.log(uploadInp.current.files);
-  };
-
   const usernameHandler = (event) => {
     setUsername(event.target.value);
   };
@@ -82,7 +78,7 @@ export default function SetProfile({ join }) {
   return (
     <Form>
       {join ? <SetprofileHeader /> : null}
-      <SetProfileImage uploadInp={uploadInp} handler={changeHandler} />
+      <SetProfileImage uploadInp={uploadInp} />
       <SetProfileInput
         id="username"
         label="사용자 이름"
