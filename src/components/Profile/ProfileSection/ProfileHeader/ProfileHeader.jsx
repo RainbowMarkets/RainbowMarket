@@ -5,11 +5,12 @@ import useUserContext from "../../../../hooks/useUserContext";
 
 export default function ProfileHeader() {
   const { user } = useUserContext();
+
   return (
     <Header>
-      <Follow follow={user.followerCount || 0} tofrom="followers" />
+      <Follow follow="followers" />
       <img src={user.image || ProfileBasic} alt="" />
-      <Follow follow={user.followingCount || 0} tofrom="followings" />
+      <Follow follow="followings" />
     </Header>
   );
 }

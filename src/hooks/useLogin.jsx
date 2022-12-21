@@ -40,6 +40,7 @@ export default function useLogin() {
         setError(null);
         setIsPending(false);
       })
+      .then(() => window.location.reload(true))
       .catch((err) => {
         setError(err.message);
         setIsPending(false);
