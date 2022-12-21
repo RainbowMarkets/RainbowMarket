@@ -54,8 +54,8 @@ export default function IsHaveFeed() {
         );
       })}
       <PostModal
-          postModalActive={postModalActive}
-          setPostModalActive={setPostModalActive}/>
+        postModalActive={postModalActive}
+        setPostModalActive={setPostModalActive}/>
       {/* {
         feedData.map((feeditem) => {
           return (

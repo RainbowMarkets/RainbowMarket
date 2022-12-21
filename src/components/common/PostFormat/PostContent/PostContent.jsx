@@ -18,7 +18,8 @@ import styled from "styled-components";
 
 const PostContent = (props) => {
   function handleSideMenu(){
-    console.log(props.postDetail.author.username);
+    console.log(props.postDetail.id);
+    console.log(props.postDetail.author._id);
     props.setPostModalActive(true);
   }
 
