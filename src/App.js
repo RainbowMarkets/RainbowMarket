@@ -14,6 +14,7 @@ import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
+import Product from "./pages/Product/Product";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -54,6 +55,7 @@ function App() {
                   path="/profile/:accountname/following"
                   element={<Follow />}
                 />
+                <Route path="/product" element={<Product />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Main>
