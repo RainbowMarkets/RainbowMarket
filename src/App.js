@@ -53,7 +53,11 @@ function App() {
                   <Route
                     path="/profile/:accountname/follower"
                     element={<Follow />}
-                  ></Route>
+                  />
+                  <Route
+                    path="/profile/:accountname/following"
+                    element={<Follow />}
+                  />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Main>
