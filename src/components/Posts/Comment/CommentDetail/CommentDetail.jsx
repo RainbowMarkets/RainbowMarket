@@ -93,7 +93,7 @@ const CommentDetail = (props) => {
                   </div>
                 </div>
                 <p>{item.content}</p>
-                <button commentModalActive={commentModalActive}>
+                <button /* commentModalActive={commentModalActive} */>
                   <span className="hidden">더보기</span>
                 </button>
               </li>
