@@ -1,13 +1,14 @@
 // 내가 작성한 댓글 : 삭제
 // 다른 사용자가 작성한 댓글 : 신고하기
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ModalWrapper } from "./styledModal";
 
 // 내가 작성한 게시글 : 삭제, 수정
 // 다른 사용자가 작성한 게시글 : 신고하기
 const Modal = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   function handleCancelMenu() {
     props.setModalActive(false);
@@ -15,8 +16,13 @@ const Modal = (props) => {
   function handleShowLogOutModal(){
     props.setIsLogOut(true);
   }
+
   function handleInfoSetting(){
-    navigate("/profile");
+    if(location.pathname == "/profile"){
+      props.setModalActive(false);
+    }else {
+      navigate("/profile");
+    } // 페이지가 프로필일때는 아무 동작도 안해서 모달 해제하는 조건문 넣음
   }
   
   return (
