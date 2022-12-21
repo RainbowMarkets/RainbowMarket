@@ -15,9 +15,9 @@ import {
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
 import styled from "styled-components";
-
+import { useState } from "react";
 const PostContent = (props) => {
-  function handleSideMenu(){
+  function handleSideMenu() {
     console.log(props.postDetail.id);
     console.log(props.postDetail.author._id);
     props.setPostModalActive(true);
@@ -52,10 +52,12 @@ const PostContent = (props) => {
 
         <PostBtn>
           <PostHeartBtn
-            heartCount={props.postDetail.heartCount}
-            hearted={props.postDetail.hearted}
+            isHeartOn={props.isHeartOn}
+            setIsHeartOn={props.setIsHeartOn}
+            likeCount={props.likeCount}
+            setLikeCount={props.setLikeCount}
           />
-          <PostCommentBtn heartCount={props.postDetail.comments.length} />
+          <PostCommentBtn commentCount={props.postDetail.comments.length} />
         </PostBtn>
         <PostDate upDate={props.postDetail.updatedAt} />
       </ContextWrapper>

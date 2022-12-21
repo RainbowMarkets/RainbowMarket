@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import profileImgSmall from "../../../../assets/images/profile_small.png";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../../../common/Modal/Modal/Modal";
 import { CommentWrapper } from "./styledCommentDetail";
 import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
+import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
 /* test220Name 계정인 경우 해당 계정의 게시글 상세페이지의 댓글들 불러오기
  */
 
@@ -14,6 +15,7 @@ const CommentDetail = (props) => {
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const handlemodalClick = useRef();
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
@@ -40,10 +42,29 @@ const CommentDetail = (props) => {
       return `${Math.floor(diff / 2592000)}달 전`;
     }
   };
-  const handleModal = () => {
+  const handleModal = (e) => {
     setIsModalOpen(!isModalOpen);
   };
-  console.log(props.commentData);
+
+  const handleClickOut = (e) => {
+    if (
+      isModalOpen &&
+      (!handlemodalClick.current ||
+        !handlemodalClick.current.contains(e.target))
+    )
+      setIsModalOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener("click", handleClickOut);
+    return () => {
+      window.removeEventListener("click", handleClickOut);
+    };
+  }, []);
+  // console.log(props.commentData);
+
+  // 모달 상태
+  const [commentModalActive, setCommentModalActive] = useState(false);
+
   return (
     <>
       <CommentWrapper>
@@ -72,13 +93,15 @@ const CommentDetail = (props) => {
                   </div>
                 </div>
                 <p>{item.content}</p>
-                <button onClick={handleModal}>
+                <button commentModalActive={commentModalActive}>
                   <span className="hidden">더보기</span>
                 </button>
               </li>
             ))}
         </ul>
       </CommentWrapper>
+      {/* 댓글 모달 띄움 */}
+      <Modal commentModalActive={commentModalActive} />
     </>
   );
 };
