@@ -19,8 +19,8 @@ const ChatRoomWrapper = styled.section`
       margin-right: 12px;
     }
     img.rainbow-gif {
-      width: 240px;
-      height: 240px;
+      width: 180px;
+      height: 180px;
       border-radius: 20px;
       margin-left: 6px;
     }
