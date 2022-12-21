@@ -17,14 +17,8 @@ const userStateReducer = (state, action) => {
 };
 
 const UserContextProvider = ({ children }) => {
-  // 토큰에 로그인 정보가 남아 있으면 가져와서 유저 정보를 갱신합니다.
-  const accountname = localStorage.getItem("aName"),
-    token = localStorage.getItem("token");
-
-  const userData = accountname && token ? { accountname, token } : null;
-
   const [state, dispatch] = useReducer(userStateReducer, {
-    user: userData,
+    user: null,
   });
 
   return (

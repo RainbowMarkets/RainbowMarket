@@ -1,10 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
+import { useEffect, useState } from "react";
 import Modal from "../common/Modal/Modal/Modal";
 import PostModal from "../common/Modal/Modal/PostModal";
-import PostOnlyText from "../common/PostFormat/PostOnlyText/PostOnlyText";
-import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 import PostContent from "../common/PostFormat/PostContent/PostContent";
@@ -12,12 +8,7 @@ import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import LogOutAlert from "../common/Modal/Alert/LogOutAlert";
 
-import {
-  CommentWrapper,
-  PostDiv,
-  PostDetailWrapper,
-  ModalStyle,
-} from "./styledPostDetail";
+import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
