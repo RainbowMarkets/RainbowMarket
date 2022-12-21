@@ -60,7 +60,7 @@ const CommentDetail = (props) => {
       window.removeEventListener("click", handleClickOut);
     };
   }, []);
-  console.log(props.commentData);
+  // console.log(props.commentData);
   return (
     <>
       <CommentWrapper>

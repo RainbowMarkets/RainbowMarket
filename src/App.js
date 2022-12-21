@@ -16,12 +16,13 @@ import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 
+// 잠시 1200 -> 100으로 변경
 function App() {
   const [isFirst, setIsFirst] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setIsFirst(false);
-    }, 1200);
+    }, 100);
   });
 
   return (

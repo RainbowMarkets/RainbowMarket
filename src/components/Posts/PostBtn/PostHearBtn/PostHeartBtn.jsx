@@ -4,15 +4,13 @@ import useUserContext from "../../../../hooks/useUserContext";
 
 import { HeartWrapper } from "./styledPostHeartBtn";
 
-const PostHeartBtn = ({ heartCount, hearted }) => {
+const PostHeartBtn = ({ isHeartOn, likeCount, setIsHeartOn, setLikeCount }) => {
   // 하트 상태값에 따라 하트 색 변경
   // console.log(heartCount, hearted);
-  const [isHeartOn, setIsHeartOn] = useState(hearted);
-  const [likeCount, setLikeCount] = useState(heartCount);
   const { user } = useUserContext();
   const handleHeart = async (e) => {
     // setIsHeartOn(true);
-    // 하트 누르지 않은 게시물
+    // 하트 누르지 않은 게시물 -> false
     if (!isHeartOn) {
       const reqPath = `/post/639ab92f17ae666581c625a1/heart`;
       const url = "https://mandarin.api.weniv.co.kr";
@@ -26,6 +24,7 @@ const PostHeartBtn = ({ heartCount, hearted }) => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             setIsHeartOn(data.post.hearted);
             setLikeCount(data.post.heartCount);
           })
@@ -38,7 +37,7 @@ const PostHeartBtn = ({ heartCount, hearted }) => {
       }
     }
     // 하트 눌린 게시물 -> hearted : true 값
-    else if (isHeartOn) {
+    if (isHeartOn) {
       const reqPath = `/post/639ab92f17ae666581c625a1/unheart`;
       const url = "https://mandarin.api.weniv.co.kr";
       try {
@@ -53,7 +52,7 @@ const PostHeartBtn = ({ heartCount, hearted }) => {
           .then((data) => {
             setIsHeartOn(data.post.hearted);
             setLikeCount(data.post.heartCount);
-            // console.log(data);
+            console.log(data);
           })
           .then(console.log(isHeartOn))
           .then(console.log(likeCount));
