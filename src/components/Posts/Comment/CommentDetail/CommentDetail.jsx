@@ -61,6 +61,10 @@ const CommentDetail = (props) => {
     };
   }, []);
   // console.log(props.commentData);
+
+  // 모달 상태
+  const [commentModalActive, setCommentModalActive] = useState(false);
+
   return (
     <>
       <CommentWrapper>
@@ -89,14 +93,15 @@ const CommentDetail = (props) => {
                   </div>
                 </div>
                 <p>{item.content}</p>
-                <button onClick={handleModal}>
+                <button commentModalActive={commentModalActive}>
                   <span className="hidden">더보기</span>
                 </button>
               </li>
             ))}
         </ul>
       </CommentWrapper>
-      {isModalOpen && <Modal ref={handlemodalClick} />}
+      {/* 댓글 모달 띄움 */}
+      <Modal commentModalActive={commentModalActive} />
     </>
   );
 };

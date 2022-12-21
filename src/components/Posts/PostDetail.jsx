@@ -44,12 +44,11 @@ const PostDetail = () => {
   const [isHeartOn, setIsHeartOn] = useState(postDetailData.hearted);
   const [likeCount, setLikeCount] = useState(postDetailData.heartCount);
 
-  console.log("isHeartOn : ", isHeartOn);
-  console.log("likeCount : ", likeCount);
+  // console.log("isHeartOn : ", isHeartOn);
+  // console.log("likeCount : ", likeCount);
 
   const [commentData, setCommentData] = useState([]);
   const { user } = useUserContext();
-  // const myToken = localStorage.getItem("token");
   // /post/:post_id
   // 639ab90a17ae666581c6259e -> 사진 없는 id
   // 639ab92f17ae666581c625a1 -> 사진 있는 id
@@ -76,8 +75,6 @@ const PostDetail = () => {
       console.log("err", err);
     }
   };
-
-  // console.log(postDetailData);
 
   // 댓글 업데이트
   const getCommentList = async () => {
