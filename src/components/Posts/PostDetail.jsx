@@ -6,6 +6,10 @@ import PostOnlyText from "../common/PostFormat/PostOnlyText/PostOnlyText";
 import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
+import PostContent from "../common/PostFormat/PostContent/PostContent";
+import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
+import useUserContext from "../../hooks/useUserContext";
+import LogOutAlert from "../common/Modal/Alert/LogOutAlert";
 
 import {
   CommentWrapper,
@@ -13,9 +17,6 @@ import {
   PostDetailWrapper,
   ModalStyle,
 } from "./styledPostDetail";
-import PostContent from "../common/PostFormat/PostContent/PostContent";
-import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
-import useUserContext from "../../hooks/useUserContext";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
@@ -95,9 +96,13 @@ const PostDetail = () => {
   // console.log(postData[0].content);
   console.log(postDetailData);
 
+  //모달 활성화 상태
+  const [modalActive, setModalActive] = useState(false);
+  const [isLogOut, setIsLogOut] = useState(false);
+
   return (
     <>
-      <CommonTopBar />
+      <CommonTopBar modalActive={modalActive} setModalActive={setModalActive} />
       <PostDetailWrapper>
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
         <PostDiv>
@@ -111,7 +116,21 @@ const PostDetail = () => {
           commentImg={postDetailData.author.image}
           setCommentData={setCommentData}
         />
+
+        {/* 슬라이드 모달 띄움 */}
+        <Modal
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+              isLogOut={isLogOut}
+              setIsLogOut={setIsLogOut} />
+          {
+            isLogOut &&
+            <LogOutAlert
+              isLogOut={isLogOut}
+              setIsLogOut={setIsLogOut} />
+          }
       </PostDetailWrapper>
+
       {/* {commentModal === true ? <Modal /> : null} */}
       {/* <DeleteAlert />
       <ModalStyle>

@@ -6,9 +6,9 @@ import { colors, fonts } from "../../GlobalStyle";
 export const StyledHeader = styled.header`
   display: flex;
   position: sticky;
-  background: white;
+  background-color: #fff;
   top: 0;
-  z-index: 10px;
+  z-index: 10;
   justify-content: space-between;
   align-items: center;
   width: 100%;

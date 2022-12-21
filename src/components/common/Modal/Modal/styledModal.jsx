@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ModalWrapper = styled.section`
   /* 모달창 외부 */
   /* position: fixed; */
-  z-index: 900;
+  z-index: 100;
   /* background-color: rgba(0, 0, 0, 0.4); */
   /* right: 0;
   bottom: 0; */
@@ -12,21 +12,21 @@ export const ModalWrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 440px;
+  min-width: 390px;
   height: 100%;
   /* bottom: 0; */
   /* position: absolute;
   left: 0px;*/
   div {
     width: 100%;
-    min-width: 390px;
     position: absolute;
+    z-index: 110;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.4);
-
     opacity: 0;
     visibility: hidden;
     transition: opacity .5s, visibility .5s;
@@ -43,7 +43,7 @@ export const ModalWrapper = styled.section`
     height: auto;
     border-radius: 10px 10px 0 0;
     background-color: #fff;
-    z-index: 910;
+    z-index: 120;
     opacity: 0;
     visibility: hidden;
     transform: translate(0, 100%);
@@ -68,6 +68,7 @@ export const ModalWrapper = styled.section`
     visibility: visible;
     transform: translate(0, 0);
   }
+
   // .container-disable { 
   //   /* 클릭불가능 효과 */
   //   pointer-events : none;

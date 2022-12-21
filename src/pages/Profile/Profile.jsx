@@ -7,11 +7,13 @@ import { Wrapper } from "./styledProfile";
 import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useState } from "react";
+import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 
 export default function Profile() {
   const { user } = useUserContext();
-  
+
   const [modalActive, setModalActive] = useState(false);
+  const [isLogOut, setIsLogOut] = useState(false);
 
   return (
     <>
@@ -19,7 +21,9 @@ export default function Profile() {
         <Login />
       ) : (
         <>
-          <CommonTopBar modalActive={modalActive} setModalActive={setModalActive}/>
+          <CommonTopBar
+            modalActive={modalActive}
+            setModalActive={setModalActive} />
           <Wrapper>
             {/* 팔로우 등 프로필이 표시되는 섹션 */}
             <ProfileSection />
@@ -27,7 +31,17 @@ export default function Profile() {
             <ProfileItemSection />
             {/* 쓴 글 목록이 표시되는 섹션 */}
             <ProfileFeedSection />
-            <Modal modalActive={modalActive} setModalActive={setModalActive}/>
+            <Modal
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+              isLogOut={isLogOut}
+              setIsLogOut={setIsLogOut} />
+            {
+              isLogOut &&
+              <LogOutAlert
+                isLogOut={isLogOut}
+                setIsLogOut={setIsLogOut} />
+            }
           </Wrapper>
         </>
       )}
