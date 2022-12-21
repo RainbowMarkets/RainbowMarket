@@ -13,36 +13,13 @@ const CommentDetail = (props) => {
   // console.log(props.commentDetail);
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState([]);
-  const { getData } = useFetch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
   const myToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
 
-  // const getCommentList = async () => {
-  //   try {
-  //     const res = await fetch(url + reqPath, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${user.token}`,
-  //         "Content-type": "application/json",
-  //       },
-  //     });
-  //     const data = await res.json();
-  //     setCommentData([...data.comments]);
-  //     console.log(commentData);
-  //   } catch (err) {
-  //     console.log("err", err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (!myToken) return;
-  //   getCommentList();
-  // }, []);
-
-  // console.log(commentData.comments);
   const getTimeGap = (time) => {
     const timeValue = new Date(time);
     const end = new Date();
@@ -62,6 +39,9 @@ const CommentDetail = (props) => {
     } else {
       return `${Math.floor(diff / 2592000)}달 전`;
     }
+  };
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
   console.log(props.commentData);
   return (
@@ -92,20 +72,11 @@ const CommentDetail = (props) => {
                   </div>
                 </div>
                 <p>{item.content}</p>
-                <button
-                // onClick={(props) => {
-                //   setCommentModal(!commentModal);
-                // }}
-                >
+                <button onClick={handleModal}>
                   <span className="hidden">더보기</span>
                 </button>
-                {/* <CommentModal /> */}
               </li>
             ))}
-
-          {/* ) : (
-            false
-          )} */}
         </ul>
       </CommentWrapper>
     </>
