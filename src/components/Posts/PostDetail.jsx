@@ -119,16 +119,16 @@ const PostDetail = () => {
 
         {/* 슬라이드 모달 띄움 */}
         <Modal
-              modalActive={modalActive}
-              setModalActive={setModalActive}
-              isLogOut={isLogOut}
-              setIsLogOut={setIsLogOut} />
-          {
-            isLogOut &&
-            <LogOutAlert
-              isLogOut={isLogOut}
-              setIsLogOut={setIsLogOut} />
-          }
+          modalActive={modalActive}
+          setModalActive={setModalActive}
+          isLogOut={isLogOut}
+          setIsLogOut={setIsLogOut} />
+        {
+          isLogOut &&
+          <LogOutAlert
+            isLogOut={isLogOut}
+            setIsLogOut={setIsLogOut} />
+        }
       </PostDetailWrapper>
 
       {/* {commentModal === true ? <Modal /> : null} */}
