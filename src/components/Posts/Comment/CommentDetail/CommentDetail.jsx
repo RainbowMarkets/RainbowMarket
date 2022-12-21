@@ -12,16 +12,15 @@ import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
 
 const CommentDetail = (props) => {
   // console.log(props.commentDetail);
+  console.log(props);
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handlemodalClick = useRef();
+  function handlesModalMenu() {}
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
-  const myToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWFiNzk5MTdhZTY2NjU4MWM2MjU2YSIsImV4cCI6MTY3NjI2Nzk2NSwiaWF0IjoxNjcxMDgzOTY1fQ.fuis1SVivuRp3hgaiJaccyNYhfU_DC0h0Df5Y3d5xFM";
-
   const getTimeGap = (time) => {
     const timeValue = new Date(time);
     const end = new Date();
@@ -42,9 +41,9 @@ const CommentDetail = (props) => {
       return `${Math.floor(diff / 2592000)}달 전`;
     }
   };
-  const handleModal = (e) => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const handleModal = (e) => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
   const handleClickOut = (e) => {
     if (
@@ -63,7 +62,7 @@ const CommentDetail = (props) => {
   // console.log(props.commentData);
 
   // 모달 상태
-  const [commentModalActive, setCommentModalActive] = useState(false);
+  // const [commentModalActive, setCommentModalActive] = useState(false);
 
   return (
     <>
@@ -93,7 +92,7 @@ const CommentDetail = (props) => {
                   </div>
                 </div>
                 <p>{item.content}</p>
-                <button /* commentModalActive={commentModalActive} */>
+                <button>
                   <span className="hidden">더보기</span>
                 </button>
               </li>
@@ -101,7 +100,6 @@ const CommentDetail = (props) => {
         </ul>
       </CommentWrapper>
       {/* 댓글 모달 띄움 */}
-      <Modal commentModalActive={commentModalActive} />
     </>
   );
 };

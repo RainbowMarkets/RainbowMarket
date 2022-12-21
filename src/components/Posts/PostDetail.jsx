@@ -5,10 +5,11 @@ import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 import PostContent from "../common/PostFormat/PostContent/PostContent";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
-import useUserContext from "../../hooks/useUserContext";
 import LogOutAlert from "../common/Modal/Alert/LogOutAlert";
 
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
+import CommentModal from "../common/Modal/Modal/CommentModal";
+import useUserContext from "../../hooks/useUserContext";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
@@ -45,7 +46,6 @@ const PostDetail = () => {
   // 639ab90a17ae666581c6259e -> 사진 없는 id
   // 639ab92f17ae666581c625a1 -> 사진 있는 id
   const url = "https://mandarin.api.weniv.co.kr";
-
   // 게시글 가져오기
   const fetchPostData = async () => {
     const reqPath = `/post/639ab92f17ae666581c625a1`;
@@ -85,16 +85,16 @@ const PostDetail = () => {
       console.log("err", err);
     }
   };
-
   useEffect(() => {
     if (!user.token) return;
     fetchPostData();
     getCommentList();
   }, []);
-
+  // console.log(user.token);
   //모달 활성화 상태
   const [modalActive, setModalActive] = useState(false);
   const [postModalActive, setPostModalActive] = useState(false);
+  // const [commentModalActive, setCommentModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
   return (
@@ -135,6 +135,10 @@ const PostDetail = () => {
         <PostModal
           postModalActive={postModalActive}
           setPostModalActive={setPostModalActive}
+        />
+        <CommentModal
+        /*commentModalActive={commentModalActive}
+          setCommentModalActive={setCommentModalActive}*/
         />
       </PostDetailWrapper>
 
