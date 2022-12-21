@@ -12,6 +12,7 @@ import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 export default function Profile() {
   const { user } = useUserContext();
 
+  console.log(user);
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
@@ -23,7 +24,8 @@ export default function Profile() {
         <>
           <CommonTopBar
             modalActive={modalActive}
-            setModalActive={setModalActive} />
+            setModalActive={setModalActive}
+          />
           <Wrapper>
             {/* 팔로우 등 프로필이 표시되는 섹션 */}
             <ProfileSection />
@@ -35,13 +37,11 @@ export default function Profile() {
               modalActive={modalActive}
               setModalActive={setModalActive}
               isLogOut={isLogOut}
-              setIsLogOut={setIsLogOut} />
-            {
-              isLogOut &&
-              <LogOutAlert
-                isLogOut={isLogOut}
-                setIsLogOut={setIsLogOut} />
-            }
+              setIsLogOut={setIsLogOut}
+            />
+            {isLogOut && (
+              <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
+            )}
           </Wrapper>
         </>
       )}

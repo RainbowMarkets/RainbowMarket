@@ -21,6 +21,23 @@ const UserContextProvider = ({ children }) => {
     user: null,
   });
 
+  // 토큰에 로그인 정보가 남아 있으면 가져와서 유저 정보를 갱신합니다.
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch({ type: "LOGIN", payload: { ...json.user, token } });
+      });
+  }
+
   return (
     <UserContext.Provider value={{ ...state, dispatch }}>
       {children}

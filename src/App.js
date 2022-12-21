@@ -14,30 +14,9 @@ import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
-import useUserContext from "./hooks/useUserContext";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
-  const { dispatch } = useUserContext();
-
-  // 토큰에 로그인 정보가 남아 있으면 가져와서 유저 정보를 갱신합니다.
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) return;
-    fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        dispatch({ type: "LOGIN", payload: { ...json.user, token } });
-      });
-  }, []);
-
   const [isFirst, setIsFirst] = useState(true);
   useEffect(() => {
     setTimeout(() => {
