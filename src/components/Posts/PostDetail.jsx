@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
 import Modal from "../common/Modal/Modal/Modal";
+import PostModal from "../common/Modal/Modal/PostModal";
 import PostOnlyText from "../common/PostFormat/PostOnlyText/PostOnlyText";
 import PostWithImg from "../common/PostFormat/PostWithImg/PostWithImg";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
@@ -102,6 +103,7 @@ const PostDetail = () => {
 
   //모달 활성화 상태
   const [modalActive, setModalActive] = useState(false);
+  const [postModalActive, setPostModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
   return (
@@ -137,6 +139,10 @@ const PostDetail = () => {
         {isLogOut && (
           <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
         )}
+        <PostModal
+          postModalActive={postModalActive}
+          setPostModalActive={setPostModalActive}
+        />
       </PostDetailWrapper>
 
       {/* {commentModal === true ? <Modal /> : null} */}
