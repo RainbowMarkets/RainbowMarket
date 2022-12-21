@@ -111,6 +111,7 @@ const PostDetail = () => {
             setLikeCount={setLikeCount}
             postModalActive={postModalActive}
             setPostModalActive={setPostModalActive}
+            setReportPostNum={() => {console.log("난 PostDetail")}}
           />
         </PostDiv>
         <CommentWrapper>
@@ -133,6 +134,8 @@ const PostDetail = () => {
           <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
         )}
         <PostModal
+          reportPostNum={postDetailData.id}
+          postUserId={postDetailData.author._id}
           postModalActive={postModalActive}
           setPostModalActive={setPostModalActive}
         />
