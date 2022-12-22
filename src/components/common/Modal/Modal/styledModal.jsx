@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../../../GlobalStyle";
 
 export const ModalWrapper = styled.section`
   /* 모달창 외부 */
@@ -29,7 +30,7 @@ export const ModalWrapper = styled.section`
     background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s, visibility .5s;
+    transition: opacity 0.5s, visibility 0.5s;
   }
 
   /* 모달창 내부 */
@@ -47,7 +48,7 @@ export const ModalWrapper = styled.section`
     opacity: 0;
     visibility: hidden;
     transform: translate(0, 100%);
-    transition: opacity .5s, visibility .5s, transform .5s;
+    transition: opacity 0.5s, visibility 0.5s, transform 0.5s;
   }
 
   ul::before {
@@ -63,13 +64,13 @@ export const ModalWrapper = styled.section`
     transform: translateX(-50%);
   }
 
-  .reveal{
+  .reveal {
     opacity: 1;
     visibility: visible;
     transform: translate(0, 0);
   }
 
-  // .container-disable { 
+  // .container-disable {
   //   /* 클릭불가능 효과 */
   //   pointer-events : none;
   // }
@@ -91,5 +92,8 @@ export const ModalWrapper = styled.section`
     flex-grow: 1;
     /* width: 100%;
     height: 100%; */
+  }
+  .red {
+    color: ${colors.colorEB};
   }
 `;

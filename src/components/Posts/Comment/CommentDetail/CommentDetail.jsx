@@ -11,17 +11,18 @@ import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
  */
 
 const CommentDetail = (props) => {
-  // console.log(props.commentDetail);
-  console.log(props);
+  // console.log(props.commentData);
+  // console.log(props);
   const { user } = useUserContext();
-  const [commentData, setCommentData] = useState([]);
+  const [commentData, setCommentData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handlemodalClick = useRef();
-  function handlesModalMenu() {}
+  const commentId = commentData;
+  console.log(commentData.id);
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
 
+  // 댓글 시간 계산 함수
   const getTimeGap = (time) => {
     const timeValue = new Date(time);
     const end = new Date();
@@ -42,28 +43,10 @@ const CommentDetail = (props) => {
       return `${Math.floor(diff / 2592000)}달 전`;
     }
   };
-  // const handleModal = (e) => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
 
-  const handleClickOut = (e) => {
-    if (
-      isModalOpen &&
-      (!handlemodalClick.current ||
-        !handlemodalClick.current.contains(e.target))
-    )
-      setIsModalOpen(false);
-  };
-  useEffect(() => {
-    window.addEventListener("click", handleClickOut);
-    return () => {
-      window.removeEventListener("click", handleClickOut);
-    };
-  }, []);
-  // console.log(props.commentData);
-
-  // 모달 상태
-  // const [commentModalActive, setCommentModalActive] = useState(false);
+  // 해당 코멘트의 id 값
+  // console.log(commentId);
+  // console.log(commentData);
 
   return (
     <>
@@ -93,13 +76,20 @@ const CommentDetail = (props) => {
                   </div>
                 </div>
                 <p>{item.content}</p>
-                <button>
+                <button
+                  onClick={() => {
+                    setCommentData(item.id);
+                    props.setCommentModalActive(true);
+                    props.setIsCommentId(item.id);
+                  }}
+                >
                   <span className="hidden">더보기</span>
                 </button>
               </li>
             ))}
         </ul>
       </CommentWrapper>
+
       {/* 댓글 모달 띄움 */}
     </>
   );

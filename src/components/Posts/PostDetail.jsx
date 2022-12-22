@@ -37,12 +37,9 @@ const PostDetail = () => {
   });
   const [isHeartOn, setIsHeartOn] = useState(postDetailData.hearted);
   const [likeCount, setLikeCount] = useState(postDetailData.heartCount);
-
-  // console.log("isHeartOn : ", isHeartOn);
-  // console.log("likeCount : ", likeCount);
-
   const [commentData, setCommentData] = useState([]);
   const { user } = useUserContext();
+  const [isCommentId, setIsCommentId] = useState("");
   // /post/:post_id
   // 639ab90a17ae666581c6259e -> 사진 없는 id
   // 639ab92f17ae666581c625a1 -> 사진 있는 id
@@ -92,12 +89,11 @@ const PostDetail = () => {
     fetchPostData();
     getCommentList();
   }, []);
-  // console.log(user.token);
 
   //모달 활성화 상태
   const [modalActive, setModalActive] = useState(false);
   const [postModalActive, setPostModalActive] = useState(false);
-  // const [commentModalActive, setCommentModalActive] = useState(false);
+  const [commentModalActive, setCommentModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
   const [isDeletePost, setIsDeletePost] = useState(false);
 
@@ -115,11 +111,19 @@ const PostDetail = () => {
             setLikeCount={setLikeCount}
             postModalActive={postModalActive}
             setPostModalActive={setPostModalActive}
-            setReportPostNum={() => {console.log("난 PostDetail")}}
+            setReportPostNum={() => {
+              console.log("난 PostDetail");
+            }}
           />
         </PostDiv>
         <CommentWrapper>
-          <CommentDetail commentData={commentData} />
+          <CommentDetail
+            commentData={commentData}
+            commentModalActive={commentModalActive}
+            setCommentModalActive={setCommentModalActive}
+            setIsCommentId={setIsCommentId}
+            isCommentId={isCommentId}
+          />
         </CommentWrapper>
         <CommentAdd
           postUserId={postDetailData.author._id}
@@ -148,20 +152,18 @@ const PostDetail = () => {
         {isDeletePost && (
           <DeleteAlert
             postId={postDetailData.id}
-            isDeletePost={isDeletePost} 
-            setIsDeletePost={setIsDeletePost} />
+            isDeletePost={isDeletePost}
+            setIsDeletePost={setIsDeletePost}
+          />
         )}
         <CommentModal
-        /*commentModalActive={commentModalActive}
-          setCommentModalActive={setCommentModalActive}*/
+          postId={postDetailData.id}
+          commentModalActive={commentModalActive}
+          setCommentModalActive={setCommentModalActive}
+          setIsCommentId={setIsCommentId}
+          isCommentId={isCommentId}
         />
       </PostDetailWrapper>
-
-      {/* {commentModal === true ? <Modal /> : null} */}
-      {/* <DeleteAlert />
-      <ModalStyle>
-        <Modal />
-      </ModalStyle> */}
     </>
   );
 };
