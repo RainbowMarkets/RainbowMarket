@@ -9,15 +9,17 @@ export default function ProfileSection() {
   const [isPending, setIsPending] = useState(false);
   // console.log(user);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    if (!user) return;
+    if (!token) return;
 
     setIsPending(true);
 
     fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })

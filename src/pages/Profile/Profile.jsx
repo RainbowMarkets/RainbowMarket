@@ -10,15 +10,15 @@ import { useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 
 export default function Profile() {
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
+  const token = localStorage.getItem("token");
 
-  console.log(user);
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
   return (
     <>
-      {!user ? (
+      {!token ? (
         <Login />
       ) : (
         <>

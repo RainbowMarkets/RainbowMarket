@@ -15,7 +15,7 @@ export default function ProfileFooter() {
         <img src={shareIcon} />
       </CircleButton> */}
       <ProfileModifyButton to="/profile/edit">프로필 수정</ProfileModifyButton>
-      <RegisterItem>상품 등록</RegisterItem>
+      <RegisterItem to="/product">상품 등록</RegisterItem>
     </Wrapper>
   );
 }
