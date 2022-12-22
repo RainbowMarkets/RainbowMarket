@@ -5,8 +5,9 @@ import useUserContext from "../../../hooks/useUserContext";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
 
 export default function IsHaveFeed() {
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
   // console.log(user.token)
+  const token = localStorage.getItem("token");
 
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/feed`;
@@ -18,7 +19,7 @@ export default function IsHaveFeed() {
       await fetch(url + reqPath, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
       })

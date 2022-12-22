@@ -4,13 +4,14 @@ const ItemList = styled.ol`
   display: flex;
   max-width: 390px;
   gap: 10px;
-  margin: 0 auto;
+  margin: 16px auto;
   overflow-x: scroll;
   overflow-y: hidden;
 `;
 
-const Item = styled.li`
-  margin-top: 16px;
+const Item = styled.a`
+  color: black;
+  text-decoration: none;
 
   figure > img {
     width: 140px;

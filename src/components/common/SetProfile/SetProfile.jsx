@@ -2,16 +2,17 @@ import { Form, StartButton } from "./styledSetProfileInput";
 import SetprofileHeader from "./SetProfileHeader/SetprofileHeader";
 import SetProfileImage from "./SetProfileImage/SetProfileImage";
 import SetProfileInput from "./SetProfileInput/SetProfileInput";
-import { useRef, useState } from "react";
-import useUserContext from "../../../hooks/useUserContext";
 
-export default function SetProfile({ join }) {
-  const { user, dispatch } = useUserContext();
-  const [username, setUsername] = useState("");
-  const [accountname, setAccountname] = useState("");
-  const [intro, setIntro] = useState("");
-  const uploadInp = useRef(null);
-
+export default function SetProfile({
+  join,
+  username,
+  accountname,
+  intro,
+  uploadInp,
+  setUsername,
+  setAccountname,
+  setIntro,
+}) {
   const usernameHandler = (event) => {
     setUsername(event.target.value);
   };
@@ -22,57 +23,6 @@ export default function SetProfile({ join }) {
 
   const introHandler = (event) => {
     setIntro(event.target.value);
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    // console.log(username, accountname, intro, uploadInp.current.files[0]);
-
-    const test = new FormData();
-    test.append("image", uploadInp.current.files[0]);
-
-    for (let k of test.keys()) {
-      console.log(k);
-    }
-    for (let v of test.values()) {
-      console.log(v);
-    }
-
-    fetch("https://mandarin.api.weniv.co.kr/image/uploadfile", {
-      method: "POST",
-      body: test,
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log("응답 : ", res);
-
-        const body = {
-          user: {
-            username: username,
-            accountname: accountname,
-            intro: intro,
-            image: `https://mandarin.api.weniv.co.kr/${res.filename}`,
-          },
-        };
-
-        fetch("https://mandarin.api.weniv.co.kr/user", {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(body),
-        })
-          .then((response) => response.json())
-          .then((res) => {
-            console.log(res);
-            dispatch({ type: "LOGIN", payload: res.user });
-            localStorage.setItem("aName", user.accountname);
-            localStorage.setItem("uName", user.username);
-            localStorage.setItem("image", user.image);
-            localStorage.setItem("token", user.token);
-          });
-      });
   };
 
   return (
@@ -100,7 +50,7 @@ export default function SetProfile({ join }) {
         value={intro}
         handler={introHandler}
       />
-      <StartButton onClick={submitHandler}>감귤마켓 시작하기</StartButton>
+      {join ? <StartButton>감귤마켓 시작하기</StartButton> : null}
     </Form>
   );
 }

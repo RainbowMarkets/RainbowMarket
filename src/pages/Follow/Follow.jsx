@@ -5,7 +5,8 @@ import SearchTopBar from "../../components/TopBar/SearchTopBar/SearchTopBar";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function Follow() {
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
+  const token = localStorage.getItem("token");
   const [follows, setFollows] = useState([]);
   const location = useLocation();
 
@@ -13,7 +14,7 @@ export default function Follow() {
     fetch(`https://mandarin.api.weniv.co.kr${location.pathname}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })
