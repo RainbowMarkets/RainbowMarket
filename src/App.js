@@ -15,6 +15,7 @@ import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
+import ChatRoom from "./components/ChatRoom/ChatRoom";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/profile/:accountname" element={<ProfileEdit />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/chat/chatroom" element={<ChatRoom />} />
                 <Route path="/post" element={<Post />} />
                 <Route path="/post/postdetail" element={<PostDetail />} />
                 <Route path="/join" element={<JoinWithEmail />} />
