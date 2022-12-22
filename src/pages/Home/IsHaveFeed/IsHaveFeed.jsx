@@ -29,9 +29,11 @@ export default function IsHaveFeed() {
         });
     }
     getFeedData();
+    // console.log(feedData)
   }, []);
 
   const [postModalActive, setPostModalActive] = useState(false);
+  const [reportPostNum, setReportPostNum] = useState(""); // post id 받아서 postModal로 넘겨주기
 
   return (
     <>
@@ -40,6 +42,7 @@ export default function IsHaveFeed() {
           <StyledSection key={Math.random()}>
             <PostContent
               postDetail={feeditem}
+              setReportPostNum={setReportPostNum}
               postModalActive={postModalActive}
               setPostModalActive={setPostModalActive}
             />
@@ -47,24 +50,11 @@ export default function IsHaveFeed() {
         );
       })}
       <PostModal
+        postUserId={null} // 팔로워들 글이라 항상 같지 않기 때문
+        reportPostNum={reportPostNum}
         postModalActive={postModalActive}
         setPostModalActive={setPostModalActive}
       />
-      {/* {
-        feedData.map((feeditem) => {
-          return (
-            <StyledSection key={Math.random()}>
-              <ProfileCont>
-                <UserList width="42px" username={feeditem.author.username} accountname={feeditem.author.accountname} />
-                <Styledbtn>
-                  <Styledimg src={sIconMoreVertical} alt="" />
-                </Styledbtn>
-              </ProfileCont>
-              <p>{feeditem.content}</p>
-            </StyledSection>
-          )
-        })
-      } */}
     </>
   );
 }

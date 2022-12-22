@@ -23,7 +23,7 @@ const Post = (props) => {
 
   const handleInpVal = (e) => {
     setInpValue(e.target.value);
-    console.log(inpValue);
+    // console.log(inpValue);
   };
 
   return (
