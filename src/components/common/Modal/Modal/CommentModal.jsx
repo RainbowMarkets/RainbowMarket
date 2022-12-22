@@ -5,6 +5,7 @@ import CommentAlert from "../Alert/CommentAlert";
 import { ModalWrapper } from "./styledModal";
 
 const CommentModal = (props) => {
+  // console.log(props);
   console.log("포스트아이디 :", props.postId);
   console.log("코멘트아이디 :", props.isCommentId);
   const postId = props.postId;
@@ -14,6 +15,7 @@ const CommentModal = (props) => {
   const { user } = useUserContext();
 
   const [isAlertCancel, setIsAlertCancel] = useState(false);
+
   function handleCancelMenu() {
     props.setCommentModalActive(false);
   }
@@ -71,6 +73,8 @@ const CommentModal = (props) => {
           commentModalActive={props.commentModalActive}
           setCommentModalActive={props.setCommentModalActive}
           setIsAlertCancel={setIsAlertCancel}
+          commentId={commentId}
+          postId={postId}
         />
       )}
     </>
