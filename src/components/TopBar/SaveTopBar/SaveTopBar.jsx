@@ -1,11 +1,13 @@
-import BackButton from "../BackButton"
-import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar"
+import BackButton from "../BackButton";
+import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar";
 
-export default function SaveTopBar() {
+export default function SaveTopBar({ handler, isPending }) {
   return (
     <StyledHeader>
       <BackButton />
-      <StyledUpdateBtn type="submit">저장</StyledUpdateBtn>
+      <StyledUpdateBtn type="button" onClick={handler} disabled={isPending}>
+        저장
+      </StyledUpdateBtn>
     </StyledHeader>
-  )
+  );
 }

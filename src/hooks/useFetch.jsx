@@ -10,7 +10,10 @@ export default function useFetch() {
       },
     })
       .then((res) => res.json())
-      .then((res) => callback(res));
+      .then((res) => {
+        callback(res);
+        console.log(res);
+      });
   };
 
   const postData = async (req, body, callback, token) => {
@@ -23,7 +26,10 @@ export default function useFetch() {
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((res) => callback(res));
+      .then((res) => {
+        callback(res);
+        console.log(res);
+      });
   };
 
   const putData = async (req, body, token) => {
@@ -39,5 +45,20 @@ export default function useFetch() {
       .then((res) => console.log(res));
   };
 
-  return { getData, postData, putData };
+  const deleteData = async (req, callback, token) => {
+    fetch(url + req, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        callback(res);
+        console.log(res);
+      });
+  };
+
+  return { getData, postData, putData, deleteData };
 }

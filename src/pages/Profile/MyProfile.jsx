@@ -7,19 +7,17 @@ import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
-import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
 export default function Profile() {
-  const param = useParams();
   const token = localStorage.getItem("token");
   const { getData } = useFetch();
 
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
-  const [userProfile, setUserProfile] = useState({
-    profile: {
+  const [userInfo, setUserInfo] = useState({
+    user: {
       _id: "",
       username: "",
       accountname: "",
@@ -34,9 +32,7 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    getData(`/profile/${param.accountname}`, setUserProfile, token).catch(
-      (err) => alert(err)
-    );
+    getData(`/user/myinfo`, setUserInfo, token).catch((err) => alert(err));
   }, []);
 
   return (
@@ -51,12 +47,9 @@ export default function Profile() {
           />
           <Wrapper>
             {/* 팔로우 등 프로필이 표시되는 섹션 */}
-            <ProfileSection
-              data={userProfile.profile}
-              setUserProfile={setUserProfile}
-            />
+            <ProfileSection data={userInfo.user} isMine={true} />
             {/* 판매 중잉 아이템이 표시되는 섹션 */}
-            <ProfileItemSection name={userProfile.profile.accountname} />
+            <ProfileItemSection name={userInfo.user.accountname} />
             {/* 쓴 글 목록이 표시되는 섹션 */}
             <ProfileFeedSection />
             <Modal
