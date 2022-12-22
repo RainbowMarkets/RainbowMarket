@@ -44,7 +44,8 @@ const PostModal = (props) => {
   
   return (
     <>
-      <ModalWrapper>
+      <ModalWrapper 
+        className={props.postModalActive ? "" : "hidden"}>
         <h2 className="hidden">게시글 모달창</h2>
         <div 
           className={props.postModalActive ? "reveal" : ""}

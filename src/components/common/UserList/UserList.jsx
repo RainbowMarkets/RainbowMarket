@@ -11,7 +11,7 @@ import {
 } from "./styledUserList";
 
 export default function UserList(props) {
-
+  
   return (
     <StyledLi>
       <StyledLink>
@@ -24,6 +24,7 @@ export default function UserList(props) {
           }
           alt=""
           style={{ width: `${props.width}`, height: `${props.width}` }}
+  
         />
         <StyledDiv>
           <StyledStrong>{props.username}</StyledStrong>
