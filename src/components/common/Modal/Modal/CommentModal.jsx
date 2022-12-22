@@ -14,6 +14,9 @@ const CommentModal = (props) => {
     setIsAlertCancel(true);
   }
 
+  // - 내가 작성한 댓글일 경우 : 삭제 버튼이 나타납니다.
+  // - 다른 사용자가 작성한 댓글일 경우 : 신고하기 버튼이 나타납니다.
+  // author._id (로컬 스토리지에 저장된)와 클릭한 author._id를 비교해서 조건문으로 출력해줄 예정
   return (
     <>
       <ModalWrapper>

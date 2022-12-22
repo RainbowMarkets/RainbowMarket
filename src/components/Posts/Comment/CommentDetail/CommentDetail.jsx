@@ -11,7 +11,7 @@ import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
  */
 
 const CommentDetail = (props) => {
-  // console.log(props.commentData);
+  console.log(props.commentData);
   // console.log(props);
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState({});
@@ -44,7 +44,7 @@ const CommentDetail = (props) => {
   };
 
   console.log(commentId);
-  // console.log(commentData);
+  console.log(commentData);
   return (
     <>
       <CommentWrapper>
