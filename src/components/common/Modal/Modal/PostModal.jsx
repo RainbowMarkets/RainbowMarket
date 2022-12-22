@@ -1,6 +1,6 @@
-// 내가 작성한 댓글 : 삭제
-// 다른 사용자가 작성한 댓글 : 신고하기
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import useUserContext from "../../../../hooks/useUserContext";
 import { ModalWrapper } from "./styledModal";
 
 // 내가 작성한 게시글 : 삭제, 수정
@@ -8,43 +8,65 @@ import { ModalWrapper } from "./styledModal";
 const PostModal = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useUserContext();
 
-  function handleCancelMenu() {
+  const url = "https://mandarin.api.weniv.co.kr";
+
+  function handlePostSideMenu() {
+    props.setPostModalActive(false);
+    // console.log(props.reportPostNum);
+    // console.log(user._id);
+  }
+
+  function handleDeletePost(){
+    props.setIsDeletePost(true);
+  }
+
+/*   useEffect(() => { */
+    const sendReport = async (postId) => {
+      await fetch(url + `/post/${postId}/report`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json"
+        }
+      }).then((res) => res.json())
+        .then((res) => {
+          console.log("신고하기", res);
+        })
+    }
+/*   }, []); */
+
+  function handlePostReport(){
+    sendReport(props.reportPostNum);
     props.setPostModalActive(false);
   }
-  function handleShowLogOutModal() {
-    props.setIsLogOut(true);
-  }
-
-  function handleInfoSetting() {
-    if (location.pathname == "/profile") {
-      props.setPostModalActive(false);
-    } else {
-      navigate("/profile");
-    } // 페이지가 프로필일때는 아무 동작도 안해서 모달 해제하는 조건문 넣음
-  }
-
+  
   return (
     <>
       <ModalWrapper>
         <h2 className="hidden">게시글 모달창</h2>
         <div 
           className={props.postModalActive ? "reveal" : ""}
-          onClick={handleCancelMenu}
+          onClick={handlePostSideMenu}
         ></div>
         <ul className={props.postModalActive ? "reveal" : ""}>
-          {/* <li>
-            <button onClick={handleInfoSetting}>설정 및 개인정보</button>
-          </li>
-          <li>
-            <button onClick={handleShowLogOutModal}>로그아웃</button>
-          </li> */}
-          <li>
-            <button>삭제</button>
-          </li>
-          <li>
-            <button>신고하기</button>
-          </li>
+          {
+            props.postUserId /* === user._id */ ? 
+            <>
+              <li>
+                <button onClick={handleDeletePost}>삭제</button>
+              </li>
+              <li>
+                <button>수정</button>
+              </li>
+            </> :
+            <>
+              <li>
+                <button onClick={handlePostReport}>신고하기</button>
+              </li>
+            </>
+          }
         </ul>
       </ModalWrapper>
     </>
