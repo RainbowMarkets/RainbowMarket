@@ -5,19 +5,19 @@ const CommentModal = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // function handleCancelMenu() {
-  //   props.setPostModalActive(false);
-  // }
+  function handleCancelMenu() {
+    props.setCommentModalActive(false);
+  }
 
   return (
     <>
       <ModalWrapper>
         <h2 className="hidden">게시글 모달창</h2>
         <div
-          className={props.postModalActive ? "reveal" : ""}
-          /*onClick={handleCancelMenu}*/
+          className={props.commentModalActive ? "reveal" : ""}
+          onClick={handleCancelMenu}
         ></div>
-        <ul className={props.postModalActive ? "reveal" : ""}>
+        <ul className={props.commentModalActive ? "reveal" : ""}>
           <li>
             <button>삭제</button>
           </li>

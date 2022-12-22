@@ -94,7 +94,7 @@ const PostDetail = () => {
   //모달 활성화 상태
   const [modalActive, setModalActive] = useState(false);
   const [postModalActive, setPostModalActive] = useState(false);
-  // const [commentModalActive, setCommentModalActive] = useState(false);
+  const [commentModalActive, setCommentModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
   return (
@@ -114,7 +114,11 @@ const PostDetail = () => {
           />
         </PostDiv>
         <CommentWrapper>
-          <CommentDetail commentData={commentData} />
+          <CommentDetail
+            commentData={commentData}
+            commentModalActive={commentModalActive}
+            setCommentModalActive={setCommentModalActive}
+          />
         </CommentWrapper>
         <CommentAdd
           postUserId={postDetailData.author._id}
@@ -137,8 +141,8 @@ const PostDetail = () => {
           setPostModalActive={setPostModalActive}
         />
         <CommentModal
-        /*commentModalActive={commentModalActive}
-          setCommentModalActive={setCommentModalActive}*/
+          commentModalActive={commentModalActive}
+          setCommentModalActive={setCommentModalActive}
         />
       </PostDetailWrapper>
 
