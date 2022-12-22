@@ -75,6 +75,7 @@ const CommentModal = (props) => {
           setIsAlertCancel={setIsAlertCancel}
           commentId={commentId}
           postId={postId}
+          setCommentData={props.setCommentData}
         />
       )}
     </>

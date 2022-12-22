@@ -5,6 +5,7 @@ import { AlertWrapper } from "./styledDeleteAlert";
 const CommentAlert = (props) => {
   const url = "https://mandarin.api.weniv.co.kr";
   const { user } = useUserContext();
+  console.log(props.commentData);
   // console.log(props.isCommentId);
   // 모달창 기능
   function handleCancelMenu() {
@@ -16,16 +17,14 @@ const CommentAlert = (props) => {
   function handleDeleteComment() {
     console.log("hi");
     deleteComment();
-    alert("댓글이 삭제되었습니다.");
-
     props.setCommentModalActive(false);
     props.setIsAlertCancel(false);
-    // useEffect
-    // useEffect(() => {
-    //   if (!user.token) return;
-    //   deleteComment();
-    // }, []);
+
+    // 2. 삭제되는 댓글의 author._id 값과 나의 author._id 값이 다르면 삭제가 안됨. -> 애초에 모달 창에서 걸러줄 예정
+    // window.location.reload();
   }
+
+  // 댓글 삭제하기
   const deleteComment = async () => {
     await fetch(url + `/post/${props.postId}/comments/${props.commentId}`, {
       method: "DELETE",
@@ -37,9 +36,15 @@ const CommentAlert = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        // 마지막 최후의 수단
+        // window.location.reload();
+        props.setCommentData((prev) =>
+          [...prev].filter((item) => item.id !== props.commentId)
+        );
       });
-    // 삭제되는 로직이 들어가야 합니다.
   };
+
+  useEffect(() => {}, [props.commentData]);
   return (
     <>
       <AlertWrapper>
