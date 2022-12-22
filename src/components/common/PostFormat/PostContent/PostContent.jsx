@@ -12,9 +12,9 @@ import UserList from "../../UserList/UserList";
 
 const PostContent = (props) => {
   function handleSideMenu() {
-    console.log(props.postDetail.id);
-    console.log(props.postDetail.author._id);
+    // console.log(props.postDetail.id)
     props.setPostModalActive(true);
+    props.setReportPostNum(props.postDetail.id); // postid
   }
 
   return (
