@@ -11,12 +11,13 @@ import {
 import UserList from "../../UserList/UserList";
 
 const PostContent = (props) => {
+  console.log(props.postDetail);
   function handleSideMenu() {
     // console.log(props.postDetail.id)
     props.setPostModalActive(true);
     props.setReportPostNum(props.postDetail.id); // postid
   }
-
+  console.log("postContent", props);
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -51,7 +52,9 @@ const PostContent = (props) => {
             likeCount={props.likeCount}
             setLikeCount={props.setLikeCount}
           />
-          <PostCommentBtn commentCount={props.postDetail.comments.length} />
+          <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
+            commentDataLength={props.commentDataLength}
+          />
         </PostBtn>
         <PostDate upDate={props.postDetail.updatedAt} />
       </ContextWrapper>

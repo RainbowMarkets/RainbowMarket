@@ -38,8 +38,10 @@ const PostDetail = () => {
   const [isHeartOn, setIsHeartOn] = useState(postDetailData.hearted);
   const [likeCount, setLikeCount] = useState(postDetailData.heartCount);
   const [commentData, setCommentData] = useState([]);
+  const [commentLength, setCommentLength] = useState(0);
   const { user } = useUserContext();
   const [isCommentId, setIsCommentId] = useState("");
+  console.log(commentData);
   // /post/:post_id
   // 639ab90a17ae666581c6259e -> 사진 없는 id
   // 639ab92f17ae666581c625a1 -> 사진 있는 id
@@ -114,6 +116,8 @@ const PostDetail = () => {
             setReportPostNum={() => {
               console.log("난 PostDetail");
             }}
+            commentDataLength={commentData.length}
+            // commentData={commentData}
           />
         </PostDiv>
         <CommentWrapper>
@@ -123,12 +127,14 @@ const PostDetail = () => {
             setCommentModalActive={setCommentModalActive}
             setIsCommentId={setIsCommentId}
             isCommentId={isCommentId}
+            setCommentData={setCommentData}
           />
         </CommentWrapper>
         <CommentAdd
           postUserId={postDetailData.author._id}
           commentImg={postDetailData.author.image}
           setCommentData={setCommentData}
+          commentData={commentData}
         />
 
         {/* 슬라이드 모달 띄움 */}
@@ -162,6 +168,8 @@ const PostDetail = () => {
           setCommentModalActive={setCommentModalActive}
           setIsCommentId={setIsCommentId}
           isCommentId={isCommentId}
+          setCommentData={setCommentData}
+          commentData={commentData}
         />
       </PostDetailWrapper>
     </>
