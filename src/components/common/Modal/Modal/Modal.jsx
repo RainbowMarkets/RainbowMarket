@@ -22,7 +22,7 @@ const Modal = (props) => {
 
   return (
     <>
-      <ModalWrapper>
+      <ModalWrapper className={props.modalActive ? "" : "hidden"}>
         <h2 className="hidden">헤더 모달창</h2>
         <div
           className={props.modalActive ? "reveal" : ""}

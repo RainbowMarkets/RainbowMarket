@@ -73,7 +73,13 @@ export default function Navbar() {
             </StyledLink>
           </StyledLi>
           <StyledLi>
-            <StyledLink to="/profile">
+            <StyledLink
+              to="/profile"
+              style={
+                nowLocation === "/profile"
+                  ? { color: colors.colorMain }
+                  : { color: colors.color76 }
+              }>
               <StyledImg
                 src={nowLocation === "/profile" ? imgProfileFill : imgProfile}
                 alt="프로필"

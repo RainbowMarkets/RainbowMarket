@@ -48,7 +48,7 @@ export const ModalWrapper = styled.section`
     opacity: 0;
     visibility: hidden;
     transform: translate(0, 100%);
-    transition: opacity 0.5s, visibility 0.5s, transform 0.5s;
+    transition: all 0.5s;
   }
 
   ul::before {
@@ -69,6 +69,7 @@ export const ModalWrapper = styled.section`
     visibility: visible;
     transform: translate(0, 0);
   }
+
 
   // .container-disable {
   //   /* 클릭불가능 효과 */
