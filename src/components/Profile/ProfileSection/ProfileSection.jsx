@@ -1,48 +1,22 @@
 import { useEffect, useState } from "react";
-import useUserContext from "../../../hooks/useUserContext";
 import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import { Section } from "./styledProfileSection";
 
-export default function ProfileSection() {
-  const { user, dispatch } = useUserContext();
-  const [isPending, setIsPending] = useState(false);
-  // console.log(user);
-
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (!token) return;
-
-    setIsPending(true);
-
-    fetch("https://mandarin.api.weniv.co.kr/user/myinfo", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        dispatch({ type: "LOGIN", payload: json.user });
-        setIsPending(false);
-      });
-  }, []);
-
+export default function ProfileSection({ data, isMine, setUserProfile }) {
   return (
     <>
-      {isPending ? (
-        "로딩 중..."
-      ) : (
-        <Section>
-          <ProfileHeader />
-          <strong>{user.username || "누구일까"}</strong>
-          <small>@{user.accountname || "누구일까"}</small>
-          <p>{user.intro || ""}</p>
-          <ProfileFooter />
-        </Section>
-      )}
+      <Section>
+        <ProfileHeader data={data} />
+        <strong>{data.username || "누구일까"}</strong>
+        <small>@{data.accountname || "누구일까"}</small>
+        <p>{data.intro || ""}</p>
+        <ProfileFooter
+          isMine={isMine}
+          setUserProfile={setUserProfile}
+          data={data}
+        />
+      </Section>
     </>
   );
 }

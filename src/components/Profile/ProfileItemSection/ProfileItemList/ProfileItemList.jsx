@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
-import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
 
-export default function ProfileItemList() {
-  // const { user } = useUserContext();
+export default function ProfileItemList({ name }) {
   const token = localStorage.getItem("token");
-  const accountname = localStorage.getItem("aName");
 
   const [items, setItems] = useState({
     data: 0,
@@ -15,8 +12,11 @@ export default function ProfileItemList() {
   const { getData } = useFetch();
 
   useEffect(() => {
-    getData(`/product/${accountname}`, setItems, token);
-  }, []);
+    // product/빈문자열 로 요청을 보내면 뭔가 응답을 해줌..
+    getData(`/product/${name || "이건없겠지"}`, setItems, token).catch((err) =>
+      console.log(err)
+    );
+  }, [name]);
 
   return (
     <ItemList>

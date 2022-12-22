@@ -10,6 +10,7 @@ export default function Product() {
   const [itemName, setItemName] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [itemLink, setItemLink] = useState("");
+  const [isPending, setIsPending] = useState(false);
   const uploadInp = useRef();
 
   const token = localStorage.getItem("token");
@@ -39,6 +40,7 @@ export default function Product() {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setIsPending(true);
 
     const files = new FormData();
     files.append("image", uploadInp.current.files[0]);
@@ -78,12 +80,20 @@ export default function Product() {
           .then((response) => response.json())
           .then((res) => console.log(res))
           .then(() => window.location.assign("/profile"));
+      })
+      .catch((err) => {
+        alert(err);
+        setIsPending(false);
       });
   };
 
   return (
     <>
-      <SaveTopBar handler={submitHandler} move="/profile" />
+      <SaveTopBar
+        handler={submitHandler}
+        move="/profile"
+        isPending={isPending}
+      />
       <Section>
         <ImageLabel>이미지 등록</ImageLabel>
         <Preview>
