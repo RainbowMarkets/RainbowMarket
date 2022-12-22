@@ -12,6 +12,7 @@ export const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
+  width: 100%;
   color: #000;
 `;
 
@@ -24,6 +25,7 @@ export const StyledDiv = styled.div`
 
 export const StyledImg = styled.img`
   width: 50px;
+  height: 50px;
   border-radius: 50%;
 `;
 

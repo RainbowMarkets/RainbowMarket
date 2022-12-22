@@ -12,6 +12,10 @@ import {
 
 export default function UserList(props) {
   
+  const handleImgError = (e) => {
+    e.target.src = defaultProfile;
+  }
+
   return (
     <StyledLi>
       <StyledLink>
@@ -24,7 +28,7 @@ export default function UserList(props) {
           }
           alt=""
           style={{ width: `${props.width}`, height: `${props.width}` }}
-  
+          onError={handleImgError}
         />
         <StyledDiv>
           <StyledStrong>{props.username}</StyledStrong>

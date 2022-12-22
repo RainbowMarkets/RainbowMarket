@@ -6,39 +6,46 @@ import { StyledSection, StyledUl } from './styledSearch'
 
 export default function Search() {
   const { user } = useUserContext();
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/user/searchuser/?keyword=dada`;
-
+  const [searchInp, setSearchInp] = useState("");
   const [userData, setUserData] = useState([]);
 
-  const fetchUserData = async () => {
-    await fetch(url + reqPath, {
-      method: "GET",
-      headers: {
-        Authorization : `Bearer ${user.token}`,
-        "Content-type" : "application/json"
-      }
-    })
-    .then((res) => res.json())
-        .then((res) => {
-          console.log("searchtest!!", res);
-          setUserData(res || []);
-        });
-  }
+  const url = "https://mandarin.api.weniv.co.kr";
+  const reqPath = `/user/searchuser/?keyword=${searchInp}`;
+  
   useEffect(() => {
     if (!user.token) return;
-    fetchUserData();
-  }, []);
+    if (searchInp){
+      const fetchUserData = async () => {
+        await fetch(url + reqPath, {
+          method: "GET",
+          headers: {
+            Authorization : `Bearer ${user.token}`,
+            "Content-type" : "application/json"
+          }
+        })
+        .then((res) => res.json())
+          .then((res) => {
+            // console.log("searchtest!!", res);
+            setUserData(res || []);
+          });
+      }
+      fetchUserData();
+    }
+  }, [searchInp]);
 
   return (
     <>
-      <SearchTopBar />
+      <SearchTopBar
+        searchInp={searchInp}
+        setSearchInp={setSearchInp}
+        />
       <StyledSection>
         <StyledUl>
           {
             userData.map((userDataitem) => {
               return(
-                <UserList 
+                <UserList
+                  key={Math.random()}
                   image={userDataitem.image}
                   username={userDataitem.username}
                   accountname ={userDataitem.accountname}/>

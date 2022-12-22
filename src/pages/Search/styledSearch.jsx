@@ -5,8 +5,8 @@ export const StyledSection = styled.section`
 `;
 
 export const StyledUl = styled.ul`
-  /* display: flex; */
-  /* flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 `;
 
