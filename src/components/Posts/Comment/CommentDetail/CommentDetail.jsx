@@ -11,18 +11,18 @@ import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
  */
 
 const CommentDetail = (props) => {
-  console.log(props.commentData);
+  // console.log(props.commentData);
   // console.log(props);
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userId, setUserId] = useState("");
-  const handlemodalClick = useRef();
-  const commentId = commentData.id;
+  const commentId = commentData;
+  console.log(commentData.id);
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
 
+  // 댓글 시간 계산 함수
   const getTimeGap = (time) => {
     const timeValue = new Date(time);
     const end = new Date();
@@ -44,8 +44,10 @@ const CommentDetail = (props) => {
     }
   };
 
-  console.log(commentId);
-  console.log(commentData);
+  // 해당 코멘트의 id 값
+  // console.log(commentId);
+  // console.log(commentData);
+
   return (
     <>
       <CommentWrapper>
@@ -76,8 +78,9 @@ const CommentDetail = (props) => {
                 <p>{item.content}</p>
                 <button
                   onClick={() => {
-                    setCommentData(item);
+                    setCommentData(item.id);
                     props.setCommentModalActive(true);
+                    props.setIsCommentId(item.id);
                   }}
                 >
                   <span className="hidden">더보기</span>
@@ -86,6 +89,7 @@ const CommentDetail = (props) => {
             ))}
         </ul>
       </CommentWrapper>
+
       {/* 댓글 모달 띄움 */}
     </>
   );
