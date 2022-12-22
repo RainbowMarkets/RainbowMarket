@@ -35,6 +35,8 @@ const CommentAdd = (props) => {
       const data = await res.json();
       // console.log(data);
       props.setCommentData((prev) => [{ ...data.comment }, ...prev]);
+      // props.setCommentLength()
+      // console.log("hi", props.commentData);
       setText("");
       //낙관적 업데이트
     } catch (err) {

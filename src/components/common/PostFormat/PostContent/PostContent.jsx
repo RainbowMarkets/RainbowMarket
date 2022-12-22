@@ -1,5 +1,3 @@
-import postImg from "../../../../assets/images/post_img.jpg";
-import profileImgSmall from "../../../../assets/images/profile_small.png";
 import sIconMoreVertical from "../../../../assets/images/s-icon-more-vertical.png";
 import PostCommentBtn from "../../../Posts/PostBtn/PostCommentBtn/PostCommentBtn";
 import PostHeartBtn from "../../../Posts/PostBtn/PostHearBtn/PostHeartBtn";
@@ -9,20 +7,17 @@ import {
   PostBtn,
   PostWrapper,
   ProfileContain,
-  ProfileName,
-  StyledLiPos,
-  PostStyledLink,
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
-import styled from "styled-components";
-import { useState } from "react";
-const PostContent = (props) => {
-  function handleSideMenu() {
-    console.log(props.postDetail.id);
-    console.log(props.postDetail.author._id);
-    props.setPostModalActive(true);
-  }
 
+const PostContent = (props) => {
+  console.log(props.postDetail);
+  function handleSideMenu() {
+    // console.log(props.postDetail.id)
+    props.setPostModalActive(true);
+    props.setReportPostNum(props.postDetail.id); // postid
+  }
+  console.log("postContent", props);
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -57,7 +52,9 @@ const PostContent = (props) => {
             likeCount={props.likeCount}
             setLikeCount={props.setLikeCount}
           />
-          <PostCommentBtn commentCount={props.postDetail.comments.length} />
+          <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
+            commentDataLength={props.commentDataLength}
+          />
         </PostBtn>
         <PostDate upDate={props.postDetail.updatedAt} />
       </ContextWrapper>

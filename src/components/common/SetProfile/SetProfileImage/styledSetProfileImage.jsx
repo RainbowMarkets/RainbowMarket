@@ -30,6 +30,7 @@ const UploadButton = styled.button`
     width: 20px;
     height: 20px;
     margin: auto;
+    object-fit: cover;
   }
 
   inp, label {

@@ -14,6 +14,8 @@ export const CommentAddWrapper = styled.form`
   img {
     width: 36px;
     height: 36px;
+    border-radius: 50%;
+    border: 0.5px solid ${colors.colorDB};
   }
   input {
     flex-grow: 1;
