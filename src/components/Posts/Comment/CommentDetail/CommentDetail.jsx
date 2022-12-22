@@ -46,8 +46,8 @@ const CommentDetail = (props) => {
 
   // 해당 코멘트의 id 값
   // console.log(commentId);
-  // console.log(commentData);
 
+  // console.log(commentData);
   return (
     <>
       <CommentWrapper>
