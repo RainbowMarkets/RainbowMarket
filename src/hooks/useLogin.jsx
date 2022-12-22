@@ -33,11 +33,14 @@ export default function useLogin() {
         // 로그인 성공
         dispatch({ type: "LOGIN", payload: user });
         localStorage.setItem("aName", user.accountname);
+        localStorage.setItem("uName", user.username);
+        localStorage.setItem("image", user.image);
         localStorage.setItem("token", user.token);
 
         setError(null);
         setIsPending(false);
       })
+      .then(() => window.location.reload(true))
       .catch((err) => {
         setError(err.message);
         setIsPending(false);

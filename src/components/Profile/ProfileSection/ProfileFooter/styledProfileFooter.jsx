@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import messageIcon from "../../../../assets/images/icon-message-circle.png";
-import shareIcon from "../../../../assets/images/icon-share.png";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,11 +22,15 @@ const RegisterItem = styled(ProfileModifyButton)`
   width: 100px;
 `;
 
-const FollowButton = styled(ProfileModifyButton)`
-  color: white;
+const FollowButton = styled.button`
+  color: ${(props) => (props.bgcolor ? "#767676" : "white")};
   line-height: 18px;
-  background: #8d72e1;
-  border: none;
+  background: ${(props) => (props.bgcolor ? "white" : "#8d72e1")};
+  border: ${(props) => (props.bgcolor ? "1px solid #dbdbdb" : "none")};
+  width: 120px;
+  height: 34px;
+  border-radius: 30px;
+  padding: 8px 0;
 `;
 
 const UnFollowButton = styled(ProfileModifyButton)`

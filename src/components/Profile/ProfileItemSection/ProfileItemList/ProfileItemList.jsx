@@ -1,32 +1,37 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
-import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
 
-export default function ProfileItemList() {
-  const { user } = useUserContext();
+export default function ProfileItemList({ name }) {
+  const token = localStorage.getItem("token");
+
   const [items, setItems] = useState({
     data: 0,
     product: [],
   });
   const { getData } = useFetch();
 
-  // useEffect(() => {
-  //   getData(`/product/${user.accountname}`, setItems, user.token);
-  // }, []);
+  useEffect(() => {
+    // product/빈문자열 로 요청을 보내면 뭔가 응답을 해줌..
+    getData(`/product/${name || "이건없겠지"}`, setItems, token).catch((err) =>
+      console.log(err)
+    );
+  }, [name]);
 
   return (
     <ItemList>
       {items.data ? (
-        items.product.map((product, i) => {
+        items.product.map((product) => {
           return (
-            <Item key={i}>
-              <figure>
-                <img src={product.itemImage} />
-                <figcaption>{product.itemName}</figcaption>
-                <span>{product.price.toLocaleString()} 원</span>
-              </figure>
-            </Item>
+            <li key={product.id}>
+              <Item href={product.link} target="_blank">
+                <figure>
+                  <img src={product.itemImage} />
+                  <figcaption>{product.itemName}</figcaption>
+                  <span>{product.price.toLocaleString()} 원</span>
+                </figure>
+              </Item>
+            </li>
           );
         })
       ) : (

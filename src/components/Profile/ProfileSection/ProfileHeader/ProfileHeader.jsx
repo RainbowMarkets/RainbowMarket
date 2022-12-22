@@ -1,15 +1,16 @@
-import React from "react";
 import Follow from "../ProfileFollow/ProfileFollow";
 import ProfileBasic from "../../../../assets/images/profile_big.png";
-import { useNavigate } from "react-router-dom";
 import { Header } from "./styledProfileHeader";
+import useUserContext from "../../../../hooks/useUserContext";
 
-export default function ProfileHeader({ userInfo }) {
+export default function ProfileHeader({ data }) {
+  const { user } = useUserContext();
+
   return (
     <Header>
-      <Follow follow={userInfo.followerCount || 0} tofrom="followers" />
-      <img src={userInfo.image || ProfileBasic} alt="" />
-      <Follow follow={userInfo.followingCount || 0} tofrom="followings" />
+      <Follow follow="followers" count={data.followerCount} data={data} />
+      <img src={data.image || ProfileBasic} alt="" />
+      <Follow follow="followings" count={data.followingCount} data={data} />
     </Header>
   );
 }
