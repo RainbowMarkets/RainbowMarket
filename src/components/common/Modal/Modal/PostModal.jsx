@@ -14,8 +14,12 @@ const PostModal = (props) => {
 
   function handlePostSideMenu() {
     props.setPostModalActive(false);
-    console.log(props.reportPostNum);
-    console.log(user._id);
+    // console.log(props.reportPostNum);
+    // console.log(user._id);
+  }
+
+  function handleDeletePost(){
+    props.setIsDeletePost(true);
   }
 
 /*   useEffect(() => { */
@@ -28,13 +32,14 @@ const PostModal = (props) => {
         }
       }).then((res) => res.json())
         .then((res) => {
-          console.log("test!!!!", res);
+          console.log("신고하기", res);
         })
     }
 /*   }, []); */
 
   function handlePostReport(){
     sendReport(props.reportPostNum);
+    props.setPostModalActive(false);
   }
   
   return (
@@ -47,10 +52,10 @@ const PostModal = (props) => {
         ></div>
         <ul className={props.postModalActive ? "reveal" : ""}>
           {
-            props.postUserId === user._id ? 
+            props.postUserId /* === user._id */ ? 
             <>
               <li>
-                <button>삭제</button>
+                <button onClick={handleDeletePost}>삭제</button>
               </li>
               <li>
                 <button>수정</button>

@@ -6,6 +6,7 @@ import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 import PostContent from "../common/PostFormat/PostContent/PostContent";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 import LogOutAlert from "../common/Modal/Alert/LogOutAlert";
+import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
 
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
 import CommentModal from "../common/Modal/Modal/CommentModal";
@@ -48,7 +49,8 @@ const PostDetail = () => {
   const url = "https://mandarin.api.weniv.co.kr";
   // 게시글 가져오기
   const fetchPostData = async () => {
-    const reqPath = `/post/639ab92f17ae666581c625a1`;
+    const reqPath = `/post/639ab92f17ae666581c625a1`; // 유진게시글id
+    // const reqPath = `/post/63a3d6c817ae666581e7d8e3`; // 다정게시글id
     try {
       const res = await fetch(url + reqPath, {
         method: "GET",
@@ -91,11 +93,13 @@ const PostDetail = () => {
     getCommentList();
   }, []);
   // console.log(user.token);
+
   //모달 활성화 상태
   const [modalActive, setModalActive] = useState(false);
   const [postModalActive, setPostModalActive] = useState(false);
   // const [commentModalActive, setCommentModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
+  const [isDeletePost, setIsDeletePost] = useState(false);
 
   return (
     <>
@@ -138,7 +142,15 @@ const PostDetail = () => {
           postUserId={postDetailData.author._id}
           postModalActive={postModalActive}
           setPostModalActive={setPostModalActive}
+          isDeletePost={isDeletePost}
+          setIsDeletePost={setIsDeletePost}
         />
+        {isDeletePost && (
+          <DeleteAlert
+            postId={postDetailData.id}
+            isDeletePost={isDeletePost} 
+            setIsDeletePost={setIsDeletePost} />
+        )}
         <CommentModal
         /*commentModalActive={commentModalActive}
           setCommentModalActive={setCommentModalActive}*/

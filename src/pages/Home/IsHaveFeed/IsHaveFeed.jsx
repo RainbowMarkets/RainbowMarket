@@ -50,6 +50,7 @@ export default function IsHaveFeed() {
         );
       })}
       <PostModal
+        postUserId={null} // 팔로워들 글이라 항상 같지 않기 때문
         reportPostNum={reportPostNum}
         postModalActive={postModalActive}
         setPostModalActive={setPostModalActive}
