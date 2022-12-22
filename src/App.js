@@ -17,7 +17,11 @@ import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
+
+import Login from "./components/common/Login/Login";
+
 import { UserContextProvider } from "./context/UserContext";
+
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -29,6 +33,7 @@ function App() {
   });
 
   return (
+    <>
     <UserContextProvider>
       <Container>
         <GlobalStyle />
@@ -69,6 +74,7 @@ function App() {
         </Wrapper>
       </Container>
     </UserContextProvider>
+    </>
   );
 }
 export default App;
