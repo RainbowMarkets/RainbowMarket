@@ -2,7 +2,6 @@ import { Container, Aside, Wrapper, Main } from "./GlobalStyle";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalStyle } from "./GlobalStyle";
 import Navbar from "./components/Navbar/Navbar";
-import MyProfile from "./pages/Profile/MyProfile";
 import Profile from "./pages/Profile/Profile";
 import Post from "./pages/Post/Post";
 import Search from "./pages/Search/Search";
@@ -10,13 +9,16 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import Chat from "./pages/Chat/Chat";
 import Follow from "./pages/Follow/Follow";
+import { UserContextProvider } from "./context/UserContext";
 import PostDetail from "./components/Posts/PostDetail";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
+import MyProfile from "./pages/Profile/MyProfile";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
+import Login from "./components/common/Login/Login";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
