@@ -14,23 +14,21 @@ export default function Search() {
   
   useEffect(() => {
     if (!user.token) return;
-    if (searchInp){
-      const fetchUserData = async () => {
-        await fetch(url + reqPath, {
-          method: "GET",
-          headers: {
-            Authorization : `Bearer ${user.token}`,
-            "Content-type" : "application/json"
-          }
-        })
-        .then((res) => res.json())
-          .then((res) => {
-            // console.log("searchtest!!", res);
-            setUserData(res || []);
-          });
-      }
-      fetchUserData();
+    const fetchUserData = async () => {
+      await fetch(url + reqPath, {
+        method: "GET",
+        headers: {
+          Authorization : `Bearer ${user.token}`,
+          "Content-type" : "application/json"
+        }
+      })
+      .then((res) => res.json())
+        .then((res) => {
+          // console.log("searchtest!!", res);
+          setUserData(res || []);
+        });
     }
+    fetchUserData();
   }, [searchInp]);
 
   return (
@@ -48,7 +46,8 @@ export default function Search() {
                   key={Math.random()}
                   image={userDataitem.image}
                   username={userDataitem.username}
-                  accountname ={userDataitem.accountname}/>
+                  accountname ={userDataitem.accountname}
+                  searchInp={searchInp}/>
               )
             })
           }

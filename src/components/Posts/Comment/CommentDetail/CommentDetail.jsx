@@ -17,7 +17,7 @@ const CommentDetail = (props) => {
   const [commentData, setCommentData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const commentId = commentData;
-  console.log(commentData.id);
+  // console.log(commentData.id);
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/639ab92f17ae666581c625a1/comments`;

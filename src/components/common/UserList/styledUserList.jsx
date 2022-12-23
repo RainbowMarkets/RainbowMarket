@@ -49,3 +49,7 @@ export const StyledButton = styled.button`
   color: ${(props) => (props.isfollow ? "black" : "white")};
   border: ${(props) => (props.isfollow ? "1px solid #dbdbdb" : "none")};
 `;
+
+export const StyledSpan = styled.span`
+  color: ${colors.colorMain};
+`
