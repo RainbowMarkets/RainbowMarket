@@ -1,5 +1,7 @@
-import BackButton from "../BackButton"
-import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar"
+import { Link } from "react-router-dom";
+import BackButton from "../BackButton";
+import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar";
+import { StyledLink } from "../MainTopBar/styledMainTopBar";
 
 export default function UpLoadTopBar(props) {
   function handleUpLoad() {
@@ -10,10 +12,15 @@ export default function UpLoadTopBar(props) {
   return (
     <StyledHeader>
       <BackButton />
-      <StyledUpdateBtn
-        type="submit"
-        onClick={handleUpLoad}
-        disabled={!props.inpValue}>업로드</StyledUpdateBtn>
+      <Link to="/profile">
+        <StyledUpdateBtn
+          type="submit"
+          onClick={handleUpLoad}
+          disabled={!props.inpValue}
+        >
+          업로드
+        </StyledUpdateBtn>
+      </Link>
     </StyledHeader>
-  )
+  );
 }
