@@ -31,6 +31,8 @@ const UserContextProvider = ({ children }) => {
     user: userData,
   });
 
+  console.log("User의 상태 :\n", state);
+
   return (
     <UserContext.Provider value={{ ...state, dispatch }}>
       {children}
