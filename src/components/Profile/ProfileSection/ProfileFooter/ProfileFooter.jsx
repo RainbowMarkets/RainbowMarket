@@ -8,25 +8,28 @@ import {
 import messageIcon from "../../../../assets/images/icon-message-circle.png";
 import shareIcon from "../../../../assets/images/icon-share.png";
 import useFetch from "../../../../hooks/useFetch";
+import useUserContext from "../../../../hooks/useUserContext";
 
 export default function ProfileFooter({ isMine, setUserProfile, data }) {
-  const token = localStorage.getItem("token");
-  const { postData, deleteData } = useFetch();
+  const { user } = useUserContext();
+  const { deleteData } = useFetch();
 
   const chatHandler = (event) => {
+    // 채팅 및 공유하기 기능 미구현
     alert(
-      "채팅 기능은 구현 중에 있습니다.\n발전하여 더 나은 서비스로 찾아뵙겠습니다."
+      "이 기능은 현재 구현 중에 있습니다.\n발전하여 더 나은 서비스로 찾아뵙겠습니다."
     );
   };
 
   const followHandler = (event) => {
+    // 버튼 종류에 따라 반응
     switch (event.target.textContent) {
       case "언팔로우":
         deleteData(
           `/profile/${data.accountname}/unfollow`,
           setUserProfile,
-          token
-        );
+          user.token
+        ).catch((err) => console.log(err));
         break;
       case "팔로우":
         fetch(
@@ -34,16 +37,18 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${user.token}`,
               "Content-type": "application/json",
             },
           }
         )
           .then((res) => res.json())
-          .then((res) => setUserProfile(res));
+          .then((res) => setUserProfile(res))
+          .catch((err) => console.log(err));
         break;
       default:
-        console.log("뭔가잘못됨");
+        // 뭔가 뭔가 잘못 됐을 때
+        console.log("팔로우, 언팔로우 기능 비정상 작동");
         break;
     }
   };
@@ -69,7 +74,7 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
           >
             {data.isfollow ? "언팔로우" : "팔로우"}
           </FollowButton>
-          <CircleButton>
+          <CircleButton onClick={chatHandler}>
             <img src={shareIcon} />
           </CircleButton>
         </>

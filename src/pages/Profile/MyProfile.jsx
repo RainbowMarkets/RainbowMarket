@@ -8,9 +8,10 @@ import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import useFetch from "../../hooks/useFetch";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function Profile() {
-  const token = localStorage.getItem("token");
+  const { user } = useUserContext();
   const { getData } = useFetch();
 
   const [modalActive, setModalActive] = useState(false);
@@ -32,14 +33,13 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    getData(`/user/myinfo`, setUserInfo, token).catch((err) => alert(err));
+    if (!user) return;
+    getData(`/user/myinfo`, setUserInfo, user.token).catch((err) => alert(err));
   }, []);
 
   return (
     <>
-      {!token ? (
-        <Login />
-      ) : (
+      {user ? (
         <>
           <CommonTopBar
             modalActive={modalActive}
@@ -63,6 +63,8 @@ export default function Profile() {
             )}
           </Wrapper>
         </>
+      ) : (
+        <Login />
       )}
     </>
   );
