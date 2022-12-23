@@ -2,35 +2,32 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import UserList from "../../components/common/UserList/UserList";
 import SearchTopBar from "../../components/TopBar/SearchTopBar/SearchTopBar";
+import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
+import { OrderList } from "./styledFollow";
 
 export default function Follow() {
-  // const { user } = useUserContext();
-  const token = localStorage.getItem("token");
-  const [follows, setFollows] = useState([]);
   const location = useLocation();
+  const { user } = useUserContext();
+  const { getData } = useFetch();
+  const [follows, setFollows] = useState([]);
 
   useEffect(() => {
-    fetch(`https://mandarin.api.weniv.co.kr${location.pathname}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setFollows(res));
+    if (!user) return;
+    getData(location.pathname + "?limit=999", setFollows, user.token).catch(
+      (err) => console.log(err)
+    );
   }, []);
 
-  console.log(follows);
+  // SearchTopBar가 오는 게 맞나?
   return (
     <>
       <SearchTopBar />
-      <ul>
+      <OrderList>
         {follows.map((data, i) => {
-          return <UserList key={i} width="50px" {...data} />;
+          return <UserList key={i} width="50px" {...data} pagefollow />;
         })}
-      </ul>
+      </OrderList>
     </>
   );
 }

@@ -19,12 +19,14 @@ const Header = styled.div`
 const ListByText = styled.button`
   width: 26px;
   height: 26px;
-  background-image: url(${postListOn});
+  background-image: url(${(props) =>
+    props.withImg ? postListOff : postListOn});
   background-repeat: none;
   background-size: cover;
 `;
 const ListByImg = styled(ListByText)`
-  background-image: url(${postAlbumOff});
+  background-image: url(${(props) =>
+    props.withImg ? postAlbumOn : postAlbumOff});
 `;
 
 export { Header, ListByText, ListByImg };
