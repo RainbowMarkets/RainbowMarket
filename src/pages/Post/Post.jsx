@@ -10,12 +10,45 @@ import {
 } from "./styledPost";
 import { useCallback, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
+import useUserContext from "../../hooks/useUserContext";
+import { UserContext } from "../../context/UserContext";
 
 const Post = (props) => {
   const [isValid, setIsValid] = useState(false);
   const textRef = useRef();
   const [inpValue, setInpValue] = useState("");
-
+  const { user } = useUserContext();
+  const url = "https://mandarin.api.weniv.co.kr";
+  // 게시글 가져오기
+  const fetchPost = async () => {
+    const reqPath = `/post`;
+    try {
+      const res = await fetch(url + reqPath, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          post: {
+            // content: `${text}`,
+            // image: `${imgurl}`, //"imageurl1, imageurl2" 형식으로
+            content: "hi",
+            image: "imgurl",
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // setPostDetailData(data.post);
+          // setIsHeartOn(data.post.hearted);
+          // setLikeCount(data.post.heartCount);
+          console.log(data);
+        });
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
   const handleResizeHeight = () => {
     textRef.current.style.height = "auto";
     textRef.current.style.height = textRef.current.scrollHeight + "px";
@@ -54,10 +87,10 @@ const Post = (props) => {
                   <h4 className="hidden">이미지추가</h4>
                   <ul>
                     <li>
-                      <img src={postImg} alt="이미지" />
+                      {/* <img src={postImg} alt="이미지" />
                       <button className="postImg-del">
                         <span className="hidden">이미지 삭제</span>
-                      </button>
+                      </button> */}
                     </li>
                   </ul>
                 </PostImgWrapper>
