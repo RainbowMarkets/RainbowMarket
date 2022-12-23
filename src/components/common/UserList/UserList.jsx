@@ -11,6 +11,7 @@ import {
   StyledStrong,
   StyledSmall,
   StyledButton,
+  StyledSpan
 } from "./styledUserList";
 
 export default function UserList(props) {
@@ -30,7 +31,7 @@ export default function UserList(props) {
       case "취소":
         deleteData(
           `/profile/${props.accountname}/unfollow`,
-          () => {},
+          () => { },
           user.token
         )
           .then(() => setIsfollow(!isfollow))
@@ -66,6 +67,29 @@ export default function UserList(props) {
   };
 
   // 해당 계정의 프로필로 이동하는 링크
+
+
+  // 서치 하이라이팅
+  const highlightText = (data, keyword) => {
+    const matchReg = new RegExp(`(${keyword})`, "gi");
+    if (keyword !== "" && data.includes(keyword)) {
+      const matchs = data.split(matchReg);
+
+      return (
+        <>
+          {
+            matchs.map((match, index) =>
+              match.toLowerCase() === keyword.toLowerCase() ? (
+                <StyledSpan key={index}>{match}</StyledSpan>) : (
+                match
+              ))
+          }
+        </>
+      );
+    }
+    return data;
+  }
+
   return (
     <StyledLi>
       <StyledLink to={`/profile/${props.accountname}`}>
@@ -81,8 +105,12 @@ export default function UserList(props) {
           onError={handleImgError}
         />
         <StyledDiv>
-          <StyledStrong>{props.username}</StyledStrong>
-          <StyledSmall>@ {props.accountname}</StyledSmall>
+          <StyledStrong>
+            {highlightText(props.username, props.searchInp)}
+          </StyledStrong>
+          <StyledSmall>
+            &#64; {highlightText(props.accountname, props.searchInp)}
+          </StyledSmall>
         </StyledDiv>
       </StyledLink>
       {props.pagefollow && props.accountname !== user.accountname && (

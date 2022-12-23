@@ -5,7 +5,11 @@ import { StyledInput } from "./styledSearchTopBar";
 export default function SearchTopBar(props) {
 
   function handleSearchInput(e){
-    props.setSearchInp(e.target.value);
+    if (e.target.value === ""){
+      props.setSearchInp(""); // 빈값이면 데이터 불러오지 말라구... 왜 안돼...
+    } else {
+      props.setSearchInp(e.target.value);
+    }
     console.log(props.searchInp);
   }
   
@@ -17,8 +21,8 @@ export default function SearchTopBar(props) {
       <StyledInput 
         id="searchId"
         type="text"
-        value={props.searchInp}
         placeholder="계정 검색"
+        // value={props.searchInp}
         onChange={handleSearchInput}/>
     </StyledHeader>
   )
