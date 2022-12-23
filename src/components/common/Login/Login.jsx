@@ -1,7 +1,11 @@
 import { useState, useRef } from "react";
 import useLogin from "../../../hooks/useLogin";
-import { WarningMessageWrapper, LoginButton, LoginButtonWrapper} from "../../common/Login/Login.style"
-import { Container, InputTitle, Input } from "../../common/Login/Login.style"
+import {
+  WarningMessageWrapper,
+  LoginButton,
+  LoginButtonWrapper,
+} from "../../common/Login/Login.style";
+import { Container, InputTitle, Input } from "../../common/Login/Login.style";
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -19,7 +23,7 @@ export default function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    login(emailInp, passInp);
+    login(userEmailRef.current.value, userPasswordRef.current.value);
   };
 
   //이메일 유효성 검사
@@ -28,15 +32,13 @@ export default function Login() {
     const emailCheck =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-      if(!emailCheck.test(userEmail)) {
-        setEmailErrorMsg('*잘못된 이메일 형식입니다.');
-        setLoginValid(false);
-        return;
-
-      }
-      setEmailErrorMsg('');
-      
-  }
+    if (!emailCheck.test(userEmail)) {
+      setEmailErrorMsg("*잘못된 이메일 형식입니다.");
+      setLoginValid(false);
+      return;
+    }
+    setEmailErrorMsg("");
+  };
 
   const goToLogin = () => {
     return loginValid && passwordValid ? setIsActive(false) : setIsActive(true);
@@ -45,11 +47,11 @@ export default function Login() {
   const passwordValidCheck = () => {
     const userPassword = userPasswordRef.current.value;
 
-    if(userPassword.length < 6) {
-      setPasswordErrorMsg('*비밀번호는 6자 이상이어야 합니다.');
+    if (userPassword.length < 6) {
+      setPasswordErrorMsg("*비밀번호는 6자 이상이어야 합니다.");
       return;
     }
-    setPasswordErrorMsg('');
+    setPasswordErrorMsg("");
     setLoginValid(true);
   };
 
@@ -80,7 +82,7 @@ export default function Login() {
         <WarningMessageWrapper>{passwordErrorMsg}</WarningMessageWrapper>
         <LoginButtonWrapper>
           <LoginButton disabled={isActive}>로그인</LoginButton>
-          <Link to = '/join'>이메일로 회원가입</Link>
+          <Link to="/join">이메일로 회원가입</Link>
         </LoginButtonWrapper>
       </form>
     </Container>
