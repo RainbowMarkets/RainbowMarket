@@ -14,6 +14,8 @@ export default function Profile() {
   const { user } = useUserContext();
   const { getData } = useFetch();
 
+  const [product, setProduct] = useState(null);
+  const [isProduct, setIsProduct] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
@@ -37,6 +39,8 @@ export default function Profile() {
     getData(`/user/myinfo`, setUserInfo, user.token).catch((err) => alert(err));
   }, []);
 
+  console.log("product :", product);
+
   return (
     <>
       {user ? (
@@ -49,7 +53,13 @@ export default function Profile() {
             {/* 팔로우 등 프로필이 표시되는 섹션 */}
             <ProfileSection data={userInfo.user} isMine={true} />
             {/* 판매 중잉 아이템이 표시되는 섹션 */}
-            <ProfileItemSection name={userInfo.user.accountname} />
+            <ProfileItemSection
+              name={userInfo.user.accountname}
+              isMine={true}
+              setIsProduct={setIsProduct}
+              setModalActive={setModalActive}
+              setProduct={setProduct}
+            />
             {/* 쓴 글 목록이 표시되는 섹션 */}
             <ProfileFeedSection />
             <Modal
@@ -57,6 +67,10 @@ export default function Profile() {
               setModalActive={setModalActive}
               isLogOut={isLogOut}
               setIsLogOut={setIsLogOut}
+              isProduct={isProduct}
+              setIsProduct={setIsProduct}
+              product={product}
+              setProduct={setProduct}
             />
             {isLogOut && (
               <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />

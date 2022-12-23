@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import ProductModal from "./ProductModal";
 import { ModalWrapper } from "./styledModal";
 
 const Modal = (props) => {
@@ -7,6 +8,7 @@ const Modal = (props) => {
 
   function handleCancelMenu() {
     props.setModalActive(false);
+    props.setIsProduct(false);
   }
   function handleShowLogOutModal() {
     props.setIsLogOut(true);
@@ -22,27 +24,37 @@ const Modal = (props) => {
 
   return (
     <>
-      <ModalWrapper className={props.modalActive ? "" : "hidden"}>
-        <h2 className="hidden">헤더 모달창</h2>
-        <div
-          className={props.modalActive ? "reveal" : ""}
-          onClick={handleCancelMenu}
-        ></div>
-        <ul className={props.modalActive ? "reveal" : ""}>
-          <li>
-            <button onClick={handleInfoSetting}>설정 및 개인정보</button>
-          </li>
-          <li>
-            <button onClick={handleShowLogOutModal}>로그아웃</button>
-          </li>
-          {/* <li>
+      {props.isProduct ? (
+        <ProductModal
+          modalActive={props.modalActive}
+          setModalActive={props.setModalActive}
+          handleCancelMenu={handleCancelMenu}
+          product={props.product}
+          setProduct={props.setProduct}
+        />
+      ) : (
+        <ModalWrapper className={props.modalActive ? "" : "hidden"}>
+          <h2 className="hidden">헤더 모달창</h2>
+          <div
+            className={props.modalActive ? "reveal" : ""}
+            onClick={handleCancelMenu}
+          ></div>
+          <ul className={props.modalActive ? "reveal" : ""}>
+            <li>
+              <button onClick={handleInfoSetting}>설정 및 개인정보</button>
+            </li>
+            <li>
+              <button onClick={handleShowLogOutModal}>로그아웃</button>
+            </li>
+            {/* <li>
             <button>삭제</button>
           </li> */}
-          {/* <li>
+            {/* <li>
             <button>신고하기</button>
           </li> */}
-        </ul>
-      </ModalWrapper>
+          </ul>
+        </ModalWrapper>
+      )}
     </>
   );
 };
