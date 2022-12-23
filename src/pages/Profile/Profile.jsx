@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function Profile() {
   const param = useParams();
-  const token = localStorage.getItem("token");
+  const { user } = useUserContext();
   const { getData } = useFetch();
 
   const [modalActive, setModalActive] = useState(false);
@@ -34,16 +35,15 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    getData(`/profile/${param.accountname}`, setUserProfile, token).catch(
+    if (!user) return;
+    getData(`/profile/${param.accountname}`, setUserProfile, user.token).catch(
       (err) => alert(err)
     );
   }, []);
 
   return (
     <>
-      {!token ? (
-        <Login />
-      ) : (
+      {user ? (
         <>
           <CommonTopBar
             modalActive={modalActive}
@@ -70,6 +70,8 @@ export default function Profile() {
             )}
           </Wrapper>
         </>
+      ) : (
+        <Login />
       )}
     </>
   );

@@ -8,8 +8,8 @@ export default function ProfileSection({ data, isMine, setUserProfile }) {
     <>
       <Section>
         <ProfileHeader data={data} />
-        <strong>{data.username || "누구일까"}</strong>
-        <small>@{data.accountname || "누구일까"}</small>
+        <strong>{data.username || "익명의 재능러"}</strong>
+        <small>@{data.accountname || "익명의 재능러"}</small>
         <p>{data.intro || ""}</p>
         <ProfileFooter
           isMine={isMine}

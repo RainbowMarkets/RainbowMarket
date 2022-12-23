@@ -8,7 +8,7 @@ export default function ProfileFeedSection() {
 
   return (
     <section style={{ width: "100%", background: "white" }}>
-      <ProfileFeedHeader setWithImg={setWithImg} />
+      <ProfileFeedHeader setWithImg={setWithImg} withImg={withImg} />
       {/* <PostOnlyText /> */}
       {/* <PostContent /> */}
       안녕안녕

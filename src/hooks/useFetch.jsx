@@ -12,7 +12,7 @@ export default function useFetch() {
       .then((res) => res.json())
       .then((res) => {
         callback(res);
-        console.log(res);
+        console.log(`getData(${req}) 결과 :\n`, res);
       });
   };
 
@@ -28,7 +28,7 @@ export default function useFetch() {
       .then((res) => res.json())
       .then((res) => {
         callback(res);
-        console.log(res);
+        console.log(`postData(${req}) 결과 :\n`, res);
       });
   };
 
@@ -42,7 +42,7 @@ export default function useFetch() {
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => console.log(`putData(${req}) 결과 :\n`, res));
   };
 
   const deleteData = async (req, callback, token) => {
@@ -56,7 +56,7 @@ export default function useFetch() {
       .then((res) => res.json())
       .then((res) => {
         callback(res);
-        console.log(res);
+        console.log(`deleteData(${req}) 결과 :\n`, res);
       });
   };
 

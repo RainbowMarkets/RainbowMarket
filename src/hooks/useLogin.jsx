@@ -2,12 +2,10 @@ import { useState } from "react";
 import useUserContext from "./useUserContext";
 
 export default function useLogin() {
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useUserContext();
 
   const login = (email, password) => {
-    setError(null); // 아직 에러가 없으니 null 입니다.
     setIsPending(true); // 통신중이므로 true입니다.
 
     // 로그인 API에 email과 password를 전달합니다.
@@ -36,17 +34,15 @@ export default function useLogin() {
         localStorage.setItem("uName", user.username);
         localStorage.setItem("image", user.image);
         localStorage.setItem("token", user.token);
-
-        setError(null);
+        localStorage.setItem("id", user._id);
         setIsPending(false);
       })
       .then(() => window.location.reload(true))
       .catch((err) => {
-        setError(err.message);
         setIsPending(false);
         console.log(err.message);
       });
   };
 
-  return { error, isPending, login };
+  return { isPending, login };
 }
