@@ -20,6 +20,7 @@ const PostModal = (props) => {
 
   function handleDeletePost(){
     props.setIsDeletePost(true);
+    console.log("너삭제");
   }
 
 /*   useEffect(() => { */
