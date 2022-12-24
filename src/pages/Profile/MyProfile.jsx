@@ -10,13 +10,14 @@ import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
 import { useParams } from "react-router-dom";
+import ProductModal from "../../components/common/Modal/Modal/ProductModal";
 
 export default function Profile() {
   const { user } = useUserContext();
   const { getData } = useFetch();
   const params = useParams();
   const [product, setProduct] = useState(null);
-  const [isProduct, setIsProduct] = useState(false);
+  const [prodModal, setProdModal] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
 
@@ -63,8 +64,8 @@ export default function Profile() {
             <ProfileItemSection
               name={userInfo.user.accountname}
               isMine={true}
-              setIsProduct={setIsProduct}
-              setModalActive={setModalActive}
+              prodModal={prodModal}
+              setProdModal={setProdModal}
               setProduct={setProduct}
             />
             {/* 쓴 글 목록이 표시되는 섹션 */}
@@ -77,8 +78,10 @@ export default function Profile() {
               setModalActive={setModalActive}
               isLogOut={isLogOut}
               setIsLogOut={setIsLogOut}
-              isProduct={isProduct}
-              setIsProduct={setIsProduct}
+            />
+            <ProductModal
+              prodModal={prodModal}
+              setProdModal={setProdModal}
               product={product}
               setProduct={setProduct}
             />

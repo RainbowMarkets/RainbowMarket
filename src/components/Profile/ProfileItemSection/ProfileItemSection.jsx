@@ -4,8 +4,8 @@ import { Section } from "./styledProfileItemSection";
 export default function ItemListSection({
   name,
   isMine,
-  setIsProduct,
-  setModalActive,
+  prodModal,
+  setProdModal,
   setProduct,
 }) {
   return (
@@ -14,8 +14,8 @@ export default function ItemListSection({
       <ProfileItemList
         name={name}
         isMine={isMine}
-        setIsProduct={setIsProduct}
-        setModalActive={setModalActive}
+        prodModal={prodModal}
+        setProdModal={setProdModal}
         setProduct={setProduct}
       />
     </Section>

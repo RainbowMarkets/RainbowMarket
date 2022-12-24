@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
+import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
 
 export default function ProfileItemList({
   name,
   isMine,
-  setIsProduct,
-  setModalActive,
+  prodModal,
+  setProdModal,
   setProduct,
 }) {
-  const token = localStorage.getItem("token");
+  const { user } = useUserContext();
+  const { getData } = useFetch();
 
   const [items, setItems] = useState({
     data: 0,
     product: [],
   });
-  const { getData } = useFetch();
 
   useEffect(() => {
     if (!name) return;
-    getData(`/product/${name}`, setItems, token).catch((err) =>
+    getData(`/product/${name}`, setItems, user.token).catch((err) =>
       console.log(err)
     );
-  }, [name]);
+  }, [name, prodModal]);
 
   return (
     <ItemList>
       {items.data ? (
-        items.product.map((product) => {
+        items.product.map((product, i) => {
           return (
             <li key={product.id}>
               <Item
                 onClick={() => {
-                  setIsProduct(true);
-                  setModalActive(true);
-                  setProduct(product);
+                  setProdModal(true);
+                  setProduct({ ...product });
                 }}
                 href={isMine ? undefined : product.link}
                 target="_blank"
