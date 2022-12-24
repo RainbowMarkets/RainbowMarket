@@ -6,6 +6,7 @@ import useUserContext from "../../../hooks/useUserContext";
 import useFetch from "../../../hooks/useFetch";
 import PostModal from "../../common/Modal/Modal/PostModal";
 import styled from "styled-components";
+import DeleteAlert from "../../common/Modal/Alert/DeleteAlert";
 
 export const StyledSection = styled.section`
   padding: 20px 16px;
@@ -15,6 +16,7 @@ export default function ProfileFeedSection({ name, postListData }) {
   const [withImg, setWithImg] = useState(false);
   // console.log(postListData);
   const [postModalActive, setPostModalActive] = useState(false);
+  const [isDeletePost, setIsDeletePost] = useState(false);
   const [reportPostNum, setReportPostNum] = useState(""); // post id 받아서 postModal로 넘겨주기
 
   return (
@@ -39,7 +41,16 @@ export default function ProfileFeedSection({ name, postListData }) {
         reportPostNum={reportPostNum}
         postModalActive={postModalActive}
         setPostModalActive={setPostModalActive}
+        setIsDeletePost={setIsDeletePost}
       />
+      {isDeletePost && (
+          <DeleteAlert
+            postId={reportPostNum}
+            isDeletePost={isDeletePost}
+            setIsDeletePost={setIsDeletePost}
+            setPostModalActive={setPostModalActive}
+          />
+        )}
     </section>
   );
 }
