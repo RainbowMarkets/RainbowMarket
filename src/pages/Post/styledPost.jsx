@@ -19,6 +19,7 @@ export const ProfileContain = styled.section`
     width: 42px;
     height: 42px;
     margin-right: 12px;
+    border-radius: 50%;
   }
 `;
 export const TextWrapper = styled.section`

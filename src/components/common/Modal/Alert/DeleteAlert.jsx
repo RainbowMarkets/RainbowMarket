@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
@@ -6,6 +6,7 @@ import { AlertWrapper } from "./styledDeleteAlert";
 const DeleteAlert = (props) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const url = "https://mandarin.api.weniv.co.kr";
 
@@ -28,8 +29,13 @@ const DeleteAlert = (props) => {
 
   function handleDelete(){
     sendDelete(props.postId);
-    // props.setIsDeletePost(false);
-    navigate("/profile")
+    if (location.pathname == "/profile") {
+      props.setIsDeletePost(false);
+      props.setPostModalActive(false);
+      window.location.reload(); // 새로고침 하는게 맞나...?
+    } else {
+      navigate("/profile");
+    }
   }
 
   return (

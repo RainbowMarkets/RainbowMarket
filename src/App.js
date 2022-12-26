@@ -11,7 +11,8 @@ import Chat from "./pages/Chat/Chat";
 import Follow from "./pages/Follow/Follow";
 import { UserContextProvider } from "./context/UserContext";
 import PostDetail from "./components/Posts/PostDetail";
-import ProfileEdit from "./pages/Profile/ProfileEdit/ProfileEdit";
+import ProfileEdit from "./pages/Profile/ProfileEdit";
+import MyProfile from "./pages/Profile/MyProfile";
 import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
@@ -21,6 +22,7 @@ import Login from "./components/common/Login/Login";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
+  // 어플리케이션 최초 접속 시 Splash 화면 띄워줌
   const [isFirst, setIsFirst] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -42,16 +44,14 @@ function App() {
             <Main>
               <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route exact path="/profile" element={<Profile />} />
+                <Route exact path="/profile" element={<MyProfile />} />
+                <Route path="/profile/:accountname" element={<Profile />} />
                 <Route path="/profile/edit" element={<ProfileEdit />} />
-                <Route path="/profile/:accountname" element={<ProfileEdit />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
-                <Route path="/chat/chatroom" element={<ChatRoom />} />
                 <Route path="/post" element={<Post />} />
                 <Route path="/post/postdetail" element={<PostDetail />} />
                 <Route path="/join" element={<JoinWithEmail />} />
-                <Route path="/login" element={<Login />} />
                 <Route
                   path="/profile/:accountname/follower"
                   element={<Follow />}
