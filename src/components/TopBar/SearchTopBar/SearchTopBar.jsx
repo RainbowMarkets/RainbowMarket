@@ -4,14 +4,14 @@ import { StyledInput } from "./styledSearchTopBar";
 
 export default function SearchTopBar(props) {
 
-  function handleSearchInput(e){
-    if (e.target.value === ""){
-      props.setSearchInp(""); // 빈값이면 데이터 불러오지 말라구... 왜 안돼...
-    } else {
-      props.setSearchInp(e.target.value);
-    }
-    console.log(props.searchInp);
-  }
+  // function handleSearchInput(e){
+  //   if (e.target.value === ""){
+  //     props.setSearchInp(null); // 빈값이면 데이터 불러오지 말라구... 왜 안돼...
+  //   } else {
+  //     props.setSearchInp(e.target.value);
+  //   }
+  //   console.log(props.searchInp);
+  // }
   
   return (
     <StyledHeader>
@@ -22,8 +22,8 @@ export default function SearchTopBar(props) {
         id="searchId"
         type="text"
         placeholder="계정 검색"
-        // value={props.searchInp}
-        onChange={handleSearchInput}/>
+        value={props.searchInp}
+        onChange={props.handleSearchInput}/>
     </StyledHeader>
   )
 }
