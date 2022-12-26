@@ -7,6 +7,7 @@ import { CommentWrapper } from "./styledCommentDetail";
 import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
+import { useParams } from "react-router-dom";
 /* test220Name 계정인 경우 해당 계정의 게시글 상세페이지의 댓글들 불러오기
  */
 
@@ -19,8 +20,8 @@ const CommentDetail = (props) => {
   const commentId = commentData;
   // console.log(commentData.id);
   // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
+  // const url = "https://mandarin.api.weniv.co.kr";
+  // const reqPath = `/post/${props.post_id}/comments`;
 
   // 댓글 시간 계산 함수
   const getTimeGap = (time) => {

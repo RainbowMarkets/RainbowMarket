@@ -50,8 +50,8 @@ function App() {
                 <Route path="/profile/edit" element={<ProfileEdit />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
-                <Route path="/post" element={<Post />} />
-                <Route path="/post/postdetail" element={<PostDetail />} />
+                <Route expact path="/post" element={<Post />} />
+                <Route path="/post/:post_id" element={<PostDetail />} />
                 <Route path="/join" element={<JoinWithEmail />} />
                 <Route
                   path="/profile/:accountname/follower"

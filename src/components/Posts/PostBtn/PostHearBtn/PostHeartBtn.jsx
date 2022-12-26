@@ -4,7 +4,13 @@ import useUserContext from "../../../../hooks/useUserContext";
 
 import { HeartWrapper } from "./styledPostHeartBtn";
 
-const PostHeartBtn = ({ isHeartOn, likeCount, setIsHeartOn, setLikeCount }) => {
+const PostHeartBtn = ({
+  isHeartOn,
+  likeCount,
+  setIsHeartOn,
+  setLikeCount,
+  post_id,
+}) => {
   // 하트 상태값에 따라 하트 색 변경
   // console.log(heartCount, hearted);
   const { user } = useUserContext();
@@ -12,7 +18,7 @@ const PostHeartBtn = ({ isHeartOn, likeCount, setIsHeartOn, setLikeCount }) => {
     // setIsHeartOn(true);
     // 하트 누르지 않은 게시물 -> false
     if (!isHeartOn) {
-      const reqPath = `/post/639ab92f17ae666581c625a1/heart`;
+      const reqPath = `/post/${post_id}/heart`;
       const url = "https://mandarin.api.weniv.co.kr";
       try {
         const res = await fetch(url + reqPath, {
