@@ -8,16 +8,15 @@ import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import { useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function Profile() {
   const param = useParams();
   const { user } = useUserContext();
-  const { getData } = useFetch();
 
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
+  const [postData, setPostData] = useState([]);
 
   const [userProfile, setUserProfile] = useState({
     profile: {
@@ -36,9 +35,43 @@ export default function Profile() {
 
   useEffect(() => {
     if (!user) return;
-    getData(`/profile/${param.accountname}`, setUserProfile, user.token).catch(
-      (err) => alert(err)
-    );
+    fetch(`https://mandarin.api.weniv.co.kr/profile/${param.accountname}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(`getData(/profile/${param.accountname})의 응답 :\n`, res);
+        setUserProfile(res);
+        return res;
+      })
+      .then((res) => {
+        fetch(
+          `https://mandarin.api.weniv.co.kr/post/${encodeURI(
+            res.profile.accountname
+          )}/userpost`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              `getData(/post/${encodeURI(
+                userProfile.profile.accountname
+              )}/userpost)의 응답 :\n`,
+              res
+            );
+            setPostData(res.post);
+          });
+      });
   }, []);
 
   return (
@@ -58,7 +91,10 @@ export default function Profile() {
             {/* 판매 중잉 아이템이 표시되는 섹션 */}
             <ProfileItemSection name={userProfile.profile.accountname} />
             {/* 쓴 글 목록이 표시되는 섹션 */}
-            <ProfileFeedSection />
+            <ProfileFeedSection
+              name={userProfile.profile.accountname}
+              data={postData}
+            />
             <Modal
               modalActive={modalActive}
               setModalActive={setModalActive}

@@ -64,3 +64,9 @@ export const PostBtn = styled.div`
   display: flex;
   margin-bottom: 16px;
 `;
+
+export const ImgBox = styled.div`
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+`;
