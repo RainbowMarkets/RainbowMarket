@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import UserList from "../../components/common/UserList/UserList";
-import SearchTopBar from "../../components/TopBar/SearchTopBar/SearchTopBar";
+import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
 import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
 import { OrderList } from "./styledFollow";
@@ -19,10 +19,10 @@ export default function Follow() {
     );
   }, []);
 
-  // SearchTopBar가 오는 게 맞나?
+  // 탑바 메뉴 어떻게 해야할지?
   return (
     <>
-      <SearchTopBar />
+      <CommonTopBar />
       <OrderList>
         {follows.map((data, i) => {
           return <UserList key={i} width="50px" {...data} pagefollow />;

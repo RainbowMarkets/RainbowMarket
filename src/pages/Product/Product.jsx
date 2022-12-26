@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProductInput from "../../components/ProductInput/ProductInput";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useUserContext from "../../hooks/useUserContext";
@@ -11,6 +11,8 @@ export default function Product() {
   const [itemPrice, setItemPrice] = useState(""); // 가격
   const [itemLink, setItemLink] = useState(""); // 판매 링크
   const [isPending, setIsPending] = useState(false); // 통신 상태
+  const [valid, setValid] = useState(false); // 입력 정보 확인
+
   const uploadInp = useRef(); // 파일 업로드 인풋 셀렉터
 
   const token = localStorage.getItem("token");
@@ -21,6 +23,7 @@ export default function Product() {
   };
   const itemPricehandler = (event) => {
     // 입력에 따라 가격 변경
+    console.log(event);
     setItemPrice(event.target.value);
   };
   const itemLinkhandler = (event) => {
@@ -93,12 +96,27 @@ export default function Product() {
       });
   };
 
+  useEffect(() => {
+    if (
+      preview &&
+      itemName.length > 0 &&
+      itemName.length < 16 &&
+      itemPrice.length > 0 &&
+      itemLink.length > 0
+    ) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+  }, [preview, itemName, itemPrice, itemLink]);
+
   return (
     <>
       <SaveTopBar
         handler={submitHandler}
         move="/profile"
         isPending={isPending}
+        valid={valid}
       />
       <Section>
         <ImageLabel>이미지 등록</ImageLabel>
@@ -114,24 +132,29 @@ export default function Product() {
             />
           </UploadLabel>
         </Preview>
-
+        <p>{preview ? null : "이미지를 올려주세요."}</p>
         <ProductInput
           label="상품명"
-          placeholder="2~15자 이내여야 합니다."
+          placeholder="1~15자 이내여야 합니다."
           stateInp={itemName}
           handler={itemNamehandler}
+          inptype="text"
+          min="2"
+          max="15"
         />
         <ProductInput
           label="가격"
           placeholder="숫자만 입력 가능합니다."
           stateInp={itemPrice}
           handler={itemPricehandler}
+          inptype="number"
         />
         <ProductInput
           label="판매 링크"
           placeholder="URL을 입력해 주세요."
           stateInp={itemLink}
           handler={itemLinkhandler}
+          inptype="text"
         />
       </Section>
     </>

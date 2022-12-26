@@ -10,6 +10,7 @@ export default function ProfileEdit() {
   const [intro, setIntro] = useState(""); // 소개
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const uploadInp = useRef(null); // 이미지 업로드 인풋 셀렉터
+  const [valid, setValid] = useState(false); // 유효성
 
   // 프로필 수정 요청 제출
   const submitHandler = (event) => {
@@ -53,8 +54,7 @@ export default function ProfileEdit() {
             .then((response) => response.json())
             .then((res) => {
               console.log(res);
-              // 성공 시 userContext와 localStorage를 갱신
-              dispatch({ type: "LOGIN", payload: res.user });
+              // 성공 시 localStorage를 갱신
               localStorage.setItem("aName", res.user.accountname);
               localStorage.setItem("uName", res.user.username);
               localStorage.setItem("image", res.user.image);
@@ -88,8 +88,7 @@ export default function ProfileEdit() {
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
-          // 성공 시 userContext와 localStorage를 갱신
-          dispatch({ type: "LOGIN", payload: res.user });
+          // 성공 시 localStorage를 갱신
           localStorage.setItem("aName", res.user.accountname);
           localStorage.setItem("uName", res.user.username);
           localStorage.setItem("image", res.user.image);
@@ -105,7 +104,7 @@ export default function ProfileEdit() {
 
   return (
     <>
-      <SaveTopBar handler={submitHandler} isPending={isPending} />
+      <SaveTopBar handler={submitHandler} isPending={isPending} valid={valid} />
       <SetProfile
         join={false}
         username={username}
@@ -115,6 +114,7 @@ export default function ProfileEdit() {
         setUsername={setUsername}
         setAccountname={setAccountname}
         setIntro={setIntro}
+        setValid={setValid}
       />
     </>
   );

@@ -7,6 +7,11 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 30px 34px;
+
+  p {
+    color: ${colors.colorMain};
+    margin-left: auto;
+  }
 `;
 
 const ImageLabel = styled.label`
