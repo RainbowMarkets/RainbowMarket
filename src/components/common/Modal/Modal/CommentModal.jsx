@@ -6,8 +6,9 @@ import { ModalWrapper } from "./styledModal";
 
 const CommentModal = (props) => {
   // console.log(props);
+
   // console.log("포스트아이디 :", props.postId);
-  // console.log("코멘트아이디 :", props.isCommentId);
+  // console.log("코멘트유저아이디 :", props.isCommentAuthorId);
   const postId = props.postId;
   const commentId = props.isCommentId;
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const CommentModal = (props) => {
   const { user } = useUserContext();
 
   const [isAlertCancel, setIsAlertCancel] = useState(false);
+  const localId = localStorage.getItem("_id");
 
   function handleCancelMenu() {
     props.setCommentModalActive(false);
@@ -22,10 +24,6 @@ const CommentModal = (props) => {
   function handleDeleteAlert() {
     setIsAlertCancel(true);
   }
-
-  // - 내가 작성한 댓글일 경우 : 삭제 버튼이 나타납니다.
-  // - 다른 사용자가 작성한 댓글일 경우 : 신고하기 버튼이 나타납니다.
-  // author._id (로컬 스토리지에 저장된)와 클릭한 author._id를 비교해서 조건문으로 출력해줄 예정
 
   // 댓글 신고
   const url = "https://mandarin.api.weniv.co.kr";
@@ -48,6 +46,8 @@ const CommentModal = (props) => {
     sendCommentReport(postId, commentId);
     props.setCommentModalActive(false);
   };
+  // console.log(commentId);
+  // console.log(props.commentData);
 
   return (
     <>
@@ -58,14 +58,17 @@ const CommentModal = (props) => {
           onClick={handleCancelMenu}
         ></div>
         <ul className={props.commentModalActive ? "reveal" : ""}>
-          <li>
-            <button className="red" onClick={handleDeleteAlert}>
-              삭제
-            </button>
-          </li>
-          <li>
-            <button onClick={handleCommentReport}>신고하기</button>
-          </li>
+          {props.isCommentAuthorId === localId ? (
+            <li>
+              <button className="red" onClick={handleDeleteAlert}>
+                삭제
+              </button>
+            </li>
+          ) : (
+            <li>
+              <button onClick={handleCommentReport}>신고하기</button>
+            </li>
+          )}
         </ul>
       </ModalWrapper>
       {isAlertCancel && (

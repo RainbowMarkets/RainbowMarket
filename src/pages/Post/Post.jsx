@@ -22,10 +22,7 @@ const Post = (props) => {
   const [inpValue, setInpValue] = useState("");
   const [fileName, setFileName] = useState([]); // 인코딩된 이미지 주소
   const [uploadData, setUploadData] = useState([]);
-
-  const [isActive, setIsActive] = useState(false);
   const [previewImgUrl, setPreviewImgUrl] = useState([]); //  미리보기 이미지 url
-  const [isPending, setIsPending] = useState(false); // 통신 상태
   const imgRef = useRef();
   const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
@@ -120,11 +117,19 @@ const Post = (props) => {
     const reader = new FileReader();
     const imageLists = event.target.files;
     let imageUrlLists = [...previewImgUrl];
+    console.log(imageLists);
+
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
     }
+    if (imageUrlLists.length > 3) {
+      alert("3개 이하의 파일을 업로드 하세요.");
+      imageUrlLists = imageUrlLists.slice(0, 3);
+    }
     setPreviewImgUrl(imageUrlLists);
+
+    console.log(imageLists);
   };
 
   // 이미지 삭제하기
@@ -140,6 +145,7 @@ const Post = (props) => {
         return i !== parseInt(idx);
       })
     );
+    // setPreviewImgUrl(previewImgUrl.filter((_, index) => index !== e));
   };
 
   useEffect(() => {
@@ -210,7 +216,7 @@ const Post = (props) => {
                 <label htmlFor="imgUpLabel" className="img-up-btn"></label>
                 <input
                   id="imgUpLabel"
-                  multiple
+                  /*multiple*/
                   alt="사진추가"
                   type="file"
                   accept="image/*"
