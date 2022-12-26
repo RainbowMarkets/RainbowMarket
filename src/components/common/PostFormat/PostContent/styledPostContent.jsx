@@ -39,7 +39,7 @@ export const ProfileContain = styled.div`
 //     color: ${colors.color76};
 //   }
 // `;
-export const ContextWrapper = styled.div`
+export const ContextWrapper = styled(Link)`
   margin-left: 54px;
   .post-context {
     font-weight: 400;

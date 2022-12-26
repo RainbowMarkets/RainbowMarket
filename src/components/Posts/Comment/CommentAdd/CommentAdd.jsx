@@ -14,7 +14,7 @@ const CommentAdd = (props) => {
   const [writeComment, setWriteComment] = useState({});
 
   const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/639ab92f17ae666581c625a1/comments`;
+  const reqPath = `/post/${props.post_id}/comments`;
 
   // 댓글 작성하기
   const handleWrapperSubmit = async (e) => {

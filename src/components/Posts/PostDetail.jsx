@@ -11,12 +11,15 @@ import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
 import CommentModal from "../common/Modal/Modal/CommentModal";
 import useUserContext from "../../hooks/useUserContext";
+import { useParams } from "react-router-dom";
 
 // test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
+  const { post_id } = useParams();
+
   const [postDetailData, setPostDetailData] = useState({
     comments: [],
-    commentCount: 0,
+    commentCount: "",
     createdAt: "",
     updatedAt: "",
     content: "",
@@ -48,7 +51,7 @@ const PostDetail = () => {
   const url = "https://mandarin.api.weniv.co.kr";
   // 게시글 가져오기
   const fetchPostData = async () => {
-    const reqPath = `/post/639ab92f17ae666581c625a1`; // 유진게시글id
+    const reqPath = `/post/${post_id}`; // 유진게시글id
     // const reqPath = `/post/63a3d6c817ae666581e7d8e3`; // 다정게시글id
     try {
       const res = await fetch(url + reqPath, {
@@ -71,7 +74,7 @@ const PostDetail = () => {
 
   // 댓글 업데이트
   const getCommentList = async () => {
-    const reqPath = `/post/639ab92f17ae666581c625a1/comments/?limit=1000&skip=0`;
+    const reqPath = `/post/${post_id}/comments/?limit=1000&skip=0`;
     try {
       const res = await fetch(url + reqPath, {
         method: "GET",
@@ -106,6 +109,7 @@ const PostDetail = () => {
         <h2 className="hidden">포스트 상세 페이지입니다.</h2>
         <PostDiv>
           <PostContent
+            post_id={post_id}
             postDetail={postDetailData}
             isHeartOn={isHeartOn}
             setIsHeartOn={setIsHeartOn}
@@ -122,6 +126,7 @@ const PostDetail = () => {
         </PostDiv>
         <CommentWrapper>
           <CommentDetail
+            post_id={post_id}
             commentData={commentData}
             commentModalActive={commentModalActive}
             setCommentModalActive={setCommentModalActive}
@@ -131,6 +136,7 @@ const PostDetail = () => {
           />
         </CommentWrapper>
         <CommentAdd
+          post_id={post_id}
           postUserId={postDetailData.author._id}
           commentImg={postDetailData.author.image}
           setCommentData={setCommentData}

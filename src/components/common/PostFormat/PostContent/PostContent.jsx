@@ -33,10 +33,9 @@ const PostContent = (props) => {
           <img className="post-modal" src={sIconMoreVertical} alt="" />
         </button>
       </ProfileContain>
-      <ContextWrapper>
+      <ContextWrapper to={`/post/${props.postDetail.id}`}>
         <p className="post-context">{props.postDetail.content}</p>
-        {/* 이미지 여부에 따라 달라지게 구현 예정 */}
-        {props.postDetail.image === "" ? null : (
+        {props.postDetail.image && (
           <ImgBox>
             {props.postDetail.image.split(",").map((img) => {
               return <img className="post-img" src={img} alt="게시글 이미지" />;
@@ -46,6 +45,7 @@ const PostContent = (props) => {
 
         <PostBtn>
           <PostHeartBtn
+            post_id={props.post_id}
             isHeartOn={props.isHeartOn}
             setIsHeartOn={props.setIsHeartOn}
             likeCount={props.likeCount}

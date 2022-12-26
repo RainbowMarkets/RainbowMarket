@@ -13,18 +13,36 @@ import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import { UserContext } from "../../context/UserContext";
 
+const formData = new FormData();
+
 const Post = (props) => {
   const [isValid, setIsValid] = useState(false);
   const textRef = useRef();
   const [profileImg, setProfileImg] = useState("");
   const [inpValue, setInpValue] = useState("");
-  const [imgFile, setImgFile] = useState("");
-  const [imgFileURL, setImgFileURL] = useState("");
+  const [fileName, setFileName] = useState([]); // 인코딩된 이미지 주소
+  const [uploadData, setUploadData] = useState([]);
+
+  const [isActive, setIsActive] = useState(false);
+  const [previewImgUrl, setPreviewImgUrl] = useState([]); //  미리보기 이미지 url
+  const [isPending, setIsPending] = useState(false); // 통신 상태
+  const imgRef = useRef();
   const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
   const localAccountName = localStorage.getItem("aName");
-  console.log(localAccountName);
-  // 개인 프로필 가져오기
+
+  // textarea
+  const handleResizeHeight = () => {
+    textRef.current.style.height = "auto";
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  };
+
+  const handleInpVal = (e) => {
+    setInpValue(e.target.value);
+    console.log(inpValue);
+  };
+
+  // 작성자 프로필 가져오기
   const fetchProfile = async () => {
     const reqPath = `/profile/${localAccountName}`;
     try {
@@ -44,80 +62,109 @@ const Post = (props) => {
     }
   };
 
-  // 게시글 작성하기
-  const fetchPostHandler = async () => {
-    const reqPath = `/post`;
+  // 이미지 서버에 전송하기
+  const fetchImgServer = async (e) => {
+    const reqPath = `/image/uploadfiles`;
+    // console.log("이거", imgRef.current.files);
+    for (const key of formData.keys()) {
+      console.log("key", key);
+    }
+    for (const value of formData.values()) {
+      console.log("values", value);
+    }
+    // console.log(data);
     try {
-      const res = await fetch(url + reqPath, {
+      fetch(url + reqPath, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          post: {
-            // content: `${text}`,
-            // image: `${imgurl}`, //"imageurl1, imageurl2" 형식으로
-            content: "",
-            image: "",
-          },
-        }),
+        body: formData,
       })
         .then((res) => res.json())
-        // .then((data) => {
-        //   // setPostDetailData(data.post);
-        //   // setIsHeartOn(data.post.hearted);
-        //   // setLikeCount(data.post.heartCount);
-        // })
-        .then(() => window.location.assign("/profile"));
+        .then((res) => {
+          // 게시글 작성하기 (업로드)
+          console.log("받은 데이터", res);
+          console.log("fileName :", fileName);
+
+          const imageNames = res
+            .map((item) => url + "/" + item.filename)
+            .join(",");
+          // console.log(imageNames);
+          fetch(url + "/post", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              post: {
+                content: `${inpValue}`,
+                image: `${imageNames}`,
+              },
+            }),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              // 게시글 작성하기 (업로드)
+              console.log("받은 데이터", res);
+            })
+            .then(() => window.location.assign("/profile"));
+        });
     } catch (err) {
       console.log("err", err);
     }
   };
-  const handleResizeHeight = () => {
-    textRef.current.style.height = "auto";
-    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  // 이미지 미리 보여주기 (한번에 선택했을 때 보여주는 방법)
+  const previewImg = (event) => {
+    for (const file of event.target.files) {
+      formData.append("image", file);
+    }
+    const reader = new FileReader();
+    const imageLists = event.target.files;
+    let imageUrlLists = [...previewImgUrl];
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+    setPreviewImgUrl(imageUrlLists);
   };
 
-  const handleInpVal = (e) => {
-    setInpValue(e.target.value);
-    console.log(inpValue);
+  // 이미지 삭제하기
+  const handleDeleteImg = (e) => {
+    const idx = e.target.parentElement.id;
+    setFileName(
+      fileName.filter((item, i) => {
+        return i !== parseInt(idx);
+      })
+    );
+    setPreviewImgUrl(
+      previewImgUrl.filter((item, i) => {
+        return i !== parseInt(idx);
+      })
+    );
   };
 
   useEffect(() => {
     if (!user.token) return;
     fetchProfile();
-  }, []);
+  }, [setUploadData]);
 
-  // 파일 미리보기 로직
-  // const handleLoadFile = (e) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(e.target.files[0]);
-  //   return new Promise((resolve) => {
-  //     reader.onload = () => {
-  //       setImgFile(reader.result);
-  //       resolve();
-  //       console.log(imgFile);
-  //     };
-  //   });
-  // };
+  // console.log(fileName);
+  // console.log(previewImgUrl);
+  // console.log(fileName.join(","));
+  // console.log(uploadData);
 
-  // 이미지 미리보기 삭제하기
-  const handleDeleteImg = (e) => {
-    setImgFile("");
-  };
-
-  // 1. 프로필 이미지 가져오기
-  // 2. 파일 선택시 화면에 띄우기 (V) -> 일단 먼저 글만 보내는 거 구현하기
+  // 1. 프로필 이미지 가져오기 (V)
+  // 2. 파일 선택시 화면에 띄우기 (V) -> 뒤에서 부터 삭제만 가능한 부분 해결하기, 같은 파일 지웠다가 다시 로드했을때 나오지 않음
   // 3. 업로드 버튼 누르면 이미지 새로 고침
   return (
     <>
       <UpLoadTopBar
         setInpValue={setInpValue}
         inpValue={inpValue}
-        handler={fetchPostHandler}
+        uploadData={uploadData}
+        setUploadData={setUploadData}
+        fetchImgServer={fetchImgServer}
       />
-      <UploadContain>
+      <UploadContain uploadData={uploadData} setUploadData={setUploadData}>
         <UploadWrapper>
           <h2 className="hidden">게시글 작성 페이지</h2>
           <ProfileContain>
@@ -141,17 +188,20 @@ const Post = (props) => {
                 <PostImgWrapper>
                   <h4 className="hidden">이미지추가</h4>
                   <ul>
-                    {imgFile && (
-                      <li>
-                        <img src={imgFile} alt="이미지" />
-                        <button
-                          className="postImg-del"
-                          onClick={handleDeleteImg}
-                        >
-                          <span className="hidden">이미지 삭제</span>
-                        </button>
-                      </li>
-                    )}
+                    {previewImgUrl &&
+                      previewImgUrl.map((item, idx) => {
+                        return (
+                          <li key={idx} id={idx}>
+                            <img src={item} alt="이미지" />
+                            <button
+                              className="postImg-del"
+                              onClick={handleDeleteImg}
+                            >
+                              <span className="hidden">이미지 삭제</span>
+                            </button>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </PostImgWrapper>
               </div>
@@ -166,6 +216,8 @@ const Post = (props) => {
                   accept="image/*"
                   className="hidden"
                   /*onChange={handleLoadFile}*/
+                  onChange={previewImg}
+                  ref={imgRef}
                 />
               </div>
             </form>
