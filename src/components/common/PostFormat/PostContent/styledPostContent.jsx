@@ -50,7 +50,7 @@ export const ContextWrapper = styled(Link)`
     height: auto;
     background-size: contain;
     border-radius: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 2px;
   }
 `;
 export const PostBtn = styled.div`
@@ -62,4 +62,5 @@ export const ImgBox = styled.div`
   display: flex;
   width: 100%;
   overflow-x: scroll;
+  margin-bottom: 12px;
 `;

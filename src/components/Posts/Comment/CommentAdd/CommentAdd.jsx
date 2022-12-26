@@ -15,6 +15,7 @@ const CommentAdd = (props) => {
 
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/${props.post_id}/comments`;
+  const localImg = localStorage.getItem("image");
 
   // 댓글 작성하기
   const handleWrapperSubmit = async (e) => {
@@ -61,7 +62,7 @@ const CommentAdd = (props) => {
         src={
           props.commentImg === "http://146.56.183.55:5050/Ellipse.png"
             ? profileImgSmall
-            : props.commentImg
+            : localImg
         }
         alt=""
       />
