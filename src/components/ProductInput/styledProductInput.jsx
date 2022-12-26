@@ -7,6 +7,7 @@ const Label = styled.label`
   line-height: 15px;
   margin-right: auto;
   margin-top: 16px;
+  margin-bottom: 6px;
 `;
 
 const Input = styled.input`
@@ -18,6 +19,22 @@ const Input = styled.input`
 
   &::placeholder {
     color: ${colors.colorDB};
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  &:focus {
+    outline: solid ${colors.colorMain};
   }
 `;
 

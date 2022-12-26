@@ -19,6 +19,7 @@ import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Login from "./components/common/Login/Login";
+import ProductEdit from "./pages/Product/ProductEdit";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -60,7 +61,8 @@ function App() {
                   path="/profile/:accountname/following"
                   element={<Follow />}
                 />
-                <Route path="/product" element={<Product />} />
+                <Route exact path="/product" element={<Product />} />
+                <Route path="/product/:productid" element={<ProductEdit />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Main>

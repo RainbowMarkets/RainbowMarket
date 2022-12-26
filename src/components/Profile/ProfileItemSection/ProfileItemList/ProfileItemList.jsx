@@ -1,30 +1,44 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
+import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
 
-export default function ProfileItemList({ name }) {
-  const token = localStorage.getItem("token");
+export default function ProfileItemList({
+  name,
+  isMine,
+  prodModal,
+  setProdModal,
+  setProduct,
+}) {
+  const { user } = useUserContext();
+  const { getData } = useFetch();
 
   const [items, setItems] = useState({
     data: 0,
     product: [],
   });
-  const { getData } = useFetch();
 
   useEffect(() => {
-    // product/빈문자열 로 요청을 보내면 뭔가 응답을 해줌..
-    getData(`/product/${name || "이건없겠지"}`, setItems, token).catch((err) =>
+    if (!name) return;
+    getData(`/product/${name}`, setItems, user.token).catch((err) =>
       console.log(err)
     );
-  }, [name]);
+  }, [name, prodModal]);
 
   return (
     <ItemList>
       {items.data ? (
-        items.product.map((product) => {
+        items.product.map((product, i) => {
           return (
             <li key={product.id}>
-              <Item href={product.link} target="_blank">
+              <Item
+                onClick={() => {
+                  setProdModal(true);
+                  setProduct({ ...product });
+                }}
+                href={isMine ? undefined : product.link}
+                target="_blank"
+              >
                 <figure>
                   <img src={product.itemImage} />
                   <figcaption>{product.itemName}</figcaption>

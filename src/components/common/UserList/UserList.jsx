@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import defaultProfile from "../../../assets/images/profile_small.png";
-import useFetch from "../../../hooks/useFetch";
 import useUserContext from "../../../hooks/useUserContext";
 import {
   StyledLi,
@@ -11,12 +10,11 @@ import {
   StyledStrong,
   StyledSmall,
   StyledButton,
-  StyledSpan
+  StyledSpan,
 } from "./styledUserList";
 
 export default function UserList(props) {
   const { user } = useUserContext();
-  const { deleteData } = useFetch();
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [isfollow, setIsfollow] = useState(props.isfollow); // 버튼 렌더링을 위한 상태
 
@@ -29,17 +27,32 @@ export default function UserList(props) {
     // 버튼 종류에 따라 반응
     switch (event.target.textContent) {
       case "취소":
-        deleteData(
-          `/profile/${props.accountname}/unfollow`,
-          () => { },
-          user.token
+        setIsPending(true); // 통신 시작
+        fetch(
+          `https://mandarin.api.weniv.co.kr/profile/${props.accountname}/unfollow`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
+            },
+          }
         )
-          .then(() => setIsfollow(!isfollow))
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              `deleteData(/profile/${props.accountname}/unfollow) 결과 :\n`,
+              res
+            );
+            setIsfollow(!isfollow);
+            setIsPending(false); // 통신 종료
+          })
           .catch((err) => {
             console.log(err);
           });
         break;
       case "팔로우":
+        setIsPending(true); // 통신 시작
         fetch(
           `https://mandarin.api.weniv.co.kr/profile/${props.accountname}/follow`,
           {
@@ -52,8 +65,9 @@ export default function UserList(props) {
         )
           .then((res) => res.json())
           .then((res) => {
-            setIsfollow(!isfollow);
             console.log("팔로우 API 응답 :\n", res);
+            setIsfollow(!isfollow);
+            setIsPending(false); // 통신 종료
           })
           .catch((err) => {
             console.log(err);
@@ -67,7 +81,7 @@ export default function UserList(props) {
   };
 
   // 해당 계정의 프로필로 이동하는 링크
-
+  console.log("isPending in USERLIST :\n", isPending);
 
   // 서치 하이라이팅
   const highlightText = (data, keyword) => {
@@ -77,18 +91,18 @@ export default function UserList(props) {
 
       return (
         <>
-          {
-            matchs.map((match, index) =>
-              match.toLowerCase() === keyword.toLowerCase() ? (
-                <StyledSpan key={index}>{match}</StyledSpan>) : (
-                match
-              ))
-          }
+          {matchs.map((match, index) =>
+            match.toLowerCase() === keyword.toLowerCase() ? (
+              <StyledSpan key={index}>{match}</StyledSpan>
+            ) : (
+              match
+            )
+          )}
         </>
       );
     }
     return data;
-  }
+  };
 
   return (
     <StyledLi>

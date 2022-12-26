@@ -70,7 +70,6 @@ export const ModalWrapper = styled.section`
     transform: translate(0, 0);
   }
 
-
   // .container-disable {
   //   /* 클릭불가능 효과 */
   //   pointer-events : none;
@@ -96,5 +95,17 @@ export const ModalWrapper = styled.section`
   }
   .red {
     color: ${colors.colorEB};
+  }
+  a {
+    color: black;
+    display: flex;
+    /* color: red; */
+    font-weight: 400;
+    line-height: 18px;
+    align-items: center;
+    flex-grow: 1;
+    /* width: 100%;
+    height: 100%; */
+    text-decoration: none;
   }
 `;
