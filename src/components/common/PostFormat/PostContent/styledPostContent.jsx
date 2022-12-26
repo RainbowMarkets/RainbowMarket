@@ -24,23 +24,16 @@ export const ProfileContain = styled.div`
     height: 18px;
   }
 `;
-// export const ProfileName = styled.div`
-//   flex-grow: 2;
-//   margin-top: 4px;
-//   p {
-//     font-weight: bold;
-//     line-height: 17.53px;
-//     margin-bottom: 2px;
-//   }
-//   small {
-//     font-weight: 400;
-//     line-height: 14px;
-//     font-size: ${fonts.mid};
-//     color: ${colors.color76};
-//   }
-// `;
 export const ContextWrapper = styled(Link)`
   margin-left: 54px;
+  color: black;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
   .post-context {
     font-weight: 400;
     line-height: 17.53px;
