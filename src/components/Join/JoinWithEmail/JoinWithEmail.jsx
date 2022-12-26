@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+/*import { useNavigate } from "react-router-dom";*/
 import {
   NextButtonWrapper,
   WarningMessageWrapper,
@@ -21,6 +22,7 @@ export default function JoinWithEmail() {
   const passwordRef = useRef("");
 
   const url = "https://mandarin.api.weniv.co.kr";
+  /* const navigate = useNavigate(); */
 
 
   // 이메일 유효성 검사
@@ -72,6 +74,8 @@ export default function JoinWithEmail() {
     //리프레시되는 것을 막아줌
     event.preventDefault();
     console.log("통신 시작", emailRef.current.value);
+    /*navigate('/setprofile'); // setProfile.jsx에서 이미지를 불러오지 못하는 오류가 있어서 나중에.. */
+
 
 
     try {
