@@ -13,11 +13,6 @@ export default function SearchTopBar(props) {
   //   console.log(props.searchInp);
   // }
   
-  function handleSearchInput(e){
-    props.setSearchInp(e.target.value);
-    console.log(props.searchInp);
-  }
-
   return (
     <StyledHeader>
       <h1 className="hidden">검색화면</h1>
@@ -27,8 +22,8 @@ export default function SearchTopBar(props) {
         id="searchId"
         type="text"
         placeholder="계정 검색"
-        // value={props.searchInp}
-        onChange={handleSearchInput}/>
+        value={props.searchInp}
+        onChange={props.handleSearchInput}/>
     </StyledHeader>
   )
 }

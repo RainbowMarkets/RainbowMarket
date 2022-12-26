@@ -9,16 +9,18 @@ import { StyledSection, StyledUl } from "./styledSearch";
 
 export default function Search() {
   const { user } = useUserContext();
-  const [searchInp, setSearchInp] = useState(null);
+  const [searchInp, setSearchInp] = useState("");
   const [userData, setUserData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // 로딩표시
-  const [target, setTarget] = useState(null); //감시할 target
 
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/user/searchuser/?keyword=dada`; /* ${searchInp} */
+  // const [isLoaded, setIsLoaded] = useState(true); // 로딩표시
+  // const [target, setTarget] = useState(null); //감시할 target
+  // const [offset, setOffset] = useState(0); // 15개씩 가져올것
+  // const [stop, setStop] = useState(false); // 데이터 로딩 중지
 
+  const fetchUserData = async (searchInp) => {
+    const url = "https://mandarin.api.weniv.co.kr";
+    const reqPath = `/user/searchuser/?keyword=${searchInp}`; /* ${searchInp} */
 
-  const fetchUserData = async () => {
     try {
       const res = await fetch(url + reqPath, {
         method: "GET",
@@ -28,64 +30,45 @@ export default function Search() {
         }
       });
       const data = await res.json();
-      setUserData((userData) => [...userData, ...data]);
-      console.log(data)
+      // console.log(data);
+      if(res.ok){
+        setUserData(data);
+      }
+      console.log(userData)
     } catch (err) {
       console.log("err", err);
     }
   };
-  useEffect(() => {
+
+  useEffect(()=> {
     fetchUserData();
-  }, [])
+  },[searchInp]);
 
-  useEffect(() => {
-    let observer;
-    if (target) {
-      const onIntersect = async ([entry], observer) => {
-        if (entry.isIntersecting) {
-          observer.unobserve(entry.target);
-          await fetchUserData();
-          observer.observe(entry.target);
-        }
-      };
-      observer = new IntersectionObserver(onIntersect, { threshold: 1 });
-      observer.observe(target);
+  let setTime;
+  function handleSearchInput(e){
+    const searchKeyword = e.target.value;
+    if (setTime) {
+      clearTimeout(setTime);
     }
-    return () => observer && observer.disconnect();
-  }, [target]);
-
-  // useEffect(() => {
-  //   if (!user.token) return;
-  //   setIsLoading(true);
-  //   const fetchUserData = async () => {
-  //     await fetch(url + reqPath, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization : `Bearer ${user.token}`,
-  //         "Content-type" : "application/json"
-  //       }
-  //     })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       // console.log("searchtest!!", res);
-  //       setUserData(res || []);
-  //       setIsLoading(false);
-  //     })
-  //     .then(searchInp === "" ? setSearchInp(null) : setSearchInp(searchInp))
-  //   }
-  //   fetchUserData();
-  // }, [searchInp]);
+    setTime = setTimeout(() => {
+      if(searchKeyword){
+        setSearchInp(searchKeyword);
+        fetchUserData(searchKeyword);
+      } else {
+        setUserData("");
+        setSearchInp("");
+      }
+    }, 500)
+    console.log(searchInp);
+  }
 
   return (
     <>
       <SearchTopBar
         searchInp={searchInp}
-        setSearchInp={setSearchInp}
+        handleSearchInput={handleSearchInput}
       />
 
-      {/* {isLoading ? (
-          <Loading />
-        ) : ( */}
       <StyledSection>
         <StyledUl>
           {
@@ -100,10 +83,9 @@ export default function Search() {
               )
             })
           }
+          {/* <li ref={setTarget}></li> */}
         </StyledUl>
-        <div ref={setTarget}></div>
       </StyledSection>
-      {/* )} */}
     </>
   )
 }
