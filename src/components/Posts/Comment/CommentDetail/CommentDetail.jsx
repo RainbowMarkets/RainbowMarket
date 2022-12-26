@@ -54,7 +54,7 @@ const CommentDetail = (props) => {
       <CommentWrapper>
         <h2 className="hidden">댓글 섹션</h2>
         <ul>
-          {props.commentData.length &&
+          {props.commentData.length > 0 &&
             props.commentData.map((item) => (
               <li key={item.id}>
                 <div>
