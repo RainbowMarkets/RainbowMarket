@@ -33,7 +33,7 @@ export const Input = styled.input`
   fill: #ffffff;
   margin-bottom: 16px;
   border: none;
-  border-bottom: 1px solid ${({ validTest }) => validTest ? `${colors.colorSub}` : `${colors.colorEB}`};
+  border-bottom: 1px solid ${colors.colorSub};
   &:focus {
     border-bottom-color: ${colors.colorMain};
   }
@@ -73,3 +73,4 @@ export const WarningMessageWrapper = styled.strong`
   margin-bottom: 6px;
   color: ${colors.colorEB};
 `;
+
