@@ -3,30 +3,49 @@ import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
 
-export default function ProfileItemList() {
+export default function ProfileItemList({
+  name,
+  isMine,
+  prodModal,
+  setProdModal,
+  setProduct,
+}) {
   const { user } = useUserContext();
+  const { getData } = useFetch();
+
   const [items, setItems] = useState({
     data: 0,
     product: [],
   });
-  const { getData } = useFetch();
 
-  // useEffect(() => {
-  //   getData(`/product/${user.accountname}`, setItems, user.token);
-  // }, []);
+  useEffect(() => {
+    if (!name) return;
+    getData(`/product/${name}`, setItems, user.token).catch((err) =>
+      console.log(err)
+    );
+  }, [name, prodModal]);
 
   return (
     <ItemList>
       {items.data ? (
         items.product.map((product, i) => {
           return (
-            <Item key={i}>
-              <figure>
-                <img src={product.itemImage} />
-                <figcaption>{product.itemName}</figcaption>
-                <span>{product.price.toLocaleString()} 원</span>
-              </figure>
-            </Item>
+            <li key={product.id}>
+              <Item
+                onClick={() => {
+                  setProdModal(true);
+                  setProduct({ ...product });
+                }}
+                href={isMine ? undefined : product.link}
+                target="_blank"
+              >
+                <figure>
+                  <img src={product.itemImage} />
+                  <figcaption>{product.itemName}</figcaption>
+                  <span>{product.price.toLocaleString()} 원</span>
+                </figure>
+              </Item>
+            </li>
           );
         })
       ) : (

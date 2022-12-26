@@ -1,13 +1,10 @@
-import useUserContext from "../../../../hooks/useUserContext";
 import { Anchor } from "./styledFollow";
 
-export default function Followers({ follow, tofrom }) {
-  const { user } = useUserContext();
-
+export default function Follow({ follow, count, name }) {
   return (
-    <Anchor to={`/profile/${user.accountname}/${tofrom}`}>
-      <strong>{follow}</strong>
-      <small>{tofrom}</small>
+    <Anchor to={`/profile/${name}/${follow.slice(0, follow.length - 1)}`}>
+      <strong>{count}</strong>
+      <small>{follow}</small>
     </Anchor>
   );
 }

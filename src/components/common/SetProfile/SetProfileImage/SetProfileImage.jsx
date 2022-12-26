@@ -1,18 +1,35 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Wrapper, ProfileImage, UploadButton } from "./styledSetProfileImage";
 import uploadimg from "../../../../assets/images/icon-image.png";
+import useUserContext from "../../../../hooks/useUserContext";
+import basicImg from "../../../../assets/images/profile_big.png";
 
-export default function SetProfileImage() {
-  const uploadInp = useRef(null);
+export default function SetProfileImage({ uploadInp }) {
+  const { user } = useUserContext();
+  const [preview, setPreview] = useState(user.image);
 
-  const changeHandler = (event) => {
-    console.log(uploadInp.current.files);
+  const uploadHandler = (event) => {
+    if (!event.target.files[0]) setPreview(null);
+    else {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      return new Promise((resolve) => {
+        reader.onload = () => {
+          setPreview(reader.result);
+          resolve();
+        };
+      });
+    }
+    // console.log(reader.result);
+    // setPreview(uploadInp.current.files[0]);
   };
 
   return (
     <Wrapper>
-      <ProfileImage src="https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_960_720.png" />
-      <UploadButton>
+      <ProfileImage src={preview || user.image || basicImg} />
+      <UploadButton type="button">
         <label htmlFor="upload">
           <img src={uploadimg} />
         </label>
@@ -21,7 +38,7 @@ export default function SetProfileImage() {
           id="upload"
           type="file"
           accept="image/*"
-          onChange={changeHandler}
+          onChange={uploadHandler}
         />
       </UploadButton>
     </Wrapper>

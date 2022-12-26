@@ -12,6 +12,7 @@ export const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
+  width: fit-content;
   color: #000;
 `;
 
@@ -24,6 +25,7 @@ export const StyledDiv = styled.div`
 
 export const StyledImg = styled.img`
   width: 50px;
+  height: 50px;
   border-radius: 50%;
 `;
 
@@ -38,11 +40,16 @@ export const StyledSmall = styled.small`
 
 export const StyledButton = styled.button`
   border-radius: 26px;
-  width: 56px;
+  min-width: 60px;
   height: 28px;
   line-height: 15px;
-  /* padding: 7px 11px; */
-  background-color: ${colors.colorMain};
+  padding: 7px 11px;
+  background-color: ${(props) => (props.isfollow ? "white" : colors.colorMain)};
   font-size: ${fonts.mid};
-  color: #fff;
+  color: ${(props) => (props.isfollow ? "black" : "white")};
+  border: ${(props) => (props.isfollow ? "1px solid #dbdbdb" : "none")};
 `;
+
+export const StyledSpan = styled.span`
+  color: ${colors.colorMain};
+`

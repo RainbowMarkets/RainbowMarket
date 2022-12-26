@@ -1,9 +1,33 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import UserList from "../../components/common/UserList/UserList";
+import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
+import useFetch from "../../hooks/useFetch";
+import useUserContext from "../../hooks/useUserContext";
+import { OrderList } from "./styledFollow";
 
 export default function Follow() {
-  const params = useParams();
+  const location = useLocation();
+  const { user } = useUserContext();
+  const { getData } = useFetch();
+  const [follows, setFollows] = useState([]);
 
-  console.log(params);
-  return <div>Follow</div>;
+  useEffect(() => {
+    if (!user) return;
+    getData(location.pathname + "?limit=999", setFollows, user.token).catch(
+      (err) => console.log(err)
+    );
+  }, []);
+
+  // 탑바 메뉴 어떻게 해야할지?
+  return (
+    <>
+      <CommonTopBar />
+      <OrderList>
+        {follows.map((data, i) => {
+          return <UserList key={i} width="50px" {...data} pagefollow />;
+        })}
+      </OrderList>
+    </>
+  );
 }

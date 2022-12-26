@@ -10,7 +10,10 @@ export default function useFetch() {
       },
     })
       .then((res) => res.json())
-      .then((res) => callback(res));
+      .then((res) => {
+        callback(res);
+        console.log(`getData(${req}) 결과 :\n`, res);
+      });
   };
 
   const postData = async (req, body, callback, token) => {
@@ -23,7 +26,10 @@ export default function useFetch() {
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((res) => callback(res));
+      .then((res) => {
+        callback(res);
+        console.log(`postData(${req}) 결과 :\n`, res);
+      });
   };
 
   const putData = async (req, body, token) => {
@@ -36,8 +42,23 @@ export default function useFetch() {
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => console.log(`putData(${req}) 결과 :\n`, res));
   };
 
-  return { getData, postData, putData };
+  const deleteData = async (req, callback, token) => {
+    fetch(url + req, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        callback(res);
+        console.log(`deleteData(${req}) 결과 :\n`, res);
+      });
+  };
+
+  return { getData, postData, putData, deleteData };
 }

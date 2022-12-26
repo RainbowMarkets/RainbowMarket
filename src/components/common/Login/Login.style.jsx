@@ -73,3 +73,4 @@ export const WarningMessageWrapper = styled.strong`
   margin-bottom: 6px;
   color: ${colors.colorEB};
 `;
+

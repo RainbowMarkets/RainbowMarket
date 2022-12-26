@@ -2,48 +2,112 @@ import ProfileItemSection from "../../components/Profile/ProfileItemSection/Prof
 import ProfileFeedSection from "../../components/Profile/ProfileFeedSection/ProfileFeedSection";
 import ProfileSection from "../../components/Profile/ProfileSection/ProfileSection";
 import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
-import useUserContext from "../../hooks/useUserContext";
 import { Wrapper } from "./styledProfile";
 import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
+import { useParams } from "react-router-dom";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function Profile() {
+  const param = useParams();
   const { user } = useUserContext();
 
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
+  const [postData, setPostData] = useState([]);
+
+  const [userProfile, setUserProfile] = useState({
+    profile: {
+      _id: "",
+      username: "",
+      accountname: "",
+      intro: "",
+      image: "",
+      isfollow: false,
+      following: [],
+      follower: [],
+      followerCount: 0,
+      followingCount: 0,
+    },
+  });
+
+  useEffect(() => {
+    if (!user) return;
+    fetch(`https://mandarin.api.weniv.co.kr/profile/${param.accountname}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(`getData(/profile/${param.accountname})의 응답 :\n`, res);
+        setUserProfile(res);
+        return res;
+      })
+      .then((res) => {
+        fetch(
+          `https://mandarin.api.weniv.co.kr/post/${encodeURI(
+            res.profile.accountname
+          )}/userpost`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              `getData(/post/${encodeURI(
+                userProfile.profile.accountname
+              )}/userpost)의 응답 :\n`,
+              res
+            );
+            setPostData(res.post);
+          });
+      });
+  }, []);
 
   return (
     <>
-      {!user ? (
-        <Login />
-      ) : (
+      {user ? (
         <>
           <CommonTopBar
             modalActive={modalActive}
-            setModalActive={setModalActive} />
+            setModalActive={setModalActive}
+          />
           <Wrapper>
             {/* 팔로우 등 프로필이 표시되는 섹션 */}
-            <ProfileSection />
+            <ProfileSection
+              data={userProfile.profile}
+              setUserProfile={setUserProfile}
+            />
             {/* 판매 중잉 아이템이 표시되는 섹션 */}
-            <ProfileItemSection />
+            <ProfileItemSection name={userProfile.profile.accountname} />
             {/* 쓴 글 목록이 표시되는 섹션 */}
-            <ProfileFeedSection />
+            <ProfileFeedSection
+              name={userProfile.profile.accountname}
+              data={postData}
+            />
             <Modal
               modalActive={modalActive}
               setModalActive={setModalActive}
               isLogOut={isLogOut}
-              setIsLogOut={setIsLogOut} />
-            {
-              isLogOut &&
-              <LogOutAlert
-                isLogOut={isLogOut}
-                setIsLogOut={setIsLogOut} />
-            }
+              setIsLogOut={setIsLogOut}
+            />
+            {isLogOut && (
+              <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
+            )}
           </Wrapper>
         </>
+      ) : (
+        <Login />
       )}
     </>
   );
