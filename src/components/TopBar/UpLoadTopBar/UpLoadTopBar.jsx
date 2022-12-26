@@ -6,16 +6,18 @@ import { StyledLink } from "../MainTopBar/styledMainTopBar";
 export default function UpLoadTopBar(props) {
   function handleUpLoad() {
     console.log(props.inpValue);
+    console.log(props.uploadData);
+
     props.setInpValue("");
   }
 
   return (
     <StyledHeader>
       <BackButton />
-      <Link to="/profile">
+      <Link /*to="/profile"*/>
         <StyledUpdateBtn
           type="submit"
-          onClick={handleUpLoad}
+          onClick={props.fetchImgServer}
           disabled={!props.inpValue}
         >
           업로드

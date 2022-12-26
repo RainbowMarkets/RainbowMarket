@@ -10,11 +10,12 @@ import imgLayerIcon from "../../../assets/images/iccon-img-layers.png";
 export default function ProfileFeedSection({ name, data }) {
   const { user } = useUserContext();
   const [onlyImg, setOnlyImg] = useState(false);
-  // console.log(data);
+  console.log(data);
 
   const [postModalActive, setPostModalActive] = useState(false);
   const [isDeletePost, setIsDeletePost] = useState(false);
   const [reportPostNum, setReportPostNum] = useState(""); // post id 받아서 postModal로 넘겨주기
+  const [isHeartOn, setIsHeartOn] = useState(data.hearted);
 
   return (
     <section style={{ width: "100%", background: "white" }}>
@@ -32,6 +33,7 @@ export default function ProfileFeedSection({ name, data }) {
                 setReportPostNum={setReportPostNum}
                 postModalActive={postModalActive}
                 setPostModalActive={setPostModalActive}
+                isHeartOn={isHeartOn}
               />
             );
           })
