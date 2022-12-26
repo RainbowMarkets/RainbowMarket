@@ -20,13 +20,13 @@ const ListByText = styled.button`
   width: 26px;
   height: 26px;
   background-image: url(${(props) =>
-    props.withImg ? postListOff : postListOn});
+    props.onlyImg ? postListOff : postListOn});
   background-repeat: none;
   background-size: cover;
 `;
 const ListByImg = styled(ListByText)`
   background-image: url(${(props) =>
-    props.withImg ? postAlbumOn : postAlbumOff});
+    props.onlyImg ? postAlbumOn : postAlbumOff});
 `;
 
 export { Header, ListByText, ListByImg };

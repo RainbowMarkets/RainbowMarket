@@ -7,19 +7,17 @@ import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
 import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
-import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
-import { useParams } from "react-router-dom";
 import ProductModal from "../../components/common/Modal/Modal/ProductModal";
 
 export default function Profile() {
   const { user } = useUserContext();
-  const { getData } = useFetch();
-  const params = useParams();
+
   const [product, setProduct] = useState(null);
   const [prodModal, setProdModal] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const [isLogOut, setIsLogOut] = useState(false);
+  const [postData, setPostData] = useState([]);
 
   const [userInfo, setUserInfo] = useState({
     user: {
@@ -35,20 +33,50 @@ export default function Profile() {
       followingCount: 0,
     },
   });
-  const [postListData, setPostListData] = useState({});
-  const localAccountName = localStorage.getItem("aName");
+
   useEffect(() => {
     if (!user) return;
-    getData(`/user/myinfo`, setUserInfo, user.token).catch((err) => alert(err));
-
-    getData(
-      `/post/${localAccountName}/userpost`,
-      setPostListData,
-      user.token
-    ).catch((err) => console.log(err));
+    fetch(`https://mandarin.api.weniv.co.kr/user/myinfo`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("getData(/user/myinfo)의 응답 :\n", res);
+        setUserInfo(res);
+        return res;
+      })
+      .then((res) => {
+        fetch(
+          `https://mandarin.api.weniv.co.kr/post/${encodeURI(
+            res.user.accountname
+          )}/userpost`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              `getData(/post/${encodeURI(
+                userInfo.user.accountname
+              )}/userpost)의 응답 :\n`,
+              res
+            );
+            setPostData(res.post);
+          });
+      });
   }, []);
 
-  console.log("product :", product);
+  console.log("postData :", postData);
+
   return (
     <>
       {user ? (
@@ -71,7 +99,7 @@ export default function Profile() {
             {/* 쓴 글 목록이 표시되는 섹션 */}
             <ProfileFeedSection
               name={userInfo.user.accountname}
-              postListData={postListData.post}
+              data={postData}
             />
             <Modal
               modalActive={modalActive}
