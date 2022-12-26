@@ -13,7 +13,6 @@ import CommentModal from "../common/Modal/Modal/CommentModal";
 import useUserContext from "../../hooks/useUserContext";
 import { useParams } from "react-router-dom";
 
-// test220Name 계정인 경우 해당 계정의 게시글 상세페이지 (1개)
 const PostDetail = () => {
   const { post_id } = useParams();
 
@@ -44,15 +43,13 @@ const PostDetail = () => {
   const [commentLength, setCommentLength] = useState(0);
   const { user } = useUserContext();
   const [isCommentId, setIsCommentId] = useState("");
-  console.log(commentData);
-  // /post/:post_id
-  // 639ab90a17ae666581c6259e -> 사진 없는 id
-  // 639ab92f17ae666581c625a1 -> 사진 있는 id
+  const [isCommentAuthorId, setIsCommentAuthorId] = useState("");
+  // console.log(commentData);
+
   const url = "https://mandarin.api.weniv.co.kr";
   // 게시글 가져오기
   const fetchPostData = async () => {
-    const reqPath = `/post/${post_id}`; // 유진게시글id
-    // const reqPath = `/post/63a3d6c817ae666581e7d8e3`; // 다정게시글id
+    const reqPath = `/post/${post_id}`;
     try {
       const res = await fetch(url + reqPath, {
         method: "GET",
@@ -133,6 +130,8 @@ const PostDetail = () => {
             setIsCommentId={setIsCommentId}
             isCommentId={isCommentId}
             setCommentData={setCommentData}
+            setIsCommentAuthorId={setIsCommentAuthorId}
+            isCommentAuthorId={isCommentAuthorId}
           />
         </CommentWrapper>
         <CommentAdd
@@ -176,6 +175,8 @@ const PostDetail = () => {
           isCommentId={isCommentId}
           setCommentData={setCommentData}
           commentData={commentData}
+          setIsCommentAuthorId={setIsCommentAuthorId}
+          isCommentAuthorId={isCommentAuthorId}
         />
       </PostDetailWrapper>
     </>

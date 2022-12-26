@@ -79,9 +79,11 @@ const CommentDetail = (props) => {
                 <p>{item.content}</p>
                 <button
                   onClick={() => {
+                    // console.log("코멘트유저아이디", item.author._id);
                     setCommentData(item.id);
                     props.setCommentModalActive(true);
                     props.setIsCommentId(item.id);
+                    props.setIsCommentAuthorId(item.author._id);
                   }}
                 >
                   <span className="hidden">더보기</span>
@@ -90,8 +92,6 @@ const CommentDetail = (props) => {
             ))}
         </ul>
       </CommentWrapper>
-
-      {/* 댓글 모달 띄움 */}
     </>
   );
 };
