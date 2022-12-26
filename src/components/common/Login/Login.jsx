@@ -1,37 +1,146 @@
-import { useState } from "react";
-import useLogin from "../../../hooks/useLogin";
+import { useState, useRef } from "react";
+/*import { useNavigate } from "react-router-dom";*/
+import {
+  LoginButtonWrapper,
+  WarningMessageWrapper,
+} from "./Login.style";
+import {
+  Container,
+  Input,
+  InputTitle,
+  LoginButton,
+} from "./Login.style";
 
-export default function Login() {
-  const [emailInp, setEmailInp] = useState("");
-  const [passInp, setPassInp] = useState("");
-  const { error, isPending, login } = useLogin();
+export default function JoinWithEmail() {
+  const [emailWarningMessage, setEmailWarningMessage] = useState("");
+  const [passwordWarningMessage, setPasswordWarningMessage] = useState("");
+  const [emailValid, setEmailValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
+  const [isActive, setIsActive] = useState(true);
 
-  const handleInp = (event) => {
-    switch (event.target.id) {
-      case "userEmail":
-        setEmailInp(event.target.value);
-        break;
-      case "userPass":
-        setPassInp(event.target.value);
-        break;
-      default:
-        alert("뭔가 잘못됨.");
-        break;
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+
+  const url = "https://mandarin.api.weniv.co.kr";
+  /* const navigate = useNavigate(); */
+
+
+  // 이메일 유효성 검사
+  const emailValidCheck = ({ target }) => {
+    const emailCurrentValue = target.value;
+    const checkTheEmail =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+    if (emailCurrentValue === "") {
+      setEmailWarningMessage("입력해주세요.");
+      setEmailValid(false);
+    } else if (!checkTheEmail.test(emailCurrentValue)) {
+      setEmailWarningMessage("올바르지 않은 이메일 형식입니다.");
+      setEmailValid(false);
+    } else {
+      setEmailWarningMessage("");
+      setEmailValid(true);
     }
   };
 
-  const handleLogin = (event) => {
-    event.preventDefault();
+  //비밀번호 유효성 검사
+  const passwordValidCheck = ({ target }) => {
+    const passwordCurrentValue = target.value;
 
-    login(emailInp, passInp);
+    if (passwordCurrentValue === "") {
+      setPasswordWarningMessage("입력해주세요.");
+      setPasswordValid(false);
+    } else if (passwordCurrentValue.length < 6) {
+      setPasswordWarningMessage("비밀번호는 6자 이상이어야 합니다.");
+    } else {
+      setPasswordWarningMessage("");
+      setPasswordValid(true);
+    }
   };
+
+      const loginData = {
+      user: {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      },
+    };
+
+  // 로그인버튼 활성화 검사
+  const goToNextSignUp = () => {
+    return emailValid && passwordValid ? setIsActive(false) : setIsActive(true);
+  };
+
+  // 제출하면 API 통신 연결
+  const onSubmitHandler = async (event) => {
+    //리프레시되는 것을 막아줌
+    event.preventDefault();
+    console.log("통신 시작", emailRef.current.value);
+    /*navigate('/setprofile'); // setProfile.jsx에서 이미지를 불러오지 못하는 오류가 있어서 나중에.. */
+
+    console.log(loginData);
+
+    try {
+      const res = await fetch(url + '/user/login', {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      //통신할 때 유효성 검사하기
+      const result = await res.json();
+      await console.log(result);
+      const requestMessage = await result.message;
+
+      if (requestMessage === "이메일 또는 비밀번호가 일치하지 않습니다.") {
+        setEmailWarningMessage("*이메일 또는 비밀번호가 일치하지 않습니다.");
+        setEmailValid(false);
+        emailRef.current.focus();
+      } else {
+        setEmailWarningMessage("");
+        localStorage.setItem("aName", result.user.accountname)
+        localStorage.setItem("uName", result.user.username)
+        localStorage.setItem("image", result.user.image)
+        localStorage.setItem("token", result.user.token)
+        localStorage.setItem("_id", result.user._id);
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
-    <form>
-      <label htmlFor="email">이메일</label>
-      <input id="userEmail" type="email" required onChange={handleInp} />
-      <label htmlFor="pass">비밀번호</label>
-      <input id="userPass" type="password" required onChange={handleInp} />
-      <button onClick={handleLogin}>제출</button>
-    </form>
+    <Container>
+      <h1 className="hidden">무지개마켓 로그인</h1>
+      <h2 className="login-title">로그인</h2>
+      <form className="login-form" onSubmit={onSubmitHandler}>
+        <InputTitle>이메일</InputTitle>
+        <Input
+          validTest={emailValid}
+          type="email"
+          ref={emailRef}
+          onKeyUp={goToNextSignUp}
+          onChange={emailValidCheck}
+          placeholder="이메일 주소를 입력해주세요"
+        />
+        <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
+        <InputTitle>비밀번호</InputTitle>
+        <Input
+          validTest={passwordValid}
+          type="password"
+          ref={passwordRef}
+          onKeyUp={goToNextSignUp}
+          onChange={passwordValidCheck}
+          placeholder="비밀번호를 입력해 주세요"
+        />
+        <WarningMessageWrapper>{passwordWarningMessage}</WarningMessageWrapper>
+        <LoginButtonWrapper>
+          <LoginButton disabled={isActive}>로그인</LoginButton>
+        </LoginButtonWrapper>
+      </form>
+    </Container>
   );
 }
