@@ -1,10 +1,10 @@
 import { Header, ListByText, ListByImg } from "./styledProfileFeedHeader";
 
-export default function ProfileFeedHeader({ setWithImg, withImg }) {
+export default function ProfileFeedHeader({ setOnlyImg, onlyImg }) {
   return (
     <Header>
-      <ListByText onClick={() => setWithImg(false)} withImg={withImg} />
-      <ListByImg onClick={() => setWithImg(true)} withImg={withImg} />
+      <ListByText onClick={() => setOnlyImg(false)} onlyImg={onlyImg} />
+      <ListByImg onClick={() => setOnlyImg(true)} onlyImg={onlyImg} />
     </Header>
   );
 }

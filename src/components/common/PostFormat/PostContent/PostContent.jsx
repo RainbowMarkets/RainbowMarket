@@ -7,17 +7,18 @@ import {
   PostBtn,
   PostWrapper,
   ProfileContain,
+  ImgBox,
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
 
 const PostContent = (props) => {
-  console.log(props.postDetail);
+  // console.log(props.postDetail);
   function handleSideMenu() {
     // console.log(props.postDetail.id)
     props.setPostModalActive(true);
     props.setReportPostNum(props.postDetail.id); // postid
   }
-  console.log("postContent", props);
+  // console.log("postContent", props);
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -35,14 +36,12 @@ const PostContent = (props) => {
       <ContextWrapper>
         <p className="post-context">{props.postDetail.content}</p>
         {/* 이미지 여부에 따라 달라지게 구현 예정 */}
-        {props.postDetail.image === "" ? (
-          <></>
-        ) : (
-          <img
-            className="post-img"
-            src={props.postDetail.image}
-            alt="게시글 이미지"
-          />
+        {props.postDetail.image === "" ? null : (
+          <ImgBox>
+            {props.postDetail.image.split(",").map((img) => {
+              return <img className="post-img" src={img} alt="게시글 이미지" />;
+            })}
+          </ImgBox>
         )}
 
         <PostBtn>
