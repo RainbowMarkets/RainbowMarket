@@ -152,9 +152,9 @@ const Post = (props) => {
   // console.log(fileName.join(","));
   // console.log(uploadData);
 
-  // 1. 프로필 이미지 가져오기 (V)
+  // 해결해봐야 할 것
   // 2. 파일 선택시 화면에 띄우기 (V) -> 뒤에서 부터 삭제만 가능한 부분 해결하기, 같은 파일 지웠다가 다시 로드했을때 나오지 않음
-  // 3. 업로드 버튼 누르면 이미지 새로 고침
+
   return (
     <>
       <UpLoadTopBar
