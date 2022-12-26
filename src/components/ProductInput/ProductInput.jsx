@@ -5,6 +5,9 @@ export default function ProductInput({
   placeholder,
   stateInp,
   handler,
+  inptype,
+  min,
+  max,
 }) {
   return (
     <>
@@ -14,6 +17,9 @@ export default function ProductInput({
         placeholder={placeholder}
         value={stateInp}
         onChange={handler}
+        type={inptype}
+        minLength={min}
+        maxLength={max}
       />
     </>
   );

@@ -6,6 +6,8 @@ export default function SetProfileInput({
   placeholder,
   value,
   handler,
+  min,
+  max,
 }) {
   return (
     <>
@@ -13,6 +15,8 @@ export default function SetProfileInput({
       <Input
         id={id}
         placeholder={placeholder}
+        minLength={min}
+        maxLength={max}
         required
         value={value}
         onChange={handler}
