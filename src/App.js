@@ -27,46 +27,6 @@ function App() {
   });
 
   return (
-<<<<<<< Updated upstream
-    <UserContextProvider>
-      <Container>
-        <GlobalStyle />
-        <Aside>
-          <img src="https://cdn.pixabay.com/photo/2017/10/05/09/37/equalizer-2818803_960_720.jpg" />
-        </Aside>
-        <Wrapper>
-          {isFirst ? (
-            <Splash />
-          ) : (
-            <BrowserRouter>
-              <Main>
-                <Routes>
-                  <Route exact path="/" element={<Home />} />
-                  <Route exact path="/profile" element={<Profile />} />
-                  <Route path="/profile/edit" element={<ProfileEdit />} />
-                  <Route
-                    path="/profile/:accountname"
-                    element={<ProfileEdit />}
-                  />
-                  <Route path="/search" element={<Search />} />
-                  <Route path="/chat" element={<Chat />} />
-                  <Route path="/post" element={<Post />} />
-                  <Route path="/post/postdetail" element={<PostDetail />} />
-                  <Route path="/join" element={<JoinWithEmail />} />
-                  <Route
-                    path="/profile/:accountname/follower"
-                    element={<Follow />}
-                  ></Route>
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Main>
-              <Navbar />
-            </BrowserRouter>
-          )}
-        </Wrapper>
-      </Container>
-    </UserContextProvider>
-=======
     <Container>
       <GlobalStyle />
       <Aside>
@@ -108,7 +68,6 @@ function App() {
         )}
       </Wrapper>
     </Container>
->>>>>>> Stashed changes
   );
 }
 export default App;
