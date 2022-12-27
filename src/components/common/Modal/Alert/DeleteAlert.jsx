@@ -29,7 +29,6 @@ const DeleteAlert = (props) => {
       navigate("/profile");
     }
   }
-  // 현재 문제 : 모달창 "삭제하기" 누르기만 해도 삭제 발생 -> 모달창 "삭제하기" 클릭 후 경고 창 "확인"을 눌러야 삭제 진행
   const sendDelete = async () => {
     await fetch(url + `/post/${props.reportPostNum}`, {
       method: "DELETE",
