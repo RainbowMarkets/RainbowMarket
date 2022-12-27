@@ -117,17 +117,24 @@ const Post = (props) => {
     const reader = new FileReader();
     const imageLists = event.target.files;
     let imageUrlLists = [...previewImgUrl];
+    let imageListsLength = imageLists.length > 3 ? 3 : imageLists;
     console.log(imageLists);
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
+      console.log("현재 : ", currentImageUrl);
+      console.log("누적 : ", imageUrlLists);
     }
-    if (imageUrlLists.length > 3) {
+    if (imageUrlLists.length > 2) {
       alert("3개 이하의 파일을 업로드 하세요.");
       imageUrlLists = imageUrlLists.slice(0, 3);
+      console.log("누적 슬라이스 : ", imageUrlLists);
+
+      setPreviewImgUrl(imageUrlLists);
+    } else if (imageLists.length <= 3) {
+      setPreviewImgUrl(imageUrlLists);
     }
-    setPreviewImgUrl(imageUrlLists);
 
     console.log(imageLists);
   };
@@ -216,7 +223,7 @@ const Post = (props) => {
                 <label htmlFor="imgUpLabel" className="img-up-btn"></label>
                 <input
                   id="imgUpLabel"
-                  /*multiple*/
+                  multiple
                   alt="사진추가"
                   type="file"
                   accept="image/*"
