@@ -12,7 +12,7 @@ import {
 import UserList from "../../UserList/UserList";
 
 const PostContent = (props) => {
-  // console.log(props.postDetail);
+  console.log("postContent : ", props.postData);
   function handleSideMenu() {
     // console.log(props.postDetail.id)
     props.setPostModalActive(true);
@@ -53,6 +53,8 @@ const PostContent = (props) => {
           />
           <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
             commentDataLength={props.commentDataLength}
+            /* profileCommentCount={props.postData.commentCount}
+            profileComments={props.postData.comments}*/
           />
         </PostBtn>
         <PostDate upDate={props.postDetail.updatedAt} />

@@ -43,6 +43,7 @@ export default function ProfileFeedSection({
         {!onlyImg ? (
           data &&
           data.map((myPostList, i) => {
+            console.log(i, "번째", myPostList);
             return (
               <StyledPostContent>
                 <h4 className="hidden"> 각각의 게시글입니다.</h4>
@@ -53,7 +54,8 @@ export default function ProfileFeedSection({
                   setReportPostNum={setReportPostNum}
                   postModalActive={postModalActive}
                   setPostModalActive={setPostModalActive}
-                  isHeartOn={isHeartOn}
+                  isHeartOn={myPostList.hearted}
+                  likeCount={myPostList.heartCount}
                 />
               </StyledPostContent>
             );

@@ -44,7 +44,7 @@ const PostHeartBtn = ({
     }
     // 하트 눌린 게시물 -> hearted : true 값
     if (isHeartOn) {
-      const reqPath = `/post/639ab92f17ae666581c625a1/unheart`;
+      const reqPath = `/post/${post_id}/unheart`;
       const url = "https://mandarin.api.weniv.co.kr";
       try {
         const res = await fetch(url + reqPath, {
@@ -74,16 +74,20 @@ const PostHeartBtn = ({
     <>
       {isHeartOn ? (
         <HeartWrapper>
-          <button type="button" onClick={handleHeart} className="heartBtnOn">
-            {/* <img src={iconHeart} alt="하트 아이콘" /> */}
-          </button>
+          <button
+            type="button"
+            onClick={handleHeart}
+            className="heartBtnOn"
+          ></button>
           <span>{likeCount}</span>
         </HeartWrapper>
       ) : (
         <HeartWrapper>
-          <button type="button" onClick={handleHeart} className="heartBtn">
-            {/* <img src={iconHeart} alt="하트 아이콘" /> */}
-          </button>
+          <button
+            type="button"
+            onClick={handleHeart}
+            className="heartBtn"
+          ></button>
           <span>{likeCount || 0}</span>
         </HeartWrapper>
       )}
