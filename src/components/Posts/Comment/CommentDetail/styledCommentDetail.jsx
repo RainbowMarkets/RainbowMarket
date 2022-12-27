@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import iconMoreVertical from "../../../../assets/images/icon- more-vertical.png";
 import { colors, fonts } from "../../../../GlobalStyle";
@@ -59,4 +60,8 @@ export const CommentWrapper = styled.section`
     top: 5px;
     right: 0px;
   }
+`;
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;

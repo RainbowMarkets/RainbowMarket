@@ -76,6 +76,7 @@ export default function Profile() {
   }, []);
 
   console.log("postData :", postData);
+  console.log("userInfo:", userInfo.user._id);
 
   return (
     <>
@@ -100,6 +101,9 @@ export default function Profile() {
             <ProfileFeedSection
               name={userInfo.user.accountname}
               data={postData}
+              setPostData={setPostData}
+              postData={postData}
+              myId={userInfo.user._id}
             />
             <Modal
               modalActive={modalActive}
