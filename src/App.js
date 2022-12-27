@@ -53,6 +53,7 @@ function App() {
                 <Route path="/chat/chatroom" element={<ChatRoom />} />
                 <Route expact path="/post" element={<Post />} />
                 <Route path="/post/:post_id" element={<PostDetail />} />
+                <Route path="/post/:post_id/edit" element={<Post />} />
                 <Route path="/join" element={<JoinWithEmail />} />
                 <Route path="/login" element={<Login />} />
                 <Route

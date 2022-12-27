@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { OnlyImage, StyledSection } from "./styledProfileFeedSection";
+import {
+  OnlyImage,
+  StyledPostContent,
+  StyledSection,
+} from "./styledProfileFeedSection";
 import ProfileFeedHeader from "./ProfileFeedHeader/ProfileFeedHeader";
 import PostContent from "../../common/PostFormat/PostContent/PostContent";
 import PostModal from "../../common/Modal/Modal/PostModal";
@@ -40,15 +44,18 @@ export default function ProfileFeedSection({
           data &&
           data.map((myPostList, i) => {
             return (
-              <PostContent
-                key={i}
-                id={myPostList.id}
-                postDetail={myPostList}
-                setReportPostNum={setReportPostNum}
-                postModalActive={postModalActive}
-                setPostModalActive={setPostModalActive}
-                isHeartOn={isHeartOn}
-              />
+              <StyledPostContent>
+                <h4 className="hidden"> 각각의 게시글입니다.</h4>
+                <PostContent
+                  key={i}
+                  id={myPostList.id}
+                  postDetail={myPostList}
+                  setReportPostNum={setReportPostNum}
+                  postModalActive={postModalActive}
+                  setPostModalActive={setPostModalActive}
+                  isHeartOn={isHeartOn}
+                />
+              </StyledPostContent>
             );
           })
         ) : (
