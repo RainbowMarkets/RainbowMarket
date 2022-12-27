@@ -13,7 +13,8 @@ const Header = styled.div`
   align-items: center;
   gap: 16px;
   margin: 0 auto;
-  border: 0.5px solid #dbdbdb;
+  padding: 9px 16px;
+  border-bottom: 0.5px solid #dbdbdb;
 `;
 
 const ListByText = styled.button`

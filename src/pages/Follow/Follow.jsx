@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import UserList from "../../components/common/UserList/UserList";
-import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
 import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
 import { OrderList } from "./styledFollow";
+import FollowTopbar from "../../components/TopBar/FollowTopBar/FollowTopBar";
 
 export default function Follow() {
   const location = useLocation();
@@ -22,7 +22,7 @@ export default function Follow() {
   // 탑바 메뉴 어떻게 해야할지?
   return (
     <>
-      <CommonTopBar />
+      <FollowTopbar />
       <OrderList>
         {follows.map((data, i) => {
           return <UserList key={i} width="50px" {...data} pagefollow />;
