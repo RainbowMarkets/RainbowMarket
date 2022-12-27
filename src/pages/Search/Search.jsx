@@ -1,92 +1,91 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "../../components/common/Loading/Loading";
-import UserList from '../../components/common/UserList/UserList'
-import Splash from "../../components/Splash/Splash";
-import SearchTopBar from '../../components/TopBar/SearchTopBar/SearchTopBar'
+import UserList from "../../components/common/UserList/UserList";
+import SearchTopBar from "../../components/TopBar/SearchTopBar/SearchTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import { StyledSection, StyledUl } from "./styledSearch";
 
 
 export default function Search() {
   const { user } = useUserContext();
-  const [searchInp, setSearchInp] = useState(null);
-  const [userData, setUserData] = useState([]);
+  const [searchInp, setSearchInp] = useState("");
+  const [userData, setUserData] = useState([]); // 뿌려줄 데이터 
 
-  const [isLoaded, setIsLoaded] = useState(true); // 로딩표시
-  const [target, setTarget] = useState(null); //감시할 target
-  const [offset, setOffset] = useState(0); // 15개씩 가져올것
-  // const [stop, setStop] = useState(false); // 데이터 로딩 중지
+  const [tempData, setTempData] = useState([]); // 입시로 들어갈 데이터
+  const [offset, setOffset] = useState(0);
+  const observeTarget = useRef(); // 감시할 target
 
   const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/user/searchuser/?keyword=dada`; /* ${searchInp} */
+  const reqPath = `/user/searchuser/?keyword=${searchInp}`; /* ${searchInp} */
 
+  const callbackFunction = (entries) => {
+    const [ entry ] = entries;
+    if(tempData.length > offset && entry.isIntersecting){
+      setOffset((offset) => offset + 15);
+    }
+  }
+
+  // 옵션 안넣어도 됨
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1.0
+  }
+
+  // 데이터 가져오기
   const fetchUserData = async () => {
+    if(searchInp === "") {
+      setUserData([]);
+      setTempData([]);
+      return;
+    }
     try {
       const res = await fetch(url + reqPath, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${user.token}`,
           "Content-type": "application/json"
-        },
-
+        }
       });
       const data = await res.json();
-      setUserData((userData) => [...userData, ...data]);
-      console.log(data);
-      setOffset((offset) => offset + data.length);
-      /*           setIsLoaded(false);
-                if (data.length < 15) {
-                  setStop(true);
-                } */
+      // console.log(data)
+      setOffset(15);
+      setUserData([]);
+      setTempData(data);
+      // console.log(data);
     } catch (err) {
       console.log("err", err);
     }
   };
 
-  // useEffect(()=>{
-  //   fetchUserData();
-  // }, [searchInp])
+  useEffect(()=>{
+    if (!user.token) return;
+    fetchUserData();
+  }, [searchInp]);
+
+  // API
+  useEffect(() => {
+    const observer = new IntersectionObserver(callbackFunction, options);
+    if (observeTarget.current) {
+      observer.observe(observeTarget.current)
+    };
+    return () => {
+      if (observeTarget.current){
+        observer.unobserve(observeTarget.current);
+      }
+    }
+  }, [observeTarget, options]);
 
   useEffect(() => {
-    let observer;
-    if (target) {
-      const onIntersect = async ([entry], observer) => {
-        if (entry.isIntersecting) {
-          observer.unobserve(entry.target);
-          await fetchUserData();
-          observer.observe(entry.target);
-        }
-      };
-      observer = new IntersectionObserver(onIntersect, { threshold: 1 });
-      observer.observe(target);
-    }
-    return () => observer && observer.disconnect();
-  }, [target, searchInp]);
+    const copyData = [...userData];
+    copyData.push(...tempData.slice(offset - 15, offset));
+    setUserData(copyData);
+  }, [tempData, offset]);
 
-  // useEffect(() => {
-  //   if (!user.token) return;
-  //   setIsLoading(true);
-  //   const fetchUserData = async () => {
-  //     await fetch(url + reqPath, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization : `Bearer ${user.token}`,
-  //         "Content-type" : "application/json"
-  //       }
-  //     })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       // console.log("searchtest!!", res);
-  //       setUserData(res || []);
-  //       setIsLoading(false);
-  //     })
-  //     .then(searchInp === "" ? setSearchInp(null) : setSearchInp(searchInp))
-  //   }
-  //   fetchUserData();
-  // }, [searchInp]);
-
+  // 서치 탑바에서 가져온 inpvalue
   function handleSearchInput(e){
     setSearchInp(e.target.value);
+    // console.log(searchInp);
   }
 
   return (
@@ -110,8 +109,9 @@ export default function Search() {
               )
             })
           }
-          <li ref={setTarget}></li>
+          {/* <li ref={observeTarget}>돼라아아아아</li> */}
         </StyledUl>
+        <div ref={observeTarget}></div>
       </StyledSection>
     </>
   )
