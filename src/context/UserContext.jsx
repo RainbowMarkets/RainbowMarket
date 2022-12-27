@@ -23,7 +23,7 @@ const UserContextProvider = ({ children }) => {
     username = localStorage.getItem("uName"),
     image = localStorage.getItem("image"),
     token = localStorage.getItem("token"),
-    _id = localStorage.getItem("id");
+    _id = localStorage.getItem("_id");
 
   const userData = token ? { accountname, username, image, token, _id } : null;
 
