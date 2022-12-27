@@ -17,7 +17,10 @@ export default function Home() {
       ) : (
         <>
           <MainTopBar />
-          {isHaveFeed ? <IsHaveFeed /> : <NoFeed />}
+          {isHaveFeed ? 
+            <IsHaveFeed
+              setIsHaveFeed={setIsHaveFeed}/> :
+            <NoFeed />}
         </>
       )}
       {/* <Modal /> */}

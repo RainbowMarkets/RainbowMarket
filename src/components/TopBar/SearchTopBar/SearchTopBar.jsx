@@ -22,7 +22,7 @@ export default function SearchTopBar(props) {
         id="searchId"
         type="text"
         placeholder="계정 검색"
-        value={props.searchInp}
+        value={props.searchInp || ""}
         onChange={props.handleSearchInput}/>
     </StyledHeader>
   )
