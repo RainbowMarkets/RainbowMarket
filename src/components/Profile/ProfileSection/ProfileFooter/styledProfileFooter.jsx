@@ -31,6 +31,11 @@ const FollowButton = styled.button`
   height: 34px;
   border-radius: 30px;
   padding: 8px 0;
+  transition: 0.3s;
+
+  &:active {
+    scale: 0.9;
+  }
 `;
 
 const UnFollowButton = styled(ProfileModifyButton)`

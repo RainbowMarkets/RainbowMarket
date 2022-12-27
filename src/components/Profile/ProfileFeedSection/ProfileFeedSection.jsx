@@ -42,18 +42,18 @@ export default function ProfileFeedSection({ name, data }) {
             <ol>
               {data.map((post) => {
                 return (
-                  <li>
+                  <>
                     {post.image ? (
                       post.image.includes(",") ? (
-                        <>
+                        <li>
                           <img src={post.image.split(",")[0]} />
                           <img className="layer-icon" src={imgLayerIcon} />
-                        </>
+                        </li>
                       ) : (
                         <img src={post.image} />
                       )
                     ) : null}
-                  </li>
+                  </>
                 );
               })}
             </ol>
