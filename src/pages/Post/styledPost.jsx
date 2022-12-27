@@ -41,9 +41,13 @@ export const TextWrapper = styled.section`
     resize: none;
     margin-bottom: 16px;
     outline: none;
+    font-size: ${fonts.main};
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
   }
   .form-textarea::placeholder {
     color: ${colors.colorC4};
+    font-size: ${fonts.main};
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
   }
 
   .label-wrap {

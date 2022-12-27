@@ -1,15 +1,7 @@
 import { useState, useRef } from "react";
 /*import { useNavigate } from "react-router-dom";*/
-import {
-  LoginButtonWrapper,
-  WarningMessageWrapper,
-} from "./Login.style";
-import {
-  Container,
-  Input,
-  InputTitle,
-  LoginButton,
-} from "./Login.style";
+import { LoginButtonWrapper, WarningMessageWrapper } from "./Login.style";
+import { Container, Input, InputTitle, LoginButton } from "./Login.style";
 
 export default function JoinWithEmail() {
   const [emailWarningMessage, setEmailWarningMessage] = useState("");
@@ -23,7 +15,6 @@ export default function JoinWithEmail() {
 
   const url = "https://mandarin.api.weniv.co.kr";
   /* const navigate = useNavigate(); */
-
 
   // 이메일 유효성 검사
   const emailValidCheck = ({ target }) => {
@@ -58,12 +49,12 @@ export default function JoinWithEmail() {
     }
   };
 
-      const loginData = {
-      user: {
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      },
-    };
+  const loginData = {
+    user: {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    },
+  };
 
   // 로그인버튼 활성화 검사
   const goToNextSignUp = () => {
@@ -80,7 +71,7 @@ export default function JoinWithEmail() {
     console.log(loginData);
 
     try {
-      const res = await fetch(url + '/user/login', {
+      const res = await fetch(url + "/user/login", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -99,18 +90,17 @@ export default function JoinWithEmail() {
         emailRef.current.focus();
       } else {
         setEmailWarningMessage("");
-        localStorage.setItem("aName", result.user.accountname)
-        localStorage.setItem("uName", result.user.username)
-        localStorage.setItem("image", result.user.image)
-        localStorage.setItem("token", result.user.token)
+        localStorage.setItem("aName", result.user.accountname);
+        localStorage.setItem("uName", result.user.username);
+        localStorage.setItem("image", result.user.image);
+        localStorage.setItem("token", result.user.token);
         localStorage.setItem("_id", result.user._id);
+        window.location.assign("/");
       }
-      
     } catch (error) {
       console.log(error);
     }
   };
-
 
   return (
     <Container>
@@ -144,4 +134,3 @@ export default function JoinWithEmail() {
     </Container>
   );
 }
-

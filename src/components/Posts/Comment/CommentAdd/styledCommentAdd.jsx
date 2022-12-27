@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../../GlobalStyle";
+import { colors, fonts } from "../../../../GlobalStyle";
 
 export const CommentAddWrapper = styled.form`
   display: flex;
@@ -28,6 +28,8 @@ export const CommentAddWrapper = styled.form`
     font-weight: 400;
     line-height: 17.53px;
     color: ${colors.colorC4};
+    font-size: ${fonts.main};
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
   }
   button.activeBtn {
     color: ${colors.colorMain};

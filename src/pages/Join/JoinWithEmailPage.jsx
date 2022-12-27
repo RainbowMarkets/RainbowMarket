@@ -1,12 +1,11 @@
 import JoinWithEmail from "../../components/Join/JoinWithEmail";
 
 function JoinWithEmailPage() {
-
-    return (
-        <>
-            <JoinWithEmail />
-        </>
-    )
+  return (
+    <>
+      <JoinWithEmail />
+    </>
+  );
 }
 
 export default JoinWithEmailPage;

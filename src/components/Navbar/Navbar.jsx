@@ -23,12 +23,12 @@ export default function Navbar() {
   const nowLocation = location.pathname;
 
   if (
-    nowLocation !== "/" &&
-    nowLocation !== "/search" &&
-    nowLocation !== "/chat" &&
-    nowLocation !== "/profile" &&
-    !nowLocation.includes("/profile/") /* ||
-    !user */
+    (nowLocation !== "/" &&
+      nowLocation !== "/search" &&
+      nowLocation !== "/chat" &&
+      nowLocation !== "/profile" &&
+      !nowLocation.includes("/profile/")) ||
+    !user
   )
     return null; /* (이거 해제하면 splash에서 내비바 없어짐) */
 
@@ -79,7 +79,8 @@ export default function Navbar() {
                 nowLocation === "/profile"
                   ? { color: colors.colorMain }
                   : { color: colors.color76 }
-              }>
+              }
+            >
               <StyledImg
                 src={nowLocation === "/profile" ? imgProfileFill : imgProfile}
                 alt="프로필"

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../../GlobalStyle";
+import { colors, fonts } from "../../../../GlobalStyle";
 
 export const ModalWrapper = styled.section`
   /* 모달창 외부 */
@@ -84,6 +84,8 @@ export const ModalWrapper = styled.section`
   }
 
   button {
+    font-size: ${fonts.main};
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     display: flex;
     /* color: red; */
     font-weight: 400;

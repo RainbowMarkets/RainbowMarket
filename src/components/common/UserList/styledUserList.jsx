@@ -48,8 +48,14 @@ export const StyledButton = styled.button`
   font-size: ${fonts.mid};
   color: ${(props) => (props.isfollow ? "black" : "white")};
   border: ${(props) => (props.isfollow ? "1px solid #dbdbdb" : "none")};
+
+  transition: 0.3s;
+
+  &:active {
+    scale: 0.9;
+  }
 `;
 
 export const StyledSpan = styled.span`
   color: ${colors.colorMain};
-`
+`;
