@@ -4,6 +4,7 @@ import { GlobalStyle } from "./GlobalStyle";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import Post from "./pages/Post/Post";
+import PostEdit from "./pages/Post/PostEdit";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
@@ -53,7 +54,7 @@ function App() {
                 <Route path="/chat/chatroom" element={<ChatRoom />} />
                 <Route expact path="/post" element={<Post />} />
                 <Route path="/post/:post_id" element={<PostDetail />} />
-                <Route path="/post/:post_id/edit" element={<Post />} />
+                <Route path="/post/:post_id/edit" element={<PostEdit />} />
                 <Route path="/join" element={<JoinWithEmail />} />
                 <Route path="/login" element={<Login />} />
                 <Route

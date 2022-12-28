@@ -12,13 +12,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import { UserContext } from "../../context/UserContext";
+import { useParams } from "react-router-dom";
 
 const formData = new FormData();
 
 const PostEdit = (props) => {
   const [isValid, setIsValid] = useState(false);
   const textRef = useRef();
+  const param = useParams();
   const [profileImg, setProfileImg] = useState("");
+
   const [inpValue, setInpValue] = useState("");
   const [fileName, setFileName] = useState([]); // 인코딩된 이미지 주소
   const [uploadData, setUploadData] = useState([]);
@@ -60,6 +63,28 @@ const PostEdit = (props) => {
       console.log("err", err);
     }
   };
+  console.log(param);
+
+  // 게시글 수정하기
+  // const putPostData = async (e) => {
+  //   const reqPath = `/post/${param.post_id}`;
+
+  //   try {
+  //     await fetch(url + reqPath, {
+  //       method: "PUT",
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //         "Content-type": "application/json",
+  //       },
+  //       body: {
+  //         post: {
+  //           content: "String",
+  //           image: "String",
+  //         },
+  //       },
+  //     }).catch((err) => console.log(err));
+  //   }
+  // };
 
   // 이미지 서버에 전송하기
   const fetchImgServer = async (e) => {
@@ -87,8 +112,23 @@ const PostEdit = (props) => {
             .map((item) => url + "/" + item.filename)
             .join(",");
           // console.log(imageNames);
-          fetch(url + "/post", {
-            method: "POST",
+          // fetch(url + "/post", {
+          //   method: "POST",
+          //   headers: {
+          //     Authorization: `Bearer ${user.token}`,
+          //     "Content-type": "application/json",
+          //   },
+          //   body: JSON.stringify({
+          //     post: {
+          //       content: `${inpValue}`,
+          //       image: `${imageNames}`,
+          //     },
+          //   }),
+          // })
+
+          // 게시글 수정하기
+          fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
+            method: "PUT",
             headers: {
               Authorization: `Bearer ${user.token}`,
               "Content-type": "application/json",
@@ -103,7 +143,7 @@ const PostEdit = (props) => {
             .then((res) => res.json())
             .then((res) => {
               // 게시글 작성하기 (업로드)
-              console.log("받은 데이터", res);
+              console.log("수정 받은 데이터", res);
             })
             .then(() => window.location.assign("/profile"));
         });
@@ -111,6 +151,7 @@ const PostEdit = (props) => {
       console.log("err", err);
     }
   };
+
   // 이미지 미리 보여주기 (한번에 선택했을 때 보여주는 방법)
   const previewImg = (event) => {
     for (const file of event.target.files) {
@@ -161,6 +202,35 @@ const PostEdit = (props) => {
     if (!user.token) return;
     fetchProfile();
   }, [setUploadData]);
+
+  // 최초 접속 시 상세 정보를 받아와서 미리 입력
+  useEffect(() => {
+    console.log("param :", param);
+    fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(`getData(/post/${param.post_id})의 응답 :\n`, res);
+        console.log(res.post.content);
+        console.log(res.post.image);
+        setInpValue(res.post.content);
+        let splitImgArr = res.post.image;
+        splitImgArr = splitImgArr.split(",");
+        console.log("split 이미지", splitImgArr);
+        setPreviewImgUrl(splitImgArr);
+        // setFileName(res.post.image);
+        // setPreview(res.product.itemImage);se
+        // setItemName(res.product.itemName);
+        // setItemPrice("" + res.product.price);
+        // setItemLink(res.product.link);
+        // setValid(true);
+      });
+  }, []);
 
   // console.log(fileName);
   // console.log(previewImgUrl);

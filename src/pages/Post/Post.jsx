@@ -21,6 +21,8 @@ const Post = (props) => {
   const [profileImg, setProfileImg] = useState("");
   const [inpValue, setInpValue] = useState("");
   const [fileName, setFileName] = useState([]); // 인코딩된 이미지 주소
+
+  const [tempFileName, setTempFileName] = useState([]); // 임시 이미지 주소
   const [uploadData, setUploadData] = useState([]);
   const [previewImgUrl, setPreviewImgUrl] = useState([]); //  미리보기 이미지 url
   const imgRef = useRef();
@@ -62,6 +64,7 @@ const Post = (props) => {
   // 이미지 서버에 전송하기
   const fetchImgServer = async (e) => {
     const reqPath = `/image/uploadfiles`;
+
     // console.log("이거", imgRef.current.files);
     for (const key of formData.keys()) {
       console.log("key", key);
@@ -79,12 +82,31 @@ const Post = (props) => {
         .then((res) => {
           // 게시글 작성하기 (업로드)
           console.log("받은 데이터", res);
-          console.log("fileName :", fileName);
-
+          console.log("fileName :", [...fileName]);
+          // tempFileName 이 누적된 파일 배열이니깐 콤마 기준으로 분리해서 item.filename에 각각 뿌려주기~
+          // httpI//sdfsdfsdf,http:////sdfsdfsdf,http:////sdfsdfsdf,
           const imageNames = res
-            .map((item) => url + "/" + item.filename)
+            .map((item) => {
+              console.log(item.filename);
+              const newArr = [];
+              // setTempFileName([item.filename]);
+              setTempFileName((prev) => [item.filename, ...prev]);
+              console.log("임시파일 아이템", tempFileName);
+              // let copyArr = tempFileName;
+              // console.log("임시파일", tempFileName);
+              // return url + "/" + item.filename;
+              // return url + "/" + tempFileName[item];
+
+              newArr.push(url + "/" + item.filename);
+
+              // console.log("스플릿", imageSplit);
+              return newArr;
+            })
             .join(",");
-          // console.log(imageNames);
+
+          console.log(imageNames);
+          console.log("임시파일", tempFileName);
+
           fetch(url + "/post", {
             method: "POST",
             headers: {
@@ -118,7 +140,6 @@ const Post = (props) => {
     const imageLists = event.target.files;
     let imageUrlLists = [...previewImgUrl];
     let imageListsLength = imageLists.length > 3 ? 3 : imageLists;
-    console.log(imageLists);
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
@@ -136,7 +157,7 @@ const Post = (props) => {
       setPreviewImgUrl(imageUrlLists);
     }
 
-    console.log(imageLists);
+    console.log([imageLists]);
   };
 
   // 이미지 삭제하기
@@ -158,9 +179,13 @@ const Post = (props) => {
   useEffect(() => {
     if (!user.token) return;
     fetchProfile();
+
+    // const copyFileName = [...fileName];
+    // copyFileName.push(...tempFileName.slice(0, 3));
+    // setFileName(copyFileName);
   }, [setUploadData]);
 
-  // console.log(fileName);
+  console.log(fileName);
   // console.log(previewImgUrl);
   // console.log(fileName.join(","));
   // console.log(uploadData);

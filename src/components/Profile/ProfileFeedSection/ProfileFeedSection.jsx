@@ -20,7 +20,7 @@ export default function ProfileFeedSection({
 }) {
   const { user } = useUserContext();
   const [onlyImg, setOnlyImg] = useState(false);
-  console.log(postData);
+  // console.log(postData);
 
   const [postModalActive, setPostModalActive] = useState(false);
   const [isDeletePost, setIsDeletePost] = useState(false);
@@ -43,12 +43,12 @@ export default function ProfileFeedSection({
         {!onlyImg ? (
           data &&
           data.map((myPostList, i) => {
-            console.log(i, "번째", myPostList);
+            // console.log(i, "번째", myPostList);
             return (
               <StyledPostContent>
                 <h4 className="hidden"> 각각의 게시글입니다.</h4>
                 <PostContent
-                  key={i}
+                  key={myPostList.id}
                   id={myPostList.id}
                   postDetail={myPostList}
                   setReportPostNum={setReportPostNum}
