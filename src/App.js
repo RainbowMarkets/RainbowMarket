@@ -14,7 +14,7 @@ import { UserContextProvider } from "./context/UserContext";
 import PostDetail from "./components/Posts/PostDetail";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import MyProfile from "./pages/Profile/MyProfile";
-import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
+import Join from "./pages/Join/Join";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
@@ -56,7 +56,8 @@ function App() {
                 <Route expact path="/post" element={<Post />} />
                 <Route path="/post/:post_id" element={<PostDetail />} />
                 <Route path="/post/:post_id/edit" element={<PostEdit />} />
-                <Route path="/join" element={<JoinWithEmail />} />
+                <Route path="/join" element={<Join />} />
+                <Route path="/post/:post_id/edit" element={<PostEdit />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                   path="/profile/:accountname/follower"

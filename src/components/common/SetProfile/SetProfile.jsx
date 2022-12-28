@@ -13,8 +13,13 @@ export default function SetProfile({
   setUsername,
   setAccountname,
   setIntro,
+  image,
+  setImage,
+  valid,
   setValid,
+  submitHandler,
 }) {
+  // validation check 함수 시작
   const [usernameCheck, setUsernameCheck] = useState(!!username);
   const [accountnameCheck, setAccountnameCheck] = useState(!!accountname);
 
@@ -79,6 +84,7 @@ export default function SetProfile({
         }
       });
   };
+  // validation check 함수 종료
 
   const introHandler = (event) => {
     setIntro(event.target.value);
@@ -93,11 +99,14 @@ export default function SetProfile({
     }
   }, [username, accountname, usernameCheck, accountnameCheck]);
 
-  console.log(usernameCheck, accountnameCheck);
   return (
     <Form>
       {join ? <SetprofileHeader /> : null}
-      <SetProfileImage uploadInp={uploadInp} />
+      <SetProfileImage
+        uploadInp={uploadInp}
+        image={image}
+        setImage={setImage}
+      />
       <SetProfileInput
         id="username"
         label="사용자 이름"
@@ -127,7 +136,11 @@ export default function SetProfile({
         value={intro}
         handler={introHandler}
       />
-      {join ? <StartButton>감귤마켓 시작하기</StartButton> : null}
+      {join ? (
+        <StartButton disabled={!valid} onClick={submitHandler}>
+          감귤마켓 시작하기
+        </StartButton>
+      ) : null}
     </Form>
   );
 }
