@@ -56,6 +56,7 @@ export default function ProfileFeedSection({
                   setPostModalActive={setPostModalActive}
                   isHeartOn={myPostList.hearted}
                   likeCount={myPostList.heartCount}
+                  commentDataLength={myPostList.commentCount}
                 />
               </StyledPostContent>
             );

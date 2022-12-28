@@ -55,6 +55,7 @@ export default function IsHaveFeed(props) {
               setPostModalActive={setPostModalActive}
               isHeartOn={feeditem.hearted}
               likeCount={feeditem.heartCount}
+              commentDataLength={feeditem.commentCount}
             />
           </StyledSection>
         );
