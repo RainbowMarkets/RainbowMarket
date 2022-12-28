@@ -13,6 +13,7 @@ const ItemList = styled.ol`
 const Item = styled.a`
   color: black;
   text-decoration: none;
+  cursor: pointer;
 
   figure > img {
     width: 140px;
