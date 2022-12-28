@@ -47,7 +47,7 @@ export default function IsHaveFeed(props) {
     <>
       {feedData.map((feeditem, index) => {
         return (
-          <StyledSection key={index}>
+          <StyledSection key={feeditem.id.length * index}>
             <PostContent
               postDetail={feeditem}
               setReportPostNum={setReportPostNum}
