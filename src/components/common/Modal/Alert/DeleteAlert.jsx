@@ -1,42 +1,52 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 
 const DeleteAlert = (props) => {
+  console.log(props.postId);
+  console.log(props.reportPostNum);
   const { user } = useUserContext();
   const navigate = useNavigate();
   const location = useLocation();
 
   const url = "https://mandarin.api.weniv.co.kr";
 
-  const sendDelete = async (postId) => {
-    await fetch(url + `/post/${postId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-        "Content-type": "application/json"
-      }
-    }).then((res) => res.json())
-      .then((res) => {
-        console.log("삭제되었습니다", res);
-      })
+  function handleCancelDelete() {
+    // props.setIsDeletePost(false);
+    props.setPostModalActive(false);
+    props.setIsAlertCancel(false);
   }
 
-  function handleCancelDelete(){
-    props.setIsDeletePost(false);
-  }
-
-  function handleDelete(){
-    sendDelete(props.postId);
-    if (location.pathname == "/profile") {
-      props.setIsDeletePost(false);
+  function handleDelete() {
+    sendDelete();
+    if (location.pathname === "/profile") {
       props.setPostModalActive(false);
-      window.location.reload(); // 새로고침 하는게 맞나...?
+      props.setIsAlertCancel(false);
+      // window.location.reload(); // 새로고침 하는게 맞나...?
     } else {
       navigate("/profile");
     }
   }
+  const sendDelete = async () => {
+    await fetch(url + `/post/${props.reportPostNum}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("삭제되었습니다", res);
+        props.setPostData((prev) =>
+          [...prev].filter((item) => item.postId !== props.reportPostNum)
+        );
+        window.location.reload();
+      });
+  };
+  useEffect(() => {}, [props.postData]);
 
   return (
     <>
@@ -49,7 +59,9 @@ const DeleteAlert = (props) => {
               <button onClick={handleCancelDelete}>취소</button>
             </li>
             <li>
-              <button className="alert-del" onClick={handleDelete}>삭제</button>
+              <button className="alert-del" onClick={handleDelete}>
+                삭제
+              </button>
             </li>
           </ul>
         </div>

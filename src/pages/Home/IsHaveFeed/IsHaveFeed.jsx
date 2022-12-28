@@ -4,7 +4,7 @@ import PostContent from "../../../components/common/PostFormat/PostContent/PostC
 import useUserContext from "../../../hooks/useUserContext";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
 
-export default function IsHaveFeed() {
+export default function IsHaveFeed(props) {
   // const { user } = useUserContext();
   // console.log(user.token)
   const token = localStorage.getItem("token");
@@ -27,7 +27,14 @@ export default function IsHaveFeed() {
         .then((res) => {
           console.log("test!!!!", res.posts);
           setFeedData(res.posts || []);
-        });
+
+            // isHaveFeed 설정
+          if (res.posts.length === 0){
+            props.setIsHaveFeed(false);
+          } else {
+            props.setIsHaveFeed(true);
+          }
+        })
     }
     getFeedData();
     // console.log(feedData)
@@ -38,9 +45,9 @@ export default function IsHaveFeed() {
 
   return (
     <>
-      {feedData.map((feeditem) => {
+      {feedData.map((feeditem, index) => {
         return (
-          <StyledSection key={Math.random()}>
+          <StyledSection key={index}>
             <PostContent
               postDetail={feeditem}
               setReportPostNum={setReportPostNum}

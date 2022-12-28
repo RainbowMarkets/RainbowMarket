@@ -84,10 +84,14 @@ export default function UserList(props) {
   console.log("isPending in USERLIST :\n", isPending);
 
   // 서치 하이라이팅
+  const escapeRegExp = (str = "") => (
+    str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
+  );
+
   const highlightText = (data, keyword) => {
-    const matchReg = new RegExp(`(${keyword})`, "gi");
+    const matchReg = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
     if (keyword !== "" && data.includes(keyword)) {
-      const matchs = data.split(matchReg);
+      let matchs = data.split(matchReg);
 
       return (
         <>

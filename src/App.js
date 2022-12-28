@@ -21,7 +21,6 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Login from "./components/common/Login/Login";
 import ProductEdit from "./pages/Product/ProductEdit";
 
-
 // 잠시 1200 -> 100으로 변경
 function App() {
   // 어플리케이션 최초 접속 시 Splash 화면 띄워줌
@@ -52,6 +51,7 @@ function App() {
                 
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/chat/chatroom" element={<ChatRoom />} />
                 <Route expact path="/post" element={<Post />} />
                 <Route path="/post/:post_id" element={<PostDetail />} />
                 <Route path="/join" element={<JoinWithEmail />} />
