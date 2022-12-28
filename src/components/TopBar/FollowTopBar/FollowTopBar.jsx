@@ -19,7 +19,7 @@ export default function FollowTopBar() {
     <StyledHead>
       <BackButton />
       <StyledTit>
-        {location[location.length - 1] === "follower" ? "팔로워" : "팔로잉"}
+        {location[location.length - 1] === "follower" ? "팔로워" : "팔로잉" ? "" : ""}
       </StyledTit>
     </StyledHead>
   );
