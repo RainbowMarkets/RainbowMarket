@@ -20,7 +20,7 @@ const Post = (props) => {
   const textRef = useRef();
   const [profileImg, setProfileImg] = useState("");
   const [inpValue, setInpValue] = useState("");
-  const [fileName, setFileName] = useState([]); // 인코딩된 이미지 주소
+  const [fileName, setFileName] = useState([]); // 삭제를 위한 인코딩된 이미지 주소
   const [uploadData, setUploadData] = useState([]);
   const [previewImgUrl, setPreviewImgUrl] = useState([]); //  미리보기 이미지 url
   const imgRef = useRef();
@@ -71,7 +71,7 @@ const Post = (props) => {
     }
     // console.log(data);
     try {
-      fetch(url + reqPath, {
+      await fetch(url + reqPath, {
         method: "POST",
         body: formData,
       })
@@ -84,6 +84,12 @@ const Post = (props) => {
           const imageNames = res
             .map((item) => url + "/" + item.filename)
             .join(",");
+          // if (fileName.length > 3) {
+          //   setFileName(fileName.slice(0, 3));
+          // } else {
+          //   setFileName(fileName);
+          // }
+
           // console.log(imageNames);
           fetch(url + "/post", {
             method: "POST",
@@ -102,8 +108,8 @@ const Post = (props) => {
             .then((res) => {
               // 게시글 작성하기 (업로드)
               console.log("받은 데이터", res);
-            })
-            .then(() => window.location.assign("/profile"));
+            });
+          // .then(() => window.location.assign("/profile"));
         });
     } catch (err) {
       console.log("err", err);
