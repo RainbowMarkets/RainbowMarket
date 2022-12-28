@@ -23,7 +23,8 @@ export default function SearchTopBar(props) {
         type="text"
         placeholder="계정 검색"
         value={props.searchInp || ""}
-        onChange={props.handleSearchInput}/>
+        onChange={props.handleSearchInput}
+        autoFocus/>
     </StyledHeader>
   )
 }
