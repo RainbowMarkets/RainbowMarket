@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useUserContext from "../../hooks/useUserContext";
@@ -11,6 +12,9 @@ export default function ProfileEdit() {
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const uploadInp = useRef(null); // 이미지 업로드 인풋 셀렉터
   const [valid, setValid] = useState(false); // 유효성
+
+  // 뒤로가기 방지용 선언
+  const navigate = useNavigate();
 
   // 프로필 수정 요청 제출
   const submitHandler = (event) => {
@@ -93,7 +97,9 @@ export default function ProfileEdit() {
           localStorage.setItem("uName", res.user.username);
           localStorage.setItem("image", res.user.image);
         })
-        .then(() => window.location.assign("/profile"))
+        .then(() => {
+            navigate("/profile", {replace: true}); // 프로필로 이동 후 뒤로가기 방지
+        })
         .catch((err) => {
           // 에러 발생 시
           alert(err);
