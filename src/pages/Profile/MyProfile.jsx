@@ -45,7 +45,7 @@ export default function Profile() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("getData(/user/myinfo)의 응답 :\n", res);
+        // console.log("getData(/user/myinfo)의 응답 :\n", res);
         setUserInfo(res);
         return res;
       })
@@ -64,19 +64,19 @@ export default function Profile() {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(
-              `getData(/post/${encodeURI(
-                userInfo.user.accountname
-              )}/userpost)의 응답 :\n`,
-              res
-            );
+            // console.log(
+            //   `getData(/post/${encodeURI(
+            //     userInfo.user.accountname
+            //   )}/userpost)의 응답 :\n`,
+            //   res
+            // );
             setPostData(res.post);
           });
       });
   }, []);
 
-  console.log("postData :", postData);
-  console.log("userInfo:", userInfo.user._id);
+  // console.log("postData :", postData);
+  // console.log("userInfo:", userInfo.user._id);
 
   return (
     <>

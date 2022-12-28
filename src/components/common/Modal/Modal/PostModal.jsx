@@ -7,16 +7,16 @@ import { ModalWrapper } from "./styledModal";
 // 내가 작성한 게시글 : 삭제, 수정
 // 다른 사용자가 작성한 게시글 : 신고하기
 const PostModal = (props) => {
-  console.log(props.reportPostNum);
-  console.log(props);
-  console.log("postuserid", props.postUserId);
-  console.log("myid", props.myId);
+  // console.log(props.reportPostNum);
+  // console.log(props);
+  // console.log("postuserid", props.postUserId);
+  // console.log("myid", props.myId);
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useUserContext();
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const url = "https://mandarin.api.weniv.co.kr";
-  console.log(user._id);
+  // console.log(user._id);
   function handlePostSideMenu() {
     props.setPostModalActive(false);
     // console.log(props.reportPostNum);
