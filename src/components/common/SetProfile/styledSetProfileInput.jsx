@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../../GlobalStyle";
 
-const Form = styled.form`
+const Form = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,8 @@ const Form = styled.form`
 `;
 
 const StartButton = styled.button`
-  background: ${colors.colorSub};
+  background: ${(props) =>
+    props.disabled ? colors.colorSub : colors.colorMain};
   width: 100%;
   font-size: 16px;
   color: white;

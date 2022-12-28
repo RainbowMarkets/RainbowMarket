@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Wrapper, ProfileImage, UploadButton } from "./styledSetProfileImage";
 import uploadimg from "../../../../assets/images/icon-image.png";
 import useUserContext from "../../../../hooks/useUserContext";
@@ -26,9 +26,10 @@ export default function SetProfileImage({ uploadInp }) {
     // setPreview(uploadInp.current.files[0]);
   };
 
+  console.log("user에 무슨 일 ", user);
   return (
     <Wrapper>
-      <ProfileImage src={preview || user ? user.image : null || basicImg} />
+      <ProfileImage src={preview || user?.image || basicImg} />
       <UploadButton type="button">
         <label htmlFor="upload">
           <img src={uploadimg} />

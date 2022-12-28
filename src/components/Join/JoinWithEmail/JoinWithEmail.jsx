@@ -12,7 +12,13 @@ import {
   NextButton,
 } from "./JoinWithEmail.style";
 
-export default function JoinWithEmail() {
+export default function JoinWithEmail({
+  toNextStep,
+  email,
+  setEmail,
+  password,
+  setPassword,
+}) {
   const [emailWarningMessage, setEmailWarningMessage] = useState("");
   const [passwordWarningMessage, setPasswordWarningMessage] = useState("");
   const [emailValid, setEmailValid] = useState(true);
@@ -23,11 +29,12 @@ export default function JoinWithEmail() {
   const passwordRef = useRef("");
 
   const url = "https://mandarin.api.weniv.co.kr";
-  /* const navigate = useNavigate(); */
 
-  // 이메일 유효성 검사
-  const emailValidCheck = ({ target }) => {
-    const emailCurrentValue = target.value;
+  // 이메일, 패스워드 onChangeHandler
+  const emailHandler = (event) => {
+    setEmail(event.target.value);
+
+    const emailCurrentValue = event.target.value;
     const checkTheEmail =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -43,9 +50,10 @@ export default function JoinWithEmail() {
     }
   };
 
-  //비밀번호 유효성 검사
-  const passwordValidCheck = ({ target }) => {
-    const passwordCurrentValue = target.value;
+  const passwordHandler = (event) => {
+    setPassword(event.target.value);
+
+    const passwordCurrentValue = event.target.value;
 
     if (passwordCurrentValue === "") {
       setPasswordWarningMessage("입력해주세요.");
@@ -56,6 +64,16 @@ export default function JoinWithEmail() {
       setPasswordWarningMessage("");
       setPasswordValid(true);
     }
+  };
+
+  // 이메일 유효성 검사
+  const emailValidCheck = ({ target }) => {
+    // 위로 이사함.
+  };
+
+  //비밀번호 유효성 검사
+  const passwordValidCheck = ({ target }) => {
+    // 위로 이사함.
   };
 
   const loginData = {
@@ -74,7 +92,6 @@ export default function JoinWithEmail() {
     //리프레시되는 것을 막아줌
     event.preventDefault();
     console.log("통신 시작", emailRef.current.value);
-    /*navigate('/setprofile'); // setProfile.jsx에서 이미지를 불러오지 못하는 오류가 있어서 나중에.. */
 
     try {
       console.log("보낼 때 :", loginData);
@@ -91,13 +108,14 @@ export default function JoinWithEmail() {
       console.log(result);
       const requestMessage = await result.message;
 
-      if (requestMessage === "이미 가입된 이메일 주소입니다.") {
+      if (requestMessage === "이미 가입된 이메일 주소 입니다.") {
         setEmailWarningMessage("*이미 가입된 이메일 주소입니다.");
         setEmailValid(false);
         emailRef.current.focus();
       } else {
         setEmailWarningMessage("");
         setEmailValid(true);
+        toNextStep();
       }
       return result;
     } catch (error) {
@@ -107,18 +125,19 @@ export default function JoinWithEmail() {
 
   return (
     <>
-      <FollowTopBar/>
+      <FollowTopBar />
       <Container>
         <h1 className="hidden">무지개마켓 회원가입</h1>
         <h2 className="join-title">이메일로 회원가입</h2>
-        <form className="join-form" onSubmit={onSubmitHandler}>
+        <div className="join-form">
           <InputTitle>이메일</InputTitle>
           <Input
             validTest={emailValid}
             type="email"
             ref={emailRef}
+            value={email}
             onKeyUp={goToNextSignUp}
-            onChange={emailValidCheck}
+            onChange={emailHandler}
             placeholder="이메일 주소를 입력해주세요"
           />
           <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
@@ -127,15 +146,20 @@ export default function JoinWithEmail() {
             validTest={passwordValid}
             type="password"
             ref={passwordRef}
+            value={password}
             onKeyUp={goToNextSignUp}
-            onChange={passwordValidCheck}
+            onChange={passwordHandler}
             placeholder="비밀번호를 입력해 주세요"
           />
-          <WarningMessageWrapper>{passwordWarningMessage}</WarningMessageWrapper>
+          <WarningMessageWrapper>
+            {passwordWarningMessage}
+          </WarningMessageWrapper>
           <NextButtonWrapper>
-            <NextButton disabled={isActive}>다음</NextButton>
+            <NextButton disabled={isActive} onClick={onSubmitHandler}>
+              다음
+            </NextButton>
           </NextButtonWrapper>
-        </form>
+        </div>
       </Container>
     </>
   );
