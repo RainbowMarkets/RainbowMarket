@@ -8,8 +8,6 @@ import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
 import { Link, useParams } from "react-router-dom";
-/* test220Name 계정인 경우 해당 계정의 게시글 상세페이지의 댓글들 불러오기
- */
 
 const CommentDetail = (props) => {
   // console.log(props.commentData);

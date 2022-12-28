@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useUserContext from "../../../../hooks/useUserContext";
 import DeleteAlert from "../Alert/DeleteAlert";
 import { ModalWrapper } from "./styledModal";
@@ -66,7 +66,7 @@ const PostModal = (props) => {
                 <button onClick={handleDeletePost}>삭제</button>
               </li>
               <li>
-                <button>수정</button>
+                <Link to={`/post/${props.reportPostNum}/edit`}>수정</Link>
               </li>
             </>
           ) : (
