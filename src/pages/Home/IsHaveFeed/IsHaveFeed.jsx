@@ -28,13 +28,13 @@ export default function IsHaveFeed(props) {
           console.log("test!!!!", res.posts);
           setFeedData(res.posts || []);
 
-            // isHaveFeed 설정
-          if (res.posts.length === 0){
+          // isHaveFeed 설정
+          if (res.posts.length === 0) {
             props.setIsHaveFeed(false);
           } else {
             props.setIsHaveFeed(true);
           }
-        })
+        });
     }
     getFeedData();
     // console.log(feedData)
@@ -53,6 +53,8 @@ export default function IsHaveFeed(props) {
               setReportPostNum={setReportPostNum}
               postModalActive={postModalActive}
               setPostModalActive={setPostModalActive}
+              isHeartOn={feeditem.hearted}
+              likeCount={feeditem.heartCount}
             />
           </StyledSection>
         );
