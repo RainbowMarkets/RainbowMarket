@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import { UserContext } from "../../context/UserContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const formData = new FormData();
 
@@ -30,6 +30,9 @@ const PostEdit = (props) => {
   const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
   const localAccountName = localStorage.getItem("aName");
+
+    // 뒤로가기 방지용 선언
+    const navigate = useNavigate();
 
   // 주소 바뀌면서 기존 데이터 받아올 예정!!! 일단 기존 Post.jsx에서 내용물 임시로 가져옴!
 
@@ -145,7 +148,7 @@ const PostEdit = (props) => {
               // 게시글 작성하기 (업로드)
               console.log("수정 받은 데이터", res);
             })
-            .then(() => window.location.assign("/profile"));
+            .then(() => navigate("/profile", {replace: true})); // 프로필로 이동 후 뒤로가기 방지
         });
     } catch (err) {
       console.log("err", err);
