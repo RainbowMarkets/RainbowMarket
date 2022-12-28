@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
 /*import { useNavigate } from "react-router-dom";*/
 import { LoginButtonWrapper, WarningMessageWrapper } from "./Login.style";
 import { Container, Input, InputTitle, LoginButton } from "./Login.style";
@@ -103,34 +104,37 @@ export default function JoinWithEmail() {
   };
 
   return (
-    <Container>
-      <h1 className="hidden">무지개마켓 로그인</h1>
-      <h2 className="login-title">로그인</h2>
-      <form className="login-form" onSubmit={onSubmitHandler}>
-        <InputTitle>이메일</InputTitle>
-        <Input
-          validTest={emailValid}
-          type="email"
-          ref={emailRef}
-          onKeyUp={goToNextSignUp}
-          onChange={emailValidCheck}
-          placeholder="이메일 주소를 입력해주세요"
-        />
-        <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
-        <InputTitle>비밀번호</InputTitle>
-        <Input
-          validTest={passwordValid}
-          type="password"
-          ref={passwordRef}
-          onKeyUp={goToNextSignUp}
-          onChange={passwordValidCheck}
-          placeholder="비밀번호를 입력해 주세요"
-        />
-        <WarningMessageWrapper>{passwordWarningMessage}</WarningMessageWrapper>
-        <LoginButtonWrapper>
-          <LoginButton disabled={isActive}>로그인</LoginButton>
-        </LoginButtonWrapper>
-      </form>
-    </Container>
+    <>
+      <FollowTopBar/>
+      <Container>
+        <h1 className="hidden">무지개마켓 로그인</h1>
+        <h2 className="login-title">로그인</h2>
+        <form className="login-form" onSubmit={onSubmitHandler}>
+          <InputTitle>이메일</InputTitle>
+          <Input
+            validTest={emailValid}
+            type="email"
+            ref={emailRef}
+            onKeyUp={goToNextSignUp}
+            onChange={emailValidCheck}
+            placeholder="이메일 주소를 입력해주세요"
+          />
+          <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
+          <InputTitle>비밀번호</InputTitle>
+          <Input
+            validTest={passwordValid}
+            type="password"
+            ref={passwordRef}
+            onKeyUp={goToNextSignUp}
+            onChange={passwordValidCheck}
+            placeholder="비밀번호를 입력해 주세요"
+          />
+          <WarningMessageWrapper>{passwordWarningMessage}</WarningMessageWrapper>
+          <LoginButtonWrapper>
+            <LoginButton disabled={isActive}>로그인</LoginButton>
+          </LoginButtonWrapper>
+        </form>
+      </Container>
+    </>
   );
 }
