@@ -59,9 +59,10 @@ const Post = (props) => {
     }
   };
 
-  // 이미지 서버에 전송하기
+  // 이미지 서버에 전송하기 (숫자로 이루어진 응답 받기)
   const fetchImgServer = async (e) => {
     const reqPath = `/image/uploadfiles`;
+    formData.append("image", e);
     // console.log("이거", imgRef.current.files);
     for (const key of formData.keys()) {
       console.log("key", key);
@@ -80,17 +81,19 @@ const Post = (props) => {
           // 게시글 작성하기 (업로드)
           console.log("받은 데이터", res);
           console.log("fileName :", fileName);
-
-          const imageNames = res
-            .map((item) => url + "/" + item.filename)
-            .join(",");
+          const imageNames = "";
+          if (fileName.length < 4) {
+            imageNames = res.map((item) => url + "/" + item.filename).join(",");
+          } else {
+            // alert
+          }
           // if (fileName.length > 3) {
           //   setFileName(fileName.slice(0, 3));
           // } else {
           //   setFileName(fileName);
           // }
 
-          // console.log(imageNames);
+          console.log(imageNames);
           fetch(url + "/post", {
             method: "POST",
             headers: {
