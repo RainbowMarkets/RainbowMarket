@@ -24,7 +24,6 @@ export default function JoinWithEmail() {
   const url = "https://mandarin.api.weniv.co.kr";
   /* const navigate = useNavigate(); */
 
-
   // 이메일 유효성 검사
   const emailValidCheck = ({ target }) => {
     const emailCurrentValue = target.value;
@@ -58,11 +57,11 @@ export default function JoinWithEmail() {
     }
   };
 
-      const loginData = {
-      user: {
-        email: `${emailRef.current.value}`
-      },
-    };
+  const loginData = {
+    user: {
+      email: `${emailRef.current.value}`,
+    },
+  };
 
   // 다음 버튼을 활성화시켜서 프로필 설정으로 갈 수 있게 하는 검사
   const goToNextSignUp = () => {
@@ -76,16 +75,15 @@ export default function JoinWithEmail() {
     console.log("통신 시작", emailRef.current.value);
     /*navigate('/setprofile'); // setProfile.jsx에서 이미지를 불러오지 못하는 오류가 있어서 나중에.. */
 
-
-
     try {
-      const res = await fetch(url + '/user/emailvalid', {
+      console.log("보낼 때 :", loginData);
+      const res = await fetch(url + "/user/emailvalid", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(loginData),
-      })
+      });
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
@@ -101,12 +99,10 @@ export default function JoinWithEmail() {
         setEmailValid(true);
       }
       return result;
-      
     } catch (error) {
       console.log(error);
     }
   };
-
 
   return (
     <Container>
