@@ -23,6 +23,7 @@ const Post = (props) => {
   const [fileName, setFileName] = useState([]); // 삭제를 위한 인코딩된 이미지 주소
   const [uploadData, setUploadData] = useState([]);
   const [previewImgUrl, setPreviewImgUrl] = useState([]); //  미리보기 이미지 url
+  let fileUrls = []; // 업로드할 이미지 배열
   const imgRef = useRef();
   const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
@@ -59,10 +60,48 @@ const Post = (props) => {
     }
   };
 
-  // 이미지 서버에 전송하기 (숫자로 이루어진 응답 받기)
-  const fetchImgServer = async (e) => {
+  let previewUrlArr = [];
+  // 이미지 미리 보여주기 (한번에 선택했을 때 보여주는 방법)
+  // 4개 이상이면 slice 해주고 이미지 선택된 상태에서 다시 이미지를 선택하면 새로운 이미지들로 기존 배열을 덮음
+  const previewImg = (e) => {
+    console.log(e.target.files);
+    let files = e.target.files;
+    let fileArray = [...files];
+    console.log(fileArray);
+    // fileUrls : 업로드할 이미지 배열
+    fileArray.forEach((file) => fileUrls.push(file));
+    console.log(fileUrls);
+    if (fileUrls.length < 4) {
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let reader = new FileReader();
+        reader.onload = () => {
+          previewUrlArr.push(reader.result);
+          setPreviewImgUrl([...previewUrlArr]);
+        };
+        reader.readAsDataURL(file);
+      }
+    } else {
+      alert("이미지 3개까지");
+      fileUrls = fileUrls.slice(0, 3);
+      fileArray = fileArray.slice(0, 3);
+      console.log(fileUrls);
+      for (let i = 0; i < fileArray.length; i++) {
+        let file = files[i];
+        let reader = new FileReader();
+        reader.onload = () => {
+          previewUrlArr.push(reader.result);
+          setPreviewImgUrl([...previewUrlArr]);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+  // 이미지 서버에 전송하기 (숫자로 이루어진 filename 응답 받기)
+  const fetchImgServer = async (file) => {
     const reqPath = `/image/uploadfiles`;
-    formData.append("image", e);
+    formData.append("image", file);
+    console.log("formData", formData);
     // console.log("이거", imgRef.current.files);
     for (const key of formData.keys()) {
       console.log("key", key);
@@ -70,82 +109,61 @@ const Post = (props) => {
     for (const value of formData.values()) {
       console.log("values", value);
     }
-    // console.log(data);
-    try {
-      await fetch(url + reqPath, {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          // 게시글 작성하기 (업로드)
-          console.log("받은 데이터", res);
-          console.log("fileName :", fileName);
-          const imageNames = "";
-          if (fileName.length < 4) {
-            imageNames = res.map((item) => url + "/" + item.filename).join(",");
-          } else {
-            // alert
-          }
-          // if (fileName.length > 3) {
-          //   setFileName(fileName.slice(0, 3));
-          // } else {
-          //   setFileName(fileName);
-          // }
+    for (const keyValue of formData) {
+      console.log("keyValue", keyValue);
+    }
 
-          console.log(imageNames);
-          fetch(url + "/post", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-              post: {
-                content: `${inpValue}`,
-                image: `${imageNames}`,
-              },
-            }),
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              // 게시글 작성하기 (업로드)
-              console.log("받은 데이터", res);
-            });
-          // .then(() => window.location.assign("/profile"));
-        });
+    try {
+      const res = await fetch(
+        "https://mandarin.api.weniv.co.kr/image/uploadfiles",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await res.json();
+      // const imageNames = await data[0].filename;
+      // return imageNames;
+      console.log("data :", data); // [{…}, {…}] 형식으로 들어옴
+      // 배열 중 인덱스 0번의 filename을 imageNames에 저장하여 return
+      // const imageNames = data[0].filename;
+      // console.log(imageNames);
+      // return data.filename;
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  // 게시글 업로드하기 (하나의 문자열로 전송 -> ,로 구분하여 전송한 후에 불러올 때는 split)
+  const createPost = async (e) => {
+    e.preventDefault();
+    // 하나의 이미지 주소 배열
+    // fileurl 반복문 돌려서 push 해주기
+    const imgUrls = [];
+    for (const file of fileUrls) {
+      const imgurl = await fetchImgServer(file);
+      imgUrls.push(url + "/" + imgurl);
+    }
+    try {
+      await fetch(url + "/post", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          post: {
+            content: `${inpValue}`,
+            image: imgUrls.join(","),
+          },
+        }),
+      }).then((res) => res.json());
+      // .then((data) => {
+      //   // fileUrls = [];
+      // });
+      // .then(() => window.location.assign("/profile"));
     } catch (err) {
       console.log("err", err);
     }
-  };
-  // 이미지 미리 보여주기 (한번에 선택했을 때 보여주는 방법)
-  const previewImg = (event) => {
-    for (const file of event.target.files) {
-      formData.append("image", file);
-    }
-    const reader = new FileReader();
-    const imageLists = event.target.files;
-    let imageUrlLists = [...previewImgUrl];
-    let imageListsLength = imageLists.length > 3 ? 3 : imageLists;
-    console.log(imageLists);
-
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-      console.log("현재 : ", currentImageUrl);
-      console.log("누적 : ", imageUrlLists);
-    }
-    if (imageUrlLists.length > 2) {
-      alert("3개 이하의 파일을 업로드 하세요.");
-      imageUrlLists = imageUrlLists.slice(0, 3);
-      console.log("누적 슬라이스 : ", imageUrlLists);
-
-      setPreviewImgUrl(imageUrlLists);
-    } else if (imageLists.length <= 3) {
-      setPreviewImgUrl(imageUrlLists);
-    }
-
-    console.log(imageLists);
   };
 
   // 이미지 삭제하기
@@ -167,15 +185,80 @@ const Post = (props) => {
   useEffect(() => {
     if (!user.token) return;
     fetchProfile();
+    fetchImgServer();
   }, [setUploadData]);
 
-  // console.log(fileName);
-  // console.log(previewImgUrl);
-  // console.log(fileName.join(","));
-  // console.log(uploadData);
+  //////////////////////////////////////////////////////////
+  // // 이미지 서버에 먼저 전송하기 (숫자로 이루어진 응답 받아오기)
+  // const fetchImgServer = async (file) => {
+  //   const reqPath = `/image/uploadfiles`;
 
-  // 해결해봐야 할 것
-  // 2. 파일 선택시 화면에 띄우기 (V) -> 뒤에서 부터 삭제만 가능한 부분 해결하기, 같은 파일 지웠다가 다시 로드했을때 나오지 않음
+  //   // const formData = new FormData();
+  //   formData.append("image", file);
+
+  //   try {
+  //     const res = await fetch(url + reqPath, {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+  //     const data = await res.json();
+  //     const imageNames = data[0].filename;
+  //     return imageNames;
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+
+  // let previewUrlArr = [];
+
+  // const previewImg = (e) => {
+  //   let files = e.target.files;
+  //   let fileArray = [...files];
+  //   fileArray.forEach((file) => fileUrls.push(file));
+
+  //   if (fileUrls.length < 4) {
+  //     for (let i = 0; i < files.length; i++) {
+  //       let file = files[i];
+  //       let reader = new FileReader();
+  //       reader.onload = () => {
+  //         previewUrlArr.push(reader.result);
+  //         setPreviewImgUrl([...previewUrlArr]);
+  //       };
+  //       reader.readAsDataURL(file);
+  //     }
+  //   } else {
+  //     alert("이미지 3개까지");
+  //     fileUrls.pop();
+  //   }
+  // };
+
+  // // 서버에 업로드하기
+  // const createPost = async () => {
+  //   const imgUrls = [];
+  //   try {
+  //     for (const file of fileUrls) {
+  //       imgUrls.push(url + "/" + (await fetchImgServer(file)));
+  //     }
+  //     const res = await fetch(url + "/post", {
+  //       method: "POST",
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         post: {
+  //           content: `${inpValue}`,
+  //           image: imgUrls.join(","),
+  //         },
+  //       }),
+  //     })
+  // .then(() => window.location.assign("/profile"));
+  //     const data = await res.json();
+  //     fileUrls = [];
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
 
   return (
     <>
@@ -185,6 +268,7 @@ const Post = (props) => {
         uploadData={uploadData}
         setUploadData={setUploadData}
         fetchImgServer={fetchImgServer}
+        onSubmit={createPost}
       />
       <UploadContain uploadData={uploadData} setUploadData={setUploadData}>
         <UploadWrapper>
@@ -229,7 +313,11 @@ const Post = (props) => {
               </div>
               {/* 디자인 변경해주기 */}
               <div className="label-wrap">
-                <label htmlFor="imgUpLabel" className="img-up-btn"></label>
+                <label
+                  htmlFor="imgUpLabel"
+                  className="img-up-btn"
+                  onChange={fetchImgServer}
+                ></label>
                 <input
                   id="imgUpLabel"
                   multiple
