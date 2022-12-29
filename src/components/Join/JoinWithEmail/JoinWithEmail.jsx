@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
-/*import { useNavigate } from "react-router-dom";*/
+import { useNavigate } from "react-router-dom";
 import {
   NextButtonWrapper,
   WarningMessageWrapper,
@@ -24,11 +24,12 @@ export default function JoinWithEmail({
   const [emailValid, setEmailValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
   const [isActive, setIsActive] = useState(true);
-
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
   const url = "https://mandarin.api.weniv.co.kr";
+  const navigate = useNavigate();
+
 
   // 이메일, 패스워드 onChangeHandler
   const emailHandler = (event) => {
@@ -86,12 +87,13 @@ export default function JoinWithEmail({
   const goToNextSignUp = () => {
     return emailValid && passwordValid ? setIsActive(false) : setIsActive(true);
   };
+  
 
   // 제출하면 API 통신 연결
   const onSubmitHandler = async (event) => {
     //리프레시되는 것을 막아줌
     event.preventDefault();
-    console.log("통신 시작", emailRef.current.value);
+    console.log("통신 시작");
 
     try {
       console.log("보낼 때 :", loginData);
@@ -100,24 +102,36 @@ export default function JoinWithEmail({
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(loginData),
+        body: JSON.stringify(loginData)
+
       });
+
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
       console.log(result);
       const requestMessage = await result.message;
+      console.log('requestMessage', requestMessage)
 
       if (requestMessage === "이미 가입된 이메일 주소 입니다.") {
         setEmailWarningMessage("*이미 가입된 이메일 주소입니다.");
         setEmailValid(false);
-        emailRef.current.focus();
+        
       } else {
+        
         setEmailWarningMessage("");
         setEmailValid(true);
-        toNextStep();
+        navigate('/setprofile', {
+          state: {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+          },
+          
+        });
       }
       return result;
+      
+     
     } catch (error) {
       console.log(error);
     }
