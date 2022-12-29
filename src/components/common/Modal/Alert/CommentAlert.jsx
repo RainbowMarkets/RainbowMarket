@@ -36,8 +36,6 @@ const CommentAlert = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        // 마지막 최후의 수단
-        // window.location.reload();
         props.setCommentData((prev) =>
           [...prev].filter((item) => item.id !== props.commentId)
         );

@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
 import { useNavigate } from "react-router-dom";
 import {
   NextButtonWrapper,
@@ -11,7 +12,13 @@ import {
   NextButton,
 } from "./JoinWithEmail.style";
 
-export default function JoinWithEmail() {
+export default function JoinWithEmail({
+  toNextStep,
+  email,
+  setEmail,
+  password,
+  setPassword,
+}) {
   const [emailWarningMessage, setEmailWarningMessage] = useState("");
   const [passwordWarningMessage, setPasswordWarningMessage] = useState("");
   const [emailValid, setEmailValid] = useState(true);
@@ -24,9 +31,11 @@ export default function JoinWithEmail() {
   const navigate = useNavigate();
 
 
-  // 이메일 유효성 검사
-  const emailValidCheck = ({ target }) => {
-    const emailCurrentValue = target.value;
+  // 이메일, 패스워드 onChangeHandler
+  const emailHandler = (event) => {
+    setEmail(event.target.value);
+
+    const emailCurrentValue = event.target.value;
     const checkTheEmail =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -42,9 +51,10 @@ export default function JoinWithEmail() {
     }
   };
 
-  //비밀번호 유효성 검사
-  const passwordValidCheck = ({ target }) => {
-    const passwordCurrentValue = target.value;
+  const passwordHandler = (event) => {
+    setPassword(event.target.value);
+
+    const passwordCurrentValue = event.target.value;
 
     if (passwordCurrentValue === "") {
       setPasswordWarningMessage("입력해주세요.");
@@ -57,11 +67,21 @@ export default function JoinWithEmail() {
     }
   };
 
-      const loginData = {
-      user: {
-        email: `${emailRef.current.value}`
-      },
-    };
+  // 이메일 유효성 검사
+  const emailValidCheck = ({ target }) => {
+    // 위로 이사함.
+  };
+
+  //비밀번호 유효성 검사
+  const passwordValidCheck = ({ target }) => {
+    // 위로 이사함.
+  };
+
+  const loginData = {
+    user: {
+      email: `${emailRef.current.value}`,
+    },
+  };
 
   // 다음 버튼을 활성화시켜서 프로필 설정으로 갈 수 있게 하는 검사
   const goToNextSignUp = () => {
@@ -75,21 +95,17 @@ export default function JoinWithEmail() {
     event.preventDefault();
     console.log("통신 시작");
 
-    
-    
- 
-
-
-
     try {
-      const res = await fetch(url + '/user/emailvalid', {
+      console.log("보낼 때 :", loginData);
+      const res = await fetch(url + "/user/emailvalid", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(loginData),
-        
-      })
+        body: JSON.stringify(loginData)
+
+      });
+
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
@@ -115,42 +131,50 @@ export default function JoinWithEmail() {
       }
       return result;
       
-      
+     
     } catch (error) {
       console.log(error);
     }
   };
 
-
   return (
-    <Container>
-      <h1 className="hidden">무지개마켓 회원가입</h1>
-      <h2 className="join-title">이메일로 회원가입</h2>
-      <form className="join-form" onSubmit={onSubmitHandler}>
-        <InputTitle>이메일</InputTitle>
-        <Input
-          validTest={emailValid}
-          type="email"
-          ref={emailRef}
-          onKeyUp={goToNextSignUp}
-          onChange={emailValidCheck}
-          placeholder="이메일 주소를 입력해주세요"
-        />
-        <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
-        <InputTitle>비밀번호</InputTitle>
-        <Input
-          validTest={passwordValid}
-          type="password"
-          ref={passwordRef}
-          onKeyUp={goToNextSignUp}
-          onChange={passwordValidCheck}
-          placeholder="비밀번호를 입력해 주세요"
-        />
-        <WarningMessageWrapper>{passwordWarningMessage}</WarningMessageWrapper>
-        <NextButtonWrapper>
-          <NextButton disabled={isActive}>다음</NextButton>
-        </NextButtonWrapper>
-      </form>
-    </Container>
+    <>
+      <FollowTopBar />
+      <Container>
+        <h1 className="hidden">무지개마켓 회원가입</h1>
+        <h2 className="join-title">이메일로 회원가입</h2>
+        <div className="join-form">
+          <InputTitle>이메일</InputTitle>
+          <Input
+            validTest={emailValid}
+            type="email"
+            ref={emailRef}
+            value={email}
+            onKeyUp={goToNextSignUp}
+            onChange={emailHandler}
+            placeholder="이메일 주소를 입력해주세요"
+          />
+          <WarningMessageWrapper>{emailWarningMessage}</WarningMessageWrapper>
+          <InputTitle>비밀번호</InputTitle>
+          <Input
+            validTest={passwordValid}
+            type="password"
+            ref={passwordRef}
+            value={password}
+            onKeyUp={goToNextSignUp}
+            onChange={passwordHandler}
+            placeholder="비밀번호를 입력해 주세요"
+          />
+          <WarningMessageWrapper>
+            {passwordWarningMessage}
+          </WarningMessageWrapper>
+          <NextButtonWrapper>
+            <NextButton disabled={isActive} onClick={onSubmitHandler}>
+              다음
+            </NextButton>
+          </NextButtonWrapper>
+        </div>
+      </Container>
+    </>
   );
 }

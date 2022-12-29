@@ -4,6 +4,7 @@ import { GlobalStyle } from "./GlobalStyle";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./pages/Profile/Profile";
 import Post from "./pages/Post/Post";
+import PostEdit from "./pages/Post/PostEdit";
 import Search from "./pages/Search/Search";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
@@ -13,7 +14,7 @@ import { UserContextProvider } from "./context/UserContext";
 import PostDetail from "./components/Posts/PostDetail";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import MyProfile from "./pages/Profile/MyProfile";
-import JoinWithEmail from "./components/Join/JoinWithEmail/JoinWithEmail";
+import Join from "./pages/Join/Join";
 import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
@@ -21,7 +22,6 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Login from "./components/common/Login/Login";
 import ProductEdit from "./pages/Product/ProductEdit";
 import SetProfile from "./components/common/SetProfile/SetProfile";
-
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -53,9 +53,12 @@ function App() {
                 <Route path="/setprofile" element={<SetProfile />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/chat/chatroom" element={<ChatRoom />} />
                 <Route expact path="/post" element={<Post />} />
                 <Route path="/post/:post_id" element={<PostDetail />} />
-                <Route path="/join" element={<JoinWithEmail />} />
+                <Route path="/post/:post_id/edit" element={<PostEdit />} />
+                <Route path="/join" element={<Join />} />
+                <Route path="/post/:post_id/edit" element={<PostEdit />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                   path="/profile/:accountname/follower"

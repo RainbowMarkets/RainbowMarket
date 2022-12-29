@@ -3,6 +3,9 @@ import styled from "styled-components";
 const StyledSection = styled.section`
   padding: 20px 16px;
 `;
+const StyledPostContent = styled.section`
+  margin-bottom: 20px;
+`;
 
 const OnlyImage = styled.article`
   ol {
@@ -35,4 +38,4 @@ const OnlyImage = styled.article`
   }
 `;
 
-export { StyledSection, OnlyImage };
+export { StyledSection, OnlyImage, StyledPostContent };

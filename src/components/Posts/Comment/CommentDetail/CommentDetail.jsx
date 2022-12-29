@@ -3,23 +3,20 @@ import profileImgSmall from "../../../../assets/images/profile_small.png";
 
 import { useEffect, useRef, useState } from "react";
 import Modal from "../../../common/Modal/Modal/Modal";
-import { CommentWrapper } from "./styledCommentDetail";
+import { CommentWrapper, StyledLink } from "./styledCommentDetail";
 import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
-import { useParams } from "react-router-dom";
-/* test220Name 계정인 경우 해당 계정의 게시글 상세페이지의 댓글들 불러오기
- */
+import { Link, useParams } from "react-router-dom";
 
 const CommentDetail = (props) => {
   // console.log(props.commentData);
-  // console.log(props);
+  console.log(props);
   const { user } = useUserContext();
   const [commentData, setCommentData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const commentId = commentData;
   // console.log(commentData.id);
-  // 포스트 디테일 페이지의 정보값 id 배열 값과 같은 값을 출력해주기
   // const url = "https://mandarin.api.weniv.co.kr";
   // const reqPath = `/post/${props.post_id}/comments`;
 
@@ -47,8 +44,8 @@ const CommentDetail = (props) => {
 
   // 해당 코멘트의 id 값
   // console.log(commentId);
-
   // console.log(commentData);
+
   return (
     <>
       <CommentWrapper>
@@ -58,7 +55,7 @@ const CommentDetail = (props) => {
             props.commentData.map((item) => (
               <li key={item.id}>
                 <div>
-                  <a href="">
+                  <StyledLink to={`/profile/${item.author.accountname}`}>
                     <img
                       src={
                         item.author?.image ===
@@ -68,11 +65,11 @@ const CommentDetail = (props) => {
                       }
                       alt=""
                     />
-                  </a>
+                  </StyledLink>
                   <div className="comment-profile">
-                    <a href="">
+                    <StyledLink to={`/profile/${item.author.accountname}`}>
                       <strong>{item.author.username}</strong>
-                    </a>
+                    </StyledLink>
                     <span>· {getTimeGap(item.createdAt)}</span>
                   </div>
                 </div>
