@@ -98,7 +98,7 @@ export default function ProfileEdit() {
           localStorage.setItem("image", res.user.image);
         })
         .then(() => {
-            navigate("/profile", {replace: true}); // 프로필로 이동 후 뒤로가기 방지
+          navigate("/profile", {replace: true}); // 프로필로 이동 후 뒤로가기 방지
         })
         .catch((err) => {
           // 에러 발생 시
