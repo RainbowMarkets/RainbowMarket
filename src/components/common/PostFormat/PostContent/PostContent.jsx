@@ -42,23 +42,23 @@ const PostContent = (props) => {
             })}
           </ImgBox>
         )}
-
-        <PostBtn>
-          <PostHeartBtn
-            post_id={props.post_id}
-            isHeartOn={props.isHeartOn}
-            setIsHeartOn={props.setIsHeartOn}
-            likeCount={props.likeCount}
-            setLikeCount={props.setLikeCount}
-          />
-          <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
-            commentDataLength={props.commentDataLength}
-            /* profileCommentCount={props.postData.commentCount}
-            profileComments={props.postData.comments}*/
-          />
-        </PostBtn>
-        <PostDate upDate={props.postDetail.updatedAt} />
       </ContextWrapper>
+
+      <PostBtn>
+        <PostHeartBtn
+          post_id={props.post_id}
+          isHeartOn={props.isHeartOn}
+          setIsHeartOn={props.setIsHeartOn}
+          likeCount={props.likeCount}
+          setLikeCount={props.setLikeCount}
+        />
+        <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
+          commentDataLength={props.commentDataLength}
+          /* profileCommentCount={props.postData.commentCount}
+            profileComments={props.postData.comments}*/
+        />
+      </PostBtn>
+      <PostDate upDate={props.postDetail.updatedAt} />
     </PostWrapper>
   );
 };
