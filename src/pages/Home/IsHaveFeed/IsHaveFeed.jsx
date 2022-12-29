@@ -56,6 +56,7 @@ export default function IsHaveFeed(props) {
               isHeartOn={feeditem.hearted}
               likeCount={feeditem.heartCount}
               commentDataLength={feeditem.commentCount}
+              post_id={feeditem.id}
             />
           </StyledSection>
         );
