@@ -3,18 +3,15 @@ import SetprofileHeader from "./SetProfileHeader/SetprofileHeader";
 import SetProfileImage from "./SetProfileImage/SetProfileImage";
 import SetProfileInput from "./SetProfileInput/SetProfileInput";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-export default function SetProfile({
-  join,
-  username,
-  accountname,
-  intro,
-  uploadInp,
-  setUsername,
-  setAccountname,
-  setIntro,
-  setValid,
-}) {
+
+export default function SetProfile({join, uploadInp}) {
+  
+  const [accountname, setAccountname] = useState('');
+  const [username, setUsername] = useState('');
+  const [intro, setIntro] = useState('');
+  const [valid, setValid] = useState(false);
   const [usernameCheck, setUsernameCheck] = useState(!!username);
   const [accountnameCheck, setAccountnameCheck] = useState(!!accountname);
 
@@ -22,7 +19,8 @@ export default function SetProfile({
     "* 2자 ~ 10자 이내로 입력해주세요."
   );
   const [accountErrMessage, setAccountErrMessage] = useState(null);
-
+  const {state} = useLocation();
+  console.log(state);
   const usernameHandler = (event) => {
     setUsername(event.target.value);
     // 글자 수 확인
@@ -64,8 +62,10 @@ export default function SetProfile({
           setAccountErrMessage(null);
           setAccountnameCheck(false);
         } else if (res.message === "이미 가입된 계정ID 입니다.") {
+
           setAccountErrMessage(res.message);
           setAccountnameCheck(false);
+
         } else if (res.message === "사용 가능한 계정ID 입니다.") {
           setAccountErrMessage(res.message);
           setAccountnameCheck(true);
@@ -93,7 +93,7 @@ export default function SetProfile({
     }
   }, [username, accountname, usernameCheck, accountnameCheck]);
 
-  console.log(usernameCheck, accountnameCheck);
+
   return (
     <Form>
       {join ? <SetprofileHeader /> : null}

@@ -6,7 +6,7 @@ import basicImg from "../../../../assets/images/profile_big.png";
 
 export default function SetProfileImage({ uploadInp }) {
   const { user } = useUserContext();
-  const [preview, setPreview] = useState(user.image);
+  const [preview, setPreview] = useState(user ? user.image : null);
 
   const uploadHandler = (event) => {
     if (!event.target.files[0]) setPreview(null);
@@ -21,14 +21,16 @@ export default function SetProfileImage({ uploadInp }) {
           resolve();
         };
       });
-    }
+    };
+
+
     // console.log(reader.result);
     // setPreview(uploadInp.current.files[0]);
   };
 
   return (
     <Wrapper>
-      <ProfileImage src={preview || user.image || basicImg} />
+      <ProfileImage src={preview || (user && user.image) || basicImg} />
       <UploadButton type="button">
         <label htmlFor="upload">
           <img src={uploadimg} />

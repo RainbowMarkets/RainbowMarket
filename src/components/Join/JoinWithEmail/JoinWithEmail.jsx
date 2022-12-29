@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-/*import { useNavigate } from "react-router-dom";*/
+import { useNavigate } from "react-router-dom";
 import {
   NextButtonWrapper,
   WarningMessageWrapper,
@@ -17,12 +17,11 @@ export default function JoinWithEmail() {
   const [emailValid, setEmailValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
   const [isActive, setIsActive] = useState(true);
-
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
   const url = "https://mandarin.api.weniv.co.kr";
-  /* const navigate = useNavigate(); */
+  const navigate = useNavigate();
 
 
   // 이메일 유효성 검사
@@ -68,13 +67,17 @@ export default function JoinWithEmail() {
   const goToNextSignUp = () => {
     return emailValid && passwordValid ? setIsActive(false) : setIsActive(true);
   };
+  
 
   // 제출하면 API 통신 연결
   const onSubmitHandler = async (event) => {
     //리프레시되는 것을 막아줌
     event.preventDefault();
-    console.log("통신 시작", emailRef.current.value);
-    /*navigate('/setprofile'); // setProfile.jsx에서 이미지를 불러오지 못하는 오류가 있어서 나중에.. */
+    console.log("통신 시작");
+
+    
+    
+ 
 
 
 
@@ -85,22 +88,33 @@ export default function JoinWithEmail() {
           "Content-type": "application/json",
         },
         body: JSON.stringify(loginData),
+        
       })
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
       console.log(result);
       const requestMessage = await result.message;
+      console.log('requestMessage', requestMessage)
 
-      if (requestMessage === "이미 가입된 이메일 주소입니다.") {
+      if (requestMessage === "이미 가입된 이메일 주소 입니다.") {
         setEmailWarningMessage("*이미 가입된 이메일 주소입니다.");
         setEmailValid(false);
-        emailRef.current.focus();
+        
       } else {
+        
         setEmailWarningMessage("");
         setEmailValid(true);
+        navigate('/setprofile', {
+          state: {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+          },
+          
+        });
       }
       return result;
+      
       
     } catch (error) {
       console.log(error);
