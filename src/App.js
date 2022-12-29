@@ -21,6 +21,7 @@ import Product from "./pages/Product/Product";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Login from "./components/common/Login/Login";
 import ProductEdit from "./pages/Product/ProductEdit";
+import SetProfile from "./components/common/SetProfile/SetProfile";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -49,6 +50,7 @@ function App() {
                 <Route exact path="/profile" element={<MyProfile />} />
                 <Route path="/profile/:accountname" element={<Profile />} />
                 <Route path="/profile/edit" element={<ProfileEdit />} />
+                <Route path="/setprofile" element={<SetProfile />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/chat/chatroom" element={<ChatRoom />} />
