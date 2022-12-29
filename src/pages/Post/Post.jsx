@@ -15,7 +15,6 @@ import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const Post = (props) => {
-  const [isValid, setIsValid] = useState(false);
   const textRef = useRef();
   const [profileImg, setProfileImg] = useState(localStorage.getItem("image"));
   const [inpValue, setInpValue] = useState("");
@@ -24,12 +23,8 @@ const Post = (props) => {
   const imgRef = useRef();
   const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
-  const localAccountName = localStorage.getItem("aName");
-
   // 뒤로가기 방지용 선언
   const navigate = useNavigate();
-
-  // 추가
   const [imgSrc, setImgSrc] = useState([]);
 
   // textarea
@@ -40,26 +35,10 @@ const Post = (props) => {
 
   const handleInpVal = (e) => {
     setInpValue(e.target.value);
-    console.log(inpValue);
+    // console.log(inpValue);
   };
 
-  //   const reqPath = `/image/uploadfiles`;
-
-  //   try {
-  //     fetch(url + reqPath, {
-  //       method: "POST",
-  //       body: formData,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //         return data;
-  //       });
-  //   } catch (err) {
-  //     console.log("err", err);
-  //   }
-  // };
-
+  // 이미지 서버에 전송
   const postUploadImgs = async (formData) => {
     try {
       const res = await fetch(
@@ -74,16 +53,15 @@ const Post = (props) => {
     } catch (error) {
       console.log("error", error);
     }
-    // return res.data;
   };
 
   // 이미지 추가 버튼
   const handleUploadImgs = (event) => {
-    console.log("click");
+    // console.log("click");
     const formData = new FormData();
-    console.log(event.target.file);
+    // console.log(event.target.file);
     const imgInput = event.target.files[0];
-    console.log(imgInput);
+    // console.log(imgInput);
     if (imgSrc.length > 2) {
       alert("이미지는 3장까지 업로드 할 수 있습니다.");
       return;
@@ -110,11 +88,10 @@ const Post = (props) => {
       });
   };
 
-  // 게시글 업로드 (handleUpload)
+  // 게시글 업로드
   const createPost = async () => {
     // formData.append("image", imgInput);
     // console.log(imgInput);
-    console.log("click @");
     await fetch(url + "/post", {
       method: "POST",
       headers: {
@@ -135,15 +112,11 @@ const Post = (props) => {
   };
 
   const handleDeleteImg = (idx) => {
-    console.log("click");
-    // console.log(idx);
-    // console.log(imgSrc);
-    // setImgSrc(imgSrc.slice())
     setImgSrc(imgSrc.filter((_, i) => i !== idx));
   };
 
   useEffect(() => {}, [imgSrc]);
-  console.log("imgSrc", imgSrc);
+  // console.log("imgSrc", imgSrc);
   return (
     <>
       <UpLoadTopBar
@@ -152,9 +125,6 @@ const Post = (props) => {
         uploadData={uploadData}
         setUploadData={setUploadData}
         createPost={createPost} // 게시글 생성
-        /*         onSubmit={() => {
-          console.log("click");
-        }} */
       />
       <UploadContain uploadData={uploadData} setUploadData={setUploadData}>
         <UploadWrapper>
@@ -200,7 +170,6 @@ const Post = (props) => {
                   </ul>
                 </PostImgWrapper>
               </div>
-              {/* 디자인 변경해주기 */}
               <div className="label-wrap">
                 <label htmlFor="imgUpLabel" className="img-up-btn"></label>
                 <input
@@ -209,7 +178,6 @@ const Post = (props) => {
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  /*onChange={handleLoadFile}*/
                   onChange={handleUploadImgs}
                   ref={imgRef}
                 />

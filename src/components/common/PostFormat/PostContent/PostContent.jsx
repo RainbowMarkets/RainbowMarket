@@ -10,7 +10,6 @@ import {
   ImgBox,
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
-import { useState } from "react";
 
 const PostContent = (props) => {
   console.log("postContent : ", props.postData);
@@ -20,8 +19,6 @@ const PostContent = (props) => {
     props.setReportPostNum(props.postDetail.id); // postid
   }
   // console.log("postContent", props);
-  const [isHeartOn, setIsHeartOn] = useState();
-  const [likeCount, setLikeCount] = useState();
   return (
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
@@ -50,13 +47,12 @@ const PostContent = (props) => {
       <PostBtn>
         <PostHeartBtn
           post_id={props.post_id}
-          isHeartOn={props.isHeartOn || isHeartOn}
-          setIsHeartOn={props.setIsHeartOn || setIsHeartOn}
-          likeCount={props.likeCount || likeCount}
-          setLikeCount={props.setLikeCount || setLikeCount}
+          isHeartOn={props.isHeartOn}
+          setIsHeartOn={props.setIsHeartOn}
+          likeCount={props.likeCount}
+          setLikeCount={props.setLikeCount}
         />
         <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
-          address={`/post/${props.postDetail.id}`}
           commentDataLength={props.commentDataLength}
           /* profileCommentCount={props.postData.commentCount}
             profileComments={props.postData.comments}*/

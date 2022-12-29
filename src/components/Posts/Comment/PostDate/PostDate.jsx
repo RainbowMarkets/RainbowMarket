@@ -1,3 +1,5 @@
+import { DateStyle } from "./styledPostDate";
+
 const PostDate = ({ upDate }) => {
   const dateFormat = (upDate) => {
     const dateTotal = upDate.split("T")[0];
@@ -9,7 +11,7 @@ const PostDate = ({ upDate }) => {
 
   return (
     <>
-      <p className="post-date">{dateFormat(upDate)}</p>
+      <DateStyle className="post-date">{dateFormat(upDate)}</DateStyle>
     </>
   );
 };
