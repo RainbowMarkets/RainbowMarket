@@ -25,7 +25,10 @@ export default function ProfileFeedSection({
   const [postModalActive, setPostModalActive] = useState(false);
   const [isDeletePost, setIsDeletePost] = useState(false);
   const [reportPostNum, setReportPostNum] = useState(""); // post id 받아서 postModal로 넘겨주기
-  const [isHeartOn, setIsHeartOn] = useState(data.hearted);
+  // const [isHeartOn, setIsHeartOn] = useState(data.hearted);
+  // 추가
+  const [isHeartOn, setIsHeartOn] = useState();
+  const [likeCount, setLikeCount] = useState();
   const [postId, setPostId] = useState("");
   const localAccountName = localStorage.getItem("test220ID");
   const url = "https://mandarin.api.weniv.co.kr";
@@ -49,7 +52,7 @@ export default function ProfileFeedSection({
                 <h4 className="hidden"> 각각의 게시글입니다.</h4>
                 <PostContent
                   key={myPostList.id}
-                  id={myPostList.id}
+                  post_id={myPostList.id}
                   postDetail={myPostList}
                   setReportPostNum={setReportPostNum}
                   postModalActive={postModalActive}

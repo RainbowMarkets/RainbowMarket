@@ -4,7 +4,7 @@ import uploadFile from "../../assets/images/upload-file.png";
 import { colors, fonts } from "../../GlobalStyle";
 
 export const UploadContain = styled.div`
-  padding: 20px 16px 16px 16px;
+  margin: 20px 16px 16px 16px;
   height: calc(100vh - 48px);
   box-sizing: border-box;
 `;
@@ -24,12 +24,15 @@ export const ProfileContain = styled.section`
 `;
 export const TextWrapper = styled.section`
   margin-top: 12px;
-  flex-grow: 1;
+  flex-grow: 2;
+  /* max-width: 354px; */
+  width: calc(100% - 86px);
   form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    width: 100%;
   }
 
   .form-textarea {
@@ -69,16 +72,31 @@ export const TextWrapper = styled.section`
 export const PostImgWrapper = styled.section`
   ul {
     display: flex;
+    max-width: calc(440px - 70px);
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
     gap: 8px;
   }
   li {
+    display: inline-block;
     position: relative;
+    width: 304px;
+    height: 228px;
+    max-width: 304px;
+    max-height: 228px;
+    min-width: 168px;
+    min-height: 126px;
   }
   img {
+    width: 304px;
+    height: 228px;
     width: 100%;
     height: 100%;
     border-radius: 10px;
     background-size: cover;
+    object-fit: cover;
   }
   .postImg-del {
     position: absolute;

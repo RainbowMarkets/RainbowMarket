@@ -170,19 +170,19 @@ const Post = (props) => {
                   </ul>
                 </PostImgWrapper>
               </div>
-              <div className="label-wrap">
-                <label htmlFor="imgUpLabel" className="img-up-btn"></label>
-                <input
-                  id="imgUpLabel"
-                  alt="사진추가"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleUploadImgs}
-                  ref={imgRef}
-                />
-              </div>
             </form>
+            <div className="label-wrap">
+              <label htmlFor="imgUpLabel" className="img-up-btn"></label>
+              <input
+                id="imgUpLabel"
+                alt="사진추가"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleUploadImgs}
+                ref={imgRef}
+              />
+            </div>
           </TextWrapper>
         </UploadWrapper>
       </UploadContain>
