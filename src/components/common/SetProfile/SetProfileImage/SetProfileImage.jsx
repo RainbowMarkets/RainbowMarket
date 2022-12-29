@@ -21,7 +21,9 @@ export default function SetProfileImage({ uploadInp }) {
           resolve();
         };
       });
-    }
+    };
+
+
     // console.log(reader.result);
     // setPreview(uploadInp.current.files[0]);
   };
@@ -29,7 +31,8 @@ export default function SetProfileImage({ uploadInp }) {
   console.log("user에 무슨 일 ", user);
   return (
     <Wrapper>
-      <ProfileImage src={preview || user?.image || basicImg} />
+      <ProfileImage src={preview || (user && user.image) || basicImg} />
+
       <UploadButton type="button">
         <label htmlFor="upload">
           <img src={uploadimg} />
