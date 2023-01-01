@@ -2,12 +2,21 @@ import sIconMoreVertical from "../../../../assets/images/s-icon-more-vertical.pn
 import PostCommentBtn from "../../../Posts/PostBtn/PostCommentBtn/PostCommentBtn";
 import PostHeartBtn from "../../../Posts/PostBtn/PostHearBtn/PostHeartBtn";
 import PostDate from "../../../Posts/Comment/PostDate/PostDate";
+import leftArrow from "../../../../assets/images/left-arrow.png";
+import rightArrow from "../../../../assets/images/right-arrow.png";
+
 import {
   ContextWrapper,
   PostBtn,
   PostWrapper,
   ProfileContain,
   ImgBox,
+  ButtonContainer,
+  PrevButton,
+  NextButton,
+  PostImgUl,
+  ArrowLeft,
+  ArrowRight,
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
 import { useEffect, useState } from "react";
@@ -20,8 +29,24 @@ const PostContent = (props) => {
     props.setReportPostNum(props.postDetail.id); // postid
   }
   // console.log("postContent", props);
+  // console.log(props.postDetail.image.split(",")[0]);
   const [isHeartOn, setIsHeartOn] = useState();
   const [likeCount, setLikeCount] = useState();
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const leftClick = () => {
+    if (currentIndex > 1) {
+      setCurrentIndex(currentIndex - 1);
+      console.log(currentIndex);
+      console.log(currentIndex.split(",").length);
+    }
+  };
+  const rightClick = () => {
+    if (currentIndex < props.postDetail.image.split(",").length) {
+      setCurrentIndex(currentIndex + 1);
+      console.log(currentIndex);
+      console.log(currentIndex.split(",").length);
+    }
+  };
 
   return (
     <PostWrapper>
@@ -41,9 +66,30 @@ const PostContent = (props) => {
         <p className="post-context">{props.postDetail.content}</p>
         {props.postDetail.image && (
           <ImgBox>
-            {props.postDetail.image.split(",").map((img) => {
-              return <img className="post-img" src={img} alt="게시글 이미지" />;
-            })}
+            <PostImgUl imgIndex={currentIndex}>
+              {props.postDetail.image.split(",").map((img) => {
+                return (
+                  <li>
+                    <img className="post-img" src={img} alt="게시글 이미지" />
+                  </li>
+                );
+              })}
+            </PostImgUl>
+            {/* 캐러셀 */}
+            {props.postDetail.image.split(",").length !== 1 && (
+              <>
+                {currentIndex !== 1 && (
+                  <ArrowLeft onClick={leftClick}>
+                    <img src={leftArrow} alt="왼쪽으로 넘기기" />
+                  </ArrowLeft>
+                )}
+                {currentIndex !== props.postDetail.image.split(",").length && (
+                  <ArrowRight onClick={rightClick}>
+                    <img src={rightArrow} alt="오른쪽으로 넘기기" />
+                  </ArrowRight>
+                )}
+              </>
+            )}
           </ImgBox>
         )}
       </ContextWrapper>

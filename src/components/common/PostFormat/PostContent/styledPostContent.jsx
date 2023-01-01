@@ -45,13 +45,6 @@ export const ContextWrapper = styled(Link)`
     line-height: 12px;
     font-size: ${fonts.small};
   }
-  .post-img {
-    width: 100%;
-    height: auto;
-    background-size: contain;
-    border-radius: 10px;
-    margin-bottom: 2px;
-  }
 `;
 export const PostBtn = styled.div`
   display: flex;
@@ -60,8 +53,60 @@ export const PostBtn = styled.div`
 `;
 
 export const ImgBox = styled.div`
-  display: flex;
-  width: 100%;
+  /* display: flex; */
   overflow-x: scroll;
   margin-bottom: 12px;
+  max-width: 354px;
+  height: 230px;
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+  border: 0.5px solid ${colors.colorDB};
+  border-radius: 10px;
+`;
+
+export const PostImgUl = styled.ul`
+  display: flex;
+  transform: translate(${(props) => `-${(props.imgIndex - 1) * 354}px`}, 0px);
+  transition: 0.5s;
+
+  li {
+    width: 354px;
+    height: 230px;
+  }
+  .post-img {
+    width: 354px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+export const ArrowBtn = styled.button`
+  background-color: white;
+  color: none;
+  /* opacity: 30%; */
+  position: absolute;
+  top: 48%;
+  line-height: 150%;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  margin: 0 5px;
+`;
+
+export const ArrowLeft = styled(ArrowBtn)`
+  left: 0;
+  img {
+    height: 20px;
+    width: 20px;
+  }
+`;
+
+export const ArrowRight = styled(ArrowBtn)`
+  right: 0;
+  img {
+    height: 20px;
+    width: 20px;
+  }
 `;
