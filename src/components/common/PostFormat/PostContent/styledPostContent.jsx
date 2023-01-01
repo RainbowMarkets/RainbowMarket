@@ -83,30 +83,39 @@ export const PostImgUl = styled.ul`
   }
 `;
 export const ArrowBtn = styled.button`
-  background-color: white;
+  background-color: inherit;
   color: none;
-  /* opacity: 30%; */
+  opacity: 20%;
   position: absolute;
-  top: 48%;
+  top: 0%;
   line-height: 150%;
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  margin: 0 5px;
 `;
 
 export const ArrowLeft = styled(ArrowBtn)`
   left: 0;
+  height: 100%;
+  width: 30px;
   img {
     height: 20px;
     width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
   }
 `;
 
 export const ArrowRight = styled(ArrowBtn)`
   right: 0;
+  height: 100%;
+  width: 30px;
   img {
     height: 20px;
     width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
   }
 `;
