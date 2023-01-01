@@ -6,7 +6,6 @@ import { Wrapper } from "./styledProfile";
 import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
-import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import { useParams } from "react-router-dom";
 import useUserContext from "../../hooks/useUserContext";
 
@@ -15,7 +14,6 @@ export default function Profile() {
   const { user } = useUserContext();
 
   const [modalActive, setModalActive] = useState(false);
-  const [isLogOut, setIsLogOut] = useState(false);
   const [postData, setPostData] = useState([]);
 
   const [userProfile, setUserProfile] = useState({
@@ -98,12 +96,7 @@ export default function Profile() {
             <Modal
               modalActive={modalActive}
               setModalActive={setModalActive}
-              isLogOut={isLogOut}
-              setIsLogOut={setIsLogOut}
             />
-            {isLogOut && (
-              <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
-            )}
           </Wrapper>
         </>
       ) : (

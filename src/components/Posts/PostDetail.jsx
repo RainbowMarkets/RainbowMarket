@@ -5,8 +5,6 @@ import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 import PostContent from "../common/PostFormat/PostContent/PostContent";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
-import LogOutAlert from "../common/Modal/Alert/LogOutAlert";
-import DeleteAlert from "../common/Modal/Alert/DeleteAlert";
 
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
 import CommentModal from "../common/Modal/Modal/CommentModal";
@@ -96,7 +94,6 @@ const PostDetail = () => {
   const [modalActive, setModalActive] = useState(false);
   const [postModalActive, setPostModalActive] = useState(false);
   const [commentModalActive, setCommentModalActive] = useState(false);
-  const [isLogOut, setIsLogOut] = useState(false);
   const [isDeletePost, setIsDeletePost] = useState(false);
 
   return (
@@ -146,12 +143,7 @@ const PostDetail = () => {
         <Modal
           modalActive={modalActive}
           setModalActive={setModalActive}
-          isLogOut={isLogOut}
-          setIsLogOut={setIsLogOut}
         />
-        {isLogOut && (
-          <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
-        )}
         <PostModal
           reportPostNum={postDetailData.id}
           postUserId={postDetailData.author._id}
@@ -160,13 +152,6 @@ const PostDetail = () => {
           isDeletePost={isDeletePost}
           setIsDeletePost={setIsDeletePost}
         />
-        {isDeletePost && (
-          <DeleteAlert
-            postId={postDetailData.id}
-            isDeletePost={isDeletePost}
-            setIsDeletePost={setIsDeletePost}
-          />
-        )}
         <CommentModal
           postId={postDetailData.id}
           commentModalActive={commentModalActive}
