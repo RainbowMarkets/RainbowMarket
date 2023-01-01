@@ -4,6 +4,7 @@ import { colors, fonts } from "../../GlobalStyle";
 export const ChatWrapper = styled.section`
   padding: 24px 16px 16px 16px;
   width: 100%;
+  height: calc(100vh - 108px);
 `;
 
 export const StyledLink = styled(Link)`

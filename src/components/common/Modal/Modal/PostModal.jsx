@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import useUserContext from "../../../../hooks/useUserContext";
 import DeleteAlert from "../Alert/DeleteAlert";
 import { ModalWrapper } from "./styledModal";
@@ -11,8 +11,7 @@ const PostModal = (props) => {
   // console.log(props);
   // console.log("postuserid", props.postUserId);
   // console.log("myid", props.myId);
-  const navigate = useNavigate();
-  const location = useLocation();
+
   const { user } = useUserContext();
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const url = "https://mandarin.api.weniv.co.kr";
@@ -24,8 +23,6 @@ const PostModal = (props) => {
   }
 
   function handleDeletePost() {
-    // props.setIsDeletePost(true);
-    // console.log("너삭제");
     setIsAlertCancel(true);
   }
 
@@ -52,7 +49,7 @@ const PostModal = (props) => {
 
   return (
     <>
-      <ModalWrapper className={props.postModalActive ? "" : "hidden"}>
+      <ModalWrapper>
         <h2 className="hidden">게시글 모달창</h2>
         <div
           className={props.postModalActive ? "reveal" : ""}

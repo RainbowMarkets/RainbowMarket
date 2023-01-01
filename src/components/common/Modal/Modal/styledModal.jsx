@@ -2,12 +2,7 @@ import styled from "styled-components";
 import { colors, fonts } from "../../../../GlobalStyle";
 
 export const ModalWrapper = styled.section`
-  /* 모달창 외부 */
-  /* position: fixed; */
   z-index: 100;
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  /* right: 0;
-  bottom: 0; */
   top: 0px;
   left: 0px;
   display: flex;
@@ -15,10 +10,6 @@ export const ModalWrapper = styled.section`
   justify-content: center;
   max-width: 440px;
   min-width: 390px;
-  height: 100%;
-  /* bottom: 0; */
-  /* position: absolute;
-  left: 0px;*/
   div {
     width: 100%;
     position: absolute;
