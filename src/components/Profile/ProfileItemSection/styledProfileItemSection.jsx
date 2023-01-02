@@ -4,7 +4,7 @@ const Section = styled.section`
   background: white;
   min-width: 390px;
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 16px 0px 16px;
 
   h2 {
     max-width: 390px;
