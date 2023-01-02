@@ -13,7 +13,7 @@ const Modal = (props) => {
     props.setModalActive(false);
   }
   function handleShowLogOutModal() {
-    props.setIsLogOut(true);
+    setIsLogOut(true);
   }
 
   function handleInfoSetting() {

@@ -6,7 +6,6 @@ import { Wrapper } from "./styledProfile";
 import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
-import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import useUserContext from "../../hooks/useUserContext";
 import ProductModal from "../../components/common/Modal/Modal/ProductModal";
 
@@ -16,7 +15,6 @@ export default function Profile() {
   const [product, setProduct] = useState(null);
   const [prodModal, setProdModal] = useState(false);
   const [modalActive, setModalActive] = useState(false);
-  const [isLogOut, setIsLogOut] = useState(false);
   const [postData, setPostData] = useState([]);
 
   const [userInfo, setUserInfo] = useState({
@@ -108,8 +106,6 @@ export default function Profile() {
             <Modal
               modalActive={modalActive}
               setModalActive={setModalActive}
-              isLogOut={isLogOut}
-              setIsLogOut={setIsLogOut}
             />
             <ProductModal
               prodModal={prodModal}
@@ -117,9 +113,6 @@ export default function Profile() {
               product={product}
               setProduct={setProduct}
             />
-            {isLogOut && (
-              <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
-            )}
           </Wrapper>
         </>
       ) : (

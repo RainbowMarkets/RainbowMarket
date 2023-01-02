@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
+
 const ChatAlert = (props) => {
   const url = "https://mandarin.api.weniv.co.kr";
   const { user } = useUserContext();
@@ -15,7 +16,6 @@ const ChatAlert = (props) => {
     props.setIsAlertCancel(false);
   }
   function handleOutChatRoom() {
-    alert("채팅방에서 나갔습니다.");
     navigate("/chat");
   }
 
