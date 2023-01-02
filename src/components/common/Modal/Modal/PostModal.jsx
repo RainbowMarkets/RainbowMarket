@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useUserContext from "../../../../hooks/useUserContext";
 import DeleteAlert from "../Alert/DeleteAlert";
+import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
+
 
 // 내가 작성한 게시글 : 삭제, 수정
 // 다른 사용자가 작성한 게시글 : 신고하기
@@ -88,6 +90,7 @@ const PostModal = (props) => {
           reportPostNum={props.reportPostNum}
         />
       )}
+      <ToastMessage />
     </>
   );
 };
