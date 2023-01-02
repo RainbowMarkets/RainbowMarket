@@ -5,6 +5,7 @@ import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
 import PostContent from "../common/PostContent/PostContent";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
+import Loading from "../common/Loading/Loading";
 
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
 import CommentModal from "../common/Modal/Modal/CommentModal";
@@ -35,13 +36,14 @@ const PostDetail = () => {
       followingCount: 0,
     },
   });
-  const [isHeartOn, setIsHeartOn] = useState(postDetailData.hearted);
-  const [likeCount, setLikeCount] = useState(postDetailData.heartCount);
+  // const [isHeartOn, setIsHeartOn] = useState(false);
+  // const [likeCount, setLikeCount] = useState(0);
   const [commentData, setCommentData] = useState([]);
   const [commentLength, setCommentLength] = useState(0);
   const { user } = useUserContext();
   const [isCommentId, setIsCommentId] = useState("");
   const [isCommentAuthorId, setIsCommentAuthorId] = useState("");
+  const [isPending, setIsPending] = useState(false);
   // console.log(commentData);
 
   const url = "https://mandarin.api.weniv.co.kr";
@@ -49,6 +51,7 @@ const PostDetail = () => {
   const fetchPostData = async () => {
     const reqPath = `/post/${post_id}`;
     try {
+      setIsPending(true); // 통신 시작
       const res = await fetch(url + reqPath, {
         method: "GET",
         headers: {
@@ -59,10 +62,13 @@ const PostDetail = () => {
         .then((res) => res.json())
         .then((data) => {
           setPostDetailData(data.post);
-          setIsHeartOn(data.post.hearted);
-          setLikeCount(data.post.heartCount);
+          console.log("postDetailData", postDetailData);
+          setIsPending(false); // 통신 종료
+          // setIsHeartOn(data.post.hearted);
+          // setLikeCount(data.post.heartCount);
         });
     } catch (err) {
+      setIsPending(false); // 통신 종료
       console.log("err", err);
     }
   };
@@ -71,6 +77,7 @@ const PostDetail = () => {
   const getCommentList = async () => {
     const reqPath = `/post/${post_id}/comments/?limit=1000&skip=0`;
     try {
+      setIsPending(true);
       const res = await fetch(url + reqPath, {
         method: "GET",
         headers: {
@@ -80,8 +87,10 @@ const PostDetail = () => {
       });
       const data = await res.json();
       setCommentData(data.comments);
+      setIsPending(false); // 통신 종료
     } catch (err) {
       console.log("err", err);
+      setIsPending(false); // 통신 종료
     }
   };
   useEffect(() => {
@@ -99,68 +108,70 @@ const PostDetail = () => {
   return (
     <>
       <CommonTopBar modalActive={modalActive} setModalActive={setModalActive} />
-      <PostDetailWrapper>
-        <h2 className="hidden">포스트 상세 페이지입니다.</h2>
-        <PostDiv>
-          <PostContent
+      {!postDetailData.author._id ? (
+        <Loading />
+      ) : (
+        <PostDetailWrapper>
+          <h2 className="hidden">포스트 상세 페이지입니다.</h2>
+          <PostDiv>
+            <PostContent
+              post_id={post_id}
+              postDetail={postDetailData}
+              isHeartOn={postDetailData.hearted}
+              likeCount={postDetailData.heartCount}
+              postModalActive={postModalActive}
+              setPostModalActive={setPostModalActive}
+              setReportPostNum={() => {
+                console.log("난 PostDetail");
+              }}
+              commentDataLength={commentData.length}
+              // commentData={commentData}
+            />
+          </PostDiv>
+          <CommentWrapper>
+            <CommentDetail
+              post_id={post_id}
+              commentData={commentData}
+              commentModalActive={commentModalActive}
+              setCommentModalActive={setCommentModalActive}
+              setIsCommentId={setIsCommentId}
+              isCommentId={isCommentId}
+              setCommentData={setCommentData}
+              setIsCommentAuthorId={setIsCommentAuthorId}
+              isCommentAuthorId={isCommentAuthorId}
+            />
+          </CommentWrapper>
+          <CommentAdd
             post_id={post_id}
-            postDetail={postDetailData}
-            isHeartOn={isHeartOn}
-            setIsHeartOn={setIsHeartOn}
-            likeCount={likeCount}
-            setLikeCount={setLikeCount}
+            postUserId={postDetailData.author._id}
+            commentImg={postDetailData.author.image}
+            setCommentData={setCommentData}
+            commentData={commentData}
+          />
+
+          {/* 슬라이드 모달 띄움 */}
+          <Modal modalActive={modalActive} setModalActive={setModalActive} />
+          <PostModal
+            reportPostNum={postDetailData.id}
+            postUserId={postDetailData.author._id}
             postModalActive={postModalActive}
             setPostModalActive={setPostModalActive}
-            setReportPostNum={() => {
-              console.log("난 PostDetail");
-            }}
-            commentDataLength={commentData.length}
-            // commentData={commentData}
+            isDeletePost={isDeletePost}
+            setIsDeletePost={setIsDeletePost}
           />
-        </PostDiv>
-        <CommentWrapper>
-          <CommentDetail
-            post_id={post_id}
-            commentData={commentData}
+          <CommentModal
+            postId={postDetailData.id}
             commentModalActive={commentModalActive}
             setCommentModalActive={setCommentModalActive}
             setIsCommentId={setIsCommentId}
             isCommentId={isCommentId}
             setCommentData={setCommentData}
+            commentData={commentData}
             setIsCommentAuthorId={setIsCommentAuthorId}
             isCommentAuthorId={isCommentAuthorId}
           />
-        </CommentWrapper>
-        <CommentAdd
-          post_id={post_id}
-          postUserId={postDetailData.author._id}
-          commentImg={postDetailData.author.image}
-          setCommentData={setCommentData}
-          commentData={commentData}
-        />
-
-        {/* 슬라이드 모달 띄움 */}
-        <Modal modalActive={modalActive} setModalActive={setModalActive} />
-        <PostModal
-          reportPostNum={postDetailData.id}
-          postUserId={postDetailData.author._id}
-          postModalActive={postModalActive}
-          setPostModalActive={setPostModalActive}
-          isDeletePost={isDeletePost}
-          setIsDeletePost={setIsDeletePost}
-        />
-        <CommentModal
-          postId={postDetailData.id}
-          commentModalActive={commentModalActive}
-          setCommentModalActive={setCommentModalActive}
-          setIsCommentId={setIsCommentId}
-          isCommentId={isCommentId}
-          setCommentData={setCommentData}
-          commentData={commentData}
-          setIsCommentAuthorId={setIsCommentAuthorId}
-          isCommentAuthorId={isCommentAuthorId}
-        />
-      </PostDetailWrapper>
+        </PostDetailWrapper>
+      )}
     </>
   );
 };

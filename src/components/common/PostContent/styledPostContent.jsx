@@ -42,6 +42,9 @@ export const ContextWrapper = styled.div`
 `;
 export const ContextLink = styled(Link)`
   color: black;
+  display: block;
+  word-break: break-all;
+
   &:focus,
   &:hover,
   &:visited,
@@ -52,8 +55,7 @@ export const ContextLink = styled(Link)`
 `;
 export const PostBtn = styled.div`
   display: flex;
-  margin-bottom: 16px;
-  margin-left: 54px;
+  margin: 12px 0 16px 54px;
 `;
 
 export const ImgBox = styled.div`

@@ -153,7 +153,8 @@ const PostEdit = (props) => {
                   className="form-textarea"
                   type="text"
                   placeholder="게시글 입력하기..."
-                  maxLength={800}
+                  maxlength="900"
+                  rows={6}
                   ref={textRef}
                   value={inpValue}
                   onInput={handleResizeHeight}
