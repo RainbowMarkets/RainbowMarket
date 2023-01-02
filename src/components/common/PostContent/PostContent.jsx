@@ -4,6 +4,7 @@ import PostHeartBtn from "../../Posts/PostBtn/PostHearBtn/PostHeartBtn";
 import PostDate from "../../Posts/Comment/PostDate/PostDate";
 import leftArrow from "../../../assets/images/left-arrow.png";
 import rightArrow from "../../../assets/images/right-arrow.png";
+import PostUserList from "../UserList/PostUserList";
 
 import {
   ContextWrapper,
@@ -55,7 +56,7 @@ const PostContent = (props) => {
     <PostWrapper>
       <h2 className="hidden">포스트 섹션</h2>
       <ProfileContain>
-        <UserList
+        <PostUserList
           width="42px"
           image={props.postDetail.author.image}
           username={props.postDetail.author.username}
