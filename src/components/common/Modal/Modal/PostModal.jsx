@@ -5,7 +5,6 @@ import DeleteAlert from "../Alert/DeleteAlert";
 import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
-
 // 내가 작성한 게시글 : 삭제, 수정
 // 다른 사용자가 작성한 게시글 : 신고하기
 const PostModal = (props) => {
@@ -63,7 +62,7 @@ const PostModal = (props) => {
         ></div>
         <ul className={props.postModalActive ? "reveal" : ""}>
           {props.postUserId === user._id ||
-          props.postUserId === user.accountname ? (
+            props.postUserId === user.accountname ? (
             <>
               <li>
                 <button onClick={handleDeletePost}>삭제</button>
@@ -96,6 +95,7 @@ const PostModal = (props) => {
       <ToastMessage
         toast={toast}
         setToast={setToast}
+        toastName="게시글"
       />
     </>
   );

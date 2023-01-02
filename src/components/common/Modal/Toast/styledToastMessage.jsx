@@ -21,9 +21,9 @@ export const StyledWrap = styled.section`
     background-color: #fff;
     border: 2px solid ${colors.colorMain};
     z-index: 1020;
-    opacity: 1;
-    /* visibility: hidden; */
-    transform: translate(0, 0); /* translate(0, 100%); */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(0, 100%);
     transition: all 0.5s;
     text-align: center;
   }
@@ -31,5 +31,11 @@ export const StyledWrap = styled.section`
   strong{
     font-weight: bold;
     font-size: ${fonts.large};
+  }
+
+  .reveal {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
   }
 `
