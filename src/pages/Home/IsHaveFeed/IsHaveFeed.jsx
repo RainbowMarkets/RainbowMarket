@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StyledSection } from "./styledisHaveFeed";
-import PostContent from "../../../components/common/PostFormat/PostContent/PostContent";
+import PostContent from "../../../components/common/PostContent/PostContent";
 import useUserContext from "../../../hooks/useUserContext";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
 

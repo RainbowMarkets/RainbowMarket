@@ -11,6 +11,7 @@ const PostHeartBtn = ({
   setLikeCount,
   post_id,
 }) => {
+  console.log(post_id);
   // 하트 상태값에 따라 하트 색 변경
   // console.log(heartCount, hearted);
   const { user } = useUserContext();
