@@ -3,7 +3,7 @@ import { colors, fonts } from "../../GlobalStyle";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 import defaultImg from "../../assets/images/profile_small.png";
 import imgUpBtn from "../../assets/images/img-button.png";
-import rainbowGif from "../../assets/images/rainbowGif.gif";
+import rainbowGif from "../../assets/images/loading.gif";
 import CommentAdd from "../Posts/Comment/CommentAdd/CommentAdd";
 import { useState } from "react";
 const ChatRoomWrapper = styled.section`

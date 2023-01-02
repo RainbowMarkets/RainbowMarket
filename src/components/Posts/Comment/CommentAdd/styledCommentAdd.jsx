@@ -40,5 +40,6 @@ export const CommentAddWrapper = styled.form`
     color: ${colors.colorC4};
     font-weight: bold;
     line-height: 18px;
+    cursor: default;
   }
 `;

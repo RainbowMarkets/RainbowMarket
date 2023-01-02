@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import defaultProfile from "../../../assets/images/profile_small.png";
 import useUserContext from "../../../hooks/useUserContext";
 import {
@@ -111,7 +110,6 @@ export default function UserList(props) {
     <StyledLi>
       <StyledLink to={`/profile/${props.accountname}`}>
         <StyledImg
-          /* src={defaultProfile} */
           src={
             props.image.includes("https://mandarin.api.weniv.co.kr")
               ? props.image === "https://mandarin.api.weniv.co.kr/Ellipse.png"
