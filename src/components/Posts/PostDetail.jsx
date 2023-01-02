@@ -3,7 +3,7 @@ import Modal from "../common/Modal/Modal/Modal";
 import PostModal from "../common/Modal/Modal/PostModal";
 import CommentDetail from "./Comment/CommentDetail/CommentDetail";
 import CommentAdd from "./Comment/CommentAdd/CommentAdd";
-import PostContent from "../common/PostFormat/PostContent/PostContent";
+import PostContent from "../common/PostContent/PostContent";
 import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
@@ -140,10 +140,7 @@ const PostDetail = () => {
         />
 
         {/* 슬라이드 모달 띄움 */}
-        <Modal
-          modalActive={modalActive}
-          setModalActive={setModalActive}
-        />
+        <Modal modalActive={modalActive} setModalActive={setModalActive} />
         <PostModal
           reportPostNum={postDetailData.id}
           postUserId={postDetailData.author._id}

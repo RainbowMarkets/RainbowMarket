@@ -5,7 +5,7 @@ import {
   StyledSection,
 } from "./styledProfileFeedSection";
 import ProfileFeedHeader from "./ProfileFeedHeader/ProfileFeedHeader";
-import PostContent from "../../common/PostFormat/PostContent/PostContent";
+import PostContent from "../../common/PostContent/PostContent";
 import PostModal from "../../common/Modal/Modal/PostModal";
 import DeleteAlert from "../../common/Modal/Alert/DeleteAlert";
 import useUserContext from "../../../hooks/useUserContext";

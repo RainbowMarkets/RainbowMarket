@@ -1,9 +1,9 @@
-import sIconMoreVertical from "../../../../assets/images/s-icon-more-vertical.png";
-import PostCommentBtn from "../../../Posts/PostBtn/PostCommentBtn/PostCommentBtn";
-import PostHeartBtn from "../../../Posts/PostBtn/PostHearBtn/PostHeartBtn";
-import PostDate from "../../../Posts/Comment/PostDate/PostDate";
-import leftArrow from "../../../../assets/images/left-arrow.png";
-import rightArrow from "../../../../assets/images/right-arrow.png";
+import sIconMoreVertical from "../../../assets/images/s-icon-more-vertical.png";
+import PostCommentBtn from "../../Posts/PostBtn/PostCommentBtn/PostCommentBtn";
+import PostHeartBtn from "../../Posts/PostBtn/PostHearBtn/PostHeartBtn";
+import PostDate from "../../Posts/Comment/PostDate/PostDate";
+import leftArrow from "../../../assets/images/left-arrow.png";
+import rightArrow from "../../../assets/images/right-arrow.png";
 
 import {
   ContextWrapper,
@@ -19,7 +19,7 @@ import {
   ArrowRight,
   ContextLink,
 } from "./styledPostContent";
-import UserList from "../../UserList/UserList";
+import UserList from "../UserList/UserList";
 import { useEffect, useState } from "react";
 
 const PostContent = (props) => {

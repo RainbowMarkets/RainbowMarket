@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { colors, fonts } from "../../../../GlobalStyle";
-import { StyledImg, StyledLink } from "../../UserList/styledUserList";
+import { colors, fonts } from "../../../GlobalStyle";
+import { StyledImg, StyledLink } from "../UserList/styledUserList";
 export const PostWrapper = styled.article`
   display: flex;
   flex-direction: column;
