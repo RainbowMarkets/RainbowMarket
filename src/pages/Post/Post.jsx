@@ -141,7 +141,7 @@ const Post = (props) => {
                   className="form-textarea"
                   type="text"
                   placeholder="게시글 입력하기..."
-                  maxLength={6000}
+                  maxLength={800}
                   ref={textRef}
                   value={inpValue}
                   onInput={handleResizeHeight}
