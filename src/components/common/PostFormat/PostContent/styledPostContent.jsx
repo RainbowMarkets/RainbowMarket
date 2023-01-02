@@ -24,16 +24,10 @@ export const ProfileContain = styled.div`
     height: 18px;
   }
 `;
-export const ContextWrapper = styled(Link)`
+export const ContextWrapper = styled.div`
   margin-left: 54px;
   color: black;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
+
   .post-context {
     font-weight: 400;
     line-height: 17.53px;
@@ -44,6 +38,16 @@ export const ContextWrapper = styled(Link)`
     font-weight: 400;
     line-height: 12px;
     font-size: ${fonts.small};
+  }
+`;
+export const ContextLink = styled(Link)`
+  color: black;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;
 export const PostBtn = styled.div`

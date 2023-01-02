@@ -17,6 +17,7 @@ import {
   PostImgUl,
   ArrowLeft,
   ArrowRight,
+  ContextLink,
 } from "./styledPostContent";
 import UserList from "../../UserList/UserList";
 import { useEffect, useState } from "react";
@@ -33,6 +34,8 @@ const PostContent = (props) => {
   const [isHeartOn, setIsHeartOn] = useState();
   const [likeCount, setLikeCount] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
+
+  // 이미지 슬라이딩 함수
   const leftClick = () => {
     if (currentIndex > 1) {
       setCurrentIndex(currentIndex - 1);
@@ -62,8 +65,13 @@ const PostContent = (props) => {
           <img className="post-modal" src={sIconMoreVertical} alt="" />
         </button>
       </ProfileContain>
-      <ContextWrapper to={`/post/${props.postDetail.id}`}>
-        <p className="post-context">{props.postDetail.content}</p>
+      <ContextWrapper>
+        <ContextLink
+          className="post-context"
+          to={`/post/${props.postDetail.id}`}
+        >
+          {props.postDetail.content}
+        </ContextLink>
         {props.postDetail.image && (
           <ImgBox>
             <PostImgUl imgIndex={currentIndex}>
