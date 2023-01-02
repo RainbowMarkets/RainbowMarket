@@ -33,6 +33,7 @@ export default function ProfileItemList({
             <li key={product.id}>
               <Item
                 onClick={() => {
+                  if (!isMine) return;
                   setProdModal(true);
                   setProduct({ ...product });
                 }}
