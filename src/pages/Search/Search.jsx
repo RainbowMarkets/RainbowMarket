@@ -16,7 +16,7 @@ export default function Search() {
   const observeTarget = useRef(); // 감시할 target
 
   const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/user/searchuser/?keyword=${searchInp}`; /* ${searchInp} */
+  const reqPath = `/user/searchuser/?keyword=${searchInp}`;
 
   const callbackFunction = (entries) => {
     const [ entry ] = entries;
@@ -85,7 +85,6 @@ export default function Search() {
   // 서치 탑바에서 가져온 inpvalue
   function handleSearchInput(e){
     setSearchInp(e.target.value);
-    // console.log(searchInp);
   }
 
   return (
@@ -109,7 +108,6 @@ export default function Search() {
               )
             })
           }
-          {/* <li ref={observeTarget}>돼라아아아아</li> */}
         </StyledUl>
         <div ref={observeTarget}></div>
       </StyledSection>
