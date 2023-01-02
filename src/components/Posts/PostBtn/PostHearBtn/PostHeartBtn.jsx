@@ -13,12 +13,14 @@ const PostHeartBtn = ({
 }) => {
   console.log(post_id);
   // 하트 상태값에 따라 하트 색 변경
-  // console.log(heartCount, hearted);
+  const [isHeart, setIsHeart] = useState(isHeartOn);
+  const [like, setLike] = useState(likeCount);
+
   const { user } = useUserContext();
   const handleHeart = async (e) => {
     // setIsHeartOn(true);
     // 하트 누르지 않은 게시물 -> false
-    if (!isHeartOn) {
+    if (!isHeart) {
       const reqPath = `/post/${post_id}/heart`;
       const url = "https://mandarin.api.weniv.co.kr";
       try {
@@ -32,19 +34,19 @@ const PostHeartBtn = ({
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            setIsHeartOn(data.post.hearted);
-            setLikeCount(data.post.heartCount);
-          })
-          .then(console.log(isHeartOn))
-          .then(console.log(likeCount));
+            setIsHeart(data.post.hearted);
+            setLike(data.post.heartCount);
+          });
+        // .then(console.log(isHeartOn))
+        // .then(console.log(likeCount));
       } catch (err) {
         console.log("err", err);
-        setIsHeartOn(false);
-        setLikeCount(likeCount);
+        // setIsHeart(false);
+        // setLike(likeCount);
       }
     }
     // 하트 눌린 게시물 -> hearted : true 값
-    if (isHeartOn) {
+    if (isHeart) {
       const reqPath = `/post/${post_id}/unheart`;
       const url = "https://mandarin.api.weniv.co.kr";
       try {
@@ -57,30 +59,30 @@ const PostHeartBtn = ({
         })
           .then((res) => res.json())
           .then((data) => {
-            setIsHeartOn(data.post.hearted);
-            setLikeCount(data.post.heartCount);
+            setIsHeart(data.post.hearted);
+            setLike(data.post.heartCount);
             console.log(data);
           })
           .then(console.log(isHeartOn))
           .then(console.log(likeCount));
       } catch (err) {
         console.log("err", err);
-        setIsHeartOn(true);
-        setLikeCount(likeCount);
+        setIsHeart(true);
+        setLike(likeCount);
       }
     }
   };
 
   return (
     <>
-      {isHeartOn ? (
+      {isHeart ? (
         <HeartWrapper>
           <button
             type="button"
             onClick={handleHeart}
             className="heartBtnOn"
           ></button>
-          <span>{likeCount}</span>
+          <span>{like || 0}</span>
         </HeartWrapper>
       ) : (
         <HeartWrapper>
@@ -89,7 +91,7 @@ const PostHeartBtn = ({
             onClick={handleHeart}
             className="heartBtn"
           ></button>
-          <span>{likeCount || 0}</span>
+          <span>{like || 0}</span>
         </HeartWrapper>
       )}
     </>

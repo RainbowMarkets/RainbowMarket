@@ -32,8 +32,8 @@ const PostContent = (props) => {
   }
   // console.log("postContent", props);
   // console.log(props.postDetail.image.split(",")[0]);
-  const [isHeartOn, setIsHeartOn] = useState();
-  const [likeCount, setLikeCount] = useState();
+  const [isHeartOn, setIsHeartOn] = useState(props.isHeartOn);
+  const [likeCount, setLikeCount] = useState(props.likeCount);
   const [currentIndex, setCurrentIndex] = useState(1);
 
   // 이미지 슬라이딩 함수
