@@ -19,6 +19,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ContextLink,
+  TextWrapper,
 } from "./styledPostContent";
 import UserList from "../UserList/UserList";
 import { useEffect, useState } from "react";
