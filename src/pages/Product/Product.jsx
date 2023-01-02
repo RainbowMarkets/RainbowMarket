@@ -23,8 +23,9 @@ export default function Product() {
   };
   const itemPricehandler = (event) => {
     // 입력에 따라 가격 변경
-    console.log(event);
-    setItemPrice(event.target.value);
+    const test = new RegExp("^[\\d]+$", "g");
+    if (test.test(event.target.value)) setItemPrice(event.target.value);
+    else return;
   };
   const itemLinkhandler = (event) => {
     // 입력에 따라 판매 링크 변경
