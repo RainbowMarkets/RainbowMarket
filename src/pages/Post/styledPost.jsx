@@ -37,7 +37,7 @@ export const TextWrapper = styled.section`
 
   .form-textarea {
     width: 100%;
-    height: 300px;
+    /* height: 300px; */
     font-weight: 400;
     line-height: 17.53px;
     border: none;
