@@ -31,7 +31,7 @@ const PostContent = (props) => {
     props.setPostModalActive(true);
     props.setReportPostNum(props.postDetail.id); // postid
   }
-  // console.log("postContent", props);
+  console.log("postContent", props);
   // console.log(props.postDetail.image.split(",")[0]);
   const [isHeartOn, setIsHeartOn] = useState(props.isHeartOn);
   const [likeCount, setLikeCount] = useState(props.likeCount);
@@ -107,10 +107,10 @@ const PostContent = (props) => {
       <PostBtn>
         <PostHeartBtn
           post_id={props.post_id}
-          isHeartOn={props.isHeartOn || isHeartOn}
-          setIsHeartOn={props.setIsHeartOn || setIsHeartOn}
-          likeCount={props.likeCount || likeCount}
-          setLikeCount={props.setLikeCount || setLikeCount}
+          isHeartOn={isHeartOn}
+          setIsHeartOn={setIsHeartOn}
+          likeCount={likeCount}
+          setLikeCount={setLikeCount}
         />
         <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
           address={`/post/${props.postDetail.id}`}
