@@ -37,6 +37,7 @@ const PostModal = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
+        alert("게시글이 신고되었습니다.");
         console.log("신고하기", res);
       });
   };

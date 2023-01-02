@@ -58,10 +58,14 @@ const CommentDetail = (props) => {
                   <StyledLink to={`/profile/${item.author.accountname}`}>
                     <img
                       src={
-                        item.author?.image ===
-                        "http://146.56.183.55:5050/Ellipse.png"
-                          ? profileImgSmall
-                          : item.author.image
+                        item.author.image.includes(
+                          "https://mandarin.api.weniv.co.kr"
+                        )
+                          ? item.author.image ===
+                            "https://mandarin.api.weniv.co.kr/Ellipse.png"
+                            ? profileImgSmall
+                            : item.author.image
+                          : profileImgSmall
                       }
                       alt=""
                     />
