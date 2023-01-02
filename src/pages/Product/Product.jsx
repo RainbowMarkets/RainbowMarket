@@ -12,7 +12,6 @@ export default function Product() {
   const [itemLink, setItemLink] = useState(""); // 판매 링크
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(false); // 입력 정보 확인
-
   const uploadInp = useRef(); // 파일 업로드 인풋 셀렉터
 
   const token = localStorage.getItem("token");
