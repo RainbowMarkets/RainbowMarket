@@ -40,7 +40,7 @@ export default function ProductModal({
 
   return (
     <>
-      <ModalWrapper className={prodModal ? "" : "hidden"}>
+      <ModalWrapper>
         <h2 className="hidden">상품 모달창</h2>
         <div className={prodModal ? "reveal" : ""} onClick={closeHandler}></div>
         <ul className={prodModal ? "reveal" : ""}>

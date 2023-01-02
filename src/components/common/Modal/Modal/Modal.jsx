@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import LogOutAlert from "../Alert/LogOutAlert";
 import { ModalWrapper } from "./styledModal";
 
 const Modal = (props) => {
+  const [isLogOut, setIsLogOut] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,7 +26,7 @@ const Modal = (props) => {
 
   return (
     <>
-      <ModalWrapper className={props.modalActive ? "" : "hidden"}>
+      <ModalWrapper>
         <h2 className="hidden">헤더 모달창</h2>
         <div
           className={props.modalActive ? "reveal" : ""}
@@ -35,14 +39,14 @@ const Modal = (props) => {
           <li>
             <button onClick={handleShowLogOutModal}>로그아웃</button>
           </li>
-          {/* <li>
-            <button>삭제</button>
-          </li> */}
-          {/* <li>
-            <button>신고하기</button>
-          </li> */}
         </ul>
       </ModalWrapper>
+      {isLogOut && (
+        <LogOutAlert
+          isLogOut={isLogOut}
+          setIsLogOut={setIsLogOut}
+        />
+      )}
     </>
   );
 };

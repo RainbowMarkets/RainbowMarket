@@ -4,7 +4,7 @@ import { StyledHeader, StyledMoreBtn } from "../commonStyledTopBar"
 export default function CommonTopBar(props) {
   function handleMenu() {
     props.setModalActive(true);
-    console.log(props.modalActive)
+    console.log(props.modalActive);
   }
 
   return (
