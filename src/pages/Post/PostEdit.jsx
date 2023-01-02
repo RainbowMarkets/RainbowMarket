@@ -83,8 +83,6 @@ const PostEdit = (props) => {
   };
   // 게시글 업로드 (수정)
   const createPost = async () => {
-    // formData.append("image", imgInput);
-    // console.log(imgInput);
     await fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
       method: "PUT",
       headers: {
@@ -122,14 +120,10 @@ const PostEdit = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        // console.log(`getData(/post/${param.post_id})의 응답 :\n`, res);
-        // console.log("content: ", res.post.content);
         setInpValue(res.post.content);
-        // console.log("image: ", res.post.image);
         if (res.post.image) {
           let splitImgArr = res.post.image;
           splitImgArr = splitImgArr.split(",");
-          // console.log("split 이미지", splitImgArr);
           setImgSrc(splitImgArr);
         }
       });
@@ -159,7 +153,7 @@ const PostEdit = (props) => {
                   className="form-textarea"
                   type="text"
                   placeholder="게시글 입력하기..."
-                  maxLength={6000}
+                  maxLength={800}
                   ref={textRef}
                   value={inpValue}
                   onInput={handleResizeHeight}
