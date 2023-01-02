@@ -89,7 +89,7 @@ export const PostImgUl = styled.ul`
 export const ArrowBtn = styled.button`
   background-color: inherit;
   color: none;
-  opacity: 20%;
+  opacity: 50%;
   position: absolute;
   top: 0%;
   line-height: 150%;
