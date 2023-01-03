@@ -3,8 +3,7 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const ChatRoomWrapper = styled.section`
   background-color: rgb(229, 232, 255);
-  height: calc(100vh - 109px);
-  padding: 20px 16px 20px 16px;
+  padding: 20px 16px 80px 16px; 
   li {
     display: flex;
     margin-bottom: 9px;
