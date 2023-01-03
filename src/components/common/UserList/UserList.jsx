@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import defaultProfile from "../../../assets/images/profile_small.png";
 import useUserContext from "../../../hooks/useUserContext";
 import {
@@ -84,9 +83,8 @@ export default function UserList(props) {
   console.log("isPending in USERLIST :\n", isPending);
 
   // 서치 하이라이팅
-  const escapeRegExp = (str = "") => (
-    str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
-  );
+  const escapeRegExp = (str = "") =>
+    str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
 
   const highlightText = (data, keyword) => {
     const matchReg = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
@@ -112,10 +110,11 @@ export default function UserList(props) {
     <StyledLi>
       <StyledLink to={`/profile/${props.accountname}`}>
         <StyledImg
-          /* src={defaultProfile} */
           src={
-            props.image !== "http://146.56.183.55:5050/Ellipse.png"
-              ? props.image
+            props.image.includes("https://mandarin.api.weniv.co.kr")
+              ? props.image === "https://mandarin.api.weniv.co.kr/Ellipse.png"
+                ? defaultProfile
+                : props.image
               : defaultProfile
           }
           alt=""

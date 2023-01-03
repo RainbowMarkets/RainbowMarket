@@ -12,7 +12,6 @@ export default function Product() {
   const [itemLink, setItemLink] = useState(""); // 판매 링크
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(false); // 입력 정보 확인
-
   const uploadInp = useRef(); // 파일 업로드 인풋 셀렉터
 
   const token = localStorage.getItem("token");
@@ -23,8 +22,9 @@ export default function Product() {
   };
   const itemPricehandler = (event) => {
     // 입력에 따라 가격 변경
-    console.log(event);
-    setItemPrice(event.target.value);
+    const test = new RegExp("^[\\d]+$", "g");
+    if (test.test(event.target.value)) setItemPrice(event.target.value);
+    else return;
   };
   const itemLinkhandler = (event) => {
     // 입력에 따라 판매 링크 변경

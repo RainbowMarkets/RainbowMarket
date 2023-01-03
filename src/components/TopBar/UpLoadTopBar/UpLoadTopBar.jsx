@@ -4,12 +4,12 @@ import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar";
 import { StyledLink } from "../MainTopBar/styledMainTopBar";
 
 export default function UpLoadTopBar(props) {
-  function handleUpLoad() {
-    console.log(props.inpValue);
-    console.log(props.uploadData);
+  // function handleUpLoad() {
+  //   console.log(props.inpValue);
+  //   console.log(props.uploadData);
 
-    props.setInpValue("");
-  }
+  //   props.setInpValue("");
+  // }
 
   return (
     <StyledHeader>
@@ -17,7 +17,7 @@ export default function UpLoadTopBar(props) {
       <Link /*to="/profile"*/>
         <StyledUpdateBtn
           type="submit"
-          onClick={props.fetchImgServer}
+          onClick={props.createPost}
           disabled={!props.inpValue}
         >
           업로드

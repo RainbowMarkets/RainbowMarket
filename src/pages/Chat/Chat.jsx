@@ -1,17 +1,14 @@
 import { useState } from "react";
 import Login from "../../components/common/Login/Login";
-import LogOutAlert from "../../components/common/Modal/Alert/LogOutAlert";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import defaultImg from "../../assets/images/profile_small.png";
 import { ChatWrapper, ListWrapper, UlWrapper, StyledLink } from "./styledChat";
-import { Link } from "react-router-dom";
 export default function Chat() {
   const { user } = useUserContext();
 
   const [modalActive, setModalActive] = useState(false);
-  const [isLogOut, setIsLogOut] = useState(false);
 
   return (
     <>
@@ -62,12 +59,7 @@ export default function Chat() {
           <Modal
             modalActive={modalActive}
             setModalActive={setModalActive}
-            isLogOut={isLogOut}
-            setIsLogOut={setIsLogOut}
           />
-          {isLogOut && (
-            <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
-          )}
         </>
       )}
     </>

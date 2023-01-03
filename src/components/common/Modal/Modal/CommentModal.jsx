@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useUserContext from "../../../../hooks/useUserContext";
 import CommentAlert from "../Alert/CommentAlert";
+import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
 const CommentModal = (props) => {
@@ -16,6 +17,7 @@ const CommentModal = (props) => {
   const { user } = useUserContext();
 
   const [isAlertCancel, setIsAlertCancel] = useState(false);
+  const [toast, setToast] = useState(false);
   const localId = localStorage.getItem("_id");
 
   function handleCancelMenu() {
@@ -38,7 +40,8 @@ const CommentModal = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        alert("댓글이 신고되었습니다.");
+        // alert("댓글이 신고되었습니다.");
+        setToast(true);
         console.log("댓글이 신고되었습니다.", res);
       });
   };
@@ -81,6 +84,11 @@ const CommentModal = (props) => {
           setCommentData={props.setCommentData}
         />
       )}
+      <ToastMessage
+        toast={toast}
+        setToast={setToast}
+        toastName="댓글"
+      />
     </>
   );
 };

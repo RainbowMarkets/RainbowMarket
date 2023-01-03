@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductInput from "../../components/ProductInput/ProductInput";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useUserContext from "../../hooks/useUserContext";
@@ -18,13 +18,18 @@ export default function ProductEdit() {
 
   const uploadInp = useRef(); // 파일 업로드 인풋 셀렉터
 
+  // 뒤로가기 방지용 선언
+  const navigate = useNavigate();
+
   const itemNamehandler = (event) => {
     // 입력에 따라 상품명 변경
     setItemName(event.target.value);
   };
   const itemPricehandler = (event) => {
     // 입력에 따라 가격 변경
-    setItemPrice(event.target.value);
+    const test = new RegExp("^[\\d]+$", "g");
+    if (test.test(event.target.value)) setItemPrice(event.target.value);
+    else return;
   };
   const itemLinkhandler = (event) => {
     // 입력에 따라 판매 링크 변경
@@ -89,7 +94,9 @@ export default function ProductEdit() {
           })
             .then((response) => response.json())
             .then((res) => console.log("이미지 수정 API의 응답 :\n", res))
-            .then(() => window.location.assign("/profile"));
+            .then(() => {
+              navigate("/profile", { replace: true }); // 프로필로 이동 후 뒤로가기 방지
+            });
         })
         .catch((err) => {
           // 에러 발생 시
@@ -117,7 +124,7 @@ export default function ProductEdit() {
       })
         .then((response) => response.json())
         .then((res) => console.log("이미지 수정 API의 응답 :\n", res))
-        .then(() => window.location.assign("/profile"))
+        .then(() => navigate("/profile", { replace: true })) // 프로필로 이동 후 뒤로가기 방지
         .catch((err) => {
           // 에러 발생 시
           alert(err);

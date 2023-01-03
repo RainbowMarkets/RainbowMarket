@@ -58,7 +58,6 @@ function App() {
                 <Route path="/post/:post_id" element={<PostDetail />} />
                 <Route path="/post/:post_id/edit" element={<PostEdit />} />
                 <Route path="/join" element={<Join />} />
-                <Route path="/post/:post_id/edit" element={<PostEdit />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                   path="/profile/:accountname/follower"

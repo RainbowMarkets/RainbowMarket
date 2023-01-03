@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import useUserContext from "../../../../hooks/useUserContext";
 import DeleteAlert from "../Alert/DeleteAlert";
+import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
 // 내가 작성한 게시글 : 삭제, 수정
@@ -11,11 +12,12 @@ const PostModal = (props) => {
   // console.log(props);
   // console.log("postuserid", props.postUserId);
   // console.log("myid", props.myId);
-  const navigate = useNavigate();
-  const location = useLocation();
+
   const { user } = useUserContext();
   const [isAlertCancel, setIsAlertCancel] = useState(false);
+  const [toast, setToast] = useState(false);
   const url = "https://mandarin.api.weniv.co.kr";
+
   // console.log(user._id);
   function handlePostSideMenu() {
     props.setPostModalActive(false);
@@ -24,8 +26,6 @@ const PostModal = (props) => {
   }
 
   function handleDeletePost() {
-    // props.setIsDeletePost(true);
-    // console.log("너삭제");
     setIsAlertCancel(true);
   }
 
@@ -40,6 +40,8 @@ const PostModal = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
+        // alert("게시글이 신고되었습니다.");
+        setToast(true);
         console.log("신고하기", res);
       });
   };
@@ -52,7 +54,7 @@ const PostModal = (props) => {
 
   return (
     <>
-      <ModalWrapper className={props.postModalActive ? "" : "hidden"}>
+      <ModalWrapper>
         <h2 className="hidden">게시글 모달창</h2>
         <div
           className={props.postModalActive ? "reveal" : ""}
@@ -60,7 +62,7 @@ const PostModal = (props) => {
         ></div>
         <ul className={props.postModalActive ? "reveal" : ""}>
           {props.postUserId === user._id ||
-          props.postUserId === user.accountname ? (
+            props.postUserId === user.accountname ? (
             <>
               <li>
                 <button onClick={handleDeletePost}>삭제</button>
@@ -90,6 +92,11 @@ const PostModal = (props) => {
           reportPostNum={props.reportPostNum}
         />
       )}
+      <ToastMessage
+        toast={toast}
+        setToast={setToast}
+        toastName="게시글"
+      />
     </>
   );
 };

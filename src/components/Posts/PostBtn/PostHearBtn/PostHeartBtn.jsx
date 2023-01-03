@@ -12,7 +12,10 @@ const PostHeartBtn = ({
   post_id,
 }) => {
   // 하트 상태값에 따라 하트 색 변경
-  // console.log(heartCount, hearted);
+  // const [isHeart, setIsHeart] = useState(isHeartOn);
+  // const [like, setLike] = useState(likeCount);
+  console.log(post_id, isHeartOn, likeCount);
+
   const { user } = useUserContext();
   const handleHeart = async (e) => {
     // setIsHeartOn(true);
@@ -31,19 +34,21 @@ const PostHeartBtn = ({
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            // setIsHeart(data.post.hearted);
+            // setLike(data.post.heartCount);
             setIsHeartOn(data.post.hearted);
             setLikeCount(data.post.heartCount);
-          })
-          .then(console.log(isHeartOn))
-          .then(console.log(likeCount));
+          });
+        // .then(console.log(isHeartOn))
+        // .then(console.log(likeCount));
       } catch (err) {
         console.log("err", err);
-        setIsHeartOn(false);
-        setLikeCount(likeCount);
+        // setIsHeart(false);
+        // setLike(likeCount);
       }
     }
     // 하트 눌린 게시물 -> hearted : true 값
-    if (isHeartOn) {
+    else {
       const reqPath = `/post/${post_id}/unheart`;
       const url = "https://mandarin.api.weniv.co.kr";
       try {
@@ -56,6 +61,8 @@ const PostHeartBtn = ({
         })
           .then((res) => res.json())
           .then((data) => {
+            // setIsHeart(data.post.hearted);
+            // setLike(data.post.heartCount);
             setIsHeartOn(data.post.hearted);
             setLikeCount(data.post.heartCount);
             console.log(data);
@@ -64,8 +71,8 @@ const PostHeartBtn = ({
           .then(console.log(likeCount));
       } catch (err) {
         console.log("err", err);
-        setIsHeartOn(true);
-        setLikeCount(likeCount);
+        // setIsHeart(true);
+        // setLike(likeCount);
       }
     }
   };
@@ -88,7 +95,7 @@ const PostHeartBtn = ({
             onClick={handleHeart}
             className="heartBtn"
           ></button>
-          <span>{likeCount || 0}</span>
+          <span>{likeCount}</span>
         </HeartWrapper>
       )}
     </>
