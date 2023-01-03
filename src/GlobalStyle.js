@@ -74,9 +74,10 @@ const Container = styled.div`
 `;
 
 const Aside = styled.aside`
-  width: 440px;
-  height: 100vh;
+  width: 390px;
+  max-height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 16px 0;
   &::-webkit-scrollbar {
     width: 1px;
@@ -85,7 +86,7 @@ const Aside = styled.aside`
   &::-webkit-scrollbar-thumb {
     background: ${colors.colorMain};
   }
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 780px) {
     display: none;
   }
 `;

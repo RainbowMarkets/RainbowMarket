@@ -23,21 +23,20 @@ import ProductEdit from "./pages/Product/ProductEdit";
 import SetProfile from "./components/common/SetProfile/SetProfile";
 import Member from "./components/Member/Member";
 
-// 잠시 1200 -> 100으로 변경
 function App() {
   // 어플리케이션 최초 접속 시 Splash 화면 띄워줌
   const [isFirst, setIsFirst] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setIsFirst(false);
-    }, 1500);
+    }, 1200);
   });
 
   return (
     <Container>
       <GlobalStyle />
       <Aside>
-        <Member/>
+        <Member />
       </Aside>
       <Wrapper>
         {isFirst ? (
