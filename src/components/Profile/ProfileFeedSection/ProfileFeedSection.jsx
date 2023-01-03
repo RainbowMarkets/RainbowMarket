@@ -8,6 +8,7 @@ import ProfileFeedHeader from "./ProfileFeedHeader/ProfileFeedHeader";
 import PostContent from "../../common/PostContent/PostContent";
 import PostModal from "../../common/Modal/Modal/PostModal";
 import imgLayerIcon from "../../../assets/images/iccon-img-layers.png";
+import { Link } from "react-router-dom";
 
 export default function ProfileFeedSection({
   name,
@@ -57,7 +58,7 @@ export default function ProfileFeedSection({
               <ol>
                 {data.map((post) => {
                   return (
-                    <>
+                    <Link to={`/post/${post.id}`}>
                       {post.image ? (
                         post.image.includes(",") ? (
                           <li>
@@ -68,7 +69,7 @@ export default function ProfileFeedSection({
                           <img src={post.image} />
                         )
                       ) : null}
-                    </>
+                    </Link>
                   );
                 })}
               </ol>
