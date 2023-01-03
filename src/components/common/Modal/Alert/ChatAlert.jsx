@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 
 const ChatAlert = (props) => {
-  const url = "https://mandarin.api.weniv.co.kr";
-  const { user } = useUserContext();
   const navigate = useNavigate();
-  console.log(props.commentData);
-  // console.log(props.isCommentId);
+
   // 모달창 기능
   function handleCancelMenu() {
     props.setModalActive(false);

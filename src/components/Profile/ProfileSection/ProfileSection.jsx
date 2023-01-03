@@ -6,7 +6,7 @@ import { Section } from "./styledProfileSection";
 export default function ProfileSection({ data, isMine, setUserProfile }) {
   return (
     <>
-      <Section>
+      <Section random={Math.random()}>
         <ProfileHeader data={data} />
         <strong>{data.username || "익명의 재능러"}</strong>
         <small>@{data.accountname || "익명의 재능러"}</small>

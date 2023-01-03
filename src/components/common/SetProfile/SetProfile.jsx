@@ -3,6 +3,7 @@ import SetprofileHeader from "./SetProfileHeader/SetprofileHeader";
 import SetProfileImage from "./SetProfileImage/SetProfileImage";
 import SetProfileInput from "./SetProfileInput/SetProfileInput";
 import { useEffect, useState } from "react";
+import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
 
 export default function SetProfile({
   join,
@@ -92,7 +93,6 @@ export default function SetProfile({
 
   useEffect(() => {
     if (usernameCheck && accountnameCheck) {
-      console.log("valid 완료");
       setValid(true);
     } else {
       setValid(false);
@@ -100,47 +100,50 @@ export default function SetProfile({
   }, [username, accountname, usernameCheck, accountnameCheck]);
 
   return (
-    <Form>
-      {join ? <SetprofileHeader /> : null}
-      <SetProfileImage
-        uploadInp={uploadInp}
-        image={image}
-        setImage={setImage}
-      />
-      <SetProfileInput
-        id="username"
-        label="사용자 이름"
-        placeholder="2~10자 이내여야 합니다."
-        value={username}
-        handler={usernameHandler}
-        min="2"
-        max="10"
-      />
-      <p>{usernameCheck ? null : userErrMessage}</p>
-      <SetProfileInput
-        id="accountname"
-        label="계정 ID"
-        placeholder="영문, 숫자, 특수문자 .(점), _(밑줄)만 사용 가능합니다."
-        value={accountname}
-        handler={accountnameHandler}
-        min="1"
-        max="10"
-      />
-      <p style={{ color: accountnameCheck ? "green" : "red" }}>
-        {accountErrMessage}
-      </p>
-      <SetProfileInput
-        id="intro"
-        label="소개"
-        placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
-        value={intro}
-        handler={introHandler}
-      />
-      {join ? (
-        <StartButton disabled={!valid} onClick={submitHandler}>
-          감귤마켓 시작하기
-        </StartButton>
-      ) : null}
-    </Form>
+    <>
+      {join && <FollowTopBar />}
+      <Form>
+        {join ? <SetprofileHeader /> : null}
+        <SetProfileImage
+          uploadInp={uploadInp}
+          image={image}
+          setImage={setImage}
+        />
+        <SetProfileInput
+          id="username"
+          label="사용자 이름"
+          placeholder="2~10자 이내여야 합니다."
+          value={username}
+          handler={usernameHandler}
+          min="2"
+          max="10"
+        />
+        <p>{usernameCheck ? null : userErrMessage}</p>
+        <SetProfileInput
+          id="accountname"
+          label="계정 ID"
+          placeholder="영문, 숫자, 특수문자 .(점), _(밑줄)만 사용 가능합니다."
+          value={accountname}
+          handler={accountnameHandler}
+          min="1"
+          max="10"
+        />
+        <p style={{ color: accountnameCheck ? "green" : "red" }}>
+          {accountErrMessage}
+        </p>
+        <SetProfileInput
+          id="intro"
+          label="소개"
+          placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+          value={intro}
+          handler={introHandler}
+        />
+        {join ? (
+          <StartButton disabled={!valid} onClick={submitHandler}>
+            감귤마켓 시작하기
+          </StartButton>
+        ) : null}
+      </Form>
+    </>
   );
 }

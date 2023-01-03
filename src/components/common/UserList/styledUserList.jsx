@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { colors, fonts } from "../../../GlobalStyle";
-// postdetail-style
 export const StyledLi = styled.li`
   display: flex;
   align-items: center;

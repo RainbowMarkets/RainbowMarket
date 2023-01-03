@@ -4,8 +4,6 @@ import FacebookIcon from "../../../assets/images/facebook.png";
 import GoogleIcon from "../../../assets/images/google.png";
 import { colors, fonts } from "../../../GlobalStyle";
 
-// 모달창 아래에서 위로 애니메이션을 통해 자연스럽게 올라오게 하고 싶은데요,
-// 관련 글들은 찾았지만 제가 연습해 본 다음에 여기에 시도해보는 걸로 하겠습니다..!
 export const LogInModalBox = styled.div`
   position: relative;
   width: 100%;

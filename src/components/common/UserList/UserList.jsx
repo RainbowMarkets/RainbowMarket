@@ -23,7 +23,6 @@ export default function UserList(props) {
 
   // 팔로우 및 언팔로우 기능
   const followHandler = (event) => {
-    // 버튼 종류에 따라 반응
     switch (event.target.textContent) {
       case "취소":
         setIsPending(true); // 통신 시작
@@ -39,10 +38,6 @@ export default function UserList(props) {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(
-              `deleteData(/profile/${props.accountname}/unfollow) 결과 :\n`,
-              res
-            );
             setIsfollow(!isfollow);
             setIsPending(false); // 통신 종료
           })
@@ -64,7 +59,6 @@ export default function UserList(props) {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log("팔로우 API 응답 :\n", res);
             setIsfollow(!isfollow);
             setIsPending(false); // 통신 종료
           })
@@ -73,14 +67,12 @@ export default function UserList(props) {
           });
         break;
       default:
-        // 뭔가 뭔가 잘못 됐을 때
         console.log("팔로우, 언팔로우 기능 비정상 작동");
         break;
     }
   };
 
   // 해당 계정의 프로필로 이동하는 링크
-  console.log("isPending in USERLIST :\n", isPending);
 
   // 서치 하이라이팅
   const escapeRegExp = (str = "") =>

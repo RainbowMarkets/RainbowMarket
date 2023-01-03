@@ -8,6 +8,7 @@ import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
 import useUserContext from "../../hooks/useUserContext";
 import ProductModal from "../../components/common/Modal/Modal/ProductModal";
+import Loading from "../../components/common/Loading/Loading";
 
 export default function Profile() {
   const { user } = useUserContext();
@@ -16,6 +17,7 @@ export default function Profile() {
   const [prodModal, setProdModal] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const [postData, setPostData] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     user: {
@@ -34,6 +36,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (!user) return;
+    setIsPending(true); // 통신 시작
     fetch(`https://mandarin.api.weniv.co.kr/user/myinfo`, {
       method: "GET",
       headers: {
@@ -43,7 +46,6 @@ export default function Profile() {
     })
       .then((res) => res.json())
       .then((res) => {
-        // console.log("getData(/user/myinfo)의 응답 :\n", res);
         setUserInfo(res);
         return res;
       })
@@ -62,23 +64,17 @@ export default function Profile() {
         )
           .then((res) => res.json())
           .then((res) => {
-            // console.log(
-            //   `getData(/post/${encodeURI(
-            //     userInfo.user.accountname
-            //   )}/userpost)의 응답 :\n`,
-            //   res
-            // );
             setPostData(res.post);
+            setIsPending(false); // 통신 종료
           });
       });
   }, []);
 
-  // console.log("postData :", postData);
-  // console.log("userInfo:", userInfo.user._id);
-
   return (
     <>
-      {user ? (
+      {isPending ? (
+        <Loading />
+      ) : user ? (
         <>
           <CommonTopBar
             modalActive={modalActive}
@@ -86,8 +82,12 @@ export default function Profile() {
           />
           <Wrapper>
             {/* 팔로우 등 프로필이 표시되는 섹션 */}
-            <ProfileSection data={userInfo.user} isMine={true} />
-            {/* 판매 중잉 아이템이 표시되는 섹션 */}
+            <ProfileSection
+              data={userInfo.user}
+              isMine={true}
+              isPending={isPending}
+            />
+            {/* 판매 중인 아이템이 표시되는 섹션 */}
             <ProfileItemSection
               name={userInfo.user.accountname}
               isMine={true}
@@ -103,10 +103,7 @@ export default function Profile() {
               postData={postData}
               myId={userInfo.user._id}
             />
-            <Modal
-              modalActive={modalActive}
-              setModalActive={setModalActive}
-            />
+            <Modal modalActive={modalActive} setModalActive={setModalActive} />
             <ProductModal
               prodModal={prodModal}
               setProdModal={setProdModal}

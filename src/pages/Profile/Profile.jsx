@@ -42,7 +42,6 @@ export default function Profile() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(`getData(/profile/${param.accountname})의 응답 :\n`, res);
         setUserProfile(res);
         return res;
       })
@@ -61,12 +60,6 @@ export default function Profile() {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(
-              `getData(/post/${encodeURI(
-                userProfile.profile.accountname
-              )}/userpost)의 응답 :\n`,
-              res
-            );
             setPostData(res.post);
           });
       });
@@ -93,10 +86,7 @@ export default function Profile() {
               name={userProfile.profile.accountname}
               data={postData}
             />
-            <Modal
-              modalActive={modalActive}
-              setModalActive={setModalActive}
-            />
+            <Modal modalActive={modalActive} setModalActive={setModalActive} />
           </Wrapper>
         </>
       ) : (

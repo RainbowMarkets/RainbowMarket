@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useUserContext from "../../../../hooks/useUserContext";
+import { useState } from "react";
 import ChatAlert from "../Alert/ChatAlert";
-import CommentAlert from "../Alert/CommentAlert";
 import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
@@ -18,7 +15,6 @@ const ChatRoomModal = (props) => {
   }
 
   const handleChatReport = () => {
-    // alert("해당 채팅방이 신고되었습니다.");
     setToast(true);
     props.setModalActive(false);
   };
@@ -48,11 +44,7 @@ const ChatRoomModal = (props) => {
           setIsAlertCancel={setIsAlertCancel}
         />
       )}
-      <ToastMessage 
-        toast={toast}
-        setToast={setToast}
-        toastName="해당 채팅방"
-      />
+      <ToastMessage toast={toast} setToast={setToast} toastName="해당 채팅방" />
     </>
   );
 };

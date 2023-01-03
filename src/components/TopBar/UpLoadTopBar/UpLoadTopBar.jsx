@@ -1,20 +1,12 @@
 import { Link } from "react-router-dom";
 import BackButton from "../BackButton";
 import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar";
-import { StyledLink } from "../MainTopBar/styledMainTopBar";
 
 export default function UpLoadTopBar(props) {
-  // function handleUpLoad() {
-  //   console.log(props.inpValue);
-  //   console.log(props.uploadData);
-
-  //   props.setInpValue("");
-  // }
-
   return (
     <StyledHeader>
       <BackButton />
-      <Link /*to="/profile"*/>
+      <Link>
         <StyledUpdateBtn
           type="submit"
           onClick={props.createPost}

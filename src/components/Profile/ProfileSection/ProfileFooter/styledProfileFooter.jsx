@@ -9,6 +9,7 @@ const Wrapper = styled.div`
 `;
 
 const ProfileModifyButton = styled(Link)`
+  background: #fff;
   color: #767676;
   width: 120px;
   height: 34px;
@@ -34,7 +35,7 @@ const FollowButton = styled.button`
   transition: 0.3s;
 
   &:active {
-    scale: 0.9;
+    scale: 0.95;
   }
 `;
 
@@ -47,12 +48,17 @@ const CircleButton = styled.button`
   height: 34px;
   border: 1px solid #dbdbdb;
   border-radius: 30px;
+  background: white;
 
   img {
     display: block;
     width: 20px;
     object-fit: cover;
     margin: auto;
+  }
+
+  &:active {
+    scale: 0.95;
   }
 `;
 

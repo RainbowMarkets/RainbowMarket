@@ -23,6 +23,7 @@ export const CommentAddWrapper = styled.form`
     margin-right: 18px;
     border: none;
     outline: none;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
   }
   input::placeholder {
     font-weight: 400;

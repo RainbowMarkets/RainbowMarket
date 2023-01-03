@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { StyledSection } from "./styledisHaveFeed";
 import PostContent from "../../../components/common/PostContent/PostContent";
-import useUserContext from "../../../hooks/useUserContext";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
+import Loading from "../../../components/common/Loading/Loading";
 
 export default function IsHaveFeed(props) {
-  // const { user } = useUserContext();
-  // console.log(user.token)
   const token = localStorage.getItem("token");
 
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/feed/?limit=30`;
 
   const [feedData, setFeedData] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     async function getFeedData() {
+      setIsPending(true); // 통신 시작
       await fetch(url + reqPath, {
         method: "GET",
         headers: {
@@ -25,8 +25,8 @@ export default function IsHaveFeed(props) {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log("test!!!!", res.posts);
           setFeedData(res.posts || []);
+          setIsPending(false); // 통신 종료
 
           // isHaveFeed 설정
           if (res.posts.length === 0) {
@@ -37,32 +37,35 @@ export default function IsHaveFeed(props) {
         });
     }
     getFeedData();
-    // console.log(feedData)
   }, []);
 
   const [postModalActive, setPostModalActive] = useState(false);
-  const [reportPostNum, setReportPostNum] = useState(""); // post id 받아서 postModal로 넘겨주기
+  const [reportPostNum, setReportPostNum] = useState("");
 
   return (
     <>
-      {feedData.map((feeditem, index) => {
-        return (
-          <StyledSection key={feeditem.id.length * index}>
-            <PostContent
-              postDetail={feeditem}
-              setReportPostNum={setReportPostNum}
-              postModalActive={postModalActive}
-              setPostModalActive={setPostModalActive}
-              isHeartOn={feeditem.hearted}
-              likeCount={feeditem.heartCount}
-              commentDataLength={feeditem.commentCount}
-              post_id={feeditem.id}
-            />
-          </StyledSection>
-        );
-      })}
+      {isPending ? (
+        <Loading />
+      ) : (
+        feedData.map((feeditem, index) => {
+          return (
+            <StyledSection key={index}>
+              <PostContent
+                postDetail={feeditem}
+                setReportPostNum={setReportPostNum}
+                postModalActive={postModalActive}
+                setPostModalActive={setPostModalActive}
+                isHeartOn={feeditem.hearted}
+                likeCount={feeditem.heartCount}
+                commentDataLength={feeditem.commentCount}
+                post_id={feeditem.id}
+              />
+            </StyledSection>
+          );
+        })
+      )}
       <PostModal
-        postUserId={null} // 팔로워들 글이라 항상 같지 않기 때문
+        postUserId={null}
         reportPostNum={reportPostNum}
         postModalActive={postModalActive}
         setPostModalActive={setPostModalActive}

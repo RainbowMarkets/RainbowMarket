@@ -12,7 +12,6 @@ export default function useFetch() {
       .then((res) => res.json())
       .then((res) => {
         callback(res);
-        console.log(`getData(${req}) 결과 :\n`, res);
       });
   };
 
@@ -28,7 +27,6 @@ export default function useFetch() {
       .then((res) => res.json())
       .then((res) => {
         callback(res);
-        console.log(`postData(${req}) 결과 :\n`, res);
       });
   };
 
@@ -56,7 +54,6 @@ export default function useFetch() {
       .then((res) => res.json())
       .then((res) => {
         callback(res);
-        console.log(`deleteData(${req}) 결과 :\n`, res);
       });
   };
 
