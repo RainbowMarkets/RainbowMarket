@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ItemList = styled.ol`
@@ -6,7 +5,7 @@ const ItemList = styled.ol`
   max-width: 390px;
   gap: 10px;
   margin: 16px auto;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 `;
 

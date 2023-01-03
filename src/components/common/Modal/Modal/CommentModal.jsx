@@ -6,10 +6,6 @@ import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
 const CommentModal = (props) => {
-  // console.log(props);
-
-  // console.log("포스트아이디 :", props.postId);
-  // console.log("코멘트유저아이디 :", props.isCommentAuthorId);
   const postId = props.postId;
   const commentId = props.isCommentId;
   const navigate = useNavigate();
@@ -40,17 +36,14 @@ const CommentModal = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        // alert("댓글이 신고되었습니다.");
         setToast(true);
-        console.log("댓글이 신고되었습니다.", res);
       });
   };
+
   const handleCommentReport = () => {
     sendCommentReport(postId, commentId);
     props.setCommentModalActive(false);
   };
-  // console.log(commentId);
-  // console.log(props.commentData);
 
   return (
     <>
@@ -84,11 +77,7 @@ const CommentModal = (props) => {
           setCommentData={props.setCommentData}
         />
       )}
-      <ToastMessage
-        toast={toast}
-        setToast={setToast}
-        toastName="댓글"
-      />
+      <ToastMessage toast={toast} setToast={setToast} toastName="댓글" />
     </>
   );
 };

@@ -30,7 +30,7 @@ export default function Navbar() {
       !nowLocation.includes("/profile/")) ||
     !user
   )
-    return null; /* (이거 해제하면 splash에서 내비바 없어짐) */
+    return null;
 
   return (
     <>
@@ -44,7 +44,6 @@ export default function Navbar() {
                   ? { color: colors.colorMain }
                   : { color: colors.color76 }
               }
-              /* className={({ isActive }) => (isActive ? "active" : undefined)} */
             >
               <StyledImg
                 src={

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProductInput from "../../components/ProductInput/ProductInput";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useUserContext from "../../hooks/useUserContext";
@@ -13,8 +14,7 @@ export default function Product() {
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(false); // 입력 정보 확인
   const uploadInp = useRef(); // 파일 업로드 인풋 셀렉터
-
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const itemNamehandler = (event) => {
     // 입력에 따라 상품명 변경
@@ -63,7 +63,6 @@ export default function Product() {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log("이미지 업로드 API 응답 :\n ", res);
         // 이미지가 성공적으로 업로드 되고 응답 받음
 
         // 응답 받은 이미지 주소를 첨부하여 상품 등록 API 제출
@@ -79,14 +78,13 @@ export default function Product() {
         fetch("https://mandarin.api.weniv.co.kr/product", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
             "Content-type": "application/json",
           },
           body: JSON.stringify(body),
         })
           .then((response) => response.json())
-          .then((res) => console.log("상품 등록 API 응답 :\n", res))
-          .then(() => window.location.assign("/profile"))
+          .then(() => navigate("/profile", { replace: true }))
           .catch((err) => console.log(err));
       })
       .catch((err) => {

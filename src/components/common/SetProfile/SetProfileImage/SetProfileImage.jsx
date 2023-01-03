@@ -22,11 +22,8 @@ export default function SetProfileImage({ uploadInp }) {
         };
       });
     }
-    // console.log(reader.result);
-    // setPreview(uploadInp.current.files[0]);
   };
 
-  console.log("user에 무슨 일 ", user);
   return (
     <Wrapper>
       <ProfileImage src={preview || user?.image || basicImg} />

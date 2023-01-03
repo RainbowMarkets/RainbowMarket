@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 
 const DeleteAlert = (props) => {
-  console.log(props.postId);
-  console.log(props.reportPostNum);
   const { user } = useUserContext();
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,7 +11,6 @@ const DeleteAlert = (props) => {
   const url = "https://mandarin.api.weniv.co.kr";
 
   function handleCancelDelete() {
-    // props.setIsDeletePost(false);
     props.setPostModalActive(false);
     props.setIsAlertCancel(false);
   }
@@ -24,7 +20,6 @@ const DeleteAlert = (props) => {
     if (location.pathname === "/profile") {
       props.setPostModalActive(false);
       props.setIsAlertCancel(false);
-      // window.location.reload(); // 새로고침 하는게 맞나...?
     } else {
       navigate("/profile");
     }
@@ -39,11 +34,10 @@ const DeleteAlert = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("삭제되었습니다", res);
         props.setPostData((prev) =>
-          [...prev].filter((item) => item.postId !== props.reportPostNum)
+          [...prev].filter((item) => item.id !== props.reportPostNum)
         );
-        window.location.reload();
+        // window.location.reload();
       });
   };
   useEffect(() => {}, [props.postData]);

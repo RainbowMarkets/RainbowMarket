@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, fonts } from "../../../../GlobalStyle"
+import { colors, fonts } from "../../../../GlobalStyle";
 
 export const StyledWrap = styled.section`
   z-index: 1000;
@@ -8,9 +8,8 @@ export const StyledWrap = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 440px;
-  min-width: 390px;
-  
+  width: 100%;
+
   div {
     width: 252px;
     flex-direction: column;
@@ -28,7 +27,7 @@ export const StyledWrap = styled.section`
     text-align: center;
   }
 
-  strong{
+  strong {
     font-weight: bold;
     font-size: ${fonts.large};
   }
@@ -38,4 +37,4 @@ export const StyledWrap = styled.section`
     visibility: visible;
     transform: translate(0, 0);
   }
-`
+`;

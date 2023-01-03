@@ -5,31 +5,20 @@ import DeleteAlert from "../Alert/DeleteAlert";
 import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
-// 내가 작성한 게시글 : 삭제, 수정
-// 다른 사용자가 작성한 게시글 : 신고하기
 const PostModal = (props) => {
-  // console.log(props.reportPostNum);
-  // console.log(props);
-  // console.log("postuserid", props.postUserId);
-  // console.log("myid", props.myId);
-
   const { user } = useUserContext();
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const [toast, setToast] = useState(false);
   const url = "https://mandarin.api.weniv.co.kr";
 
-  // console.log(user._id);
   function handlePostSideMenu() {
     props.setPostModalActive(false);
-    // console.log(props.reportPostNum);
-    // console.log(user._id);
   }
 
   function handleDeletePost() {
     setIsAlertCancel(true);
   }
 
-  /*   useEffect(() => { */
   const sendReport = async (postId) => {
     await fetch(url + `/post/${postId}/report`, {
       method: "POST",
@@ -40,12 +29,9 @@ const PostModal = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        // alert("게시글이 신고되었습니다.");
         setToast(true);
-        console.log("신고하기", res);
       });
   };
-  /*   }, []); */
 
   function handlePostReport() {
     sendReport(props.reportPostNum);
@@ -62,7 +48,7 @@ const PostModal = (props) => {
         ></div>
         <ul className={props.postModalActive ? "reveal" : ""}>
           {props.postUserId === user._id ||
-            props.postUserId === user.accountname ? (
+          props.postUserId === user.accountname ? (
             <>
               <li>
                 <button onClick={handleDeletePost}>삭제</button>
@@ -92,11 +78,7 @@ const PostModal = (props) => {
           reportPostNum={props.reportPostNum}
         />
       )}
-      <ToastMessage
-        toast={toast}
-        setToast={setToast}
-        toastName="게시글"
-      />
+      <ToastMessage toast={toast} setToast={setToast} toastName="게시글" />
     </>
   );
 };

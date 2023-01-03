@@ -21,7 +21,7 @@ const Modal = (props) => {
       props.setModalActive(false);
     } else {
       navigate("/profile");
-    } // 페이지가 프로필일때는 아무 동작도 안해서 모달 해제하는 조건문 넣음
+    }
   }
 
   return (
@@ -42,10 +42,7 @@ const Modal = (props) => {
         </ul>
       </ModalWrapper>
       {isLogOut && (
-        <LogOutAlert
-          isLogOut={isLogOut}
-          setIsLogOut={setIsLogOut}
-        />
+        <LogOutAlert isLogOut={isLogOut} setIsLogOut={setIsLogOut} />
       )}
     </>
   );

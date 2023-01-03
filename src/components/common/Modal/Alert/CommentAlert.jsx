@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect } from "react";
 import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 const CommentAlert = (props) => {
   const url = "https://mandarin.api.weniv.co.kr";
   const { user } = useUserContext();
-  console.log(props.commentData);
-  // console.log(props.isCommentId);
-  // 모달창 기능
+
   function handleCancelMenu() {
     props.setCommentModalActive(false);
     props.setIsAlertCancel(false);
   }
-  console.log("코멘트 alert : ", props.commentId);
-  // 삭제 클릭하면 -> 댓글 삭제 기능
+
   function handleDeleteComment() {
-    console.log("hi");
     deleteComment();
     props.setCommentModalActive(false);
     props.setIsAlertCancel(false);
-
-    // 2. 삭제되는 댓글의 author._id 값과 나의 author._id 값이 다르면 삭제가 안됨. -> 애초에 모달 창에서 걸러줄 예정
-    // window.location.reload();
   }
 
   // 댓글 삭제하기

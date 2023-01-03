@@ -8,8 +8,7 @@ export const ModalWrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 440px;
-  min-width: 390px;
+  width: 100%;
   div {
     width: 100%;
     position: absolute;
@@ -27,7 +26,6 @@ export const ModalWrapper = styled.section`
   /* 모달창 내부 */
   ul {
     width: 100%;
-    min-width: 390px;
     flex-direction: column;
     position: absolute;
     bottom: 0;
@@ -60,11 +58,6 @@ export const ModalWrapper = styled.section`
     visibility: visible;
     transform: translate(0, 0);
   }
-
-  // .container-disable {
-  //   /* 클릭불가능 효과 */
-  //   pointer-events : none;
-  // }
 
   li {
     height: 46px;

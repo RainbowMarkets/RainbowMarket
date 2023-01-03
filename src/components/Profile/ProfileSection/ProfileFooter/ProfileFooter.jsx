@@ -15,14 +15,12 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
   const [isPending, setIsPending] = useState(false);
 
   const chatHandler = (event) => {
-    // 채팅 및 공유하기 기능 미구현
     alert(
       "이 기능은 현재 구현 중에 있습니다.\n발전하여 더 나은 서비스로 찾아뵙겠습니다."
     );
   };
 
   const followHandler = (event) => {
-    // 버튼 종류에 따라 반응
     switch (event.target.textContent) {
       case "언팔로우":
         setIsPending(true); // 통신 시작
@@ -38,10 +36,6 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(
-              `deleteData(/profile/${data.accountname}/unfollow)의 응답 :\n`,
-              res
-            );
             setUserProfile(res);
             setIsPending(false); // 통신 종료
           })
@@ -64,7 +58,6 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log("팔로우 API의 응답 :\n", res);
             setUserProfile(res);
             setIsPending(false); // 통신 종료
           })
@@ -74,7 +67,6 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
           });
         break;
       default:
-        // 뭔가 뭔가 잘못 됐을 때
         console.log("팔로우, 언팔로우 기능 비정상 작동");
         break;
     }

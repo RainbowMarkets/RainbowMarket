@@ -2,7 +2,6 @@ import BackButton from "../BackButton";
 import { StyledHeader, StyledUpdateBtn } from "../commonStyledTopBar";
 
 export default function SaveTopBar({ handler, isPending, valid }) {
-  console.log("SaveTopBar의 valid", valid);
   return (
     <StyledHeader>
       <BackButton />

@@ -1,5 +1,4 @@
 import defaultProfile from "../../../assets/images/profile_small.png";
-import useUserContext from "../../../hooks/useUserContext";
 
 import {
   StyledWrap,
@@ -11,7 +10,6 @@ import {
 } from "./styledUserList";
 
 export default function PostUserList(props) {
-
   const handleImgError = (e) => {
     e.target.src = defaultProfile;
   };
@@ -32,12 +30,8 @@ export default function PostUserList(props) {
           onError={handleImgError}
         />
         <StyledDiv>
-          <StyledStrong>
-            { props.username }
-          </StyledStrong>
-          <StyledSmall>
-            &#64; { props.accountname }
-          </StyledSmall>
+          <StyledStrong>{props.username}</StyledStrong>
+          <StyledSmall>&#64; {props.accountname}</StyledSmall>
         </StyledDiv>
       </StyledLink>
     </StyledWrap>
