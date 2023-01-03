@@ -1,6 +1,3 @@
-// 게시물 추가 : 업로드 페이지
-import profileImgSmall from "../../assets/images/profile_small.png";
-import postImg from "../../assets/images/post_img.jpg";
 import {
   PostImgWrapper,
   ProfileContain,
@@ -8,10 +5,9 @@ import {
   UploadContain,
   UploadWrapper,
 } from "./styledPost";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import useUserContext from "../../hooks/useUserContext";
-import { UserContext } from "../../context/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 const formData = new FormData();
@@ -27,8 +23,6 @@ const PostEdit = (props) => {
   const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
   const [imgSrc, setImgSrc] = useState([]);
-
-  // 뒤로가기 방지용 선언
   const navigate = useNavigate();
 
   // textarea
@@ -39,7 +33,6 @@ const PostEdit = (props) => {
 
   const handleInpVal = (e) => {
     setInpValue(e.target.value);
-    // console.log(inpValue);
   };
 
   // 이미지 서버에 전송
@@ -61,11 +54,8 @@ const PostEdit = (props) => {
 
   // 이미지 추가 버튼
   const handleUploadImgs = (event) => {
-    console.log("click");
     const formData = new FormData();
-    console.log(event.target.file);
     const imgInput = event.target.files[0];
-    console.log(imgInput);
     if (imgSrc.length > 2) {
       alert("이미지는 3장까지 업로드 할 수 있습니다.");
       return;
@@ -75,7 +65,6 @@ const PostEdit = (props) => {
     postUploadImgs(formData)
       .then((data) => {
         setImgSrc([...imgSrc, `${url}/${data[0].filename}`]);
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -97,20 +86,17 @@ const PostEdit = (props) => {
       }),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res))
       .then(() => navigate("/profile", { replace: true })) // 프로필로 이동 후 뒤로가기 방지
       .catch((err) => console.log(err));
   };
 
   // 이미지 삭제하기
   const handleDeleteImg = (idx) => {
-    console.log("click");
     setImgSrc(imgSrc.filter((_, i) => i !== idx));
   };
 
   // 최초 접속 시 상세 정보를 받아와서 미리 입력
   useEffect(() => {
-    // console.log("param :", param);
     fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
       method: "GET",
       headers: {

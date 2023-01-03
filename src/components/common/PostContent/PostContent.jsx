@@ -5,6 +5,7 @@ import PostDate from "../../Posts/Comment/PostDate/PostDate";
 import leftArrow from "../../../assets/images/left-arrow.png";
 import rightArrow from "../../../assets/images/right-arrow.png";
 import PostUserList from "../UserList/PostUserList";
+import basicImage from "../../../assets/images/img-error.png";
 
 import {
   ContextWrapper,
@@ -12,27 +13,19 @@ import {
   PostWrapper,
   ProfileContain,
   ImgBox,
-  ButtonContainer,
-  PrevButton,
-  NextButton,
   PostImgUl,
   ArrowLeft,
   ArrowRight,
   ContextLink,
-  TextWrapper,
 } from "./styledPostContent";
-import UserList from "../UserList/UserList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const PostContent = (props) => {
-  console.log("postContent : ", props.postData);
   function handleSideMenu() {
-    console.log(props.postDetail.id);
     props.setPostModalActive(true);
     props.setReportPostNum(props.postDetail.id); // postid
   }
-  console.log("postContent", props);
-  // console.log(props.postDetail.image.split(",")[0]);
+
   const [isHeartOn, setIsHeartOn] = useState(props.isHeartOn);
   const [likeCount, setLikeCount] = useState(props.likeCount);
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -41,15 +34,11 @@ const PostContent = (props) => {
   const leftClick = () => {
     if (currentIndex > 1) {
       setCurrentIndex(currentIndex - 1);
-      console.log(currentIndex);
-      console.log(currentIndex.split(",").length);
     }
   };
   const rightClick = () => {
     if (currentIndex < props.postDetail.image.split(",").length) {
       setCurrentIndex(currentIndex + 1);
-      console.log(currentIndex);
-      console.log(currentIndex.split(",").length);
     }
   };
 
@@ -80,12 +69,19 @@ const PostContent = (props) => {
               {props.postDetail.image.split(",").map((img) => {
                 return (
                   <li>
-                    <img className="post-img" src={img} alt="게시글 이미지" />
+                    <img
+                      className="post-img"
+                      src={
+                        img.includes("https://mandarin.api.weniv.co.kr/")
+                          ? img
+                          : basicImage
+                      }
+                      alt="게시글 이미지"
+                    />
                   </li>
                 );
               })}
             </PostImgUl>
-            {/* 캐러셀 */}
             {props.postDetail.image.split(",").length !== 1 && (
               <>
                 {currentIndex !== 1 && (
@@ -112,11 +108,9 @@ const PostContent = (props) => {
           likeCount={likeCount}
           setLikeCount={setLikeCount}
         />
-        <PostCommentBtn /*commentCount={props.postDetail.comments.length}*/
+        <PostCommentBtn
           address={`/post/${props.postDetail.id}`}
           commentDataLength={props.commentDataLength}
-          /* profileCommentCount={props.postData.commentCount}
-            profileComments={props.postData.comments}*/
         />
       </PostBtn>
       <PostDate upDate={props.postDetail.updatedAt} />

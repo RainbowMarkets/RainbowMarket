@@ -1,24 +1,10 @@
-import styled from "styled-components";
 import profileImgSmall from "../../../../assets/images/profile_small.png";
 
-import { useEffect, useRef, useState } from "react";
-import Modal from "../../../common/Modal/Modal/Modal";
+import { useState } from "react";
 import { CommentWrapper, StyledLink } from "./styledCommentDetail";
-import useFetch from "../../../../hooks/useFetch";
-import useUserContext from "../../../../hooks/useUserContext";
-import { ModalWrapper } from "../../../common/Modal/Modal/styledModal";
-import { Link, useParams } from "react-router-dom";
 
 const CommentDetail = (props) => {
-  // console.log(props.commentData);
-  console.log(props);
-  const { user } = useUserContext();
   const [commentData, setCommentData] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const commentId = commentData;
-  // console.log(commentData.id);
-  // const url = "https://mandarin.api.weniv.co.kr";
-  // const reqPath = `/post/${props.post_id}/comments`;
 
   // 댓글 시간 계산 함수
   const getTimeGap = (time) => {
@@ -41,10 +27,6 @@ const CommentDetail = (props) => {
       return `${Math.floor(diff / 2592000)}달 전`;
     }
   };
-
-  // 해당 코멘트의 id 값
-  // console.log(commentId);
-  // console.log(commentData);
 
   return (
     <>
@@ -80,7 +62,6 @@ const CommentDetail = (props) => {
                 <p>{item.content}</p>
                 <button
                   onClick={() => {
-                    // console.log("코멘트유저아이디", item.author._id);
                     setCommentData(item.id);
                     props.setCommentModalActive(true);
                     props.setIsCommentId(item.id);

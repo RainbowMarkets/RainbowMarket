@@ -27,7 +27,6 @@ export default function ProductModal({
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("상품 삭제 API의 응답 :\n", res);
         setIsAlert(false);
         setProdModal(false);
         setProduct(null);

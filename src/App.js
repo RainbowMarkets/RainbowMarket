@@ -10,7 +10,6 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import Chat from "./pages/Chat/Chat";
 import Follow from "./pages/Follow/Follow";
-import { UserContextProvider } from "./context/UserContext";
 import PostDetail from "./components/Posts/PostDetail";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import MyProfile from "./pages/Profile/MyProfile";
@@ -30,7 +29,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsFirst(false);
-    }, 100);
+    }, 1500);
   });
 
   return (

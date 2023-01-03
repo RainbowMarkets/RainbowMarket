@@ -4,21 +4,20 @@ export const StyledInput = styled.input`
   margin-left: 20px;
   padding: 7px 16px;
   width: 100%;
-  background: #F2F2F2;
+  background: #f2f2f2;
   color: #000;
   line-height: 18px;
   border-radius: 32px;
   border: none;
-
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
 
   &::placeholder {
     line-height: 18px;
-    color: #C4C4C4;
+    color: #c4c4c4;
     vertical-align: baseline;
   }
 
-  &:focus{
+  &:focus {
     outline: none;
   }
-`
-
+`;

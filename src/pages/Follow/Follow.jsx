@@ -19,7 +19,6 @@ export default function Follow() {
     );
   }, []);
 
-  // 탑바 메뉴 어떻게 해야할지?
   return (
     <>
       <FollowTopbar />

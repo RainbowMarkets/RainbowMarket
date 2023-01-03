@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
-/*import { useNavigate } from "react-router-dom";*/
 import {
   NextButtonWrapper,
   WarningMessageWrapper,
@@ -67,14 +66,10 @@ export default function JoinWithEmail({
   };
 
   // 이메일 유효성 검사
-  const emailValidCheck = ({ target }) => {
-    // 위로 이사함.
-  };
+  const emailValidCheck = ({ target }) => {};
 
   //비밀번호 유효성 검사
-  const passwordValidCheck = ({ target }) => {
-    // 위로 이사함.
-  };
+  const passwordValidCheck = ({ target }) => {};
 
   const loginData = {
     user: {
@@ -89,12 +84,9 @@ export default function JoinWithEmail({
 
   // 제출하면 API 통신 연결
   const onSubmitHandler = async (event) => {
-    //리프레시되는 것을 막아줌
     event.preventDefault();
-    console.log("통신 시작", emailRef.current.value);
 
     try {
-      console.log("보낼 때 :", loginData);
       const res = await fetch(url + "/user/emailvalid", {
         method: "POST",
         headers: {
@@ -105,7 +97,6 @@ export default function JoinWithEmail({
 
       //통신할 때 유효성 검사하기
       const result = await res.json();
-      console.log(result);
       const requestMessage = await result.message;
 
       if (requestMessage === "이미 가입된 이메일 주소 입니다.") {

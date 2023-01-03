@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function ProfileEdit() {
-  const { user, dispatch } = useUserContext();
+  const { user } = useUserContext();
   const [username, setUsername] = useState(user.username); // 사용자 이름
   const [accountname, setAccountname] = useState(user.accountname); // 계정 ID
   const [intro, setIntro] = useState(""); // 소개
@@ -34,9 +34,6 @@ export default function ProfileEdit() {
       })
         .then((response) => response.json())
         .then((res) => {
-          // 이미지 파일 업로드가 끝나고 응답을 받으면
-          console.log("응답 : ", res);
-
           // 입력값들과 이미지 주소를 body에 넣어 요청 전송
           const body = {
             user: {
@@ -57,13 +54,12 @@ export default function ProfileEdit() {
           })
             .then((response) => response.json())
             .then((res) => {
-              console.log(res);
               // 성공 시 localStorage를 갱신
               localStorage.setItem("aName", res.user.accountname);
               localStorage.setItem("uName", res.user.username);
               localStorage.setItem("image", res.user.image);
             })
-            .then(() => window.location.assign("/profile"));
+            .then(() => navigate("/profile", { replace: true }));
         })
         .catch((err) => {
           // 에러 발생 시
@@ -91,14 +87,13 @@ export default function ProfileEdit() {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
           // 성공 시 localStorage를 갱신
           localStorage.setItem("aName", res.user.accountname);
           localStorage.setItem("uName", res.user.username);
           localStorage.setItem("image", res.user.image);
         })
         .then(() => {
-          navigate("/profile", {replace: true}); // 프로필로 이동 후 뒤로가기 방지
+          navigate("/profile", { replace: true }); // 프로필로 이동 후 뒤로가기 방지
         })
         .catch((err) => {
           // 에러 발생 시

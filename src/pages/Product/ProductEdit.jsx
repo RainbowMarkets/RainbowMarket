@@ -71,9 +71,6 @@ export default function ProductEdit() {
       })
         .then((response) => response.json())
         .then((res) => {
-          // 이미지 파일 업로드가 끝나고 응답을 받으면
-          console.log("응답 : ", res);
-
           // 입력값들과 이미지 주소를 body에 넣어 요청 전송
           const body = {
             product: {
@@ -93,7 +90,6 @@ export default function ProductEdit() {
             body: JSON.stringify(body),
           })
             .then((response) => response.json())
-            .then((res) => console.log("이미지 수정 API의 응답 :\n", res))
             .then(() => {
               navigate("/profile", { replace: true }); // 프로필로 이동 후 뒤로가기 방지
             });
@@ -123,7 +119,6 @@ export default function ProductEdit() {
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
-        .then((res) => console.log("이미지 수정 API의 응답 :\n", res))
         .then(() => navigate("/profile", { replace: true })) // 프로필로 이동 후 뒤로가기 방지
         .catch((err) => {
           // 에러 발생 시
@@ -150,7 +145,6 @@ export default function ProductEdit() {
 
   // 최초 접속 시 상세 정보를 받아와서 미리 입력
   useEffect(() => {
-    console.log("param :", param);
     fetch(
       `https://mandarin.api.weniv.co.kr/product/detail/${param.productid}`,
       {
@@ -163,7 +157,6 @@ export default function ProductEdit() {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(`getData(/product/${param.productid})의 응답 :\n`, res);
         setPreview(res.product.itemImage);
         setItemName(res.product.itemName);
         setItemPrice("" + res.product.price);
@@ -171,8 +164,6 @@ export default function ProductEdit() {
         setValid(true);
       });
   }, []);
-
-  console.log("valid 도대체", valid);
 
   return (
     <>

@@ -2,7 +2,6 @@ import CommonTopBar from "../TopBar/CommonTopBar/CommonTopBar";
 import defaultImg from "../../assets/images/profile_small.png";
 import imgUpBtn from "../../assets/images/img-button.png";
 import rainbowGif from "../../assets/images/loading.gif";
-import CommentAdd from "../Posts/Comment/CommentAdd/CommentAdd";
 import { useState } from "react";
 import { ChatRoomWrapper, CommentAddWrapper } from "./styledChatRoom";
 import ChatRoomModal from "../common/Modal/Modal/ChatRoomModal";
@@ -11,14 +10,13 @@ const ChatRoom = () => {
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
   const [modalActive, setModalActive] = useState(false);
-  const [chatModalActive, setChatModalActive] = useState(false);
+
   // 입력 유무에 따라 버튼 활성화
   const handleChangeBtn = () => {
     setIsActive(text.length > 0 ? true : false);
   };
   // 댓글 input 값 받아오기
   const handleText = (e) => {
-    // console.log(e.target.value);
     setText(e.target.value);
   };
   return (
@@ -52,7 +50,8 @@ const ChatRoom = () => {
             <div className="box-container">
               <span className="time">12:40</span>
               <p className="box-right">
-                저희 레인보우 마켓은 재능 기부를 주제로 어쩌구 저쩌구
+                저희 레인보우 마켓은 재능 기부 또는 판매를 메인으로 자신의
+                재능을 필요한 사람들에게 기부를 하거나 도움을 원하는 사
               </p>
             </div>
           </li>

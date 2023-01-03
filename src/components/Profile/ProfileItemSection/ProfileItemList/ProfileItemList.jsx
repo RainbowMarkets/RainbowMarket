@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
+import basicImage from "../../../../assets/images/img-error-small.png";
 
 export default function ProfileItemList({
   name,
@@ -12,6 +13,10 @@ export default function ProfileItemList({
 }) {
   const { user } = useUserContext();
   const { getData } = useFetch();
+
+  const handleImgError = (e) => {
+    e.target.src = basicImage;
+  };
 
   const [items, setItems] = useState({
     data: 0,
@@ -41,7 +46,16 @@ export default function ProfileItemList({
                 target="_blank"
               >
                 <figure>
-                  <img src={product.itemImage} />
+                  <img
+                    src={
+                      product.itemImage.includes(
+                        "https://mandarin.api.weniv.co.kr/"
+                      )
+                        ? product.itemImage
+                        : basicImage
+                    }
+                    onError={handleImgError}
+                  />
                   <figcaption>{product.itemName}</figcaption>
                   <span>{product.price.toLocaleString()} 원</span>
                 </figure>

@@ -1,17 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import { useState } from "react";
 import profileImgSmall from "../../../../assets/images/profile_small.png";
-import useFetch from "../../../../hooks/useFetch";
 import useUserContext from "../../../../hooks/useUserContext";
 import { CommentAddWrapper } from "./styledCommentAdd";
-// 댓글 기능 구현하기 1. 프로필 이미지 넣기
+
 const CommentAdd = (props) => {
-  // 버튼 활성화
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
   const { user } = useUserContext();
-
-  const [writeComment, setWriteComment] = useState({});
 
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/${props.post_id}/comments`;
@@ -34,12 +29,8 @@ const CommentAdd = (props) => {
         }),
       });
       const data = await res.json();
-      // console.log(data);
       props.setCommentData((prev) => [{ ...data.comment }, ...prev]);
-      // props.setCommentLength()
-      // console.log("hi", props.commentData);
       setText("");
-      //낙관적 업데이트
     } catch (err) {
       console.log("err", err);
     }
@@ -47,7 +38,6 @@ const CommentAdd = (props) => {
 
   // 댓글 input 값 받아오기
   const handleText = (e) => {
-    // console.log(e.target.value);
     setText(e.target.value);
   };
 
