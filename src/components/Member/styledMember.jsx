@@ -6,10 +6,11 @@ export const StyledUl = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 30px;
 
   li {
-    width: 360px;
-    height: 225px;
+    width: 320px;
+    height: 200px;
     background: no-repeat center/cover url(${idCard});
     display: flex;
     justify-content: space-evenly;
@@ -19,7 +20,7 @@ export const StyledUl = styled.ul`
     margin-top: 10px;
   }
 
-  li div{
+  li div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,11 +28,11 @@ export const StyledUl = styled.ul`
     gap: 5px;
   }
 
-  li .links{
+  li .links {
     gap: 10px;
   }
 
-  li img{
+  li img {
     width: 120px;
     height: 120px;
     object-fit: cover;
@@ -50,8 +51,8 @@ export const StyledUl = styled.ul`
     filter: drop-shadow(0 0 5px #cbcbcb);
   }
 
-  strong{
+  strong {
     font-size: ${fonts.large};
     font-weight: bold;
   }
-`
+`;
