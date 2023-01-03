@@ -74,10 +74,16 @@ const Container = styled.div`
 `;
 
 const Aside = styled.aside`
-  width: 390px;
-  background: white;
-  img {
-    width: 100%;
+  width: 440px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 16px 0;
+  &::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.colorMain};
   }
   @media screen and (max-width: 680px) {
     display: none;

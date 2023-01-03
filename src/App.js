@@ -21,6 +21,7 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Login from "./components/common/Login/Login";
 import ProductEdit from "./pages/Product/ProductEdit";
 import SetProfile from "./components/common/SetProfile/SetProfile";
+import Member from "./components/Member/Member";
 
 // 잠시 1200 -> 100으로 변경
 function App() {
@@ -36,7 +37,7 @@ function App() {
     <Container>
       <GlobalStyle />
       <Aside>
-        <img src="https://cdn.pixabay.com/photo/2017/10/05/09/37/equalizer-2818803_960_720.jpg" />
+        <Member/>
       </Aside>
       <Wrapper>
         {isFirst ? (
