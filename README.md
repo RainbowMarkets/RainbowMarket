@@ -50,7 +50,7 @@ test1 pw : 123456
 - Discord : 실시간 소통 및 화면 공유
 - Slack : 각 컴포넌트별 전달사항 작성
 - VScode liveshare : 공통적인 문제 같이 해결
-- Notion : 주간 회의록 작성 및 기
+- Notion : 주간 회의록 작성 및 기록
 
 ## 3. 역할분담
 
