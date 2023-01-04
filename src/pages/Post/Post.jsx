@@ -7,17 +7,17 @@ import {
 } from "./styledPost";
 import { useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
-import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
+import useUserContext from "../../hooks/useUserContext";
 
 const Post = (props) => {
+  const { user, token } = useUserContext();
   const textRef = useRef();
-  const [profileImg, setProfileImg] = useState(localStorage.getItem("image"));
+  const [profileImg, setProfileImg] = useState(user.image);
   const [inpValue, setInpValue] = useState("");
   const [uploadData, setUploadData] = useState([]);
 
   const imgRef = useRef();
-  const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
   const navigate = useNavigate();
   const [imgSrc, setImgSrc] = useState([]);
@@ -73,7 +73,7 @@ const Post = (props) => {
     await fetch(url + "/post", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
       body: JSON.stringify({

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { colors, fonts } from "../../../GlobalStyle";
 export const StyledLi = styled.li`
   display: flex;

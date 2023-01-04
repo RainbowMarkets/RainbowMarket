@@ -1,5 +1,4 @@
 import useUserContext from "../../../../hooks/useUserContext";
-
 import { HeartWrapper } from "./styledPostHeartBtn";
 
 const PostHeartBtn = ({
@@ -9,7 +8,7 @@ const PostHeartBtn = ({
   setLikeCount,
   post_id,
 }) => {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const handleHeart = async (e) => {
     if (!isHeartOn) {
       const reqPath = `/post/${post_id}/heart`;
@@ -18,7 +17,7 @@ const PostHeartBtn = ({
         const res = await fetch(url + reqPath, {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-type": "application/json",
           },
         })
@@ -37,7 +36,7 @@ const PostHeartBtn = ({
         const res = await fetch(url + reqPath, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-type": "application/json",
           },
         })

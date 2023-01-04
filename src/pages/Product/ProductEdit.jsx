@@ -6,7 +6,7 @@ import useUserContext from "../../hooks/useUserContext";
 import { Section, ImageLabel, Preview, UploadLabel } from "./styledProduct";
 
 export default function ProductEdit() {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const param = useParams();
 
   const [preview, setPreview] = useState(null); // 사진 미리보기
@@ -84,7 +84,7 @@ export default function ProductEdit() {
           fetch(`https://mandarin.api.weniv.co.kr/product/${param.productid}`, {
             method: "PUT",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
             body: JSON.stringify(body),
@@ -113,7 +113,7 @@ export default function ProductEdit() {
       fetch(`https://mandarin.api.weniv.co.kr/product/${param.productid}`, {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
         body: JSON.stringify(body),
@@ -150,7 +150,7 @@ export default function ProductEdit() {
       {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
       }

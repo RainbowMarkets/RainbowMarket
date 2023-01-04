@@ -3,9 +3,10 @@ import { StyledSection } from "./styledisHaveFeed";
 import PostContent from "../../../components/common/PostContent/PostContent";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
 import Loading from "../../../components/common/Loading/Loading";
+import useUserContext from "../../../hooks/useUserContext";
 
 export default function IsHaveFeed(props) {
-  const token = localStorage.getItem("token");
+  const { token } = useUserContext();
 
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/feed/?limit=30`;

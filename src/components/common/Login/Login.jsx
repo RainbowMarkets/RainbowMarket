@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
+import useUserContext from "../../../hooks/useUserContext";
 import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
 import { LoginButtonWrapper, WarningMessageWrapper } from "./Login.style";
 import { Container, Input, InputTitle, LoginButton } from "./Login.style";
 
 export default function JoinWithEmail() {
+  const { dispatch } = useUserContext();
   const [emailWarningMessage, setEmailWarningMessage] = useState("");
   const [passwordWarningMessage, setPasswordWarningMessage] = useState("");
   const [emailValid, setEmailValid] = useState(true);
@@ -90,11 +92,9 @@ export default function JoinWithEmail() {
         emailRef.current.focus();
       } else {
         setEmailWarningMessage("");
-        localStorage.setItem("aName", result.user.accountname);
-        localStorage.setItem("uName", result.user.username);
-        localStorage.setItem("image", result.user.image);
         localStorage.setItem("token", result.user.token);
-        localStorage.setItem("_id", result.user._id);
+        dispatch({ type: "TokenReady", payload: { token: result.user.token } });
+        dispatch({ type: "LOGIN", payload: result.user });
         window.location.assign("/");
       }
     } catch (error) {

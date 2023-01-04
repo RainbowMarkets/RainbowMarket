@@ -44,6 +44,7 @@ export const ContextLink = styled(Link)`
   color: black;
   display: block;
   word-break: break-all;
+  white-space: pre-wrap;
 
   &:focus,
   &:hover,

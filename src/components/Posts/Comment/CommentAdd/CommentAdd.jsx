@@ -6,11 +6,11 @@ import { CommentAddWrapper } from "./styledCommentAdd";
 const CommentAdd = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
-  const { user } = useUserContext();
+  const { user, token } = useUserContext();
 
   const url = "https://mandarin.api.weniv.co.kr";
   const reqPath = `/post/${props.post_id}/comments`;
-  const localImg = localStorage.getItem("image");
+  const localImg = user.image;
 
   // 댓글 작성하기
   const handleWrapperSubmit = async (e) => {
@@ -19,7 +19,7 @@ const CommentAdd = (props) => {
       const res = await fetch(url + reqPath, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
         body: JSON.stringify({

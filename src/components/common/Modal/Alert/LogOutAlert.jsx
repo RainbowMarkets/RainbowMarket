@@ -12,7 +12,7 @@ const LogOutAlert = (props) => {
 
   function handleLogOut() {
     dispatch({ type: "LOGOUT" }); // user에 null값
-    localStorage.clear(); // 로컬스토리지 삭제
+    localStorage.removeItem("token"); // 로컬스토리지 삭제
     navigate("/"); // 홈으로 이동
   }
 

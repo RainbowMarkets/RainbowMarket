@@ -7,7 +7,6 @@ import imgProfile from "../../assets/images/icon-user.png";
 import imgProfileFill from "../../assets/images/icon-user-fill.png";
 import { colors } from "../../GlobalStyle";
 import { useLocation } from "react-router-dom";
-import useUserContext from "../../hooks/useUserContext";
 
 import {
   StyledLink,
@@ -16,9 +15,10 @@ import {
   StyledUl,
   StyledLi,
 } from "./styledNavBar";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function Navbar() {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const location = useLocation();
   const nowLocation = location.pathname;
 
@@ -28,7 +28,7 @@ export default function Navbar() {
       nowLocation !== "/chat" &&
       nowLocation !== "/profile" &&
       !nowLocation.includes("/profile/")) ||
-    !user
+    !token
   )
     return null;
 

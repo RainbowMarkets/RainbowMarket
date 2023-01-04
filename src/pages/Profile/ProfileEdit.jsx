@@ -5,7 +5,7 @@ import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function ProfileEdit() {
-  const { user } = useUserContext();
+  const { user, token, dispatch } = useUserContext();
   const [username, setUsername] = useState(user.username); // 사용자 이름
   const [accountname, setAccountname] = useState(user.accountname); // 계정 ID
   const [intro, setIntro] = useState(""); // 소개
@@ -47,17 +47,15 @@ export default function ProfileEdit() {
           fetch("https://mandarin.api.weniv.co.kr/user", {
             method: "PUT",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
             body: JSON.stringify(body),
           })
             .then((response) => response.json())
             .then((res) => {
-              // 성공 시 localStorage를 갱신
-              localStorage.setItem("aName", res.user.accountname);
-              localStorage.setItem("uName", res.user.username);
-              localStorage.setItem("image", res.user.image);
+              // 성공 시 유저 정보를 갱신
+              dispatch({ type: "LOGIN", payload: res.user });
             })
             .then(() => navigate("/profile", { replace: true }));
         })
@@ -80,17 +78,15 @@ export default function ProfileEdit() {
       fetch("https://mandarin.api.weniv.co.kr/user", {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
         .then((res) => {
-          // 성공 시 localStorage를 갱신
-          localStorage.setItem("aName", res.user.accountname);
-          localStorage.setItem("uName", res.user.username);
-          localStorage.setItem("image", res.user.image);
+          // 성공 시 유저 정보를 갱신
+          dispatch({ type: "LOGIN", payload: res.user });
         })
         .then(() => {
           navigate("/profile", { replace: true }); // 프로필로 이동 후 뒤로가기 방지

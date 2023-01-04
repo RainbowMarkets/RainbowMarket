@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import useUserContext from "../../../../hooks/useUserContext";
 import CommentAlert from "../Alert/CommentAlert";
 import ToastMessage from "../Toast/ToastMessage";
@@ -8,13 +7,10 @@ import { ModalWrapper } from "./styledModal";
 const CommentModal = (props) => {
   const postId = props.postId;
   const commentId = props.isCommentId;
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useUserContext();
+  const { user, token } = useUserContext();
 
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const [toast, setToast] = useState(false);
-  const localId = localStorage.getItem("_id");
 
   function handleCancelMenu() {
     props.setCommentModalActive(false);
@@ -30,7 +26,7 @@ const CommentModal = (props) => {
     await fetch(url + `/post/${postId}/comments/${commentId}/report`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })
@@ -54,7 +50,7 @@ const CommentModal = (props) => {
           onClick={handleCancelMenu}
         ></div>
         <ul className={props.commentModalActive ? "reveal" : ""}>
-          {props.isCommentAuthorId === localId ? (
+          {props.isCommentAuthorId === user._id ? (
             <li>
               <button className="red" onClick={handleDeleteAlert}>
                 삭제

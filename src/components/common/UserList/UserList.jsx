@@ -13,7 +13,7 @@ import {
 } from "./styledUserList";
 
 export default function UserList(props) {
-  const { user } = useUserContext();
+  const { user, token } = useUserContext();
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [isfollow, setIsfollow] = useState(props.isfollow); // 버튼 렌더링을 위한 상태
 
@@ -31,7 +31,7 @@ export default function UserList(props) {
           {
             method: "DELETE",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
           }
@@ -52,7 +52,7 @@ export default function UserList(props) {
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
           }

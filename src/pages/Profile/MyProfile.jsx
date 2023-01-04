@@ -11,7 +11,7 @@ import ProductModal from "../../components/common/Modal/Modal/ProductModal";
 import Loading from "../../components/common/Loading/Loading";
 
 export default function Profile() {
-  const { user } = useUserContext();
+  const { token, dispatch } = useUserContext();
 
   const [product, setProduct] = useState(null);
   const [prodModal, setProdModal] = useState(false);
@@ -35,17 +35,18 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    if (!user) return;
+    if (!token) return;
     setIsPending(true); // 통신 시작
     fetch(`https://mandarin.api.weniv.co.kr/user/myinfo`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((res) => {
+        dispatch({ type: "LOGIN", payload: res.user });
         setUserInfo(res);
         return res;
       })
@@ -57,7 +58,7 @@ export default function Profile() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
           }
@@ -74,7 +75,7 @@ export default function Profile() {
     <>
       {isPending ? (
         <Loading />
-      ) : user ? (
+      ) : token ? (
         <>
           <CommonTopBar
             modalActive={modalActive}

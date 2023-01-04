@@ -9,8 +9,8 @@ import Loading from "../common/Loading/Loading";
 
 import { CommentWrapper, PostDiv, PostDetailWrapper } from "./styledPostDetail";
 import CommentModal from "../common/Modal/Modal/CommentModal";
-import useUserContext from "../../hooks/useUserContext";
 import { useParams } from "react-router-dom";
+import useUserContext from "../../hooks/useUserContext";
 
 const PostDetail = () => {
   const { post_id } = useParams();
@@ -37,8 +37,8 @@ const PostDetail = () => {
     },
   });
   const [commentData, setCommentData] = useState([]);
-  const [commentLength, setCommentLength] = useState(0);
-  const { user } = useUserContext();
+
+  const { token } = useUserContext();
   const [isCommentId, setIsCommentId] = useState("");
   const [isCommentAuthorId, setIsCommentAuthorId] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -52,7 +52,7 @@ const PostDetail = () => {
       const res = await fetch(url + reqPath, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
       })
@@ -75,7 +75,7 @@ const PostDetail = () => {
       const res = await fetch(url + reqPath, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
       });
@@ -88,7 +88,7 @@ const PostDetail = () => {
     }
   };
   useEffect(() => {
-    if (!user.token) return;
+    if (!token) return;
     fetchPostData();
     getCommentList();
   }, []);
@@ -115,9 +115,7 @@ const PostDetail = () => {
               likeCount={postDetailData.heartCount}
               postModalActive={postModalActive}
               setPostModalActive={setPostModalActive}
-              setReportPostNum={() => {
-                console.log("난 PostDetail");
-              }}
+              setReportPostNum={() => {}}
               commentDataLength={commentData.length}
             />
           </PostDiv>

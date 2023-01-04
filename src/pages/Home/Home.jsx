@@ -3,9 +3,10 @@ import MainTopBar from "../../components/TopBar/MainTopBar/MainTopBar";
 import IsHaveFeed from "./IsHaveFeed/IsHaveFeed";
 import NoFeed from "./NoFeed/NoFeed";
 import LoginModal from "../../components/Login/LoginModal/LoginModal";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function Home() {
-  const token = localStorage.getItem("token");
+  const { token } = useUserContext();
   const [isHaveFeed, setIsHaveFeed] = useState(true);
 
   return (

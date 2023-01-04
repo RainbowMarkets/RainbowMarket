@@ -7,11 +7,11 @@ import {
 } from "./styledProfileFooter";
 import messageIcon from "../../../../assets/images/icon-message-circle.png";
 import shareIcon from "../../../../assets/images/icon-share.png";
-import useUserContext from "../../../../hooks/useUserContext";
 import { useState } from "react";
+import useUserContext from "../../../../hooks/useUserContext";
 
 export default function ProfileFooter({ isMine, setUserProfile, data }) {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const [isPending, setIsPending] = useState(false);
 
   const chatHandler = (event) => {
@@ -29,7 +29,7 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
           {
             method: "DELETE",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
           }
@@ -51,7 +51,7 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
           }
