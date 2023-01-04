@@ -8,8 +8,8 @@
 test1 id : rainbowmarket@official.com
 test1 pw : 123456
 ```
+<img width="100%" src="https://user-images.githubusercontent.com/63508955/210481667-27ac8744-744c-406d-9a4f-095e101733d5.png"/>
 
-![Untitled](READ%20ME%20c897883500b54adbab5b8eadcde6c067/Untitled.png)
 
 ## 1. 소개와 기능
 
@@ -25,7 +25,7 @@ test1 pw : 123456
 
 | 이석우                                                                                           | 김다정                                                                                          | 권지혜                                                                                          | 이유진                                                                                          |
 | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| <img src ="https://avatars.githubusercontent.com/u/108033922?v=4" width="170px" height="210px"/> | <img src ="https://avatars.githubusercontent.com/u/93987174?v=4" width="170px" height="210px"/> | <img src ="https://avatars.githubusercontent.com/u/53033847?v=4" width="170px" height="210px"/> | <img src ="https://avatars.githubusercontent.com/u/63508955?v=4" width="170px" height="210px"/> |
+| <img src ="https://avatars.githubusercontent.com/u/108033922?v=4" width="150px" height="150px"/> | <img src ="https://avatars.githubusercontent.com/u/93987174?v=4" width="150px" height="150px"/> | <img src ="https://avatars.githubusercontent.com/u/53033847?v=4" width="150px" height="150px"/> | <img src ="https://avatars.githubusercontent.com/u/63508955?v=4" width="150px" height="150px"/> |
 | 🔗https://github.com/Skylark92                                                                   | 🔗https://github.com/DADA6041                                                                   | 🔗https://github.com/jhfrontend                                                                 | 🔗https://github.com/yjlee9909                                                                  |
 
 ## 개발 환경
@@ -53,10 +53,11 @@ test1 pw : 123456
 - 각자 활동 내역에 대해 [이슈 등록](https://github.com/RainbowMarkets/RainbowMarket/issues) 후 작업 진행
 - [GitHub Project 사용](https://github.com/RainbowMarkets/RainbowMarket/projects?query=is%3Aopen)
 
-![Untitled](READ%20ME%20c897883500b54adbab5b8eadcde6c067/Untitled%201.png)
+  <img width="80%" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b41989fa-c043-4fc9-afa3-840e28767ed9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230104%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230104T035835Z&X-Amz-Expires=86400&X-Amz-Signature=9aa08de5153c7beda91cafd67b6e1c3a7b1755cee9494f1d8ea5a5d46f0751c9&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"/>
+
 
 - Slack 사용하여 각 컴포넌트별 전달 사항 작성
-  ![Untitled](READ%20ME%20c897883500b54adbab5b8eadcde6c067/Untitled%202.png)
+  <img width="80%" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/46a0ecb5-518f-43a6-a850-e43eaab5655e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230104%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230104T035926Z&X-Amz-Expires=86400&X-Amz-Signature=cd157a2eecf51f9ebc796329b3a6334a7203beb343341c5617281799289df4e5&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"/>
 
 ## 역할 분담
 
