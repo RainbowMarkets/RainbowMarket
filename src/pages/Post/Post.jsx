@@ -114,16 +114,18 @@ const Post = (props) => {
             <h3 className="hidden">게시글 작성란</h3>
             <form method="post">
               <div className="post-wrap">
-                <textarea
-                  className="form-textarea"
-                  type="text"
-                  placeholder="게시글 입력하기..."
-                  maxLength="900"
-                  ref={textRef}
-                  value={inpValue}
-                  onInput={handleResizeHeight}
-                  onChange={handleInpVal}
-                />
+                <pre>
+                  <textarea
+                    className="form-textarea"
+                    type="text"
+                    placeholder="게시글 입력하기..."
+                    maxLength="900"
+                    ref={textRef}
+                    value={inpValue}
+                    onInput={handleResizeHeight}
+                    onChange={handleInpVal}
+                  />
+                </pre>
                 <PostImgWrapper>
                   <h4 className="hidden">이미지추가</h4>
                   <ul>
