@@ -6,7 +6,7 @@ import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
 
 const PostModal = (props) => {
-  const { user } = useUserContext();
+  const { user, token } = useUserContext();
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const [toast, setToast] = useState(false);
   const url = "https://mandarin.api.weniv.co.kr";
@@ -23,7 +23,7 @@ const PostModal = (props) => {
     await fetch(url + `/post/${postId}/report`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })

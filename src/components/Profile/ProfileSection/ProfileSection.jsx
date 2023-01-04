@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import ProfileFooter from "./ProfileFooter/ProfileFooter";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import { Section } from "./styledProfileSection";

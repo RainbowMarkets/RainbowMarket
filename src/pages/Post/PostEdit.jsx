@@ -7,20 +7,18 @@ import {
 } from "./styledPost";
 import { useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
-import useUserContext from "../../hooks/useUserContext";
 import { useNavigate, useParams } from "react-router-dom";
-
-const formData = new FormData();
+import useUserContext from "../../hooks/useUserContext";
 
 const PostEdit = (props) => {
+  const { user, token } = useUserContext();
   const textRef = useRef();
   const param = useParams();
-  const [profileImg, setProfileImg] = useState(localStorage.getItem("image"));
+  const [profileImg, setProfileImg] = useState(user.image);
 
   const [inpValue, setInpValue] = useState("");
   const [uploadData, setUploadData] = useState([]);
   const imgRef = useRef();
-  const { user } = useUserContext();
   const url = "https://mandarin.api.weniv.co.kr";
   const [imgSrc, setImgSrc] = useState([]);
   const navigate = useNavigate();
@@ -75,7 +73,7 @@ const PostEdit = (props) => {
     await fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
       body: JSON.stringify({
@@ -100,7 +98,7 @@ const PostEdit = (props) => {
     fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })
@@ -169,19 +167,19 @@ const PostEdit = (props) => {
                   </ul>
                 </PostImgWrapper>
               </div>
-              <div className="label-wrap">
-                <label htmlFor="imgUpLabel" className="img-up-btn"></label>
-                <input
-                  id="imgUpLabel"
-                  alt="사진추가"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleUploadImgs}
-                  ref={imgRef}
-                />
-              </div>
             </form>
+            <div className="label-wrap">
+              <label htmlFor="imgUpLabel" className="img-up-btn"></label>
+              <input
+                id="imgUpLabel"
+                alt="사진추가"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleUploadImgs}
+                ref={imgRef}
+              />
+            </div>
           </TextWrapper>
         </UploadWrapper>
       </UploadContain>

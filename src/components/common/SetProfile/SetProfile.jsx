@@ -44,7 +44,6 @@ export default function SetProfile({
   const accountnameHandler = (event) => {
     setAccountname(event.target.value);
 
-    console.log(event.target.value);
     // 아무 입력값이 없을 시
     if (event.target.value === "") {
       setAccountErrMessage("* 필수 입력사항입니다.");
@@ -65,7 +64,6 @@ export default function SetProfile({
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("Accountname 유효성 검사 API 응답:\n", res);
         if (res.message === "잘못된 접근입니다.") {
           setAccountErrMessage(null);
           setAccountnameCheck(false);

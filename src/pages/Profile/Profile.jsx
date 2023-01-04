@@ -11,7 +11,7 @@ import useUserContext from "../../hooks/useUserContext";
 
 export default function Profile() {
   const param = useParams();
-  const { user } = useUserContext();
+  const { user, token } = useUserContext();
 
   const [modalActive, setModalActive] = useState(false);
   const [postData, setPostData] = useState([]);
@@ -32,11 +32,11 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    if (!user) return;
+    if (!token) return;
     fetch(`https://mandarin.api.weniv.co.kr/profile/${param.accountname}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })
@@ -53,7 +53,7 @@ export default function Profile() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
               "Content-type": "application/json",
             },
           }
@@ -67,7 +67,7 @@ export default function Profile() {
 
   return (
     <>
-      {user ? (
+      {token ? (
         <>
           <CommonTopBar
             modalActive={modalActive}
@@ -78,6 +78,7 @@ export default function Profile() {
             <ProfileSection
               data={userProfile.profile}
               setUserProfile={setUserProfile}
+              isMine={param.accountname === user.accountname}
             />
             {/* 판매 중잉 아이템이 표시되는 섹션 */}
             <ProfileItemSection name={userProfile.profile.accountname} />

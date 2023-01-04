@@ -4,7 +4,7 @@ import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 
 const DeleteAlert = (props) => {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,7 +28,7 @@ const DeleteAlert = (props) => {
     await fetch(url + `/post/${props.reportPostNum}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })

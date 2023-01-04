@@ -8,14 +8,14 @@ import FollowTopbar from "../../components/TopBar/FollowTopBar/FollowTopBar";
 
 export default function Follow() {
   const location = useLocation();
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const { getData } = useFetch();
   const [follows, setFollows] = useState([]);
 
   useEffect(() => {
-    if (!user) return;
-    getData(location.pathname + "?limit=999", setFollows, user.token).catch(
-      (err) => console.log(err)
+    if (!token) return;
+    getData(location.pathname + "?limit=999", setFollows, token).catch((err) =>
+      console.log(err)
     );
   }, []);
 

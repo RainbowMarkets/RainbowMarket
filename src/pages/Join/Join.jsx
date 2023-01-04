@@ -88,7 +88,7 @@ function Join() {
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
-        })
+        }) // 이후 바로 로그인 되게끔 할 수도 있을 듯
         .then(() => navigate("/"))
         .catch((err) => {
           alert(err);

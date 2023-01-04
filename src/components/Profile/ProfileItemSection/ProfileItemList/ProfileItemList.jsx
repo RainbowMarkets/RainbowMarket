@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
-import useUserContext from "../../../../hooks/useUserContext";
 import { ItemList, Item } from "./styledProfileItemList";
 import basicImage from "../../../../assets/images/img-error-small.png";
+import useUserContext from "../../../../hooks/useUserContext";
 
 export default function ProfileItemList({
   name,
@@ -11,7 +11,7 @@ export default function ProfileItemList({
   setProdModal,
   setProduct,
 }) {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const { getData } = useFetch();
 
   const handleImgError = (e) => {
@@ -25,7 +25,7 @@ export default function ProfileItemList({
 
   useEffect(() => {
     if (!name) return;
-    getData(`/product/${name}`, setItems, user.token).catch((err) =>
+    getData(`/product/${name}`, setItems, token).catch((err) =>
       console.log(err)
     );
   }, [name, prodModal]);
@@ -42,7 +42,14 @@ export default function ProfileItemList({
                   setProdModal(true);
                   setProduct({ ...product });
                 }}
-                href={isMine ? undefined : product.link}
+                href={
+                  isMine
+                    ? undefined
+                    : product.link.includes(".") &&
+                      !product.link.includes("://")
+                    ? "https://" + product.link
+                    : product.link
+                }
                 target="_blank"
               >
                 <figure>

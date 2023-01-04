@@ -10,7 +10,7 @@ export default function ProductModal({
   product,
   setProduct,
 }) {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const [isAlert, setIsAlert] = useState(false);
 
   const alertHandler = (event) => {
@@ -21,7 +21,7 @@ export default function ProductModal({
     fetch(`https://mandarin.api.weniv.co.kr/product/${product.id}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })
@@ -52,7 +52,16 @@ export default function ProductModal({
             </button>
           </li>
           <li>
-            <a href={product ? product.link : undefined} target="_blank">
+            <a
+              href={
+                product
+                  ? product.link.includes(".") && !product.link.includes("://")
+                    ? "https://" + product.link
+                    : product.link
+                  : undefined
+              }
+              target="_blank"
+            >
               상품 페이지로 이동하기
             </a>
           </li>

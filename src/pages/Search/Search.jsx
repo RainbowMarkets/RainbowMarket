@@ -5,7 +5,7 @@ import useUserContext from "../../hooks/useUserContext";
 import { StyledSection, StyledUl } from "./styledSearch";
 
 export default function Search() {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const [searchInp, setSearchInp] = useState("");
   const [userData, setUserData] = useState([]); // 뿌려줄 데이터
 
@@ -41,7 +41,7 @@ export default function Search() {
       const res = await fetch(url + reqPath, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
       });
@@ -55,7 +55,7 @@ export default function Search() {
   };
 
   useEffect(() => {
-    if (!user.token) return;
+    if (!token) return;
     fetchUserData();
   }, [searchInp]);
 

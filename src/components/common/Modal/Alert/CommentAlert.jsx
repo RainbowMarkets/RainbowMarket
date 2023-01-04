@@ -3,7 +3,7 @@ import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 const CommentAlert = (props) => {
   const url = "https://mandarin.api.weniv.co.kr";
-  const { user } = useUserContext();
+  const { token } = useUserContext();
 
   function handleCancelMenu() {
     props.setCommentModalActive(false);
@@ -21,7 +21,7 @@ const CommentAlert = (props) => {
     await fetch(url + `/post/${props.postId}/comments/${props.commentId}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json",
       },
     })

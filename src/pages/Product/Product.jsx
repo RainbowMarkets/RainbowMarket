@@ -6,7 +6,7 @@ import useUserContext from "../../hooks/useUserContext";
 import { Section, ImageLabel, Preview, UploadLabel } from "./styledProduct";
 
 export default function Product() {
-  const { user } = useUserContext();
+  const { token } = useUserContext();
   const [preview, setPreview] = useState(null); // 사진 미리보기
   const [itemName, setItemName] = useState(""); // 상품명
   const [itemPrice, setItemPrice] = useState(""); // 가격
@@ -78,7 +78,7 @@ export default function Product() {
         fetch("https://mandarin.api.weniv.co.kr/product", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-type": "application/json",
           },
           body: JSON.stringify(body),
