@@ -30,7 +30,7 @@ function App() {
     setTimeout(() => {
       setIsFirst(false);
     }, 1200);
-  });
+  }, []);
 
   return (
     <Container>

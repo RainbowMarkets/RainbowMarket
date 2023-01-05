@@ -42,6 +42,10 @@ export default function SetProfile({
   };
 
   const accountnameHandler = (event) => {
+    // 특수문자 확인
+    const regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g;
+    if (event.target.value.search(regExp) !== -1) return;
+
     setAccountname(event.target.value);
 
     // 아무 입력값이 없을 시

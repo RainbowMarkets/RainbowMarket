@@ -20,12 +20,16 @@ export default function Product() {
     // 입력에 따라 상품명 변경
     setItemName(event.target.value);
   };
+
   const itemPricehandler = (event) => {
+    const value = event.target.value;
     // 입력에 따라 가격 변경
-    const test = new RegExp("^[\\d]+$", "g");
-    if (test.test(event.target.value)) setItemPrice(event.target.value);
+    const test = new RegExp("^[0-9]+$", "g");
+    if (value === "") setItemPrice("");
+    else if (test.test(value)) setItemPrice(value);
     else return;
   };
+
   const itemLinkhandler = (event) => {
     // 입력에 따라 판매 링크 변경
     setItemLink(event.target.value);
@@ -50,6 +54,10 @@ export default function Product() {
   };
 
   const submitHandler = (event) => {
+    if (+itemPrice === 0) {
+      alert("가격을 1원 이상 입력해주세요!");
+      return;
+    }
     event.preventDefault(); // submit 기본 동작 새로고침 방지
     setIsPending(true); // 통신 시작
 
@@ -145,7 +153,7 @@ export default function Product() {
           placeholder="숫자만 입력 가능합니다."
           stateInp={itemPrice}
           handler={itemPricehandler}
-          inptype="number"
+          inptype="text"
         />
         <ProductInput
           label="판매 링크"

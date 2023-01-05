@@ -8,7 +8,7 @@ export default function ProfileEdit() {
   const { user, token, dispatch } = useUserContext();
   const [username, setUsername] = useState(user.username); // 사용자 이름
   const [accountname, setAccountname] = useState(user.accountname); // 계정 ID
-  const [intro, setIntro] = useState(""); // 소개
+  const [intro, setIntro] = useState(user.intro); // 소개
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const uploadInp = useRef(null); // 이미지 업로드 인풋 셀렉터
   const [valid, setValid] = useState(false); // 유효성
