@@ -6,11 +6,12 @@ import { Wrapper } from "./styledProfile";
 import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function Profile() {
   const param = useParams();
+  const navigate = useNavigate();
   const { user, token } = useUserContext();
 
   const [modalActive, setModalActive] = useState(false);
@@ -40,7 +41,10 @@ export default function Profile() {
         "Content-type": "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) return res.json();
+        else navigate(-1);
+      })
       .then((res) => {
         setUserProfile(res);
         return res;
