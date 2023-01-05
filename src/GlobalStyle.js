@@ -40,10 +40,28 @@ export const GlobalStyle = createGlobalStyle`
     background: #E6E8FC;
   }
 
-  button{
+  button {
     background: none;
     border: none;
     cursor: pointer;
+  }
+
+  a {
+    color: ${colors.color76};
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+      color: ${colors.color76};
+      text-decoration: none;
+    }
+  }
+
+  input:focus {
+    font-size: 16px;
+    // scale: 0.86;
   }
 
   .hidden {
@@ -67,6 +85,7 @@ export const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,6 +95,7 @@ const Container = styled.div`
 const Aside = styled.aside`
   width: 390px;
   max-height: 100vh;
+  max-height: calc(var(--vh, 1vh) * 100);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 16px 0;
@@ -92,8 +112,10 @@ const Aside = styled.aside`
 `;
 
 const Wrapper = styled.div`
-  width: 440px;
+  width: 100%;
+  max-width: 440px;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   position: relative;
   overflow: hidden;
   background: white;

@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { colors, fonts } from "../../../../GlobalStyle";
 
 export const ModalWrapper = styled.section`
-  z-index: 100;
+  -webkit-transform: translate3d (0, 0, 0);
+  z-index: 200;
   top: 0px;
   left: 0px;
   display: flex;
@@ -12,7 +13,7 @@ export const ModalWrapper = styled.section`
   div {
     width: 100%;
     position: absolute;
-    z-index: 110;
+    z-index: 210;
     top: 0;
     left: 0;
     bottom: 0;
@@ -33,7 +34,7 @@ export const ModalWrapper = styled.section`
     height: auto;
     border-radius: 10px 10px 0 0;
     background-color: #fff;
-    z-index: 120;
+    z-index: 220;
     opacity: 0;
     visibility: hidden;
     transform: translate(0, 100%);

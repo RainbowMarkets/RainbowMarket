@@ -11,6 +11,7 @@ export const AlertWrapper = styled.section`
   justify-content: center;
   align-items: center;
   z-index: 904;
+  -webkit-transform: translate3d (0, 0, 0);
 
   div {
     background-color: #ffffff;

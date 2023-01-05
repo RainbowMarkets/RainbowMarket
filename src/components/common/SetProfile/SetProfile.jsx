@@ -142,7 +142,7 @@ export default function SetProfile({
         />
         {join ? (
           <StartButton disabled={!valid} onClick={submitHandler}>
-            감귤마켓 시작하기
+            🌈 무지개마켓 시작하기
           </StartButton>
         ) : null}
       </Form>

@@ -18,9 +18,11 @@ import {
   ArrowRight,
   ContextLink,
 } from "./styledPostContent";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const PostContent = (props) => {
+  const imgRef = useRef();
+
   function handleSideMenu() {
     props.setPostModalActive(true);
     props.setReportPostNum(props.postDetail.id); // postid
@@ -65,7 +67,11 @@ const PostContent = (props) => {
         </ContextLink>
         {props.postDetail.image && (
           <ImgBox>
-            <PostImgUl imgIndex={currentIndex}>
+            <PostImgUl
+              imgIndex={currentIndex}
+              totalWidth={props.postDetail.image.split(",").length}
+              imgWidth={imgRef.current?.width}
+            >
               {props.postDetail.image.split(",").map((img) => {
                 return (
                   <li>
@@ -77,6 +83,7 @@ const PostContent = (props) => {
                           : basicImage
                       }
                       alt="게시글 이미지"
+                      ref={imgRef}
                     />
                   </li>
                 );

@@ -92,7 +92,7 @@ const Post = (props) => {
     setImgSrc(imgSrc.filter((_, i) => i !== idx));
   };
 
-  useEffect(() => {}, [imgSrc]);
+  // useEffect(() => {}, [imgSrc]);
 
   return (
     <>

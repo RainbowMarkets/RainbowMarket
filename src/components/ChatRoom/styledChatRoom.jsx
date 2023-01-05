@@ -3,7 +3,7 @@ import { colors, fonts } from "../../GlobalStyle";
 
 export const ChatRoomWrapper = styled.section`
   background-color: rgb(229, 232, 255);
-  padding: 20px 16px 80px 16px; 
+  padding: 20px 16px 80px 16px;
   li {
     display: flex;
     margin-bottom: 9px;
@@ -65,8 +65,9 @@ export const CommentAddWrapper = styled.form`
   border-top: 0.5px solid ${colors.colorDB};
   bottom: 0;
   background-color: #fff;
-  width: 440px;
-  min-width: 390px;
+  width: 100%;
+  max-width: 440px;
+
   img {
     width: 36px;
     height: 36px;

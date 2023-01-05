@@ -9,8 +9,9 @@ export const CommentAddWrapper = styled.form`
   border-top: 0.5px solid ${colors.colorDB};
   bottom: 0;
   background-color: #fff;
-  width: 440px;
-  min-width: 390px;
+  width: 100%;
+  max-width: 440px;
+
   img {
     width: 36px;
     height: 36px;
