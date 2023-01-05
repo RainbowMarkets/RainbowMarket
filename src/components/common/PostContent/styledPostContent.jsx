@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { colors, fonts } from "../../../GlobalStyle";
-import { StyledImg, StyledLink } from "../UserList/styledUserList";
+
 export const PostWrapper = styled.article`
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@ export const ImgBox = styled.div`
   /* display: flex; */
   overflow-x: scroll;
   margin-bottom: 12px;
-  max-width: 354px;
+  /* max-width: 354px; */
   height: 230px;
   position: relative;
   overflow: hidden;
@@ -74,18 +74,23 @@ export const ImgBox = styled.div`
 
 export const PostImgUl = styled.ul`
   display: flex;
-  transform: translate(${(props) => `-${(props.imgIndex - 1) * 354}px`}, 0px);
+  transform: translate(
+    ${(props) => `-${(props.imgIndex - 1) * props.imgWidth}px`},
+    0px
+  );
   transition: 0.5s;
+  width: ${(props) => props.totalWidth * 100}%;
+  height: 100%;
 
   li {
-    width: 354px;
-    height: 230px;
+    width: 100%;
+    height: 100%;
   }
   .post-img {
-    width: 354px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     margin-bottom: 2px;
-    height: 100%;
     object-fit: cover;
   }
 `;
