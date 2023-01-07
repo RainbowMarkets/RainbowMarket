@@ -90,8 +90,14 @@ export const LogInModalBox = styled.div`
         font-size: ${fonts.small};
         text-decoration: none;
 
-        &:visited {
-          color: ${colors.color76};
+          &:focus,
+          &:hover,
+          &:visited,
+          &:link,
+          &:active {
+            color: ${colors.color76};
+            text-decoration: none;
+          }
         }
       }
     }
