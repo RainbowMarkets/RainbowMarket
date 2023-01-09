@@ -47,16 +47,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${colors.color76};
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-      color: ${colors.color76};
-      text-decoration: none;
-    }
   }
 
   input:focus {
@@ -126,6 +117,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
+  padding-bottom: 60px;
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar {

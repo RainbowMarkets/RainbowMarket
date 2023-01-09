@@ -4,6 +4,7 @@ import SetProfileImage from "./SetProfileImage/SetProfileImage";
 import SetProfileInput from "./SetProfileInput/SetProfileInput";
 import { useEffect, useState } from "react";
 import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
+import useFetch from "../../../hooks/useFetch";
 
 export default function SetProfile({
   join,
@@ -16,10 +17,12 @@ export default function SetProfile({
   setIntro,
   image,
   setImage,
+  isPending,
   valid,
   setValid,
   submitHandler,
 }) {
+  const { postData } = useFetch();
   // validation check 함수 시작
   const [usernameCheck, setUsernameCheck] = useState(!!username);
   const [accountnameCheck, setAccountnameCheck] = useState(!!accountname);
@@ -55,32 +58,24 @@ export default function SetProfile({
       return;
     }
 
-    fetch("https://mandarin.api.weniv.co.kr/user/accountnamevalid", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
+    const body = {
+      user: {
+        accountname: event.target.value,
       },
-      body: JSON.stringify({
-        user: {
-          accountname: event.target.value,
-        },
-      }),
-    })
-      .then((res) => res.json())
+    };
+
+    postData("/user/accountnamevalid", body)
       .then((res) => {
-        if (res.message === "잘못된 접근입니다.") {
-          setAccountErrMessage(null);
-          setAccountnameCheck(false);
-        } else if (res.message === "이미 가입된 계정ID 입니다.") {
-          setAccountErrMessage(res.message);
-          setAccountnameCheck(false);
-        } else if (res.message === "사용 가능한 계정ID 입니다.") {
+        setAccountErrMessage(res.message);
+        setAccountnameCheck(false);
+
+        if (res.message === "사용 가능한 계정ID 입니다.") {
           setAccountErrMessage(res.message);
           setAccountnameCheck(true);
         }
       })
       .then(() => {
-        // 삭제키를 꾹 누르고 있을 때 오류나는 것 방지
+        // 삭제키를 꾹 누를 때 통신 시간 때문에 반영 못한 경우
         if (event.target.value === "") {
           setAccountErrMessage("* 필수 입력사항입니다.");
           setAccountnameCheck(false);
@@ -141,7 +136,7 @@ export default function SetProfile({
           handler={introHandler}
         />
         {join ? (
-          <StartButton disabled={!valid} onClick={submitHandler}>
+          <StartButton disabled={!valid && !isPending} onClick={submitHandler}>
             🌈 무지개마켓 시작하기
           </StartButton>
         ) : null}

@@ -4,7 +4,7 @@ import FollowTopBar from "../../TopBar/FollowTopBar/FollowTopBar";
 import { LoginButtonWrapper, WarningMessageWrapper } from "./Login.style";
 import { Container, Input, InputTitle, LoginButton } from "./Login.style";
 
-export default function JoinWithEmail() {
+export default function Login() {
   const { dispatch } = useUserContext();
   const [emailWarningMessage, setEmailWarningMessage] = useState("");
   const [passwordWarningMessage, setPasswordWarningMessage] = useState("");
