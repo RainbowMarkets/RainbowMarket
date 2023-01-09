@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import { ItemList, Item } from "./styledProfileItemList";
 import basicImage from "../../../../assets/images/img-error-small.png";
-import useUserContext from "../../../../hooks/useUserContext";
 
 export default function ProfileItemList({
   name,
@@ -11,7 +10,6 @@ export default function ProfileItemList({
   setProdModal,
   setProduct,
 }) {
-  const { token } = useUserContext();
   const { getData } = useFetch();
 
   const handleImgError = (e) => {
@@ -25,9 +23,7 @@ export default function ProfileItemList({
 
   useEffect(() => {
     if (!name) return;
-    getData(`/product/${name}`, setItems, token).catch((err) =>
-      console.log(err)
-    );
+    getData(`/product/${name}`).then((res) => setItems(res));
   }, [name, prodModal]);
 
   return (

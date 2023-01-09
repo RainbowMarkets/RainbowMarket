@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductInput from "../../components/ProductInput/ProductInput";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
-import useUserContext from "../../hooks/useUserContext";
+import useFetch from "../../hooks/useFetch";
 import { Section, ImageLabel, Preview, UploadLabel } from "./styledProduct";
 
 export default function Product() {
-  const { token } = useUserContext();
+  const { postData, uploadImage } = useFetch();
+
   const [preview, setPreview] = useState(null); // 사진 미리보기
   const [itemName, setItemName] = useState(""); // 상품명
   const [itemPrice, setItemPrice] = useState(""); // 가격
@@ -65,11 +66,16 @@ export default function Product() {
     const files = new FormData();
     files.append("image", uploadInp.current.files[0]);
 
-    fetch("https://mandarin.api.weniv.co.kr/image/uploadfile", {
-      method: "POST",
-      body: files,
-    })
-      .then((response) => response.json())
+    // webp 확장자는 API에 업로드 불가함으로 처리
+    if (uploadInp.current.files[0].name.includes(".webp")) {
+      setIsPending(false);
+      setValid(false);
+      files.delete("image");
+      alert("webp 파일은 업로드 할 수 없습니다.");
+      return;
+    }
+
+    uploadImage(files)
       .then((res) => {
         // 이미지가 성공적으로 업로드 되고 응답 받음
 
@@ -83,15 +89,7 @@ export default function Product() {
           },
         };
 
-        fetch("https://mandarin.api.weniv.co.kr/product", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(body),
-        })
-          .then((response) => response.json())
+        postData("/product", body)
           .then(() => navigate("/profile", { replace: true }))
           .catch((err) => console.log(err));
       })
@@ -108,6 +106,7 @@ export default function Product() {
       itemName.length > 0 &&
       itemName.length < 16 &&
       itemPrice.length > 0 &&
+      itemPrice.length < 16 &&
       itemLink.length > 0
     ) {
       setValid(true);
@@ -154,6 +153,7 @@ export default function Product() {
           stateInp={itemPrice}
           handler={itemPricehandler}
           inptype="text"
+          max="15"
         />
         <ProductInput
           label="판매 링크"

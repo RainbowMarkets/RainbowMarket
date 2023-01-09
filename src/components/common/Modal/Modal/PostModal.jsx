@@ -47,8 +47,8 @@ const PostModal = (props) => {
           onClick={handlePostSideMenu}
         ></div>
         <ul className={props.postModalActive ? "reveal" : ""}>
-          {props.postUserId === user._id ||
-          props.postUserId === user.accountname ? (
+          {props.postUserId === user?._id ||
+          props.postUserId === user?.accountname ? (
             <>
               <li>
                 <button onClick={handleDeletePost}>삭제</button>

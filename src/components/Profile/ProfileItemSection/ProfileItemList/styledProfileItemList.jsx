@@ -10,9 +10,14 @@ const ItemList = styled.ol`
 `;
 
 const Item = styled.a`
+  width: 140px;
   color: black;
   text-decoration: none;
   cursor: pointer;
+
+  figure {
+    width: 140px;
+  }
 
   figure > img {
     width: 140px;
@@ -23,10 +28,20 @@ const Item = styled.a`
   }
 
   figure > figcaption {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     line-height: 18px;
   }
 
   figure > span {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: #8d72e1;
     font-size: 12px;
     font-weight: 700;

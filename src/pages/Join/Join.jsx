@@ -2,8 +2,10 @@ import JoinWithEmail from "../../components/Join/JoinWithEmail/JoinWithEmail";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 function Join() {
+  const { postData, uploadImage } = useFetch();
   const [nextStep, setNextStep] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,12 +33,17 @@ function Join() {
       const files = new FormData();
       files.append("image", uploadInp.current.files[0]);
 
+      // webp 확장자는 API에 업로드 불가함으로 처리
+      if (uploadInp.current.files[0].name.includes(".webp")) {
+        setIsPending(false);
+        setValid(false);
+        files.delete("image");
+        alert("webp 파일은 업로드 할 수 없습니다.");
+        return;
+      }
+
       // 먼저 이미지 파일을 서버에 업로드
-      fetch("https://mandarin.api.weniv.co.kr/image/uploadfile", {
-        method: "POST",
-        body: files,
-      })
-        .then((response) => response.json())
+      uploadImage(files)
         .then((res) => {
           const body = {
             user: {
@@ -49,18 +56,7 @@ function Join() {
             },
           };
 
-          fetch("https://mandarin.api.weniv.co.kr/user", {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify(body),
-          })
-            .then((response) => response.json())
-            .then((res) => {
-              console.log(res);
-            })
-            .then(() => navigate("/"));
+          postData("/user", body).then(() => navigate("/"));
         })
         .catch((err) => {
           alert(err);
@@ -78,17 +74,7 @@ function Join() {
         },
       };
 
-      fetch("https://mandarin.api.weniv.co.kr/user", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-        }) // 이후 바로 로그인 되게끔 할 수도 있을 듯
+      postData("/user", body) // 이후 바로 로그인 되게끔 할 수도 있을 듯
         .then(() => navigate("/"))
         .catch((err) => {
           alert(err);
@@ -110,6 +96,7 @@ function Join() {
           uploadInp={uploadInp}
           image={image}
           setImage={setImage}
+          isPending={isPending}
           valid={valid}
           setValid={setValid}
           submitHandler={submitHandler}

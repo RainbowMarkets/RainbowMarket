@@ -2,10 +2,13 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
+import useFetch from "../../hooks/useFetch";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function ProfileEdit() {
-  const { user, token, dispatch } = useUserContext();
+  const { user, dispatch } = useUserContext();
+  const { putData, uploadImage } = useFetch();
+
   const [username, setUsername] = useState(user.username); // 사용자 이름
   const [accountname, setAccountname] = useState(user.accountname); // 계정 ID
   const [intro, setIntro] = useState(user.intro); // 소개
@@ -27,12 +30,16 @@ export default function ProfileEdit() {
       const files = new FormData();
       files.append("image", uploadInp.current.files[0]);
 
+      if (uploadInp.current.files[0].name.includes(".webp")) {
+        setIsPending(false);
+        setValid(false);
+        files.delete("image");
+        alert("webp 파일은 업로드 할 수 없습니다.");
+        return;
+      }
+
       // 먼저 이미지 파일을 서버에 업로드
-      fetch("https://mandarin.api.weniv.co.kr/image/uploadfile", {
-        method: "POST",
-        body: files,
-      })
-        .then((response) => response.json())
+      uploadImage(files)
         .then((res) => {
           // 입력값들과 이미지 주소를 body에 넣어 요청 전송
           const body = {
@@ -44,20 +51,16 @@ export default function ProfileEdit() {
             },
           };
 
-          fetch("https://mandarin.api.weniv.co.kr/user", {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify(body),
-          })
-            .then((response) => response.json())
+          putData("/user", body)
             .then((res) => {
               // 성공 시 유저 정보를 갱신
               dispatch({ type: "LOGIN", payload: res.user });
             })
-            .then(() => navigate("/profile", { replace: true }));
+            .then(() => navigate("/profile", { replace: true }))
+            .catch((err) => {
+              setIsPending(false);
+              console.log(err);
+            });
         })
         .catch((err) => {
           // 에러 발생 시
@@ -75,15 +78,7 @@ export default function ProfileEdit() {
         },
       };
 
-      fetch("https://mandarin.api.weniv.co.kr/user", {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-      })
-        .then((response) => response.json())
+      putData("/user", body)
         .then((res) => {
           // 성공 시 유저 정보를 갱신
           dispatch({ type: "LOGIN", payload: res.user });

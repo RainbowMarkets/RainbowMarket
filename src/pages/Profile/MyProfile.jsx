@@ -3,15 +3,18 @@ import ProfileFeedSection from "../../components/Profile/ProfileFeedSection/Prof
 import ProfileSection from "../../components/Profile/ProfileSection/ProfileSection";
 import CommonTopBar from "../../components/TopBar/CommonTopBar/CommonTopBar";
 import { Wrapper } from "./styledProfile";
-import Login from "../../components/common/Login/Login";
 import Modal from "../../components/common/Modal/Modal/Modal";
 import { useEffect, useState } from "react";
 import useUserContext from "../../hooks/useUserContext";
 import ProductModal from "../../components/common/Modal/Modal/ProductModal";
 import Loading from "../../components/common/Loading/Loading";
+import useFetch from "../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const { token, dispatch } = useUserContext();
+  const { getData } = useFetch();
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
   const [prodModal, setProdModal] = useState(false);
@@ -35,47 +38,38 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    if (!token) return;
-    setIsPending(true); // 통신 시작
-    fetch(`https://mandarin.api.weniv.co.kr/user/myinfo`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        dispatch({ type: "LOGIN", payload: res.user });
-        setUserInfo(res);
-        return res;
-      })
-      .then((res) => {
-        fetch(
-          `https://mandarin.api.weniv.co.kr/post/${encodeURI(
-            res.user.accountname
-          )}/userpost`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-type": "application/json",
-            },
-          }
-        )
-          .then((res) => res.json())
-          .then((res) => {
-            setPostData(res.post);
-            setIsPending(false); // 통신 종료
-          });
-      });
+    if (!token) navigate("/login");
+    else {
+      setIsPending(true); // 통신 시작
+      getData("/user/myinfo")
+        .then((res) => {
+          dispatch({ type: "LOGIN", payload: res.user });
+          setUserInfo(res);
+          return res;
+        })
+        .then((res) => {
+          getData(`/post/${encodeURI(res.user.accountname)}/userpost`)
+            .then((res) => {
+              setPostData(res.post);
+              setIsPending(false); // 통신 종료
+            })
+            .catch((err) => {
+              setIsPending(false);
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          setIsPending(false);
+          console.log(err);
+        });
+    }
   }, []);
 
   return (
     <>
       {isPending ? (
         <Loading />
-      ) : token ? (
+      ) : (
         <>
           <CommonTopBar
             modalActive={modalActive}
@@ -113,8 +107,6 @@ export default function Profile() {
             />
           </Wrapper>
         </>
-      ) : (
-        <Login />
       )}
     </>
   );
