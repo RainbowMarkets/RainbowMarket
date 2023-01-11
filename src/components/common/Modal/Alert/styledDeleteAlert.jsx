@@ -43,6 +43,7 @@ export const AlertWrapper = styled.section`
     height: 100%;
     font-weight: 400;
     line-height: 17.53px;
+    color: #000;
   }
   .alert-del {
     color: red;

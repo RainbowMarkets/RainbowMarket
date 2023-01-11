@@ -73,8 +73,13 @@ export const LogInModalBox = styled.div`
         display: flex;
         align-items: center;
 
-        &:visited {
+        &:focus,
+        &:hover,
+        &:visited,
+        &:link,
+        &:active {
           color: ${colors.color76};
+          text-decoration: none;
         }
 
         &::after {

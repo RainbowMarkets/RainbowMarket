@@ -30,6 +30,11 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
 
+  :root, #root, body {
+    width: 100%;
+    height: 100%;
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;
@@ -52,7 +57,6 @@ export const GlobalStyle = createGlobalStyle`
 
   input:focus {
     font-size: 16px;
-    // scale: 0.86;
   }
 
   .hidden {
@@ -74,9 +78,8 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,8 +88,8 @@ const Container = styled.div`
 
 const Aside = styled.aside`
   width: 390px;
-  max-height: 100vh;
-  max-height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
+  // max-height: -webkit-fill-available;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 16px 0;
@@ -104,9 +107,9 @@ const Aside = styled.aside`
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
   max-width: 440px;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+
   position: relative;
   overflow: hidden;
   background: white;
@@ -117,7 +120,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  padding-bottom: 60px;
+  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar {

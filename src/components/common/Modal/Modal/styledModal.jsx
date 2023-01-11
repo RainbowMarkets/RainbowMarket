@@ -72,7 +72,7 @@ export const ModalWrapper = styled.section`
     font-size: ${fonts.main};
     font-family: "Spoqa Han Sans Neo", "sans-serif";
     display: flex;
-    /* color: red; */
+    color: #000;
     font-weight: 400;
     line-height: 18px;
     align-items: center;
