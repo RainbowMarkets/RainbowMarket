@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors, fonts } from "../../GlobalStyle";
 
 export const StyledNav = styled.nav`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
   max-width: 440px;
@@ -12,7 +12,6 @@ export const StyledNav = styled.nav`
   border-top: solid 0.5px ${colors.colorDB};
   background-color: #fff;
   -webkit-transform: translate3d (0, 0, 0);
-  z-index: 100;
 `;
 
 export const StyledUl = styled.ul`

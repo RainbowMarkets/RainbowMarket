@@ -4,8 +4,10 @@ import uploadFile from "../../assets/images/upload-file.png";
 import { colors, fonts } from "../../GlobalStyle";
 
 export const UploadContain = styled.div`
+  // position: absolute;
   padding: 20px 16px 16px 16px;
-  height: calc(100vh - 48px);
+  width: 100%;
+  height: calc(100% - 48px);
   box-sizing: border-box;
 `;
 export const UploadWrapper = styled.section`
@@ -29,19 +31,22 @@ export const TextWrapper = styled.section`
   flex-grow: 2;
   width: calc(100% - 86px);
   justify-content: space-between;
-
+  height: 100%;
+  // overflow-y: auto;
   form {
     width: 100%;
   }
 
   .form-textarea {
     width: 100%;
+    height: 100%;
     font-weight: 400;
     line-height: 17.53px;
     border: none;
     resize: none;
     margin-bottom: 16px;
     outline: none;
+
     font-size: ${fonts.main};
     font-family: "Spoqa Han Sans Neo", "sans-serif";
   }

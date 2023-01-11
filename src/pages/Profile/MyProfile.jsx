@@ -98,14 +98,14 @@ export default function Profile() {
               postData={postData}
               myId={userInfo.user._id}
             />
-            <Modal modalActive={modalActive} setModalActive={setModalActive} />
-            <ProductModal
-              prodModal={prodModal}
-              setProdModal={setProdModal}
-              product={product}
-              setProduct={setProduct}
-            />
           </Wrapper>
+          <Modal modalActive={modalActive} setModalActive={setModalActive} />
+          <ProductModal
+            prodModal={prodModal}
+            setProdModal={setProdModal}
+            product={product}
+            setProduct={setProduct}
+          />
         </>
       )}
     </>

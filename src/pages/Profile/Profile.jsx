@@ -57,30 +57,23 @@ export default function Profile() {
 
   return (
     <>
-      (
-      <>
-        <CommonTopBar
-          modalActive={modalActive}
-          setModalActive={setModalActive}
+      <CommonTopBar modalActive={modalActive} setModalActive={setModalActive} />
+      <Wrapper>
+        {/* 팔로우 등 프로필이 표시되는 섹션 */}
+        <ProfileSection
+          data={userProfile.profile}
+          setUserProfile={setUserProfile}
+          isMine={param.accountname === user?.accountname}
         />
-        <Wrapper>
-          {/* 팔로우 등 프로필이 표시되는 섹션 */}
-          <ProfileSection
-            data={userProfile.profile}
-            setUserProfile={setUserProfile}
-            isMine={param.accountname === user?.accountname}
-          />
-          {/* 판매 중잉 아이템이 표시되는 섹션 */}
-          <ProfileItemSection name={userProfile.profile.accountname} />
-          {/* 쓴 글 목록이 표시되는 섹션 */}
-          <ProfileFeedSection
-            name={userProfile.profile.accountname}
-            data={postData}
-          />
-          <Modal modalActive={modalActive} setModalActive={setModalActive} />
-        </Wrapper>
-      </>
-      )
+        {/* 판매 중인 아이템이 표시되는 섹션 */}
+        <ProfileItemSection name={userProfile.profile.accountname} />
+        {/* 쓴 글 목록이 표시되는 섹션 */}
+        <ProfileFeedSection
+          name={userProfile.profile.accountname}
+          data={postData}
+        />
+      </Wrapper>
+      <Modal modalActive={modalActive} setModalActive={setModalActive} />
     </>
   );
 }
