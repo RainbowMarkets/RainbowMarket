@@ -23,6 +23,10 @@ import { useRef, useState } from "react";
 const PostContent = (props) => {
   const imgRef = useRef();
 
+  const handleImgError = (e) => {
+    e.target.src = basicImage;
+  };
+
   function handleSideMenu() {
     props.setPostModalActive(true);
     props.setReportPostNum(props.postDetail.id); // postid
@@ -77,12 +81,9 @@ const PostContent = (props) => {
                   <li>
                     <img
                       className="post-img"
-                      src={
-                        img.includes("https://mandarin.api.weniv.co.kr/")
-                          ? img
-                          : basicImage
-                      }
+                      src={img}
                       alt="게시글 이미지"
+                      onError={handleImgError}
                       ref={imgRef}
                     />
                   </li>
