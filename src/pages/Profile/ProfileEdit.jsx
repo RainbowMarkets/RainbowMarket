@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SetProfile from "../../components/common/SetProfile/SetProfile";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
@@ -9,15 +9,15 @@ export default function ProfileEdit() {
   const { user, dispatch } = useUserContext();
   const { putData, uploadImage } = useFetch();
 
-  const [username, setUsername] = useState(user.username); // 사용자 이름
-  const [accountname, setAccountname] = useState(user.accountname); // 계정 ID
-  const [intro, setIntro] = useState(user.intro); // 소개
+  // 뒤로가기 방지용 선언
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState(user?.username); // 사용자 이름
+  const [accountname, setAccountname] = useState(user?.accountname); // 계정 ID
+  const [intro, setIntro] = useState(user?.intro); // 소개
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const uploadInp = useRef(null); // 이미지 업로드 인풋 셀렉터
   const [valid, setValid] = useState(false); // 유효성
-
-  // 뒤로가기 방지용 선언
-  const navigate = useNavigate();
 
   // 프로필 수정 요청 제출
   const submitHandler = (event) => {
@@ -93,6 +93,10 @@ export default function ProfileEdit() {
         });
     }
   };
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
 
   return (
     <>

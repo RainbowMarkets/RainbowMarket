@@ -55,7 +55,7 @@ export default function Search() {
   };
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) window.location.replace("/");
     fetchUserData();
   }, [searchInp]);
 

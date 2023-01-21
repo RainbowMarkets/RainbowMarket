@@ -38,7 +38,7 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    if (!token) navigate("/login");
+    if (!token) navigate("/");
     else {
       setIsPending(true); // 통신 시작
       getData("/user/myinfo")

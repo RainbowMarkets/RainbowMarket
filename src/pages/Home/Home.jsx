@@ -2,7 +2,7 @@ import { useState } from "react";
 import MainTopBar from "../../components/TopBar/MainTopBar/MainTopBar";
 import IsHaveFeed from "./IsHaveFeed/IsHaveFeed";
 import NoFeed from "./NoFeed/NoFeed";
-import LoginModal from "../../components/Login/LoginModal/LoginModal";
+import Login from "./../../components/common/Login/Login";
 import useUserContext from "../../hooks/useUserContext";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       {!token ? (
-        <LoginModal />
+        <Login />
       ) : (
         <>
           <MainTopBar />

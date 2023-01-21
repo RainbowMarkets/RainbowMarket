@@ -13,7 +13,7 @@ import useUserContext from "../../hooks/useUserContext";
 const Post = (props) => {
   const { user, token } = useUserContext();
   const textRef = useRef();
-  const [profileImg, setProfileImg] = useState(user.image);
+  const [profileImg, setProfileImg] = useState(user?.image);
   const [inpValue, setInpValue] = useState("");
   const [uploadData, setUploadData] = useState([]);
 
@@ -92,7 +92,9 @@ const Post = (props) => {
     setImgSrc(imgSrc.filter((_, i) => i !== idx));
   };
 
-  // useEffect(() => {}, [imgSrc]);
+  useEffect(() => {
+    if (!token) navigate("/", { replace: true });
+  }, []);
 
   return (
     <>

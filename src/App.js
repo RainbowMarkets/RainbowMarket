@@ -18,9 +18,7 @@ import { useEffect, useState } from "react";
 import Splash from "./components/Splash/Splash";
 import Product from "./pages/Product/Product";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
-import Login from "./components/common/Login/Login";
 import ProductEdit from "./pages/Product/ProductEdit";
-import SetProfile from "./components/common/SetProfile/SetProfile";
 import Member from "./components/Member/Member";
 
 function App() {
@@ -49,7 +47,6 @@ function App() {
                 <Route exact path="/profile" element={<MyProfile />} />
                 <Route path="/profile/:accountname" element={<Profile />} />
                 <Route path="/profile/edit" element={<ProfileEdit />} />
-                <Route path="/setprofile" element={<SetProfile />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/chat/chatroom" element={<ChatRoom />} />
@@ -57,7 +54,6 @@ function App() {
                 <Route path="/post/:post_id" element={<PostDetail />} />
                 <Route path="/post/:post_id/edit" element={<PostEdit />} />
                 <Route path="/join" element={<Join />} />
-                <Route path="/login" element={<Login />} />
                 <Route
                   path="/profile/:accountname/follower"
                   element={<Follow />}
