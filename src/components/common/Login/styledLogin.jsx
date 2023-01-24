@@ -50,12 +50,16 @@ export const InputTitle = styled.span`
 
 export const JoinButton = styled(Link)`
   display: block;
-  max-width: max-content;
-  color: ${colors.color76};
-  font-size: ${fonts.mid};
-  margin: 0 auto;
   margin-bottom: 16px;
+  width: 100%;
+  height: 44px;
+  border-radius: 44px;
+  color: black;
+  background: ${colors.colorDB};
+  font-size: ${fonts.mid};
+  font-weight: 400;
   text-align: center;
+  line-height: 44px;
   text-decoration: none;
 
   &:focus,
@@ -63,14 +67,7 @@ export const JoinButton = styled(Link)`
   &:visited,
   &:link,
   &:active {
-    color: ${colors.color76};
-  }
-
-  &:after {
-    content: "혹은";
-    display: block;
-    font-size: ${fonts.small};
-    margin-top: 10px;
+    color: black;
   }
 `;
 

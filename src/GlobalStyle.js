@@ -46,6 +46,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button {
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     background: none;
     border: none;
     cursor: pointer;

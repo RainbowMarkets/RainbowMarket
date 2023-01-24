@@ -103,7 +103,7 @@ export default function Login() {
             {passwordWarningMessage}
           </WarningMessageWrapper>
           <LoginButton disabled={!isActive}>로그인</LoginButton>
-          <JoinButton to="/join">이메일로 회원가입</JoinButton>
+          <JoinButton to="/join">회원가입</JoinButton>
           <button className="browse" type="button" onClick={browseHandler}>
             둘러보기
           </button>
