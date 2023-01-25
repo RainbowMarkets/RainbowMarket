@@ -34,7 +34,7 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    if (!token) navigate("/login");
+    if (!token) navigate("/");
     else {
       getData(`/profile/${param.accountname}`)
         .then((res) => {
