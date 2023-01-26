@@ -4,12 +4,13 @@ import useUserContext from "../../../../hooks/useUserContext";
 import DeleteAlert from "../Alert/DeleteAlert";
 import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
+import useFetch from "../../../../hooks/useFetch";
 
 const PostModal = (props) => {
-  const { user, token } = useUserContext();
+  const { user } = useUserContext();
+  const { postData } = useFetch();
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const [toast, setToast] = useState(false);
-  const url = "https://mandarin.api.weniv.co.kr";
 
   function handlePostSideMenu() {
     props.setPostModalActive(false);
@@ -19,18 +20,11 @@ const PostModal = (props) => {
     setIsAlertCancel(true);
   }
 
+  // 게시글 신고 API
   const sendReport = async (postId) => {
-    await fetch(url + `/post/${postId}/report`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setToast(true);
-      });
+    postData(`/post/${postId}/report`).then((res) => {
+      setToast(true);
+    });
   };
 
   function handlePostReport() {

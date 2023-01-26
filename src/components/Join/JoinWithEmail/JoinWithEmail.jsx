@@ -10,6 +10,7 @@ import {
   InputTitle,
   NextButton,
 } from "./JoinWithEmail.style";
+import useFetch from "../../../hooks/useFetch";
 
 export default function JoinWithEmail({
   toNextStep,
@@ -26,8 +27,7 @@ export default function JoinWithEmail({
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
-
-  const url = "https://mandarin.api.weniv.co.kr";
+  const { postData } = useFetch();
 
   // 이메일, 패스워드 onChangeHandler
   const emailHandler = (event) => {
@@ -65,12 +65,6 @@ export default function JoinWithEmail({
     }
   };
 
-  // 이메일 유효성 검사
-  const emailValidCheck = ({ target }) => {};
-
-  //비밀번호 유효성 검사
-  const passwordValidCheck = ({ target }) => {};
-
   const loginData = {
     user: {
       email: `${emailRef.current.value}`,
@@ -87,28 +81,22 @@ export default function JoinWithEmail({
     event.preventDefault();
 
     try {
-      const res = await fetch(url + "/user/emailvalid", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(loginData),
-      });
-
-      //통신할 때 유효성 검사하기
-      const result = await res.json();
-      const requestMessage = await result.message;
-
-      if (requestMessage === "이미 가입된 이메일 주소 입니다.") {
-        setEmailWarningMessage("*이미 가입된 이메일 주소입니다.");
-        setEmailValid(false);
-        emailRef.current.focus();
-      } else {
-        setEmailWarningMessage("");
-        setEmailValid(true);
-        toNextStep();
-      }
-      return result;
+      // 이메일 검증 API
+      // 통신할 때 유효성 검사하기
+      postData(`/user/emailvalid`, loginData)
+        .then((result) => result.message)
+        .then((requestMessage) => {
+          if (requestMessage === "이미 가입된 이메일 주소 입니다.") {
+            setEmailWarningMessage("*이미 가입된 이메일 주소입니다.");
+            setEmailValid(false);
+            emailRef.current.focus();
+          } else {
+            setEmailWarningMessage("");
+            setEmailValid(true);
+            toNextStep();
+          }
+          // return result;
+        });
     } catch (error) {
       console.log(error);
     }

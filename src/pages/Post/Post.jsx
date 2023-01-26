@@ -9,9 +9,11 @@ import { useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../../hooks/useUserContext";
+import useFetch from "../../hooks/useFetch";
 
 const Post = (props) => {
   const { user, token } = useUserContext();
+  const { postData, uploadImage } = useFetch();
   const textRef = useRef();
   const [profileImg, setProfileImg] = useState(user?.image);
   const [inpValue, setInpValue] = useState("");
@@ -32,18 +34,17 @@ const Post = (props) => {
     setInpValue(e.target.value);
   };
 
-  // 이미지 서버에 전송
+  // 이미지 서버에 전송 API
   const postUploadImgs = async (formData) => {
     try {
-      const res = await fetch(
-        "https://mandarin.api.weniv.co.kr/image/uploadfiles",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await res.json();
-      return data;
+      uploadImage(formData)
+        .then((data) => {
+          // console.log(data);
+          setImgSrc([...imgSrc, `${url}/${data.filename}`]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.log("error", error);
     }
@@ -59,32 +60,21 @@ const Post = (props) => {
     }
     formData.append("image", imgInput);
 
-    postUploadImgs(formData)
-      .then((data) => {
-        setImgSrc([...imgSrc, `${url}/${data[0].filename}`]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // 이미지 서버 전송 함수
+    postUploadImgs(formData);
   };
 
-  // 게시글 업로드
+  // 게시글 업로드 API
   const createPost = async () => {
-    await fetch(url + "/post", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
+    const body = {
+      post: {
+        content: `${inpValue}`,
+        image: imgSrc.join(","),
       },
-      body: JSON.stringify({
-        post: {
-          content: `${inpValue}`,
-          image: imgSrc.join(","),
-        },
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => navigate("/profile", { replace: true })) // 프로필로 이동 후 뒤로가기 방지
+    };
+
+    postData(`/post`, body)
+      .then(() => navigate("/profile", { replace: true })) // 프로필로 이동 후 뒤로가기 방지)
       .catch((err) => console.log(err));
   };
 
