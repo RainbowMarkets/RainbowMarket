@@ -3,18 +3,17 @@ import UserList from "../../components/common/UserList/UserList";
 import SearchTopBar from "../../components/TopBar/SearchTopBar/SearchTopBar";
 import useUserContext from "../../hooks/useUserContext";
 import { StyledSection, StyledUl } from "./styledSearch";
+import useFetch from "../../hooks/useFetch";
 
 export default function Search() {
   const { token } = useUserContext();
+  const { getData } = useFetch();
   const [searchInp, setSearchInp] = useState("");
   const [userData, setUserData] = useState([]); // 뿌려줄 데이터
 
   const [tempData, setTempData] = useState([]); // 임시로 들어갈 데이터
   const [offset, setOffset] = useState(0);
   const observeTarget = useRef(); // 감시할 target
-
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/user/searchuser/?keyword=${searchInp}`;
 
   const callbackFunction = (entries) => {
     const [entry] = entries;
@@ -38,17 +37,12 @@ export default function Search() {
       return;
     }
     try {
-      const res = await fetch(url + reqPath, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
+      // 유저 검색 API
+      getData(`/user/searchuser/?keyword=${searchInp}`).then((data) => {
+        setOffset(15);
+        setUserData([]);
+        setTempData(data);
       });
-      const data = await res.json();
-      setOffset(15);
-      setUserData([]);
-      setTempData(data);
     } catch (err) {
       console.log("err", err);
     }

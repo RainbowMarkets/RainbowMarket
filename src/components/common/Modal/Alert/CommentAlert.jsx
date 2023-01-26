@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
+import useFetch from "../../../../hooks/useFetch";
+
 const CommentAlert = (props) => {
-  const url = "https://mandarin.api.weniv.co.kr";
-  const { token } = useUserContext();
+  const { deleteData } = useFetch();
 
   function handleCancelMenu() {
     props.setCommentModalActive(false);
@@ -18,20 +18,15 @@ const CommentAlert = (props) => {
 
   // 댓글 삭제하기
   const deleteComment = async () => {
-    await fetch(url + `/post/${props.postId}/comments/${props.commentId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+    // 댓글 삭제 API
+    deleteData(`/post/${props.postId}/comments/${props.commentId}`).then(
+      (res) => {
+        // console.log(res);
         props.setCommentData((prev) =>
           [...prev].filter((item) => item.id !== props.commentId)
         );
-      });
+      }
+    );
   };
 
   useEffect(() => {}, [props.commentData]);

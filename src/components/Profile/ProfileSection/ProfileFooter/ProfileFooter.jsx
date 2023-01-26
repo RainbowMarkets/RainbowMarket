@@ -8,10 +8,10 @@ import {
 import messageIcon from "../../../../assets/images/icon-message-circle.png";
 import shareIcon from "../../../../assets/images/icon-share.png";
 import { useState } from "react";
-import useUserContext from "../../../../hooks/useUserContext";
+import useFetch from "../../../../hooks/useFetch";
 
 export default function ProfileFooter({ isMine, setUserProfile, data }) {
-  const { token } = useUserContext();
+  const { deleteData, postData } = useFetch();
   const [isPending, setIsPending] = useState(false);
 
   const chatHandler = (event) => {
@@ -24,17 +24,8 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
     switch (event.target.textContent) {
       case "언팔로우":
         setIsPending(true); // 통신 시작
-        fetch(
-          `https://mandarin.api.weniv.co.kr/profile/${data.accountname}/unfollow`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-type": "application/json",
-            },
-          }
-        )
-          .then((res) => res.json())
+        // 언팔로우 API
+        deleteData(`/profile/${data.accountname}/unfollow`)
           .then((res) => {
             setUserProfile(res);
             setIsPending(false); // 통신 종료
@@ -46,17 +37,8 @@ export default function ProfileFooter({ isMine, setUserProfile, data }) {
         break;
       case "팔로우":
         setIsPending(true); // 통신 시작
-        fetch(
-          `https://mandarin.api.weniv.co.kr/profile/${data.accountname}/follow`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-type": "application/json",
-            },
-          }
-        )
-          .then((res) => res.json())
+        // 팔로우 API
+        postData(`/profile/${data.accountname}/follow`)
           .then((res) => {
             setUserProfile(res);
             setIsPending(false); // 통신 종료

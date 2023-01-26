@@ -9,9 +9,11 @@ import { useEffect, useRef, useState } from "react";
 import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserContext from "../../hooks/useUserContext";
+import useFetch from "../../hooks/useFetch";
 
 const PostEdit = (props) => {
   const { user, token } = useUserContext();
+  const { uploadImage, putData, getData } = useFetch();
   const textRef = useRef();
   const param = useParams();
   const [profileImg, setProfileImg] = useState(user.image);
@@ -33,18 +35,17 @@ const PostEdit = (props) => {
     setInpValue(e.target.value);
   };
 
-  // 이미지 서버에 전송
+  // 이미지 서버에 전송 API
   const postUploadImgs = async (formData) => {
     try {
-      const res = await fetch(
-        "https://mandarin.api.weniv.co.kr/image/uploadfiles",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await res.json();
-      return data;
+      uploadImage(formData)
+        .then((data) => {
+          // console.log(data);
+          setImgSrc([...imgSrc, `${url}/${data.filename}`]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.log("error", error);
     }
@@ -60,30 +61,18 @@ const PostEdit = (props) => {
     }
     formData.append("image", imgInput);
 
-    postUploadImgs(formData)
-      .then((data) => {
-        setImgSrc([...imgSrc, `${url}/${data[0].filename}`]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // 이미지 서버 전송 함수
+    postUploadImgs(formData);
   };
-  // 게시글 업로드 (수정)
+  // 게시글 업로드 (수정) API
   const createPost = async () => {
-    await fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
+    const body = {
+      post: {
+        content: `${inpValue}`,
+        image: imgSrc.join(","),
       },
-      body: JSON.stringify({
-        post: {
-          content: `${inpValue}`,
-          image: imgSrc.join(","),
-        },
-      }),
-    })
-      .then((res) => res.json())
+    };
+    putData(`/post/${param.post_id}`, body)
       .then(() => navigate("/profile", { replace: true })) // 프로필로 이동 후 뒤로가기 방지
       .catch((err) => console.log(err));
   };
@@ -93,24 +82,16 @@ const PostEdit = (props) => {
     setImgSrc(imgSrc.filter((_, i) => i !== idx));
   };
 
-  // 최초 접속 시 상세 정보를 받아와서 미리 입력
+  // 최초 접속 시 상세 정보를 받아와서 미리 입력 API
   useEffect(() => {
-    fetch(`https://mandarin.api.weniv.co.kr/post/${param.post_id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setInpValue(res.post.content);
-        if (res.post.image) {
-          let splitImgArr = res.post.image;
-          splitImgArr = splitImgArr.split(",");
-          setImgSrc(splitImgArr);
-        }
-      });
+    getData(`/post/${param.post_id}`).then((res) => {
+      setInpValue(res.post.content);
+      if (res.post.image) {
+        let splitImgArr = res.post.image;
+        splitImgArr = splitImgArr.split(",");
+        setImgSrc(splitImgArr);
+      }
+    });
   }, []);
 
   return (

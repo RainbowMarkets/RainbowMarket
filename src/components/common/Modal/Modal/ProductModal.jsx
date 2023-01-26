@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { ModalWrapper } from "./styledModal";
 import { AlertWrapper } from "../Alert/styledDeleteAlert";
-import useUserContext from "../../../../hooks/useUserContext";
 import { useState } from "react";
+import useFetch from "../../../../hooks/useFetch";
 
 export default function ProductModal({
   prodModal,
@@ -10,27 +10,20 @@ export default function ProductModal({
   product,
   setProduct,
 }) {
-  const { token } = useUserContext();
+  const { deleteData } = useFetch();
   const [isAlert, setIsAlert] = useState(false);
 
   const alertHandler = (event) => {
     setIsAlert(true);
   };
 
+  // 상품 삭제 API
   const deleteHandler = (event) => {
-    fetch(`https://mandarin.api.weniv.co.kr/product/${product.id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setIsAlert(false);
-        setProdModal(false);
-        setProduct(null);
-      });
+    deleteData(`/product/${product.id}`).then((res) => {
+      setIsAlert(false);
+      setProdModal(false);
+      setProduct(null);
+    });
   };
 
   const closeHandler = (event) => {
@@ -61,6 +54,7 @@ export default function ProductModal({
                   : undefined
               }
               target="_blank"
+              rel="noreferrer"
             >
               상품 페이지로 이동하기
             </a>

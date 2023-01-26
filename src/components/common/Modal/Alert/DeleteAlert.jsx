@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
+import useFetch from "../../../../hooks/useFetch";
 
 const DeleteAlert = (props) => {
-  const { token } = useUserContext();
+  const { deleteData } = useFetch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const url = "https://mandarin.api.weniv.co.kr";
 
   function handleCancelDelete() {
     props.setPostModalActive(false);
@@ -25,20 +23,12 @@ const DeleteAlert = (props) => {
     }
   }
   const sendDelete = async () => {
-    await fetch(url + `/post/${props.reportPostNum}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        props.setPostData((prev) =>
-          [...prev].filter((item) => item.id !== props.reportPostNum)
-        );
-        // window.location.reload();
-      });
+    // 게시글 삭제 API
+    deleteData(`/post/${props.reportPostNum}`).then((res) => {
+      props.setPostData((prev) =>
+        [...prev].filter((item) => item.id !== props.reportPostNum)
+      );
+    });
   };
   useEffect(() => {}, [props.postData]);
 

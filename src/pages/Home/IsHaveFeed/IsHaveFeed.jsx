@@ -3,13 +3,10 @@ import { StyledSection } from "./styledisHaveFeed";
 import PostContent from "../../../components/common/PostContent/PostContent";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
 import Loading from "../../../components/common/Loading/Loading";
-import useUserContext from "../../../hooks/useUserContext";
+import useFetch from "../../../hooks/useFetch";
 
 export default function IsHaveFeed(props) {
-  const { token } = useUserContext();
-
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/feed/?limit=30`;
+  const { getData } = useFetch();
 
   const [feedData, setFeedData] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -17,25 +14,17 @@ export default function IsHaveFeed(props) {
   useEffect(() => {
     async function getFeedData() {
       setIsPending(true); // 통신 시작
-      await fetch(url + reqPath, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setFeedData(res.posts || []);
-          setIsPending(false); // 통신 종료
-
-          // isHaveFeed 설정
-          if (res.posts.length === 0) {
-            props.setIsHaveFeed(false);
-          } else {
-            props.setIsHaveFeed(true);
-          }
-        });
+      // 피드 API
+      getData(`/post/feed/?limit=30`).then((res) => {
+        setFeedData(res.posts || []);
+        setIsPending(false); // 통신 종료
+        // isHaveFeed 설정
+        if (res.posts.length === 0) {
+          props.setIsHaveFeed(false);
+        } else {
+          props.setIsHaveFeed(true);
+        }
+      });
     }
     getFeedData();
   }, []);
