@@ -1,5 +1,6 @@
 import useUserContext from "../../../../hooks/useUserContext";
 import { HeartWrapper } from "./styledPostHeartBtn";
+import useFetch from "../../../../hooks/useFetch";
 
 const PostHeartBtn = ({
   isHeartOn,
@@ -9,6 +10,8 @@ const PostHeartBtn = ({
   post_id,
 }) => {
   const { token } = useUserContext();
+  const { postData, deleteData } = useFetch();
+
   const handleHeart = async (e) => {
     if (!isHeartOn) {
       const reqPath = `/post/${post_id}/heart`;
@@ -30,21 +33,12 @@ const PostHeartBtn = ({
         console.log("err", err);
       }
     } else {
-      const reqPath = `/post/${post_id}/unheart`;
-      const url = "https://mandarin.api.weniv.co.kr";
       try {
-        const res = await fetch(url + reqPath, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setIsHeartOn(data.post.hearted);
-            setLikeCount(data.post.heartCount);
-          });
+        // 좋아요 취소 API
+        deleteData(`/post/${post_id}/unheart`).then((data) => {
+          setIsHeartOn(data.post.hearted);
+          setLikeCount(data.post.heartCount);
+        });
       } catch (err) {
         console.log("err", err);
       }
