@@ -49,7 +49,6 @@ const PostDetail = () => {
   const fetchPostData = async () => {
     try {
       setIsPending(true); // 통신 시작
-
       // 게시글 상세 API
       getData(`/post/${post_id}`).then((data) => {
         setPostDetailData(data.post);
@@ -63,19 +62,13 @@ const PostDetail = () => {
 
   // 댓글 업데이트
   const getCommentList = async () => {
-    const reqPath = `/post/${post_id}/comments/?limit=1000&skip=0`;
     try {
       setIsPending(true);
-      const res = await fetch(url + reqPath, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
+      // 댓글 리스트 API
+      getData(`/post/${post_id}/comments/?limit=1000&skip=0`).then((data) => {
+        setCommentData(data.comments);
+        setIsPending(false); // 통신 종료
       });
-      const data = await res.json();
-      setCommentData(data.comments);
-      setIsPending(false); // 통신 종료
     } catch (err) {
       console.log("err", err);
       setIsPending(false); // 통신 종료
