@@ -4,6 +4,7 @@ import useUserContext from "../../../../hooks/useUserContext";
 import DeleteAlert from "../Alert/DeleteAlert";
 import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
+import useFetch from "../../../../hooks/useFetch";
 
 const PostModal = (props) => {
   const { user, token } = useUserContext();

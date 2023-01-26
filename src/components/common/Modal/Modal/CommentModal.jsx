@@ -8,7 +8,7 @@ import useFetch from "../../../../hooks/useFetch";
 const CommentModal = (props) => {
   const postId = props.postId;
   const commentId = props.isCommentId;
-  const { user, token } = useUserContext();
+  const { user } = useUserContext();
   const { postData } = useFetch();
 
   const [isAlertCancel, setIsAlertCancel] = useState(false);
