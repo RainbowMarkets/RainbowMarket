@@ -44,7 +44,6 @@ const PostDetail = () => {
   const [isCommentAuthorId, setIsCommentAuthorId] = useState("");
   const [isPending, setIsPending] = useState(false);
 
-  const url = "https://mandarin.api.weniv.co.kr";
   // 게시글 가져오기
   const fetchPostData = async () => {
     try {

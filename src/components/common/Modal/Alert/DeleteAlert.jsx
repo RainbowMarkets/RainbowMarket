@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 import useFetch from "../../../../hooks/useFetch";
 
 const DeleteAlert = (props) => {
-  const { token } = useUserContext();
   const { deleteData } = useFetch();
   const navigate = useNavigate();
   const location = useLocation();

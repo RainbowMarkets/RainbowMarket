@@ -3,15 +3,10 @@ import { StyledSection } from "./styledisHaveFeed";
 import PostContent from "../../../components/common/PostContent/PostContent";
 import PostModal from "../../../components/common/Modal/Modal/PostModal";
 import Loading from "../../../components/common/Loading/Loading";
-import useUserContext from "../../../hooks/useUserContext";
 import useFetch from "../../../hooks/useFetch";
 
 export default function IsHaveFeed(props) {
-  const { token } = useUserContext();
   const { getData } = useFetch();
-
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/feed/?limit=30`;
 
   const [feedData, setFeedData] = useState([]);
   const [isPending, setIsPending] = useState(false);

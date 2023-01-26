@@ -9,10 +9,8 @@ const CommentAdd = (props) => {
 
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
-  const { user, token } = useUserContext();
+  const { user } = useUserContext();
 
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/${props.post_id}/comments`;
   const localImg = user.image;
 
   // 댓글 작성하기

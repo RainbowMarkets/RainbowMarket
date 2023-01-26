@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import useUserContext from "../../../../hooks/useUserContext";
 import { AlertWrapper } from "./styledDeleteAlert";
 import useFetch from "../../../../hooks/useFetch";
 
 const CommentAlert = (props) => {
-  const url = "https://mandarin.api.weniv.co.kr";
-  const { token } = useUserContext();
   const { deleteData } = useFetch();
 
   function handleCancelMenu() {

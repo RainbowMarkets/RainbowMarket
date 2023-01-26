@@ -8,11 +8,9 @@ import {
 import messageIcon from "../../../../assets/images/icon-message-circle.png";
 import shareIcon from "../../../../assets/images/icon-share.png";
 import { useState } from "react";
-import useUserContext from "../../../../hooks/useUserContext";
 import useFetch from "../../../../hooks/useFetch";
 
 export default function ProfileFooter({ isMine, setUserProfile, data }) {
-  const { token } = useUserContext();
   const { deleteData, postData } = useFetch();
   const [isPending, setIsPending] = useState(false);
 

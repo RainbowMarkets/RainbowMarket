@@ -1,4 +1,3 @@
-import useUserContext from "../../../../hooks/useUserContext";
 import { HeartWrapper } from "./styledPostHeartBtn";
 import useFetch from "../../../../hooks/useFetch";
 
