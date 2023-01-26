@@ -9,26 +9,16 @@ const PostHeartBtn = ({
   setLikeCount,
   post_id,
 }) => {
-  const { token } = useUserContext();
   const { postData, deleteData } = useFetch();
 
   const handleHeart = async (e) => {
     if (!isHeartOn) {
-      const reqPath = `/post/${post_id}/heart`;
-      const url = "https://mandarin.api.weniv.co.kr";
       try {
-        const res = await fetch(url + reqPath, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setIsHeartOn(data.post.hearted);
-            setLikeCount(data.post.heartCount);
-          });
+        // 좋아요 표시 API
+        postData(`/post/${post_id}/heart`).then((data) => {
+          setIsHeartOn(data.post.hearted);
+          setLikeCount(data.post.heartCount);
+        });
       } catch (err) {
         console.log("err", err);
       }
