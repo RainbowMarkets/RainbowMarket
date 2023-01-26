@@ -39,7 +39,7 @@ const Post = (props) => {
     try {
       uploadImage(formData)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setImgSrc([...imgSrc, `${url}/${data.filename}`]);
         })
         .catch((error) => {
