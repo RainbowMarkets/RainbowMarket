@@ -11,9 +11,11 @@ import {
   StyledButton,
   StyledSpan,
 } from "./styledUserList";
+import useFetch from "../../../hooks/useFetch";
 
 export default function UserList(props) {
-  const { user, token } = useUserContext();
+  const { user } = useUserContext();
+  const { deleteData, postData } = useFetch();
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [isfollow, setIsfollow] = useState(props.isfollow); // 버튼 렌더링을 위한 상태
 
@@ -26,17 +28,8 @@ export default function UserList(props) {
     switch (event.target.textContent) {
       case "취소":
         setIsPending(true); // 통신 시작
-        fetch(
-          `https://mandarin.api.weniv.co.kr/profile/${props.accountname}/unfollow`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-type": "application/json",
-            },
-          }
-        )
-          .then((res) => res.json())
+        // 팔로우 취소 API
+        deleteData(`/profile/${props.accountname}/unfollow`)
           .then((res) => {
             setIsfollow(!isfollow);
             setIsPending(false); // 통신 종료
@@ -47,17 +40,8 @@ export default function UserList(props) {
         break;
       case "팔로우":
         setIsPending(true); // 통신 시작
-        fetch(
-          `https://mandarin.api.weniv.co.kr/profile/${props.accountname}/follow`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-type": "application/json",
-            },
-          }
-        )
-          .then((res) => res.json())
+        // 팔로우 API
+        postData(`/profile/${props.accountname}/follow`)
           .then((res) => {
             setIsfollow(!isfollow);
             setIsPending(false); // 통신 종료
