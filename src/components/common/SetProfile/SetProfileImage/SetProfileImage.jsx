@@ -3,26 +3,11 @@ import { Wrapper, ProfileImage, UploadButton } from "./styledSetProfileImage";
 import uploadimg from "../../../../assets/images/icon-image.png";
 import useUserContext from "../../../../hooks/useUserContext";
 import basicImg from "../../../../assets/images/profile_big.png";
+import useImageHandler from "../../../../hooks/useImageHandler";
 
-export default function SetProfileImage({ uploadInp }) {
+export default function SetProfileImage({ imageRef }) {
   const { user } = useUserContext();
-  const [preview, setPreview] = useState(user ? user.image : null);
-
-  const uploadHandler = (event) => {
-    if (!event.target.files[0]) setPreview(null);
-    else {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]);
-
-      return new Promise((resolve) => {
-        reader.onload = () => {
-          setPreview(reader.result);
-          resolve();
-        };
-      });
-    }
-  };
+  const { preview, previewHandler } = useImageHandler();
 
   return (
     <Wrapper>
@@ -32,11 +17,11 @@ export default function SetProfileImage({ uploadInp }) {
           <img src={uploadimg} />
         </label>
         <input
-          ref={uploadInp}
+          ref={imageRef}
           id="upload"
           type="file"
-          accept="image/*"
-          onChange={uploadHandler}
+          accept=".jpg, .gif, .png, .jpeg, .bmp, .tif, .heic"
+          onChange={previewHandler}
         />
       </UploadButton>
     </Wrapper>

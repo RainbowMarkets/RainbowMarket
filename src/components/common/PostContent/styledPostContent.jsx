@@ -91,7 +91,7 @@ export const PostImgUl = styled.ul`
     height: 100%;
     border-radius: 10px;
     margin-bottom: 2px;
-    object-fit: cover;
+    object-fit: fill; // 이미지 모달 완성 전까지 임시 적용
   }
 `;
 export const ArrowBtn = styled.button`
