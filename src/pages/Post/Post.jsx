@@ -10,6 +10,7 @@ import UpLoadTopBar from "../../components/TopBar/UpLoadTopBar/UpLoadTopBar";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../../hooks/useUserContext";
 import useFetch from "../../hooks/useFetch";
+import imageCompression from "browser-image-compression";
 
 const Post = (props) => {
   const { user, token } = useUserContext();
@@ -54,14 +55,23 @@ const Post = (props) => {
   const handleUploadImgs = (event) => {
     const formData = new FormData();
     const imgInput = event.target.files[0];
+
     if (imgSrc.length > 2) {
       alert("이미지는 3장까지 업로드 할 수 있습니다.");
       return;
     }
-    formData.append("image", imgInput);
 
-    // 이미지 서버 전송 함수
-    postUploadImgs(formData);
+    // 최대 사이즈 2MB로 이미지 압축
+    imageCompression(imgInput, {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 440,
+    }).then((compressedFile) => {
+      const newFile = new File([compressedFile], imgInput.name, {
+        type: imgInput.type,
+      });
+      formData.append("image", newFile);
+      postUploadImgs(formData); // 이미지 서버 전송 함수
+    });
   };
 
   // 게시글 업로드 API
