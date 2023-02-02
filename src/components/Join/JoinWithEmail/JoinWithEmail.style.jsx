@@ -26,19 +26,20 @@ export const InputTitle = styled.span`
   margin-bottom: 10px;
 `;
 
-
 export const Input = styled.input`
   width: 322px;
   height: 48px;
   fill: #ffffff;
   margin-bottom: 16px;
   border: none;
-  border-bottom: 1px solid ${({ validTest }) => validTest ? `${colors.colorSub}` : `${colors.colorEB}`};
+  border-bottom: 1px solid
+    ${({ validTest }) =>
+      validTest ? `${colors.colorSub}` : `${colors.colorEB}`};
   &:focus {
     border-bottom-color: ${colors.colorMain};
-  }
     outline: none;
   }
+
   &::placeholder {
     color: ${colors.colorDB};
   }

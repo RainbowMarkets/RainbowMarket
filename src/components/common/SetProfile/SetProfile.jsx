@@ -11,7 +11,7 @@ export default function SetProfile({
   username,
   accountname,
   intro,
-  uploadInp,
+  imageRef,
   setUsername,
   setAccountname,
   setIntro,
@@ -102,7 +102,7 @@ export default function SetProfile({
       <Form>
         {join ? <SetprofileHeader /> : null}
         <SetProfileImage
-          uploadInp={uploadInp}
+          imageRef={imageRef}
           image={image}
           setImage={setImage}
         />

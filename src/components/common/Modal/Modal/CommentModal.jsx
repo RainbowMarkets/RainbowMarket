@@ -3,11 +3,13 @@ import useUserContext from "../../../../hooks/useUserContext";
 import CommentAlert from "../Alert/CommentAlert";
 import ToastMessage from "../Toast/ToastMessage";
 import { ModalWrapper } from "./styledModal";
+import useFetch from "../../../../hooks/useFetch";
 
 const CommentModal = (props) => {
   const postId = props.postId;
   const commentId = props.isCommentId;
-  const { user, token } = useUserContext();
+  const { user } = useUserContext();
+  const { postData } = useFetch();
 
   const [isAlertCancel, setIsAlertCancel] = useState(false);
   const [toast, setToast] = useState(false);
@@ -19,21 +21,11 @@ const CommentModal = (props) => {
     setIsAlertCancel(true);
   }
 
-  // 댓글 신고
-  const url = "https://mandarin.api.weniv.co.kr";
-
+  // 댓글 신고 API
   const sendCommentReport = async (postId, commentId) => {
-    await fetch(url + `/post/${postId}/comments/${commentId}/report`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setToast(true);
-      });
+    postData(`/post/${postId}/comments/${commentId}/report`).then((res) => {
+      setToast(true);
+    });
   };
 
   const handleCommentReport = () => {

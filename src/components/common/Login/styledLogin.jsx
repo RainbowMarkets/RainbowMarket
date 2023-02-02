@@ -1,11 +1,26 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fonts, colors } from "../../../GlobalStyle";
 
 export const Container = styled.div`
+  background: ${colors.colorMain};
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+
+  img {
+    width: 170px;
+    margin: auto;
+  }
+
+  form {
+    background: white;
+    width: 100%;
+    padding: 34px;
+    border-radius: 20px 20px 0 0;
+  }
 
   .login-title {
     font-family: "Spoqa Han Sans Neo";
@@ -14,6 +29,13 @@ export const Container = styled.div`
     line-height: 30px;
     text-align: center;
     margin: 30px 0 40px;
+  }
+
+  .browse {
+    width: 100%;
+    height: 44px;
+    border: solid 1px ${colors.colorMain};
+    border-radius: 44px;
   }
 `;
 
@@ -26,9 +48,31 @@ export const InputTitle = styled.span`
   margin-bottom: 10px;
 `;
 
+export const JoinButton = styled(Link)`
+  display: block;
+  margin-bottom: 16px;
+  width: 100%;
+  height: 44px;
+  border-radius: 44px;
+  color: black;
+  background: ${colors.colorDB};
+  font-size: ${fonts.mid};
+  font-weight: 400;
+  text-align: center;
+  line-height: 44px;
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    color: black;
+  }
+`;
 
 export const Input = styled.input`
-  width: 322px;
+  width: 100%;
   height: 48px;
   fill: #ffffff;
   margin-bottom: 16px;
@@ -44,15 +88,9 @@ export const Input = styled.input`
   }
 `;
 
-export const LoginButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 export const LoginButton = styled.button`
-  margin: 30px 0 34px;
-  width: 322px;
+  margin-bottom: 16px;
+  width: 100%;
   height: 44px;
   ${({ disabled }) => {
     return disabled === false
@@ -65,6 +103,7 @@ export const LoginButton = styled.button`
 
 export const WarningMessageWrapper = styled.strong`
   display: block;
+  height: 14px;
   font-family: Spoqa Han Sans Neo;
   font-size: ${fonts.mid};
   font-weight: 400;
@@ -73,4 +112,3 @@ export const WarningMessageWrapper = styled.strong`
   margin-bottom: 6px;
   color: ${colors.colorEB};
 `;
-

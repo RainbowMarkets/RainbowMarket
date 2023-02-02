@@ -2,34 +2,31 @@ import { useState } from "react";
 import profileImgSmall from "../../../../assets/images/profile_small.png";
 import useUserContext from "../../../../hooks/useUserContext";
 import { CommentAddWrapper } from "./styledCommentAdd";
+import useFetch from "../../../../hooks/useFetch";
 
 const CommentAdd = (props) => {
+  const { postData } = useFetch();
+
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState("");
-  const { user, token } = useUserContext();
+  const { user } = useUserContext();
 
-  const url = "https://mandarin.api.weniv.co.kr";
-  const reqPath = `/post/${props.post_id}/comments`;
   const localImg = user.image;
 
   // 댓글 작성하기
   const handleWrapperSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(url + reqPath, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
+      const body = {
+        comment: {
+          content: `${text}`,
         },
-        body: JSON.stringify({
-          comment: {
-            content: `${text}`,
-          },
-        }),
-      });
-      const data = await res.json();
-      props.setCommentData((prev) => [{ ...data.comment }, ...prev]);
+      };
+
+      // 댓글 작성 API
+      postData(`/post/${props.post_id}/comments`, body).then((data) =>
+        props.setCommentData((prev) => [{ ...data.comment }, ...prev])
+      );
       setText("");
     } catch (err) {
       console.log("err", err);

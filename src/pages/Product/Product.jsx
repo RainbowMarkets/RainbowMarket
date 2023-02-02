@@ -1,20 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductInput from "../../components/ProductInput/ProductInput";
 import SaveTopBar from "../../components/TopBar/SaveTopBar/SaveTopBar";
 import useFetch from "../../hooks/useFetch";
+import useImageHandler from "../../hooks/useImageHandler";
 import { Section, ImageLabel, Preview, UploadLabel } from "./styledProduct";
 
 export default function Product() {
-  const { postData, uploadImage } = useFetch();
+  const { postData } = useFetch();
+  const { imageRef, preview, previewHandler, imageUploadHandler } =
+    useImageHandler();
 
-  const [preview, setPreview] = useState(null); // 사진 미리보기
   const [itemName, setItemName] = useState(""); // 상품명
   const [itemPrice, setItemPrice] = useState(""); // 가격
   const [itemLink, setItemLink] = useState(""); // 판매 링크
   const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(false); // 입력 정보 확인
-  const uploadInp = useRef(); // 파일 업로드 인풋 셀렉터
   const navigate = useNavigate();
 
   const itemNamehandler = (event) => {
@@ -36,24 +37,6 @@ export default function Product() {
     setItemLink(event.target.value);
   };
 
-  const uploadHandler = (event) => {
-    // 선택된 이미지가 없다면 null
-    if (!event.target.files[0]) setPreview(null);
-    else {
-      // 이미지를 FileReader API를 이용해 출력
-      const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]);
-
-      return new Promise((resolve) => {
-        reader.onload = () => {
-          setPreview(reader.result);
-          resolve();
-        };
-      });
-    }
-  };
-
   const submitHandler = (event) => {
     if (+itemPrice === 0) {
       alert("가격을 1원 이상 입력해주세요!");
@@ -62,30 +45,14 @@ export default function Product() {
     event.preventDefault(); // submit 기본 동작 새로고침 방지
     setIsPending(true); // 통신 시작
 
-    // 이미지 파일을 FormData에 담아 제출
-    const files = new FormData();
-    files.append("image", uploadInp.current.files[0]);
-
-    // webp 확장자는 API에 업로드 불가함으로 처리
-    if (uploadInp.current.files[0].name.includes(".webp")) {
-      setIsPending(false);
-      setValid(false);
-      files.delete("image");
-      alert("webp 파일은 업로드 할 수 없습니다.");
-      return;
-    }
-
-    uploadImage(files)
+    imageUploadHandler(imageRef.current.files[0])
       .then((res) => {
-        // 이미지가 성공적으로 업로드 되고 응답 받음
-
-        // 응답 받은 이미지 주소를 첨부하여 상품 등록 API 제출
         const body = {
           product: {
             itemName: itemName,
             price: +itemPrice,
             link: itemLink,
-            itemImage: `https://mandarin.api.weniv.co.kr/${res.filename}`,
+            itemImage: `https://mandarin.api.weniv.co.kr/${res?.filename}`,
           },
         };
 
@@ -129,10 +96,10 @@ export default function Product() {
           {preview ? <img src={preview} /> : ""}
           <UploadLabel>
             <input
-              ref={uploadInp}
+              ref={imageRef}
               type="file"
               accept="image/*"
-              onChange={uploadHandler}
+              onChange={previewHandler}
               style={{ display: "none" }}
             />
           </UploadLabel>
