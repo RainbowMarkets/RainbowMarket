@@ -63,12 +63,11 @@ export const ImgBox = styled.div`
   /* display: flex; */
   overflow-x: scroll;
   margin-bottom: 12px;
-  /* max-width: 354px; */
-  height: 230px;
+  max-height: 300px;
   position: relative;
   overflow: hidden;
   margin: 10px 0;
-  border: 0.5px solid ${colors.colorDB};
+  /* border: 0.5px solid ${colors.colorDB}; */
   border-radius: 10px;
 `;
 
@@ -84,14 +83,13 @@ export const PostImgUl = styled.ul`
 
   li {
     width: 100%;
-    height: 100%;
   }
   .post-img {
     width: 100%;
+    max-height: 300px;
+    display: block;
     height: 100%;
-    border-radius: 10px;
-    margin-bottom: 2px;
-    object-fit: fill; // 이미지 모달 완성 전까지 임시 적용
+    object-fit: contain;
   }
 `;
 export const ArrowBtn = styled.button`
@@ -113,7 +111,7 @@ export const ArrowLeft = styled(ArrowBtn)`
   img {
     height: 20px;
     width: 20px;
-    background-color: white;
+    background-color: #e0e0e0;
     border-radius: 50%;
     padding: 5px;
   }
@@ -126,7 +124,7 @@ export const ArrowRight = styled(ArrowBtn)`
   img {
     height: 20px;
     width: 20px;
-    background-color: white;
+    background-color: #e0e0e0;
     border-radius: 50%;
     padding: 5px;
   }
