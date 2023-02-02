@@ -4,7 +4,6 @@ import useFetch from "./useFetch";
 
 export default function useImageHandler() {
   const { uploadImage } = useFetch();
-  const [file, setFile] = useState(null); // 파일 상태 관리
   const [preview, setPreview] = useState(null); // 이미지 미리보기 관리
 
   const imageRef = useRef(null); // 파일 Input DOM을 선택하기 위한 useRef
@@ -45,5 +44,5 @@ export default function useImageHandler() {
     } else return;
   };
 
-  return { preview, previewHandler, imageRef, file, imageUploadHandler };
+  return { preview, previewHandler, imageRef, imageUploadHandler };
 }
