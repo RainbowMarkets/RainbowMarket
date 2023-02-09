@@ -11,10 +11,11 @@ import CommentModal from "../common/Modal/Modal/CommentModal";
 import { useParams } from "react-router-dom";
 import useUserContext from "../../hooks/useUserContext";
 import useFetch from "../../hooks/useFetch";
+import Error from "../common/Error/Error";
 
 const PostDetail = () => {
   const { post_id } = useParams();
-  const { getData } = useFetch();
+  const { getData, error } = useFetch();
 
   const [postDetailData, setPostDetailData] = useState({
     comments: [],
@@ -88,7 +89,9 @@ const PostDetail = () => {
   return (
     <>
       <CommonTopBar modalActive={modalActive} setModalActive={setModalActive} />
-      {!postDetailData.author._id ? (
+      {error ? (
+        <Error message={error} />
+      ) : !postDetailData.author._id ? (
         <Loading />
       ) : (
         <PostDetailWrapper>
