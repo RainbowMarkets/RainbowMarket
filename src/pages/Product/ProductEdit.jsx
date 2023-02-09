@@ -7,7 +7,7 @@ import useImageHandler from "../../hooks/useImageHandler";
 import { Section, ImageLabel, Preview, UploadLabel } from "./styledProduct";
 
 export default function ProductEdit() {
-  const { getData, putData } = useFetch();
+  const { getData, putData, isPending } = useFetch();
   const { imageRef, preview, previewHandler, imageUploadHandler } =
     useImageHandler();
   const param = useParams();
@@ -16,7 +16,6 @@ export default function ProductEdit() {
   const [itemName, setItemName] = useState(""); // 상품명
   const [itemPrice, setItemPrice] = useState(""); // 가격
   const [itemLink, setItemLink] = useState(""); // 판매 링크
-  const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(true); // 입력 정보 확인
 
   // 뒤로가기 방지용 선언
@@ -41,7 +40,6 @@ export default function ProductEdit() {
 
   const submitHandler = (event) => {
     event.preventDefault(); // submit 기능 새로고침 방지
-    setIsPending(true); // 통신 시작
 
     imageUploadHandler(imageRef.current.files[0])
       .then((res) => {
@@ -63,7 +61,6 @@ export default function ProductEdit() {
       .catch((err) => {
         // 에러 발생 시
         alert(err);
-        setIsPending(false);
       });
   };
 

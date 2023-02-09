@@ -43,19 +43,15 @@ const PostDetail = () => {
   const { token } = useUserContext();
   const [isCommentId, setIsCommentId] = useState("");
   const [isCommentAuthorId, setIsCommentAuthorId] = useState("");
-  const [isPending, setIsPending] = useState(false);
 
   // 게시글 가져오기
   const fetchPostData = async () => {
     try {
-      setIsPending(true); // 통신 시작
       // 게시글 상세 API
       getData(`/post/${post_id}`).then((data) => {
         setPostDetailData(data.post);
-        setIsPending(false); // 통신 종료
       });
     } catch (err) {
-      setIsPending(false); // 통신 종료
       console.log("err", err);
     }
   };
@@ -63,15 +59,12 @@ const PostDetail = () => {
   // 댓글 업데이트
   const getCommentList = async () => {
     try {
-      setIsPending(true);
       // 댓글 리스트 API
       getData(`/post/${post_id}/comments/?limit=1000&skip=0`).then((data) => {
         setCommentData(data.comments);
-        setIsPending(false); // 통신 종료
       });
     } catch (err) {
       console.log("err", err);
-      setIsPending(false); // 통신 종료
     }
   };
   useEffect(() => {

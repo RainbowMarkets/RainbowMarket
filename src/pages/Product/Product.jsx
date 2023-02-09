@@ -7,14 +7,13 @@ import useImageHandler from "../../hooks/useImageHandler";
 import { Section, ImageLabel, Preview, UploadLabel } from "./styledProduct";
 
 export default function Product() {
-  const { postData } = useFetch();
+  const { postData, isPending } = useFetch();
   const { imageRef, preview, previewHandler, imageUploadHandler } =
     useImageHandler();
 
   const [itemName, setItemName] = useState(""); // 상품명
   const [itemPrice, setItemPrice] = useState(""); // 가격
   const [itemLink, setItemLink] = useState(""); // 판매 링크
-  const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(false); // 입력 정보 확인
   const navigate = useNavigate();
 
@@ -43,7 +42,6 @@ export default function Product() {
       return;
     }
     event.preventDefault(); // submit 기본 동작 새로고침 방지
-    setIsPending(true); // 통신 시작
 
     imageUploadHandler(imageRef.current.files[0])
       .then((res) => {
@@ -63,7 +61,6 @@ export default function Product() {
       .catch((err) => {
         // 에러 발생 시
         alert(err);
-        setIsPending(false);
       });
   };
 
