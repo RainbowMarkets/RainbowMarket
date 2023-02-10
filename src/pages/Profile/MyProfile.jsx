@@ -13,14 +13,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const { token, dispatch } = useUserContext();
-  const { getData } = useFetch();
+  const { getData, isPending } = useFetch();
   const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
   const [prodModal, setProdModal] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const [postData, setPostData] = useState([]);
-  const [isPending, setIsPending] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     user: {
@@ -40,7 +39,6 @@ export default function Profile() {
   useEffect(() => {
     if (!token) navigate("/");
     else {
-      setIsPending(true); // 통신 시작
       getData("/user/myinfo")
         .then((res) => {
           dispatch({ type: "LOGIN", payload: res.user });
@@ -51,15 +49,12 @@ export default function Profile() {
           getData(`/post/${encodeURI(res.user.accountname)}/userpost`)
             .then((res) => {
               setPostData(res.post);
-              setIsPending(false); // 통신 종료
             })
             .catch((err) => {
-              setIsPending(false);
               console.log(err);
             });
         })
         .catch((err) => {
-          setIsPending(false);
           console.log(err);
         });
     }

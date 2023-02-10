@@ -6,18 +6,15 @@ import Loading from "../../../components/common/Loading/Loading";
 import useFetch from "../../../hooks/useFetch";
 
 export default function IsHaveFeed(props) {
-  const { getData } = useFetch();
+  const { getData, isPending } = useFetch();
 
   const [feedData, setFeedData] = useState([]);
-  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     async function getFeedData() {
-      setIsPending(true); // 통신 시작
       // 피드 API
       getData(`/post/feed/?limit=30`).then((res) => {
         setFeedData(res.posts || []);
-        setIsPending(false); // 통신 종료
         // isHaveFeed 설정
         if (res.posts.length === 0) {
           props.setIsHaveFeed(false);

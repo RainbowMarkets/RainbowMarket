@@ -8,7 +8,7 @@ import useUserContext from "../../hooks/useUserContext";
 
 export default function ProfileEdit() {
   const { user, dispatch } = useUserContext();
-  const { putData } = useFetch();
+  const { putData, isPending } = useFetch();
   const { imageRef, imageUploadHandler } = useImageHandler();
 
   // 뒤로가기 방지용 선언
@@ -17,13 +17,11 @@ export default function ProfileEdit() {
   const [username, setUsername] = useState(user?.username); // 사용자 이름
   const [accountname, setAccountname] = useState(user?.accountname); // 계정 ID
   const [intro, setIntro] = useState(user?.intro); // 소개
-  const [isPending, setIsPending] = useState(false); // 통신 상태
   const [valid, setValid] = useState(false); // 유효성
 
   // 프로필 수정 요청 제출
   const submitHandler = async (event) => {
     event.preventDefault(); // submit 기능 새로고침 방지
-    setIsPending(true); // 통신 시작
 
     imageUploadHandler(imageRef.current.files[0])
       .then((res) => {
@@ -42,20 +40,17 @@ export default function ProfileEdit() {
         putData("/user", body)
           .then((res) => {
             // 성공 시 유저 정보를 갱신
-            setIsPending(false);
             console.log("put 결과 :", res);
             dispatch({ type: "LOGIN", payload: res.user });
           })
           .then(() => navigate("/profile", { replace: true }))
           .catch((err) => {
-            setIsPending(false);
             console.log(err);
           });
       })
       .catch((err) => {
         // 에러 발생 시
         alert(err);
-        setIsPending(false);
       });
   };
 

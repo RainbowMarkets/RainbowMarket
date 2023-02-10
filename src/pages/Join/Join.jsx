@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
 function Join() {
-  const { postData, uploadImage } = useFetch();
+  const { postData, uploadImage, isPending } = useFetch();
   const [nextStep, setNextStep] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +13,6 @@ function Join() {
   const [accountname, setAccountname] = useState("");
   const [intro, setIntro] = useState("");
   const [image, setImage] = useState("");
-  const [isPending, setIsPending] = useState(false);
 
   const [valid, setValid] = useState(false);
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ function Join() {
   // 회원가입 함수 시작
   const submitHandler = (event) => {
     event.preventDefault();
-    setIsPending(true);
 
     // 이미지 파일이 있는 경우
     if (uploadInp.current.files[0]) {
@@ -35,7 +33,6 @@ function Join() {
 
       // webp 확장자는 API에 업로드 불가함으로 처리
       if (uploadInp.current.files[0].name.includes(".webp")) {
-        setIsPending(false);
         setValid(false);
         files.delete("image");
         alert("webp 파일은 업로드 할 수 없습니다.");
@@ -60,7 +57,6 @@ function Join() {
         })
         .catch((err) => {
           alert(err);
-          setIsPending(false);
         });
     } else {
       const body = {
@@ -78,7 +74,6 @@ function Join() {
         .then(() => navigate("/"))
         .catch((err) => {
           alert(err);
-          setIsPending(false);
         });
     }
   };

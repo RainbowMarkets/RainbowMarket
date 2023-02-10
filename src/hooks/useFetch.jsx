@@ -1,11 +1,17 @@
+import { useState } from "react";
 import useUserContext from "./useUserContext";
 
 export default function useFetch() {
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
+
   const { token } = useUserContext();
 
   const url = "https://mandarin.api.weniv.co.kr";
 
   const getData = async (req) => {
+    setIsPending(true);
+
     return fetch(url + req, {
       method: "GET",
       headers: {
@@ -13,12 +19,18 @@ export default function useFetch() {
         "Content-type": "application/json",
       },
     }).then((res) => {
+      setIsPending(false);
       if (res.ok) return res.json();
-      else throw new Error(res.statusText);
+      else {
+        setError(`${res.status} : ${res.statusText}`);
+        throw new Error(res.statusText);
+      }
     });
   };
 
   const postData = async (req, body) => {
+    setIsPending(true);
+
     return fetch(url + req, {
       method: "POST",
       headers: {
@@ -27,12 +39,18 @@ export default function useFetch() {
       },
       body: JSON.stringify(body),
     }).then((res) => {
+      setIsPending(false);
       if (res.ok) return res.json();
-      else throw new Error(res.statusText);
+      else {
+        setError(`${res.status} : ${res.statusText}`);
+        throw new Error(res.statusText);
+      }
     });
   };
 
   const putData = async (req, body) => {
+    setIsPending(true);
+
     return fetch(url + req, {
       method: "PUT",
       headers: {
@@ -41,12 +59,18 @@ export default function useFetch() {
       },
       body: JSON.stringify(body),
     }).then((res) => {
+      setIsPending(false);
       if (res.ok) return res.json();
-      else throw new Error(res.statusText);
+      else {
+        setError(`${res.status} : ${res.statusText}`);
+        throw new Error(res.statusText);
+      }
     });
   };
 
   const deleteData = async (req) => {
+    setIsPending(true);
+
     return fetch(url + req, {
       method: "DELETE",
       headers: {
@@ -54,20 +78,38 @@ export default function useFetch() {
         "Content-type": "application/json",
       },
     }).then((res) => {
+      setIsPending(false);
       if (res.ok) return res.json();
-      else throw new Error(res.statusText);
+      else {
+        setError(`${res.status} : ${res.statusText}`);
+        throw new Error(res.statusText);
+      }
     });
   };
 
   const uploadImage = async (body) => {
+    setIsPending(true);
+
     return fetch(url + "/image/uploadfile", {
       method: "POST",
       body: body,
     }).then((res) => {
+      setIsPending(false);
       if (res.ok) return res.json();
-      else throw new Error(res.statusText);
+      else {
+        setError(`${res.status} : ${res.statusText}`);
+        throw new Error(res.statusText);
+      }
     });
   };
 
-  return { getData, postData, putData, deleteData, uploadImage };
+  return {
+    getData,
+    postData,
+    putData,
+    deleteData,
+    uploadImage,
+    isPending,
+    error,
+  };
 }
