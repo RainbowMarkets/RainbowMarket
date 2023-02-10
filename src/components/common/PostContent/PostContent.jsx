@@ -19,6 +19,7 @@ import {
   ContextLink,
 } from "./styledPostContent";
 import { useRef, useState } from "react";
+import ImgModal from "../Modal/Modal/ImgModal";
 
 const PostContent = (props) => {
   const imgRef = useRef();
@@ -32,6 +33,8 @@ const PostContent = (props) => {
     props.setReportPostNum(props.postDetail.id); // postid
   }
 
+  const [isImgModal, setIsImgModal] = useState(false);
+  const [modalImg, setModalImg] = useState("");
   const [isHeartOn, setIsHeartOn] = useState(props.isHeartOn);
   const [likeCount, setLikeCount] = useState(props.likeCount);
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -46,6 +49,11 @@ const PostContent = (props) => {
     if (currentIndex < props.postDetail.image.split(",").length) {
       setCurrentIndex(currentIndex + 1);
     }
+  };
+
+  const imgModalHandler = (img) => {
+    setIsImgModal(true);
+    setModalImg(img);
   };
 
   return (
@@ -78,7 +86,7 @@ const PostContent = (props) => {
             >
               {props.postDetail.image.split(",").map((img) => {
                 return (
-                  <li>
+                  <li onClick={() => imgModalHandler(img)}>
                     <img
                       className="post-img"
                       src={img}
@@ -107,7 +115,9 @@ const PostContent = (props) => {
           </ImgBox>
         )}
       </ContextWrapper>
-
+      {isImgModal && (
+        <ImgModal img={modalImg} handler={() => setIsImgModal(false)} />
+      )}
       <PostBtn>
         <PostHeartBtn
           post_id={props.post_id}
