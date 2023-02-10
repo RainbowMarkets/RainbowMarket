@@ -67,7 +67,7 @@ export const ImgBox = styled.div`
   position: relative;
   overflow: hidden;
   margin: 10px 0;
-  // border: 0.5px solid ${colors.colorDB};
+  border: 0.5px solid ${colors.colorDB};
   border-radius: 10px;
 `;
 
@@ -89,7 +89,7 @@ export const PostImgUl = styled.ul`
     max-height: 300px;
     display: block;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 export const ArrowBtn = styled.button`
