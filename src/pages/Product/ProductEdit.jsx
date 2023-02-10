@@ -66,7 +66,7 @@ export default function ProductEdit() {
 
   // 전송해도 되는지 확인
   useEffect(() => {
-    setItemImage(preview);
+    if (preview) setItemImage(preview);
     if (
       itemImage &&
       itemName.length > 0 &&
