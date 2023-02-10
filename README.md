@@ -16,7 +16,7 @@
     [3. 개발 환경](#개발-환경)<br>
     [4. 구현 기능](#구현-기능)<br>
     [5. 프로젝트 구조](#프로젝트-구조)<br>
-    [6. 트러블 슈팅](#트러블-트러블)<br>
+    [6. 트러블 슈팅](#트러블-슈팅)<br>
     [7. 프로젝트 배포 후 느낀 점](#프로젝트-배포-후-느낀-점)
 
 ## 프로젝트 소개
@@ -84,35 +84,35 @@
 ---
 |<center>Splash</center>|<center>회원가입</center>|<center>로그인</center>|
 |---|---|---|
-|<img width="275px" src=https://user-images.githubusercontent.com/63508955/211530261-b2d718c2-a69b-4224-b9b5-cebbdc8c128d.gif></img>|<img width="275px" src=https://i.imgur.com/UqAQYqf.gif></img>|<img width="275px" src=https://i.imgur.com/vE7LvrW.gif></img>
+|<img src=https://user-images.githubusercontent.com/63508955/211530261-b2d718c2-a69b-4224-b9b5-cebbdc8c128d.gif></img>|<img src=https://i.imgur.com/UqAQYqf.gif></img>|<img src=https://i.imgur.com/vE7LvrW.gif></img>
 
 | <center>홈화면</center> | <center>계정 검색</center> | <center>유저 프로필</center> |
 | --- | --- | --- |
-|<img width="275px" src=https://i.imgur.com/H1hpMGk.gif></img>|<img  width="275px" src="https://i.imgur.com/vf6ojtY.gif"></img>|<img width="275px" src="https://i.imgur.com/mOmjo4h.gif"></img>|
+|<img src=https://i.imgur.com/H1hpMGk.gif></img>|<img src="https://i.imgur.com/vf6ojtY.gif"></img>|<img src="https://i.imgur.com/mOmjo4h.gif"></img>|
 
 | <center>내 프로필</center> | <center>내 프로필 수정</center> | <center>팔로우, 팔로워</center> |
 | --- | --- | --- |
-|<img width="275px" src="https://i.imgur.com/fHpsZmZ.gif"></img>|<img width="275px" src="https://i.imgur.com/FH8IWV0.gif"></img>|<img width="275px"  src="https://i.imgur.com/jwX1yYW.gif"></img>
+|<img src="https://i.imgur.com/fHpsZmZ.gif"></img>|<img src="https://i.imgur.com/FH8IWV0.gif"></img>|<img src="https://i.imgur.com/jwX1yYW.gif"></img>
 
 | <center>재능 판매 등록</center> | <center>재능 판매 수정</center> | <center>재능 판매 링크 이동</center> |
 | --- | --- | --- |
-|<img width="275px" src="https://i.imgur.com/vZErGm9.gif"></img>|<img width="275px" src="https://i.imgur.com/5CbjoeV.gif"></img>|<img width="275px" src="https://i.imgur.com/PMj9gE4.gif"></img>
+|<img src="https://i.imgur.com/vZErGm9.gif"></img>|<img src="https://i.imgur.com/5CbjoeV.gif"></img>|<img width="276px" src="https://i.imgur.com/PMj9gE4.gif"></img>
 
 | <center>재능 판매 목록 삭제</center> | <center>404 페이지</center> | <center>게시글 등록</center> |
 | --- | --- | --- |
-|<img width="275px" src="https://i.imgur.com/4qiQCxK.gif"></img>|<img width="275px" src="https://i.imgur.com/UkAoXZh.gif"></img>|<img width="275px" src="https://i.imgur.com/WpOXRuV.gif"></img>|
+|<img src="https://i.imgur.com/4qiQCxK.gif"></img>|<img src="https://i.imgur.com/UkAoXZh.gif"></img>|<img src="https://i.imgur.com/WpOXRuV.gif"></img>|
 
 | <center>게시글 상세 페이지</center> | <center>게시글 수정</center> | <center>게시글 삭제</center> |
 | --- | --- | --- |
-|<img width="275px" src="https://i.imgur.com/cgPynrM.gif"></img>|<img width="275px" src="https://i.imgur.com/y9M9mnd.gif"></img>|<img  width="275px" src="https://i.imgur.com/7zd0KyW.gif"></img>
+|<img src="https://i.imgur.com/cgPynrM.gif"></img>|<img src="https://i.imgur.com/y9M9mnd.gif"></img>|<img src="https://i.imgur.com/7zd0KyW.gif"></img>
 
 |<center>게시글 댓글 등록</center> | <center>게시글 댓글 삭제</center> | <center>게시글 좋아요</center>
 | --- | --- | --- |
-|<img width="275px" src="https://i.imgur.com/6Ra8QQV.gif"></img>|<img width="275px" src="https://i.imgur.com/mWKXMg6.gif"></img>|<img width="275px" src="https://i.imgur.com/GhU97uO.gif"></img>
+|<img src="https://i.imgur.com/6Ra8QQV.gif"></img>|<img src="https://i.imgur.com/mWKXMg6.gif"></img>|<img src="https://i.imgur.com/GhU97uO.gif"></img>
 
 | <center>모달 기능</center> | <center>신고</center> | <center>로그아웃</center> |
 | --- | --- | --- |
-|<img width="275px" src="https://i.imgur.com/lbG8D0H.gif"></img>|<img width="275px" src="https://i.imgur.com/nC0O4au.gif"></img>|<img width="275px" src="https://i.imgur.com/6pjK7sk.gif"></img>
+|<img src="https://i.imgur.com/lbG8D0H.gif"></img>|<img src="https://i.imgur.com/nC0O4au.gif"></img>|<img src="https://i.imgur.com/6pjK7sk.gif"></img>
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
@@ -124,30 +124,54 @@
 ┣ 📂public
 ┃ ┣ 📜favicon.ico
 ┃ ┗ 📜index.html
-┣ 📂src
+┣📦src
 ┃ ┣ 📂assets
 ┃ ┃ ┣ 📂images
 ┃ ┣ 📂components
 ┃ ┃ ┣ 📂ChatRoom
 ┃ ┃ ┣ 📂Join
-┃ ┃ ┣ 📂Login
+┃ ┃ ┃ ┗ 📂JoinWithEmail
 ┃ ┃ ┣ 📂Member
 ┃ ┃ ┣ 📂Navbar
 ┃ ┃ ┣ 📂Posts
 ┃ ┃ ┃ ┣ 📂Comment
+┃ ┃ ┃ ┃ ┣ 📂CommentAdd
+┃ ┃ ┃ ┃ ┣ 📂CommentDetail
+┃ ┃ ┃ ┃ ┗ 📂PostDate
 ┃ ┃ ┃ ┣ 📂PostBtn
+┃ ┃ ┃ ┃ ┣ 📂PostCommentBtn
+┃ ┃ ┃ ┃ ┗ 📂PostHearBtn
 ┃ ┃ ┣ 📂ProductInput
 ┃ ┃ ┣ 📂Profile
 ┃ ┃ ┃ ┣ 📂ProfileFeedSection
+┃ ┃ ┃ ┃ ┣ 📂ProfileFeedHeader
 ┃ ┃ ┃ ┣ 📂ProfileItemSection
+┃ ┃ ┃ ┃ ┣ 📂ProfileItemList
 ┃ ┃ ┃ ┗ 📂ProfileSection
+┃ ┃ ┃ ┃ ┣ 📂ProfileFollow
+┃ ┃ ┃ ┃ ┣ 📂ProfileFooter
+┃ ┃ ┃ ┃ ┣ 📂ProfileHeader
 ┃ ┃ ┣ 📂Splash
 ┃ ┃ ┣ 📂TopBar
+┃ ┃ ┃ ┣ 📂CommonTopBar
+┃ ┃ ┃ ┣ 📂FollowTopBar
+┃ ┃ ┃ ┣ 📂MainTopBar
+┃ ┃ ┃ ┣ 📂SaveTopBar
+┃ ┃ ┃ ┣ 📂SearchTopBar
+┃ ┃ ┃ ┣ 📂UpLoadTopBar
 ┃ ┃ ┗ 📂common
+┃ ┃ ┃ ┣ 📂Error
 ┃ ┃ ┃ ┣ 📂Loading
+┃ ┃ ┃ ┣ 📂Login
 ┃ ┃ ┃ ┣ 📂Modal
+┃ ┃ ┃ ┃ ┣ 📂Alert
+┃ ┃ ┃ ┃ ┣ 📂Modal
+┃ ┃ ┃ ┃ ┗ 📂Toast
 ┃ ┃ ┃ ┣ 📂PostContent
 ┃ ┃ ┃ ┣ 📂SetProfile
+┃ ┃ ┃ ┃ ┣ 📂SetProfileHeader
+┃ ┃ ┃ ┃ ┣ 📂SetProfileImage
+┃ ┃ ┃ ┃ ┣ 📂SetProfileInput
 ┃ ┃ ┃ ┗ 📂UserList
 ┃ ┣ 📂context
 ┃ ┣ 📂hooks
@@ -155,6 +179,8 @@
 ┃ ┃ ┣ 📂Chat
 ┃ ┃ ┣ 📂Follow
 ┃ ┃ ┣ 📂Home
+┃ ┃ ┃ ┣ 📂IsHaveFeed
+┃ ┃ ┃ ┣ 📂NoFeed
 ┃ ┃ ┣ 📂Join
 ┃ ┃ ┣ 📂NotFound
 ┃ ┃ ┣ 📂Post
