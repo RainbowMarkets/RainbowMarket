@@ -51,7 +51,7 @@ export default function ProfileItemList({
                 <figure>
                   <img
                     src={
-                      product.itemImage.includes(
+                      product.itemImage?.includes(
                         "https://mandarin.api.weniv.co.kr/"
                       )
                         ? product.itemImage

@@ -50,7 +50,7 @@ export default function ProductEdit() {
             link: itemLink,
             itemImage: res
               ? `https://mandarin.api.weniv.co.kr/${res.filename}`
-              : preview,
+              : itemImage,
           },
         };
 
