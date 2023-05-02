@@ -82,15 +82,20 @@ export default function UserList(props) {
     return data;
   };
 
+  let image = props.image;
+  if (image.includes("mandarin.api")) {
+    image = image.replace("mandarin.api", "api.mandarin"); // api 주소 변경으로 유실된 이미지 임시 처리
+  }
+
   return (
     <StyledLi>
       <StyledLink to={`/profile/${props.accountname}`}>
         <StyledImg
           src={
-            props.image.includes("https://api.mandarin.weniv.co.kr")
-              ? props.image === "https://api.mandarin.weniv.co.kr/Ellipse.png"
+            image?.includes("https://api.mandarin.weniv.co.kr")
+              ? image === "https://api.mandarin.weniv.co.kr/Ellipse.png"
                 ? defaultProfile
-                : props.image
+                : image
               : defaultProfile
           }
           alt=""
