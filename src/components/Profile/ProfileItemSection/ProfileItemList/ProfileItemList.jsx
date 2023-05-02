@@ -43,8 +43,8 @@ export default function ProfileItemList({
                     ? undefined
                     : product.link.includes(".") &&
                       !product.link.includes("://")
-                    ? "https://" + product.link
-                    : product.link
+                      ? "https://" + product.link
+                      : product.link
                 }
                 target="_blank"
               >
@@ -52,7 +52,7 @@ export default function ProfileItemList({
                   <img
                     src={
                       product.itemImage?.includes(
-                        "https://mandarin.api.weniv.co.kr/"
+                        "https://api.mandarin.weniv.co.kr/"
                       )
                         ? product.itemImage
                         : basicImage

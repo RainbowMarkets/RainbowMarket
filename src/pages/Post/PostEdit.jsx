@@ -22,7 +22,7 @@ const PostEdit = (props) => {
   const [inpValue, setInpValue] = useState("");
   const [uploadData, setUploadData] = useState([]);
   const imgRef = useRef();
-  const url = "https://mandarin.api.weniv.co.kr";
+  const url = "https://api.mandarin.weniv.co.kr";
   const [imgSrc, setImgSrc] = useState([]);
   const navigate = useNavigate();
 

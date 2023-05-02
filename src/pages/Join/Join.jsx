@@ -49,7 +49,7 @@ function Join() {
               password: password,
               accountname: accountname,
               intro: intro,
-              image: `https://mandarin.api.weniv.co.kr/${res.filename}`,
+              image: `https://api.mandarin.weniv.co.kr/${res.filename}`,
             },
           };
 
@@ -66,7 +66,7 @@ function Join() {
           password: password,
           accountname: accountname,
           intro: intro,
-          image: "https://mandarin.api.weniv.co.kr/1671515000334.png",
+          image: "https://api.mandarin.weniv.co.kr/1671515000334.png",
         },
       };
 

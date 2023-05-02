@@ -50,7 +50,7 @@ export default function Product() {
             itemName: itemName,
             price: +itemPrice,
             link: itemLink,
-            itemImage: `https://mandarin.api.weniv.co.kr/${res?.filename}`,
+            itemImage: `https://api.mandarin.weniv.co.kr/${res?.filename}`,
           },
         };
 

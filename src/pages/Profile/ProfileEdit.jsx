@@ -32,7 +32,7 @@ export default function ProfileEdit() {
             accountname: accountname,
             intro: intro,
             image: res
-              ? `https://mandarin.api.weniv.co.kr/${res.filename}`
+              ? `https://api.mandarin.weniv.co.kr/${res.filename}`
               : user.image,
           },
         };

@@ -41,10 +41,10 @@ const CommentDetail = (props) => {
                     <img
                       src={
                         item.author.image.includes(
-                          "https://mandarin.api.weniv.co.kr"
+                          "https://api.mandarin.weniv.co.kr"
                         )
                           ? item.author.image ===
-                            "https://mandarin.api.weniv.co.kr/Ellipse.png"
+                            "https://api.mandarin.weniv.co.kr/Ellipse.png"
                             ? profileImgSmall
                             : item.author.image
                           : profileImgSmall

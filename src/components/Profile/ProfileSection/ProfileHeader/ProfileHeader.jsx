@@ -12,8 +12,8 @@ export default function ProfileHeader({ data }) {
       />
       <img
         src={
-          data.image.includes("https://mandarin.api.weniv.co.kr")
-            ? data.image === "https://mandarin.api.weniv.co.kr/Ellipse.png"
+          data.image.includes("https://api.mandarin.weniv.co.kr")
+            ? data.image === "https://api.mandarin.weniv.co.kr/Ellipse.png"
               ? ProfileBasic
               : data.image
             : ProfileBasic

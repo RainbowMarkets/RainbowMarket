@@ -87,8 +87,8 @@ export default function UserList(props) {
       <StyledLink to={`/profile/${props.accountname}`}>
         <StyledImg
           src={
-            props.image.includes("https://mandarin.api.weniv.co.kr")
-              ? props.image === "https://mandarin.api.weniv.co.kr/Ellipse.png"
+            props.image.includes("https://api.mandarin.weniv.co.kr")
+              ? props.image === "https://api.mandarin.weniv.co.kr/Ellipse.png"
                 ? defaultProfile
                 : props.image
               : defaultProfile
