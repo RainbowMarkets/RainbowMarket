@@ -96,7 +96,8 @@
 
 | <center>재능 판매 등록</center> | <center>재능 판매 수정</center> | <center>재능 판매 링크 이동</center> |
 | --- | --- | --- |
-|<img src="https://i.imgur.com/vZErGm9.gif"></img>|<img src="https://i.imgur.com/5CbjoeV.gif"></img>|<img width="276px" src="https://i.imgur.com/PMj9gE4.gif"></img>
+|<img src="https://i.imgur.com/vZErGm9.gif"></img>|<img src="https://i.imgur.com/5CbjoeV.gif"></img>|<img src="https://user-images.githubusercontent.com/63508955/218062082-2b1f75de-dc6e-4175-8d25-dcf7e6e32777.gif"></img>
+
 
 | <center>재능 판매 목록 삭제</center> | <center>404 페이지</center> | <center>게시글 등록</center> |
 | --- | --- | --- |
