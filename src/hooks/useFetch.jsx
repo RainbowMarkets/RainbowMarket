@@ -7,7 +7,7 @@ export default function useFetch() {
 
   const { token } = useUserContext();
 
-  const url = "https://mandarin.api.weniv.co.kr";
+  const url = "https://api.mandarin.weniv.co.kr";
 
   const getData = async (req) => {
     setIsPending(true);

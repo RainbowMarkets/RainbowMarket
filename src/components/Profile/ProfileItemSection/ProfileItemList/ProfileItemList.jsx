@@ -30,6 +30,12 @@ export default function ProfileItemList({
     <ItemList>
       {items.data ? (
         items.product.map((product, i) => {
+
+          let image = product.itemImage;
+          if (image.includes("mandarin.api")) {
+            image = image.replace("mandarin.api", "api.mandarin"); // api 주소 변경으로 유실된 이미지 임시 처리
+          }
+
           return (
             <li key={product.id}>
               <Item
@@ -43,18 +49,18 @@ export default function ProfileItemList({
                     ? undefined
                     : product.link.includes(".") &&
                       !product.link.includes("://")
-                    ? "https://" + product.link
-                    : product.link
+                      ? "https://" + product.link
+                      : product.link
                 }
                 target="_blank"
               >
                 <figure>
                   <img
                     src={
-                      product.itemImage?.includes(
-                        "https://mandarin.api.weniv.co.kr/"
+                      image?.includes(
+                        "https://api.mandarin.weniv.co.kr/"
                       )
-                        ? product.itemImage
+                        ? image
                         : basicImage
                     }
                     onError={handleImgError}

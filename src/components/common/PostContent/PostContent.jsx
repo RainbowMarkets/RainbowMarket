@@ -85,6 +85,10 @@ const PostContent = (props) => {
               imgWidth={imgRef.current?.width}
             >
               {props.postDetail.image.split(",").map((img) => {
+                if (img.includes("mandarin.api")) {
+                  img = img.replace("mandarin.api", "api.mandarin"); // api 주소 변경으로 유실된 이미지 임시 처리
+                }
+
                 return (
                   <li onClick={() => imgModalHandler(img)}>
                     <img

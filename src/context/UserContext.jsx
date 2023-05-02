@@ -32,7 +32,7 @@ const UserContextProvider = ({ children }) => {
   const getProfile = async () => {
     try {
       const response = await fetch(
-        "https://mandarin.api.weniv.co.kr/user/myinfo",
+        "https://api.mandarin.weniv.co.kr/user/myinfo",
         {
           method: "GET",
           headers: {
