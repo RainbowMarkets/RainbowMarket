@@ -57,16 +57,22 @@ export default function ProfileFeedSection({
             ) : (
               <ol>
                 {data.map((post) => {
+                  let image = post.image.includes(",") ? post.image.split(",")[0] : post.image;
+
+                  if (image.includes("mandarin.api")) {
+                    image = image.replace("mandarin.api", "api.mandarin"); // api 주소 변경으로 유실된 이미지 임시 처리
+                  }
+
                   return (
                     post.image && (
                       <Link to={`/post/${post.id}`}>
                         {post.image.includes(",") ? (
                           <li>
-                            <img src={post.image.split(",")[0]} />
+                            <img src={image} />
                             <img className="layer-icon" src={imgLayerIcon} />
                           </li>
                         ) : (
-                          <img src={post.image} />
+                          <img src={image} />
                         )}
                       </Link>
                     )
